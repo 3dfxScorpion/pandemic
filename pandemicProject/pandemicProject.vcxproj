@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{6CA20FED-D973-45BC-A2DB-EC9DCEA3BA39}</ProjectGuid>
+    <ProjectGuid>{99D4F825-E6D2-4A31-B49F-5A5EF86FE2FA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>pandemic</RootNamespace>
+    <RootNamespace>pandemicProject</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -78,7 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="testCode.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
