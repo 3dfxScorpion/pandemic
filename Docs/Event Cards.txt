@@ -1,0 +1,5 @@
+One Quiet Night - Skip the next Infect Cities step.
+Airlift - Move any 1 pawn to any city.
+Forecast - Look at and rearrange the top 6 cards of the Infection Deck.
+Government Grant - Add 1 Research Station to any city.
+Resilient Population - Remove any 1 card in the Infection Discard Pile from the game. You may play this between the Infect and Intensify steps of an epidemic.
