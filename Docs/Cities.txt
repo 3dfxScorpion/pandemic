@@ -1,0 +1,228 @@
+From: San Francisco
+To:   Chicago
+      Los Angeles
+	  Manila
+	  Tokyo
+From: Chicago
+To:   Atlanta
+      San Francisco
+	  Los Angeles
+	  Mexico City
+	  Montreal
+From: Atlanta
+To:   Chicago
+      Miami
+	  Washington
+From: Montreal
+To:   Chicago
+      New York
+	  Washington
+From: New York
+To:   London
+      Madrid
+	  Montreal
+	  Washington
+From: Washington
+To:   Atlanta
+      Miami
+	  Montreal
+	  New York
+From: London
+To:   Essen
+      Madrid
+	  New York
+	  Paris
+From: Madrid
+To:   Algiers
+      London
+	  New York
+	  Paris
+	  Sao Paulo
+From: Paris
+To:   Algiers
+      Essen
+	  London
+	  Madrid
+	  Milan
+From: Essen
+To:   London
+      Milan
+	  Paris
+	  St. Petersburg
+From: Milan
+To:   Essen
+      Istanbul
+	  Paris
+From: St. Petersburg
+To:   Essen
+      Istanbul
+	  Moscow
+From: Los Angeles
+To:   Chicago
+      Mexico City
+	  San Francisco
+	  Sydney
+From: Mexico City
+To:   Bogota
+      Chicago
+	  Lima
+	  Los Angeles
+	  Miami
+From: Miami
+To:   Atlanta
+      Bogota
+	  Mexico City
+	  Washington
+From: Bogota
+To:   Buenos Aires
+      Lima
+      Mexico City
+      Miami
+      Sao Paulo      
+From: Lima
+To:   Bogota
+      Mexico City
+	  Santiago
+From: Santiago
+To:   Lima
+From: Sao Paulo
+To:   Bogota
+      Buenos Aires
+      Lagos
+	  Madrid
+From: Buenos Aires
+To:   Bogota
+      Sao Paulo
+From: Lagos
+To:   Khartoum
+      Kinshasa
+	  Sao Paulo
+From: Kinshasa
+To:   Johannesburg
+      Khartoum
+	  Lagos
+From: Khartoum
+To:   Cairo
+      Johannesburg
+	  Kinshasa
+	  Lagos
+From: Johannesburg
+To:   Khartoum
+      Kinshasa
+From: Algiers
+To:   Cairo
+      Istanbul
+	  Madrid
+	  Paris
+From: Cairo
+To:   Algiers
+      Baghdad
+	  Istanbul
+	  Khartoum
+	  Riyadh
+From: Istanbul
+To:   Algiers
+      Baghdad
+      Cairo
+	  Milan
+	  Moscow
+	  St. Petersburg
+From: Moscow
+To:   Istanbul
+      St. Petersburg
+	  Tehran
+From: Tehran
+To:   Baghdad
+      Delhi
+	  Karachi
+	  Moscow
+From: Baghdad
+To:   Cairo
+      Istanbul
+	  Karachi
+	  Riyadh
+	  Tehran
+From: Riyadh
+To:   Baghdad
+      Cairo
+	  Karachi
+From: Karachi
+To:   Baghdad
+      Delhi
+	  Mumbai
+	  Riyadh
+	  Tehran
+From: Mumbai
+To:   Chennai
+      Delhi
+	  Karachi
+From: Delhi
+To:   Chennai
+      Karachi
+	  Kolkata
+	  Mumbai
+	  Tehran
+From: Kolkata
+To:   Bangkok
+      Chennai
+	  Delhi
+	  Hong Kong
+From: Chennai
+To:   Bangkok
+      Delhi
+	  Jakarta
+	  Mumbai
+From: Bangkok
+To:   Chennai
+      Ho Chi Minh City
+	  Hong Kong
+	  Jakarta
+	  Kolkata
+From: Jakarta
+To:   Bangkok
+      Chennai
+      Ho Chi Minh City
+	  Sydney
+From: Beijing
+To:   Seoul
+      Shanghai
+From: Shanghai
+To:   Beijing
+      Hong Kong
+	  Seoul
+	  Taipei
+	  Tokyo
+41.From: Hong Kong
+To:   
+From: Ho Chi Minh City
+To:   Bangkok
+      Hong Kong
+	  Jakarta
+	  Manila
+From: Seoul
+To:   Beijing
+      Shanghai
+	  Tokyo
+From: Taipei
+To:   Hong Kong
+      Manila
+	  Osaka
+	  Shanghai
+From: Manila
+To:   Ho Chi Minh City
+      Hong Kong
+	  San Francisco
+	  Sydney
+	  Taipei
+From: Sydney
+To:   Jakarta
+      Los Angeles
+	  Manila
+From: Tokyo
+To:   Osaka
+      San Francisco
+	  Seoul
+	  Shanghai
+From: Osaka
+To:   Taipei
+      Tokyo
