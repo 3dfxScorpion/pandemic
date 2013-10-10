@@ -1,0 +1,30 @@
+4310 
+Jeffrey McIntire
+Stories 10/10/13
+
+
+1. I want to take a ferry from San Francisco to Tokyo and receive the Tokyo city card from another player. I will then create a research station by discarding the city card and treat one disease
+
+Reqs for #1
+-Decks should be able to be created
+-Cities should be able to be made and read into the desired data structure
+-User should be able to perform the walk/ferry action
+-Decks should have the ability to be shuffled and dealt to players. 
+-Disease cubes need to be able to be placed depending on which infection cards are drawn before the game starts
+-User should be able to share a city card that matches the city they are in with another player
+-User should be able to take the city card that matches the city they are in from another player
+
+2. Starting in new york, I want to discard my new york card and travel to Mumbai From their I will share my Mumbai card with another player. I’ll then want to travel to Karachi and treat a cured disease (red), removing all the red disease cubes from Karachi.
+
+Reqs for #2
+-A user should be able to remove all disease cubes of one color only if the disease is cured
+-User should be able to perform the charter flight action
+-Decks should be able to be created
+-Decks should have the ability to be shuffled and dealt to players.
+-The limit of cards in each players hand should be 7 after the first epidemic is drawn
+-Disease cubes need to be able to be placed depending on which infection cards are drawn before the game starts
+-Cities should be able to be made and read into the desired data structure
+-User should be able to share a city card that matches the city they are in with
+ another player
+-User should be able to take the city card that matches the city they are in from another player
+
