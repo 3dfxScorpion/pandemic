@@ -1,0 +1,31 @@
+Stories:
+-User should be able to input how many players are playing from 2 to 4
+-There should be an ability to set the difficulty, ranging from 4 to 6 epidemic cards. 
+-Cities should be able to be made and read into the desired data structure
+-Decks should be able to be created
+-Decks should have the ability to be shuffled and dealt to players. 
+-Disease cubes need to be able to be placed depending on which infection cards are drawn before the game starts
+-There should be a way to create a card and add it to a deck
+-Users should be able to keep track of the infection rate
+-Users should be able to keep track of the ourbreak number
+-Users should have the ability to choose four actions on their turn.
+-User should be able to perform the walk/ferry action
+-User should be able to perform the direct flight action
+-User should be able to perform the charter flight action
+-User should be able to perform the shuttle flight action
+-User should be able to perform the build research station action
+-User should be able to perform the treat disease action
+-User should be able to perform the share knowledge action
+-User should be able to discover a cure.
+-User should be able to eradicate a disease.
+-User should be able to play an event card whenever they want to.
+-Event card effects should be implemented.
+-End game cases need to be created.
+-The limit of cards in each players hand should be 7 after the first epidemic is drawn
+-Epidemic card effects should be implemented
+-Outbreaks need to be implemented
+-Cures should only be found at research stations
+-A user should be able to remove all disease cubes of one color only if the disease is cured
+-Role cards should be implemented and random when chosen.
+-Pawns should start at Atlanta
+-The first research station should be placed in Atlanta.
