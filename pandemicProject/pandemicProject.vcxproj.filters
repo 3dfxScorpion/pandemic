@@ -19,4 +19,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CityCard.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Card.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCityCard.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventCard.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

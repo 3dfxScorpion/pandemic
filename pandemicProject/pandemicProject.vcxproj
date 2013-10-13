@@ -80,6 +80,12 @@
   <ItemGroup>
     <ClCompile Include="testCode.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Card.h" />
+    <ClInclude Include="CityCard.h" />
+    <ClInclude Include="EventCard.h" />
+    <ClInclude Include="PlayerCityCard.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
