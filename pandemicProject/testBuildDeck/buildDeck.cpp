@@ -11,8 +11,8 @@ using std::cout;
 using std::string;
 using std::vector;
 
-static const uint CITYEVENT = 53; /* city and event total count */
-static const uint EPICS  = 6;     /* epidemic card total */
+static const uint CITYEVENT = 53; // city and event total count
+static const uint EPICS  = 6;     // epidemic card total
 
 int main() {
     srand(time(0));
@@ -25,7 +25,7 @@ int main() {
         "Khartoum", "Johannesburg", "Algiers", "Cairo", "Istanbul", "Moscow",
         "Tehran", "Baghdad", "Riyadh", "Karachi", "Mumbai", "Delhi", "Kolkata",
         "Chennai", "Bangkok", "Jakarta", "Beijing", "Shanghai", "Hong Kong",
-        "Ho Chi Minh City", "Seoul", "Taipei", "Manila", "Sydney", "Tokyo", "Osaka"
+        "Ho Chi Minh City", "Seoul", "Taipei", "Manila", "Sydney", "Tokyo", "Osaka",
         "One Quiet Night", "Airlift", "Forecast",
         "Government Grant", "Resilient Population"
     };
@@ -39,7 +39,7 @@ int main() {
 /*  create indices for EPIDEMIC cards */
     int epics[EPICS] = {};
     for ( uint i = 0; i < EPICS; i++ ) {
-        uint r = (CITYEVENT / EPICS * i) + rand() % (CITYEVENT / EPICS);
+        uint r = EPICS + (CITYEVENT / EPICS * i) + rand() % (CITYEVENT / EPICS);
         epics[i] = r;
     }
 /* create Deck */
@@ -48,12 +48,12 @@ int main() {
     vector<Card*> deck;
     for ( uint n = 0; n < totCards; n++ ) {
         uint id = (n - ep) + ep;
-        if ( id == epics[ep] ) {    /* EPIDEMIC index found!      */
+        if ( id == epics[ep] ) {    // EPIDEMIC index found!
             Card* tmp = new Card(id, "EPIDEMIC");
-            deck.push_back(tmp);   /* add EPIDEMIC cards to Deck */
+            deck.push_back(tmp);    // add EPIDEMIC cards to Deck
             ++ep;
             continue;
-        }                           /* otherwise add city card    */
+        }                           // otherwise add city card
         Card* tmp = new Card(id, allCards[*iItr]);
         deck.push_back(tmp);
         ++iItr;
