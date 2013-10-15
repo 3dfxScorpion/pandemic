@@ -1,9 +1,11 @@
 #include "mapClass.h"
 
+// default constructor
 mapClass::mapClass() {
-	// default constructor
+	
 }
 
+// parse file
 mapClass::mapClass(string cityFile) {
-	// parse file
+	
 }
