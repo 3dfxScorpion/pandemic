@@ -27,4 +27,7 @@ can be done.
 
 FIXED ISSUE of missing city (forgot a comma...)
 
+20131015 - 
+    converted to handle Chris' CityCard and EventCard classes, as well as a newly created EdipemicCard
+
 

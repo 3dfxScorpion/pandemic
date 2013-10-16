@@ -3,7 +3,9 @@
 #include<cstdlib>
 #include<vector>
 #include<unordered_set>
-#include "Card.h"
+#include "CityCard.h"
+#include "EventCard.h"
+#include "EpidemicCard.h"
 
 #define unsigned int uint
 
@@ -12,7 +14,7 @@ using std::string;
 using std::vector;
 
 static const uint CITYEVENT = 53; // city and event total count
-static const uint EPICS  = 6;     // epidemic card total
+static const uint EPICS = 6;      // epidemic card total
 
 int main() {
     srand(time(0));
@@ -48,16 +50,20 @@ int main() {
     vector<Card*> deck;
     for ( uint n = 0; n < totCards; n++ ) {
         uint id = (n - ep) + ep;
+        Card* tmp;
         if ( id == epics[ep] ) {    // EPIDEMIC index found!
-            Card* tmp = new Card(id, "EPIDEMIC");
+            tmp = new EpidemicCard(id, "EPIDEMIC");
             deck.push_back(tmp);    // add EPIDEMIC cards to Deck
             ++ep;
             continue;
-        }                           // otherwise add city card
-        Card* tmp = new Card(id, allCards[*iItr]);
+        }
+        if ( *iItr > 47 )           // EVENT card needed
+            tmp = new EventCard(id, allCards[*iItr]);
+        else                        // CITY  card needed
+            tmp = new CityCard(id, allCards[*iItr]);
         deck.push_back(tmp);
         ++iItr;
-		}
+    }
     printf("deck size: %i\n", deck.size());
     printf("deck created:\n");
     std::vector<Card*>::iterator cItr;
