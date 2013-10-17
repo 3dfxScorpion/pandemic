@@ -1,12 +1,12 @@
 //
 // This is a temporary holder for data that will be in the model (similar to the "board" superclass we discussed) class after we get far enough to implement MVC.
 // For now, various stuff belonging to View/controller will also be here for the submission
-/*#include <iostream>
+#include <iostream>
 using namespace std;
 #include "temp\Player.h"
 //#include "temp\cityClass.h"
 
-
+/*
 int main()
 {
 	int numPlayers = 0;										// stores player count
