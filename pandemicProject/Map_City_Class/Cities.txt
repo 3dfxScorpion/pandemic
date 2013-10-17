@@ -1,4 +1,5 @@
 NAME:   San Francisco
+Color:  Blue
 Pop:    0
 Black:  0
 Blue:   0
@@ -11,6 +12,7 @@ Adj:    Chicago
         Tokyo
 
 NAME:   Chicago
+Color:  Blue
 Pop:    0
 Black:  0
 Blue:   0
@@ -24,6 +26,7 @@ Adj:    Atlanta
         Montreal
 
 NAME:   Atlanta
+Color:  Blue
 Pop:    0
 Black:  0
 Blue:   0
@@ -35,6 +38,7 @@ Adj:    Chicago
         Washington
 
 NAME:   Montreal
+Color:  Blue
 Pop:    0
 Black:  0
 Blue:   0
@@ -46,6 +50,7 @@ Adj:    Chicago
         Washington
 
 NAME:   New York
+Color:  Blue
 Pop:    0
 Black:  0
 Blue:   0
@@ -58,6 +63,7 @@ Adj:    London
         Washington
 
 NAME:   Washington
+Color:  Blue
 Pop:    0
 Black:  0
 Blue:   0
@@ -70,6 +76,7 @@ Adj:    Atlanta
         New York
 
 NAME:   London
+Color:  Blue
 Pop:    0
 Black:  0
 Blue:   0
@@ -82,6 +89,7 @@ Adj:    Essen
         Paris
 
 NAME:   Madrid
+Color:  Blue
 Pop:    0
 Black:  0
 Blue:   0
@@ -95,6 +103,7 @@ Adj:    Algiers
         Sao Paulo
 
 NAME:   Paris
+Color:  Blue
 Pop:    0
 Black:  0
 Blue:   0
@@ -108,6 +117,7 @@ Adj:    Algiers
         Milan
 
 NAME:   Essen
+Color:  Blue
 Pop:    0
 Black:  0
 Blue:   0
@@ -120,6 +130,7 @@ Adj:    London
         St. Petersburg
 
 NAME:   Milan
+Color:  Blue
 Pop:    0
 Black:  0
 Blue:   0
@@ -131,6 +142,7 @@ Adj:    Essen
         Paris
 
 NAME:   St. Petersburg
+Color:  Blue
 Pop:    0
 Black:  0
 Blue:   0
@@ -142,6 +154,7 @@ Adj:    Essen
         Moscow
 
 NAME:   Los Angeles
+Color:  Yellow
 Pop:    0
 Black:  0
 Blue:   0
@@ -154,6 +167,7 @@ Adj:    Chicago
         Sydney
 
 NAME:   Mexico City
+Color:  Yellow
 Pop:    0
 Black:  0
 Blue:   0
@@ -167,6 +181,7 @@ Adj:    Bogota
         Miami
 
 NAME:   Miami
+Color:  Yellow
 Pop:    0
 Black:  0
 Blue:   0
@@ -179,6 +194,7 @@ Adj:    Atlanta
         Washington
 
 NAME:   Bogota
+Color:  Yellow
 Pop:    0
 Black:  0
 Blue:   0
@@ -192,6 +208,7 @@ Adj:    Buenos Aires
         Sao Paulo
 
 NAME:   Lima
+Color:  Yellow
 Pop:    0
 Black:  0
 Blue:   0
@@ -203,6 +220,7 @@ Adj:    Bogota
         Santiago
 
 NAME:   Santiago
+Color:  Yellow
 Pop:    0
 Black:  0
 Blue:   0
@@ -212,6 +230,7 @@ HasSta: FALSE
 Adj:    Lima
 
 NAME:   Sao Paulo
+Color:  Yellow
 Pop:    0
 Black:  0
 Blue:   0
@@ -224,6 +243,7 @@ Adj:    Bogota
         Madrid
 
 NAME:   Buenos Aires
+Color:  Yellow
 Pop:    0
 Black:  0
 Blue:   0
@@ -234,6 +254,7 @@ Adj:    Bogota
         Sao Paulo
 
 NAME:   Lagos
+Color:  Yellow
 Pop:    0
 Black:  0
 Blue:   0
@@ -245,6 +266,7 @@ Adj:    Khartoum
         Sao Paulo
 
 NAME:   Kinshasa
+Color:  Yellow
 Pop:    0
 Black:  0
 Blue:   0
@@ -256,6 +278,7 @@ Adj:    Johannesburg
         Lagos
 
 NAME:   Khartoum
+Color:  Yellow
 Pop:    0
 Black:  0
 Blue:   0
@@ -268,6 +291,7 @@ Adj:    Cairo
         Lagos
 
 NAME:   Johannesburg
+Color:  Yellow
 Pop:    0
 Black:  0
 Blue:   0
@@ -278,6 +302,7 @@ Adj:    Khartoum
         Kinshasa
 
 NAME:   Algiers
+Color:  Black
 Pop:    0
 Black:  0
 Blue:   0
@@ -290,6 +315,7 @@ Adj:    Cairo
         Paris
 
 NAME:   Cairo
+Color:  Black
 Pop:    0
 Black:  0
 Blue:   0
@@ -303,6 +329,7 @@ Adj:    Algiers
         Riyadh
 
 NAME:   Istanbul
+Color:  Black
 Pop:    0
 Black:  0
 Blue:   0
@@ -317,6 +344,7 @@ Adj:    Algiers
         St. Petersburg
 
 NAME:   Moscow
+Color:  Black
 Pop:    0
 Black:  0
 Blue:   0
@@ -328,6 +356,7 @@ Adj:    Istanbul
         Tehran
 
 NAME:   Tehran
+Color:  Black
 Pop:    0
 Black:  0
 Blue:   0
@@ -340,6 +369,7 @@ Adj:    Baghdad
         Moscow
 
 NAME:   Baghdad
+Color:  Black
 Pop:    0
 Black:  0
 Blue:   0
@@ -353,6 +383,7 @@ Adj:    Cairo
         Tehran
 
 NAME:   Riyadh
+Color:  Black
 Pop:    0
 Black:  0
 Blue:   0
@@ -364,6 +395,7 @@ Adj:    Baghdad
         Karachi
 
 NAME:   Karachi
+Color:  Black
 Pop:    0
 Black:  0
 Blue:   0
@@ -377,6 +409,7 @@ Adj:    Baghdad
         Tehran
 
 NAME:   Mumbai
+Color:  Black
 Pop:    0
 Black:  0
 Blue:   0
@@ -388,6 +421,7 @@ Adj:    Chennai
         Karachi
 
 NAME:   Delhi
+Color:  Black
 Pop:    0
 Black:  0
 Blue:   0
@@ -401,6 +435,7 @@ Adj:    Chennai
         Tehran
 
 NAME:   Kolkata
+Color:  Black
 Pop:    0
 Black:  0
 Blue:   0
@@ -413,6 +448,7 @@ Adj:    Bangkok
         Hong Kong
 
 NAME:   Chennai
+Color:  Black
 Pop:    8865000
 Black:  0
 Blue:   0
@@ -425,6 +461,7 @@ Adj:    Bangkok
         Mumbai
 
 NAME:   Bangkok
+Color:  Red
 Pop:    0
 Black:  0
 Blue:   0
@@ -438,6 +475,7 @@ Adj:    Chennai
         Kolkata
 
 NAME:   Jakarta
+Color:  Red
 Pop:    0
 Black:  0
 Blue:   0
@@ -450,6 +488,7 @@ Adj:    Bangkok
         Sydney
 
 NAME:   Beijing
+Color:  Red
 Pop:    0
 Black:  0
 Blue:   0
@@ -460,6 +499,7 @@ Adj:    Seoul
         Shanghai
 
 NAME:   Shanghai
+Color:  Red
 Pop:    0
 Black:  0
 Blue:   0
@@ -473,6 +513,7 @@ Adj:    Beijing
         Tokyo
 
 NAME:   Hong Kong
+Color:  Red
 Pop:    0
 Black:  0
 Blue:   0
@@ -487,6 +528,7 @@ Adj:    Bankok
         Taipei
 
 NAME:   Ho Chi Minh City
+Color:  Red
 Pop:    0
 Black:  0
 Blue:   0
@@ -499,6 +541,7 @@ Adj:    Bangkok
         Manila
 
 NAME:   Seoul
+Color:  Red
 Pop:    0
 Black:  0
 Blue:   0
@@ -510,6 +553,7 @@ Adj:    Beijing
         Tokyo
 
 NAME:   Taipei
+Color:  Red
 Pop:    0
 Black:  0
 Blue:   0
@@ -522,6 +566,7 @@ Adj:    Hong Kong
         Shanghai
 
 NAME:   Manila
+Color:  Red
 Pop:    20767000
 Black:  0
 Blue:   0
@@ -535,6 +580,7 @@ Adj:    Ho Chi Minh City
         Taipei
 
 NAME:   Sydney
+Color:  Red
 Pop:    0
 Black:  0
 Blue:   0
@@ -546,6 +592,7 @@ Adj:    Jakarta
         Manila
 
 NAME:   Tokyo
+Color:  Red
 Pop:    0
 Black:  0
 Blue:   0
@@ -558,6 +605,7 @@ Adj:    Osaka
         Shanghai
 
 NAME:   Osaka
+Color:  Red
 Pop:    0
 Black:  0
 Blue:   0

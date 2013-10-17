@@ -2,6 +2,7 @@
 
 cityClass::cityClass() {
 	cityName			= "";
+	cityColor			= "";
 	cityPopulation		= 0;
 	numInfectedBlack	= 0;
 	numInfectedBlue		= 0;
@@ -11,9 +12,10 @@ cityClass::cityClass() {
 	researchStation		= false;
 }
 
-cityClass::cityClass(string cityName, int cityPop, int blackInfected, int blueInfected, int redInfected, 
+cityClass::cityClass(string cityName, string cityColor, int cityPop, int blackInfected, int blueInfected, int redInfected, 
 						int yellowInfected, bool researchStatus) {
 	setCityName(cityName);				// sets city name
+	setCityColor(cityColor);			// sets city color
 	setPopulation(cityPop);				// sets population
 	setInfectedBlack(blackInfected);	// sets level of black infected
 	setInfectedBlue(blueInfected);		// sets level of blue infected
@@ -25,6 +27,10 @@ cityClass::cityClass(string cityName, int cityPop, int blackInfected, int blueIn
 
 void cityClass::setCityName(string name) {
 	cityName = name;
+}
+
+void cityClass::setCityColor(string color) {
+	cityColor = color;
 }
 
 void cityClass::setPopulation(int cityPop) {
@@ -70,6 +76,10 @@ void cityClass::setAdjCity(string adjCityName) {
 
 string cityClass::getCityName() {
 	return cityName;
+}
+
+string cityClass::getCityColor() {
+	return cityColor;
 }
 
 int cityClass::getPopulation() {

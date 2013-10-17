@@ -11,9 +11,10 @@ public:
 	cityClass();
 
 	// cityClass(cityName, population, black, blue, red, yellow, station)
-	cityClass(string, int, int, int, int, int, bool);
+	cityClass(string, string, int, int, int, int, int, bool);
 
 	void	setCityName(string);		// sets city name
+	void	setCityColor(string);		// sets city color
 	void	setPopulation(int);			// sets population
 	void	setInfectedBlack(int);		// sets level of black infected
 	void	setInfectedBlue(int);		// sets level of blue infected
@@ -24,6 +25,7 @@ public:
 	void	setAdjCity(string);			// adds city to list of adjacent cities
 
 	string	getCityName();				// returns city name
+	string	getCityColor();				// returns city color
 	int		getPopulation();			// returns city population
 	int		getInfectedBlack();			// return black infection level
 	int		getInfectedBlue();			// return blue infection level
@@ -38,6 +40,7 @@ public:
 
 private:
 	string	cityName;					// name of city
+	string	cityColor;					// color of city
 	int		cityPopulation;				// population of city
 	int		numInfectedBlack;			// number of people infected with black virus
 	int		numInfectedBlue;			// number of people infected with blue virus

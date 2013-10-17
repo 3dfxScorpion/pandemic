@@ -18,9 +18,9 @@ int main() {
 	gameMap.worldMap[3].setInfectedRed(0);
 	gameMap.worldMap[3].setInfectedYellow(0);
 
-/*
 	for(int i = 0; i < gameMap.getNumberofCities(); i++) {
 		cout << "City:   " << gameMap.worldMap[i].getCityName()			<< endl;
+		cout << "Color:  " << gameMap.worldMap[i].getCityColor()		<< endl;
 		cout << "Pop:    " << gameMap.worldMap[i].getPopulation()		<< endl;
 		cout << "Black:  " << gameMap.worldMap[i].getInfectedBlack()	<< endl;
 		cout << "Blue:   " << gameMap.worldMap[i].getInfectedBlue()		<< endl;
@@ -35,7 +35,6 @@ int main() {
 		}
 		cout << endl;
 	}
-*/
 
 /*
 	cityClass currentCity = gameMap.locateCity("Essen");

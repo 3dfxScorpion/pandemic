@@ -21,7 +21,7 @@ int mapClass::populateMap(string cityFile) {
 	if(cityInfoFile.eof())
 		return 1;
 	else {
-		string cityName, adjCity;
+		string cityName, cityColor, adjCity;
 		int population, black, blue, red, yellow;
 		bool station;
 
@@ -40,6 +40,8 @@ int mapClass::populateMap(string cityFile) {
 
 				if(first == "NAME:  ") 
 					cityName = second;
+				else if(first == "Color: ")
+					cityColor = second;
 				else if(first == "Pop:   ")
 					population = stoi(second);
 				else if(first == "Black: ")
@@ -61,7 +63,7 @@ int mapClass::populateMap(string cityFile) {
 				}
 				else if(first == "Adj:   ") {
 					// populate map vector with cities
-					cityClass currentCity = cityClass(cityName, population, black, blue, red, yellow, station);
+					cityClass currentCity = cityClass(cityName, cityColor, population, black, blue, red, yellow, station);
 					
 					currentCity.setAdjCity(second);
 					while(!cityInfoFile.eof()) {
