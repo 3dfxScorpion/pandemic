@@ -1,616 +1,616 @@
-NAME:	San Francisco
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Chicago
-		Los Angeles
-		Manila
-		Tokyo
+NAME:   San Francisco
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Chicago
+        Los Angeles
+        Manila
+        Tokyo
 
-NAME:	Chicago
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Atlanta
-		San Francisco
-		Los Angeles
-		Mexico City
-		Montreal
+NAME:   Chicago
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Atlanta
+        San Francisco
+        Los Angeles
+        Mexico City
+        Montreal
 
-NAME:	Atlanta
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Chicago
-		Miami
-		Washington
+NAME:   Atlanta
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Chicago
+        Miami
+        Washington
 
-NAME:	Montreal
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Chicago
-		New York
-		Washington
+NAME:   Montreal
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Chicago
+        New York
+        Washington
 
-NAME:	New York
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	London
-		Madrid
-		Montreal
-		Washington
+NAME:   New York
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    London
+        Madrid
+        Montreal
+        Washington
 
-NAME:	Washington
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Atlanta
-		Miami
-		Montreal
-		New York
+NAME:   Washington
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Atlanta
+        Miami
+        Montreal
+        New York
 
-NAME:	London
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Essen
-		Madrid
-		New York
-		Paris
+NAME:   London
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Essen
+        Madrid
+        New York
+        Paris
 
-NAME:	Madrid
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Algiers
-		London
-		New York
-		Paris
-		Sao Paulo
+NAME:   Madrid
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Algiers
+        London
+        New York
+        Paris
+        Sao Paulo
 
-NAME:	Paris
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Algiers
-		Essen
-		London
-		Madrid
-		Milan
+NAME:   Paris
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Algiers
+        Essen
+        London
+        Madrid
+        Milan
 
-NAME:	Essen
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	London
-		Milan
-		Paris
-		St. Petersburg
+NAME:   Essen
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    London
+        Milan
+        Paris
+        St. Petersburg
 
-NAME:	Milan
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Essen
-		Istanbul
-		Paris
-		
-NAME:	St. Petersburg
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Essen
-		Istanbul
-		Moscow
+NAME:   Milan
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Essen
+        Istanbul
+        Paris
 
-NAME:	Los Angeles
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Chicago
-		Mexico City
-		San Francisco
-		Sydney
+NAME:   St. Petersburg
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Essen
+        Istanbul
+        Moscow
 
-NAME:	Mexico City
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Bogota
-		Chicago
-		Lima
-		Los Angeles
-		Miami
+NAME:   Los Angeles
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Chicago
+        Mexico City
+        San Francisco
+        Sydney
 
-NAME:	Miami
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Atlanta
-		Bogota
-		Mexico City
-		Washington
+NAME:   Mexico City
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Bogota
+        Chicago
+        Lima
+        Los Angeles
+        Miami
 
-NAME:	Bogota
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Buenos Aires
-		Lima
-		Mexico City
-		Miami
-		Sao Paulo
-	  
-NAME:	Lima
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Bogota
-		Mexico City
-		Santiago
+NAME:   Miami
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Atlanta
+        Bogota
+        Mexico City
+        Washington
 
-NAME:	Santiago
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Lima
+NAME:   Bogota
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Buenos Aires
+        Lima
+        Mexico City
+        Miami
+        Sao Paulo
 
-NAME:	Sao Paulo
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Bogota
-		Buenos Aires
-		Lagos
-		Madrid
+NAME:   Lima
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Bogota
+        Mexico City
+        Santiago
 
-NAME:	Buenos Aires
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Bogota
-		Sao Paulo
+NAME:   Santiago
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Lima
 
-NAME:	Lagos
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Khartoum
-		Kinshasa
-		Sao Paulo
+NAME:   Sao Paulo
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Bogota
+        Buenos Aires
+        Lagos
+        Madrid
 
-NAME:	Kinshasa
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Johannesburg
-		Khartoum
-		Lagos
+NAME:   Buenos Aires
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Bogota
+        Sao Paulo
 
-NAME:	Khartoum
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Cairo
-		Johannesburg
-		Kinshasa
-		Lagos
+NAME:   Lagos
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Khartoum
+        Kinshasa
+        Sao Paulo
 
-NAME:	Johannesburg
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Khartoum
-		Kinshasa
+NAME:   Kinshasa
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Johannesburg
+        Khartoum
+        Lagos
 
-NAME:	Algiers
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Cairo
-		Istanbul
-		Madrid
-		Paris
+NAME:   Khartoum
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Cairo
+        Johannesburg
+        Kinshasa
+        Lagos
 
-NAME:	Cairo
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Algiers
-		Baghdad
-		Istanbul
-		Khartoum
-		Riyadh
+NAME:   Johannesburg
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Khartoum
+        Kinshasa
 
-NAME:	Istanbul
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Algiers
-		Baghdad
-		Cairo
-		Milan
-		Moscow
-		St. Petersburg
+NAME:   Algiers
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Cairo
+        Istanbul
+        Madrid
+        Paris
 
-NAME:	Moscow
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Istanbul
-		St. Petersburg
-		Tehran
+NAME:   Cairo
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Algiers
+        Baghdad
+        Istanbul
+        Khartoum
+        Riyadh
 
-NAME:	Tehran
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Baghdad
-		Delhi
-		Karachi
-		Moscow
+NAME:   Istanbul
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Algiers
+        Baghdad
+        Cairo
+        Milan
+        Moscow
+        St. Petersburg
 
-NAME:	Baghdad
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Cairo
-		Istanbul
-		Karachi
-		Riyadh
-		Tehran
+NAME:   Moscow
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Istanbul
+        St. Petersburg
+        Tehran
 
-NAME:	Riyadh
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Baghdad
-		Cairo
-		Karachi
+NAME:   Tehran
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Baghdad
+        Delhi
+        Karachi
+        Moscow
 
-NAME:	Karachi
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Baghdad
-		Delhi
-		Mumbai
-		Riyadh
-		Tehran
+NAME:   Baghdad
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Cairo
+        Istanbul
+        Karachi
+        Riyadh
+        Tehran
 
-NAME:	Mumbai
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Chennai
-		Delhi
-		Karachi
+NAME:   Riyadh
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Baghdad
+        Cairo
+        Karachi
 
-NAME:	Delhi
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Chennai
-		Karachi
-		Kolkata
-		Mumbai
-		Tehran
+NAME:   Karachi
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Baghdad
+        Delhi
+        Mumbai
+        Riyadh
+        Tehran
 
-NAME:	Kolkata
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Bangkok
-		Chennai
-		Delhi
-		Hong Kong
+NAME:   Mumbai
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Chennai
+        Delhi
+        Karachi
 
-NAME:	Chennai
-Pop:	8865000
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Bangkok
-		Delhi
-		Jakarta
-		Mumbai
+NAME:   Delhi
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Chennai
+        Karachi
+        Kolkata
+        Mumbai
+        Tehran
 
-NAME:	Bangkok
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Chennai
-		Ho Chi Minh City
-		Hong Kong
-		Jakarta
-		Kolkata
+NAME:   Kolkata
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Bangkok
+        Chennai
+        Delhi
+        Hong Kong
 
-NAME:	Jakarta
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Bangkok
-		Chennai
-		Ho Chi Minh City
-		Sydney
+NAME:   Chennai
+Pop:    8865000
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Bangkok
+        Delhi
+        Jakarta
+        Mumbai
 
-NAME:	Beijing
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Seoul
-		Shanghai
+NAME:   Bangkok
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Chennai
+        Ho Chi Minh City
+        Hong Kong
+        Jakarta
+        Kolkata
 
-NAME:	Shanghai
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Beijing
-		Hong Kong
-		Seoul
-		Taipei
-		Tokyo
+NAME:   Jakarta
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Bangkok
+        Chennai
+        Ho Chi Minh City
+        Sydney
 
-NAME:	Hong Kong
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Bankok
-		Ho Chi Minh City
-		Kolkata
-		Manila
-		Shanghai
-		Taipei
+NAME:   Beijing
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Seoul
+        Shanghai
 
-NAME:	Ho Chi Minh City
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Bangkok
-		Hong Kong
-		Jakarta
-		Manila
+NAME:   Shanghai
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Beijing
+        Hong Kong
+        Seoul
+        Taipei
+        Tokyo
 
-NAME:	Seoul
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Beijing
-		Shanghai
-		Tokyo
+NAME:   Hong Kong
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Bankok
+        Ho Chi Minh City
+        Kolkata
+        Manila
+        Shanghai
+        Taipei
 
-NAME:	Taipei
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Hong Kong
-		Manila
-		Osaka
-		Shanghai
+NAME:   Ho Chi Minh City
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Bangkok
+        Hong Kong
+        Jakarta
+        Manila
 
-NAME:	Manila
-Pop:	20767000
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Ho Chi Minh City
-		Hong Kong
-		San Francisco
-		Sydney
-		Taipei
+NAME:   Seoul
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Beijing
+        Shanghai
+        Tokyo
 
-NAME:	Sydney
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Jakarta
-		Los Angeles
-		Manila
+NAME:   Taipei
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Hong Kong
+        Manila
+        Osaka
+        Shanghai
 
-NAME:	Tokyo
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Osaka
-		San Francisco
-		Seoul
-		Shanghai
+NAME:   Manila
+Pop:    20767000
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Ho Chi Minh City
+        Hong Kong
+        San Francisco
+        Sydney
+        Taipei
 
-NAME:	Osaka
-Pop:	0
-Black:	0
-Blue:	0
-Red:	0
-Yellow:	0
-IsInf:	FALSE
-HasSta:	FALSE
-Adj:	Taipei
-		Tokyo
+NAME:   Sydney
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Jakarta
+        Los Angeles
+        Manila
+
+NAME:   Tokyo
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Osaka
+        San Francisco
+        Seoul
+        Shanghai
+
+NAME:   Osaka
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+IsInf:  FALSE
+HasSta: FALSE
+Adj:    Taipei
+        Tokyo
