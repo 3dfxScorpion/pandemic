@@ -7,6 +7,8 @@ using namespace std;
 struct list
 {
 	int   city;
+	int test;
+	int test2;
 	list* next;
 };
 
@@ -50,3 +52,4 @@ private:
 	bool	researchStation;			// does city have research station
 	list*	adjCity;					// linked list of adjacent cities
 };
+
