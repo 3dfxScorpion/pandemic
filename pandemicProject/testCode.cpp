@@ -1,6 +1,6 @@
 //Use this to test any code you may have written. This will be replaced with a real main function once we get around to it.
 
-#include <iostream>
+/*#include <iostream>
 #include <string>
 //#include "CityCard.h"
 
@@ -12,4 +12,4 @@ int main() {
 	cout << "Updated the file for testing.";
 	cin.get();
 	return 0;
-}
+}*/
