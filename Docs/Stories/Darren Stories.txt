@@ -1,0 +1,33 @@
+User Stories - Darren Goostree
+
+-Users should be able to set the number of people playing, and be referenced by their name on their turn.
+-Users should be able to draw a hand from the deck.
+-Users should be able to play, and discard cards from their hand as appropriate.
+-Users should be able to move freely to any adjacent city if they have available moves on their turn.
+-Users should be able to fly to a city if they hold that city's card.
+-Users should be able to fly to any city if they hold their current city's card.
+-Users should be able to build and relocate (if the max number is set) research stations.
+-Users should be able to treat, or eradicate if appropriate, disease in their current city.
+-Users should be able to view a current status of all infected cities.
+-Users should be able play event cards at any point during the game.
+-Users should be able to cure a disease if they hold the required number of cards and are at a research station.
+-Users should be able to monitor current oubreak level and infection rates.
+-Users should be able to "share knowledge" with each other if they are in the same city.
+-Users should be assigned a random city card, and the program should determine starting order based on chosen city population.
+-The game should end when any of the failure conditions are satisfied, or if the win condition is.
+-The user should be able to check their current location and recieve a printout of all adjacent cities.
+-The game should draw infection cards and infect the appropriate city at the end of every turn.
+-The game should respond to Epidemic cards by:
+  -increasing the infection rate
+  -draw a city card and place the appropriate number of disease cubes on that city.
+  -Reshuffle the discarded cards and place them on the top of the infection deck.
+-The game should handle outbreaks when the total number of disease cubes on a city would exceed 3.
+-Users should experience a chain reaction of outbreaks if a single outbreak causes others.
+-Users should be able to select the difficulty of the game at the beginning.
+-Users should be able to exit the game without ctrl+c at any time.
+-Users should be able to view the contents of every player's hand at any time.
+-Users should be able to determine the color of their city cards without referencing the city class.
+-The game should be able to track which infection cards have been used, sort them randomly, and reapply to top of the deck.
+-Users should be able to randomly be assigned roles.
+-The game should recognized the differences in certain actions based on a player's role (ie 4 cards to cure)
+-The user should be able to view their role's benefits.
