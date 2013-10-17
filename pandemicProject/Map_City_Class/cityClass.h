@@ -4,17 +4,6 @@
 
 using namespace std;
 
-<<<<<<< HEAD
-=======
-struct list
-{
-	int   city;
-	int test;
-	int test2;
-	list* next;
-};
-
->>>>>>> d21a82c6227ad753492499a32b543aa48fe83338
 class cityClass 
 {
 public:
@@ -56,14 +45,5 @@ private:
 	int		numInfectedYellow;			// number of people infected with yellow virus
 	bool	isInfected;					// is city infected
 	bool	researchStation;			// does city have research station
-<<<<<<< HEAD
 	vector<string> adjCity;				// vector of adjacent cities
 };
-=======
-	list*	adjCity;					// linked list of adjacent cities
-};
-
-<<<<<<< HEAD
->>>>>>> d21a82c6227ad753492499a32b543aa48fe83338
-=======
->>>>>>> d21a82c6227ad753492499a32b543aa48fe83338

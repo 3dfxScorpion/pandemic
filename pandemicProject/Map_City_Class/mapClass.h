@@ -4,9 +4,10 @@
 class mapClass
 {
 public:
-	mapClass();					// default constructor
-	int populateMap(string);	// populates map from file (returns 0 if success, 1 if error)
-	int getNumberofCities();	// returns number of cities
-//private:
+	mapClass();						// default constructor
+	int populateMap(string);		// populates map from file (returns 0 if success, 1 if error)
+	int getNumberofCities();		// returns number of cities
+	cityClass* locateCity(string);	// 
+
 	vector<cityClass> worldMap;
 };
