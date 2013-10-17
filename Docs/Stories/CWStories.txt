@@ -1,0 +1,73 @@
+Cassandra Wong
+Pandemic Stories
+
+Story 1
+*******
+Player Role: Medic
+Starting Location: Manila
+Hand: various city cards (one Miami), 1 red card
+Actions:
+1. Direct flight to city Miami
+  - Auto heals yellow disease which has been cured
+2. Drives to Atlanta
+3. Give red Atlanta card to Scientist at research station
+  - Scientist has 3 red cards, so ready to cure next turn
+4. Treat blue disease
+  - all blue cubes removed due to role
+
+Story 2
+*******
+Player Role: Scientist
+Starting location: New York
+Hand: 3 blue city cards, 1 Istanbul card, 3 other city cards
+Actions:
+1. Drives from Madrid to London where other player is located
+2. Takes blue London card from that player
+   - Goes over hand limit so discards card
+3. Charter flight to Istanbul where research center is
+4. Discover cure for blue disease
+
+For either story:
+Maybe:
+Event card: Forecast* - reorder some of the infection cards
+* Or other event card like Government Grant
+
+As a player, I can perform 4 actions.
+As a player, I can move to another city.
+  Drive/Ferry, Direct Flight, Charter Flight, Shuttle Flight
+AS a player, I can build a research station.
+  Need current city card.
+  No more than 6 stations total.
+As a player, I can share knowledge.
+  Give city card of current city to user in same city.
+  Take city card of current city from user in same city.
+  Discard card or play event card if hand larger than 7.
+As a player, I can discover a cure.
+  Discard 5 City cards of same color - unless Scientist.
+  Put cure marker on indicator.
+As a player, I can use an event card.
+  Resilient Population, Airlift, Forecast, One Quiet Night, Government Grant
+
+As a (insert role), I have special abilities.
+  Contingency Planner
+   - can take event card from discard, exclude from hand limit
+   - after use, card removed from game
+  Dispatcher
+   - move any pawn to other pawn's location
+   - move another pawn as if yours
+   - cards discarded are from own hand
+  Operations Expert
+   - build research station at current city w/o discard
+   - once per turn, move from research station to any city discarding any city card
+   - Dispatcher may not use special move ability
+  Quarantine Specialist
+   - prevent outbreaks in current/connected cities
+  Researcher
+   - give any city card to player in same city
+	- either player's turn
+  Scientist
+   - only 4 cards to discover cure
+  Medic
+   - remove all cubes of same color when curing
+   - if disease cured, cubes auto-removed (no action used)
+   - prevent disease cubes/outbreak of cured diseases in current location
