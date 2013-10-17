@@ -2,7 +2,6 @@
 #include<vector>
 #include "Deck.h"
 #include "Player.h"
-#include "Map.h"
 
 using std::cout;
 

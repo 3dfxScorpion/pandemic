@@ -22,6 +22,13 @@ class Move
     virtual string toString() = 0;
 };
 
+class CanShuffle {
+  public:
+    virtual void createDeck() = 0;
+    virtual void shuffleCards() = 0;
+    virtual void shuffleCards() = 0;
+};
+
 class GameState
 {
   public:
