@@ -32,6 +32,11 @@ int main() {
 	}
 */
 
+/*
+	cityClass currentCity = gameMap.locateCity("Essen");
+	cout << currentCity.getCityName() << endl;
+*/
+
 
 	
 	cout << "Press any key to exit.";

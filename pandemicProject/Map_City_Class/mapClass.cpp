@@ -94,3 +94,14 @@ int mapClass::populateMap(string cityFile) {
 int mapClass::getNumberofCities() {
 	return worldMap.size();
 }
+
+cityClass mapClass::locateCity(string cityName) {
+	cityClass located;
+	for(int i = 0; i < worldMap.size(); i++) {
+		if(worldMap[i].getCityName() == cityName) {
+			located = worldMap[i];
+			break;
+		}
+	}
+	return located;
+}
