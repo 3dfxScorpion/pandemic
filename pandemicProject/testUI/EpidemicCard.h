@@ -8,7 +8,7 @@ class EpidemicCard : public Card {
     string description;
 
   public:
-    EpidemicCard(int id, string name, string desc = "tbd") :
+    EpidemicCard(int id, string name, string desc = "epidemic") :
         Card(id, name),	description(desc) {}
 
     string getDescription() {	return description; }

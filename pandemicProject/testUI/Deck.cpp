@@ -59,7 +59,22 @@ void Deck::buildFullDeck(vector<Card*>& tmpDeck) {
         ++iItr;
     }
 }
-void Deck::shuffleDeck(vector<Card*>&) {
+/* generate unordered set of random indices for cards id's */
+void Deck::shuffleDeck(vector<Card*>& oldDeck) {
+    size_t n = oldDeck.size();
+    size_t eCount = 0;
+    Card* tmpArray[n];
+    std::vector<Card*>::iterator odItr = oldDeck.begin();;
+    for ( size_t i = 0; i < eCount; i++ ) {
+        tmpArray[i] = *odItr++;
+    }
+    /* generate random indices for cards id's */
+    std::unordered_set<int> ids;
+    std::unordered_set<int>::iterator iItr;
+    while ( ids.size() < n ) {
+        int num = rand() % n;
+        ids.insert(num);
+    }
 }
 void Deck::dealCards() {
 }
@@ -69,7 +84,7 @@ Card* Deck::takeCard() {
         return NULL;
     }
     Card* tmp;
-		tmp = deck.front();
+    tmp = deck.front();
     deck.erase(deck.begin());
     size--;
     return tmp;
