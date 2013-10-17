@@ -4,7 +4,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Chicago
         Los Angeles
@@ -17,7 +16,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Atlanta
         San Francisco
@@ -31,7 +29,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Chicago
         Miami
@@ -43,7 +40,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Chicago
         New York
@@ -55,7 +51,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    London
         Madrid
@@ -68,7 +63,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Atlanta
         Miami
@@ -81,7 +75,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Essen
         Madrid
@@ -94,7 +87,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Algiers
         London
@@ -108,7 +100,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Algiers
         Essen
@@ -122,7 +113,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    London
         Milan
@@ -135,7 +125,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Essen
         Istanbul
@@ -147,7 +136,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Essen
         Istanbul
@@ -159,7 +147,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Chicago
         Mexico City
@@ -172,7 +159,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Bogota
         Chicago
@@ -186,7 +172,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Atlanta
         Bogota
@@ -199,7 +184,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Buenos Aires
         Lima
@@ -213,7 +197,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Bogota
         Mexico City
@@ -225,7 +208,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Lima
 
@@ -235,7 +217,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Bogota
         Buenos Aires
@@ -248,7 +229,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Bogota
         Sao Paulo
@@ -259,7 +239,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Khartoum
         Kinshasa
@@ -271,7 +250,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Johannesburg
         Khartoum
@@ -283,7 +261,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Cairo
         Johannesburg
@@ -296,7 +273,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Khartoum
         Kinshasa
@@ -307,7 +283,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Cairo
         Istanbul
@@ -320,7 +295,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Algiers
         Baghdad
@@ -334,7 +308,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Algiers
         Baghdad
@@ -349,7 +322,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Istanbul
         St. Petersburg
@@ -361,7 +333,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Baghdad
         Delhi
@@ -374,7 +345,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Cairo
         Istanbul
@@ -388,7 +358,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Baghdad
         Cairo
@@ -400,7 +369,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Baghdad
         Delhi
@@ -414,7 +382,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Chennai
         Delhi
@@ -426,7 +393,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Chennai
         Karachi
@@ -440,7 +406,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Bangkok
         Chennai
@@ -453,7 +418,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Bangkok
         Delhi
@@ -466,7 +430,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Chennai
         Ho Chi Minh City
@@ -480,7 +443,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Bangkok
         Chennai
@@ -493,7 +455,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Seoul
         Shanghai
@@ -504,7 +465,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Beijing
         Hong Kong
@@ -518,7 +478,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Bankok
         Ho Chi Minh City
@@ -533,7 +492,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Bangkok
         Hong Kong
@@ -546,7 +504,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Beijing
         Shanghai
@@ -558,7 +515,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Hong Kong
         Manila
@@ -571,7 +527,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Ho Chi Minh City
         Hong Kong
@@ -585,7 +540,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Jakarta
         Los Angeles
@@ -597,7 +551,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Osaka
         San Francisco
@@ -610,7 +563,6 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-IsInf:  FALSE
 HasSta: FALSE
 Adj:    Taipei
         Tokyo
