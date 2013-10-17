@@ -7,8 +7,6 @@ using namespace std;
 struct list
 {
 	int   city;
-	int test;
-	int test2;
 	list* next;
 };
 
