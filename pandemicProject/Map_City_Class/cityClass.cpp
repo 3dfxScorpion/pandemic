@@ -9,7 +9,6 @@ cityClass::cityClass() {
 	numInfectedYellow	= 0;
 	isInfected			= false;
 	researchStation		= false;
-	adjCity				= NULL;
 }
 
 cityClass::cityClass(string cityName, int cityPop, int blackInfected, int blueInfected, int redInfected, 
@@ -22,7 +21,6 @@ cityClass::cityClass(string cityName, int cityPop, int blackInfected, int blueIn
 	setInfectedYellow(yellowInfected);	// sets level of yellow infected
 	setInfected(infectedStatus);		// sets infected status
 	setResearchStation(researchStatus);	// sets research station status
-	adjCity = NULL;						// 
 }
 
 void cityClass::setCityName(string name) {
@@ -57,21 +55,8 @@ void cityClass::setResearchStation(bool researchStatus) {
 	researchStation = researchStatus;
 }
 
-void cityClass::addCity(int cityValue) {
-	list* cityNode = new list;
-	cityNode->city = cityValue;
-	cityNode->next = NULL;
-
-	list* node = adjCity;
-	if(node == NULL) {
-		node = cityNode;
-	}
-	else {
-		while(node->next == NULL) {
-			node = node->next;
-		}
-		node->next = cityNode;
-	}
+void cityClass::setAdjCity(string adjCityName) {
+	adjCity.push_back(adjCityName);
 }
 
 //*********************************************************************************************
@@ -100,22 +85,37 @@ int cityClass::getInfectedYellow() {
 	return numInfectedYellow;
 }
 
-bool cityClass::getInfected() {
+bool cityClass::getInfectedBool() {
 	return isInfected;
 }
 
-bool cityClass::getResearchStation() {
+string cityClass::getInfected() {
+	string result;
+	if(isInfected)
+		result = "TRUE";
+	else
+		result = "FALSE";
+	return result;
+}
+
+bool cityClass::getResearchStationBool() {
 	return researchStation;
 }
 
-vector<int> cityClass::getAdjCity() {
-	vector<int> cityList;
-	list* node = adjCity;
+string cityClass::getResearchStation() {
+	string result;
+	if(researchStation)
+		result = "TRUE";
+	else
+		result = "FALSE";
+	return result;
+}
 
-	while(node != NULL) {
-		cityList.push_back(node->city);
-		node = node->next;
-	}
-
+vector<string> cityClass::getAdjCity() {
+	vector<string> cityList(adjCity);
 	return cityList;
+}
+
+int cityClass::getNumberAdjacent() {
+	return adjCity.size();
 }

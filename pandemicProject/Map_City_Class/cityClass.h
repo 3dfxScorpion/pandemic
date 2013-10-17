@@ -4,12 +4,17 @@
 
 using namespace std;
 
+<<<<<<< HEAD
+=======
 struct list
 {
 	int   city;
+	int test;
+	int test2;
 	list* next;
 };
 
+>>>>>>> d21a82c6227ad753492499a32b543aa48fe83338
 class cityClass 
 {
 public:
@@ -27,7 +32,7 @@ public:
 	void	setInfectedYellow(int);		// sets level of yellow infected
 	void	setInfected(bool);			// sets infected status
 	void	setResearchStation(bool);	// sets research station status
-	void	addCity(int);				// adds city to list of adjacent cities
+	void	setAdjCity(string);			// adds city to list of adjacent cities
 
 	string	getCityName();				// returns city name
 	int		getPopulation();			// returns city population
@@ -35,9 +40,12 @@ public:
 	int		getInfectedBlue();			// return blue infection level
 	int		getInfectedRed();			// return red infection level
 	int		getInfectedYellow();		// return yellow infection level
-	bool	getInfected();				// returns city infection status
-	bool	getResearchStation();		// returns research station status
-	vector<int>	getAdjCity();			// returns a vector of adjacent cities
+	bool	getInfectedBool();			// returns city infection status as bool
+	string	getInfected();				// returns city infection status as string
+	bool	getResearchStationBool();	// returns research station status as bool
+	string	getResearchStation();		// returns research station status as string
+	vector<string>	getAdjCity();		// returns a vector of adjacent cities
+	int		getNumberAdjacent();		// returns the number of adjacent cities
 
 private:
 	string	cityName;					// name of city
@@ -48,6 +56,14 @@ private:
 	int		numInfectedYellow;			// number of people infected with yellow virus
 	bool	isInfected;					// is city infected
 	bool	researchStation;			// does city have research station
+<<<<<<< HEAD
+	vector<string> adjCity;				// vector of adjacent cities
+};
+=======
 	list*	adjCity;					// linked list of adjacent cities
 };
 
+<<<<<<< HEAD
+>>>>>>> d21a82c6227ad753492499a32b543aa48fe83338
+=======
+>>>>>>> d21a82c6227ad753492499a32b543aa48fe83338
