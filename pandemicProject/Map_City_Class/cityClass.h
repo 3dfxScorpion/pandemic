@@ -10,8 +10,8 @@ public:
 	// default constructor
 	cityClass();
 
-	// cityClass(cityName, population, black, blue, red, yellow, infected, station)
-	cityClass(string, int, int, int, int, int, bool, bool);
+	// cityClass(cityName, population, black, blue, red, yellow, station)
+	cityClass(string, int, int, int, int, int, bool);
 
 	void	setCityName(string);		// sets city name
 	void	setPopulation(int);			// sets population
@@ -19,7 +19,7 @@ public:
 	void	setInfectedBlue(int);		// sets level of blue infected
 	void	setInfectedRed(int);		// sets level of red infected
 	void	setInfectedYellow(int);		// sets level of yellow infected
-	void	setInfected(bool);			// sets infected status
+	void	setInfected();				// sets infected status
 	void	setResearchStation(bool);	// sets research station status
 	void	setAdjCity(string);			// adds city to list of adjacent cities
 

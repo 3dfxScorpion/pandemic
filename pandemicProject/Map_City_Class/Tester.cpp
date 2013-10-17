@@ -5,13 +5,18 @@ using namespace std;
 
 int main() {
 	mapClass gameMap;
-	string filename = "Cities.txt";
+	string filename = "Cities_test.txt";
 
 	cout << gameMap.getNumberofCities() << endl;
 
 	gameMap.populateMap(filename);
 
 	cout << gameMap.getNumberofCities() << endl << endl;;
+
+	gameMap.worldMap[3].setInfectedBlack(0);
+	gameMap.worldMap[3].setInfectedBlue(0);
+	gameMap.worldMap[3].setInfectedRed(0);
+	gameMap.worldMap[3].setInfectedYellow(0);
 
 /*
 	for(int i = 0; i < gameMap.getNumberofCities(); i++) {
@@ -37,7 +42,7 @@ int main() {
 	cout << currentCity.getCityName() << endl;
 */
 
-
+	cout << gameMap.infectedList();
 	
 	cout << "Press any key to exit.";
 	cin.get();

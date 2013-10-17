@@ -1,6 +1,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <iomanip>
 #include "mapClass.h"
 
 // default constructor
@@ -22,7 +23,7 @@ int mapClass::populateMap(string cityFile) {
 	else {
 		string cityName, adjCity;
 		int population, black, blue, red, yellow;
-		bool infected, station;
+		bool station;
 
 		while(!cityInfoFile.eof()) {
 			string first;
@@ -50,15 +51,6 @@ int mapClass::populateMap(string cityFile) {
 				else if(first == "Yellow:")
 					yellow = stoi(second);
 				// 
-				else if(first == "IsInf: ") {
-					if(second == "TRUE")
-						infected = true;
-					else if(second == "FALSE")
-						infected = false;
-					else
-						cout << "ERROR: IsInf\n";
-				}
-				// 
 				else if(first == "HasSta:") {
 					if(second == "TRUE")
 						station = true;
@@ -69,7 +61,7 @@ int mapClass::populateMap(string cityFile) {
 				}
 				else if(first == "Adj:   ") {
 					// populate map vector with cities
-					cityClass currentCity = cityClass(cityName, population, black, blue, red, yellow, infected, station);
+					cityClass currentCity = cityClass(cityName, population, black, blue, red, yellow, station);
 					
 					currentCity.setAdjCity(second);
 					while(!cityInfoFile.eof()) {
@@ -104,4 +96,18 @@ cityClass mapClass::locateCity(string cityName) {
 		}
 	}
 	return located;
+}
+
+string mapClass::infectedList() {
+	ostringstream infectedCities;
+	infectedCities << setw(15) << setiosflags(ios::left) << "City:" << setw(8) << "Black:" 
+		<< setw(8) << "Blue:" << setw(8) << "Red:" << setw(8) << "Yellow:" << endl;
+	for(int i = 0; i < worldMap.size(); i++) {
+		if(worldMap[i].getInfectedBool()) {
+			infectedCities << setw(15) << setiosflags(ios::left) << worldMap[i].getCityName() << setw(8) 
+				<< worldMap[i].getInfectedBlack() << setw(8) << worldMap[i].getInfectedBlue() << setw(8)
+				<< worldMap[i].getInfectedRed() << setw(8) << worldMap[i].getInfectedYellow() << endl;
+		}
+	}
+	return infectedCities.str();
 }

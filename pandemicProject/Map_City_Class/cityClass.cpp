@@ -12,14 +12,14 @@ cityClass::cityClass() {
 }
 
 cityClass::cityClass(string cityName, int cityPop, int blackInfected, int blueInfected, int redInfected, 
-						int yellowInfected, bool infectedStatus, bool researchStatus) {
+						int yellowInfected, bool researchStatus) {
 	setCityName(cityName);				// sets city name
 	setPopulation(cityPop);				// sets population
 	setInfectedBlack(blackInfected);	// sets level of black infected
 	setInfectedBlue(blueInfected);		// sets level of blue infected
 	setInfectedRed(redInfected);		// sets level of red infected
 	setInfectedYellow(yellowInfected);	// sets level of yellow infected
-	setInfected(infectedStatus);		// sets infected status
+	setInfected();						// sets infected status
 	setResearchStation(researchStatus);	// sets research station status
 }
 
@@ -33,22 +33,29 @@ void cityClass::setPopulation(int cityPop) {
 
 void cityClass::setInfectedBlack(int blackInfected) {
 	numInfectedBlack = blackInfected;
+	setInfected();	// test if infected
 }
 
 void cityClass::setInfectedBlue(int blueInfected) {
 	numInfectedBlue = blueInfected;
+	setInfected();	// test if infected
 }
 
 void cityClass::setInfectedRed(int redInfected) {
 	numInfectedRed = redInfected;
+	setInfected();	// test if infected
 }
 
 void cityClass::setInfectedYellow(int yellowInfected) {
 	numInfectedYellow = yellowInfected;
+	setInfected();	// test if infected
 }
 
-void cityClass::setInfected(bool infectedStatus) {
-	isInfected = infectedStatus;
+void cityClass::setInfected() {
+	if(numInfectedBlack > 0|| numInfectedBlue > 0 || numInfectedRed > 0 || numInfectedYellow > 0)
+		isInfected = true;
+	else
+		isInfected = false;
 }
 
 void cityClass::setResearchStation(bool researchStatus) {
