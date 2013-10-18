@@ -49,6 +49,9 @@ int main() {
 	
 	// test of infectedList formatted output
 	cout << endl << gameMap.infectedList() << endl;
+
+	// testing researchList to return string of research locations
+	cout << endl << gameMap.researchList() << endl;
 	
 	cout << "Press any key to exit.";
 	cin.get();
