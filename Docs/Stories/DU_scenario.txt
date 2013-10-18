@@ -1,0 +1,128 @@
+Role Assignments:
+Rima	- Scientist
+Thomas	- Dispatcher
+Judith	- Researcher
+Stephen	- Quarantine Specialist
+
+Initial Cards Dealt:
+Rima	- Sydney, Government Grant
+Thomas	- Milan, Baghdad
+Judith	- San Francisco, Beijing
+Stephen	- St. Petersburg, Johannesburg
+
+Initial Infection:
+Sydney			- 3
+Mexico City		- 3
+Osaka			- 3
+Santiago		- 2
+Hong Kong		- 2
+Sao Paulo		- 2
+San Francisco	- 1
+Los Angeles		- 1
+Milan			- 1
+
+***** TURN 1 *****
+
+Infection Rate:	2
+Outbreaks:		0
+
+Rima:
+Action 1	- Share Card, take Beijing from Judith
+Action 2	- Move to Chicago
+Action 3	- Move to San Francisco
+Action 4	- Treat infection
+Draw Card	- Kinshasa
+Draw Card	- Istanbul
+Infect City	- Montreal
+Infect City	- Baghdad
+
+Thomas:
+Action 1	- Share Card, take San Francisco
+Action 2	- Move Judith to Washington
+Action 3	- Move to Washington
+Action 4	- Move to New York
+Draw Card	- Tokyo
+Draw Card	- Forecast
+Infect City	- Kolkata
+Infect City	- Washington
+
+Judith:
+Action 1	- Move to New York
+Action 2	- Move to London
+Action 3	- Move to Essen
+Action 4	- Move to St. Petersburg
+Draw Card	- Algiers
+Draw Card	- Epidemic, Johannesburg +3
+			- Increase Infection Rate
+			- Epidemic Card Removed from Game
+			- Infection Discard Pile shuffled and added to Infection pile
+Infect City	- Sao Paulo +1
+Infect City	- Johannesburg, Outbreak!
+			- Increase Outbreak Level +1
+			- Kinshasa +1
+			- Khartoum +1
+
+Stephen:
+Action 1	- Move to Washington
+Action 2	- Move to New York
+Action 3	- Move to London
+Action 4	- Move to Essen
+Draw Card	- Bogota
+Draw Card	- Kolkata
+Infect City	- Baghdad
+Infect City	- Los Angeles
+
+***** TURN 2 *****
+
+Infection Rate:	2
+Outbreaks:		1
+
+Rima:
+Action 1	- Move to Tokyo
+Action 2	- Move to Osaka
+Action 3	- Treat
+Action 4	- Treat
+Draw Card	- One Quiet Night
+Draw Card	- Tehran
+Event Card	- One Quiet Night
+Infect City - Skipped
+Infect City - Skipped
+
+Thomas:
+Action 1	- Move to London
+Action 2	- Move to Essen
+Action 3	- Move to St. Petersburg
+Action 4	- Move Stephen to St. Petersburg
+Draw Card	- Sao Paulo
+Draw Card	- Seoul
+Infect City	- Mexico City, Outbreak!
+			- Increase Outbreak Level +1
+			- Los Angeles +1
+			- Chicago +1 Yellow
+			- Miami +1
+			- Bogota +1
+			- Lima +1
+Infect City	- Santiago +1
+
+Judith:
+Action 1	- Move to Istanbul
+Action 2	- Move to Baghdad
+Action 3	- Treat
+Action 4	- Treat
+Draw Card	- Karachi
+Draw Card	- Hong Kong
+Infect City	- Milan
+Infect City	- San Francisco
+
+Stephen:
+Action 1	- Give St. Petersburg to Thomas
+			- Discard Sao Paulo
+Action 2	- Move to Moscow
+Action 3	- Move to Tehran
+Action 4	- Move to Delhi
+Draw Card	- Epidemic
+			- Khartoum +3
+Draw Card	- Cairo
+			
+***** GAME OVER *****
+Not enough disease cubes left to place. Yellow = 0
