@@ -24,6 +24,7 @@ private:
     vector<Card*> hand;
     
 public:
+    Player(string _name, string _role, cityClass* _location){playerName = _name; playerRole = _role;location =_location;}
     Player(string _name, string _role){playerName = _name; playerRole = _role;}
     Player(){playerName = "default";playerRole = "default";}
     void addCard(Card* _toAdd);
