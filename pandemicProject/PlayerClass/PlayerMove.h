@@ -26,7 +26,7 @@ public:
     void buildRStation();
     void treatDisease();
     void cureDisease(Card*);
-    void shareKnowledge(Card*);
+    void shareKnowledge(Player*, Card*);
     Player * getCurrentPlayer(){return currentPlayer;}
 private:
     

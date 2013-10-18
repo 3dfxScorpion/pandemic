@@ -11,17 +11,19 @@
 #include "PlayerMove.h"
 
 PlayerMove::PlayerMove(){
-}//default constructor
+}//default constructor to keep my compiler happy.
 
 
 //The player moves to any city adjacent to it on the map.
 void PlayerMove::moveAdjacent(cityClass* toMove){
     bool isAdj = false;
     string destination = toMove->getCityName();
-    vector<string> adjCities = toMove->getAdjCity();
+    vector<string> adjCities = currentPlayer->getPlayerLocation()->getAdjCity();
     for (int i = 0;i<=toMove->getNumberAdjacent();i++)  //check if the requested city is adjacent
         if (destination == adjCities[i])
-            isAdj = true;                               //if adj city is found set true
+        {isAdj = true;                                  //if adj city is found set true
+            break;                                      //found the city, no need to loop further.
+        }
     if (isAdj)
         currentPlayer->setPlayerLocation(toMove);
     else
@@ -52,7 +54,7 @@ void PlayerMove::charterFlight(cityClass* toMove)
 {
     bool hasCard = false;
     string destination = toMove->getCityName();
-    for (int i =0;i<=currentPlayer->getHandSize();i++)
+    for (int i =0;i<=currentPlayer->getHandSize()-1;i++)
         if (currentPlayer->getHand()[i]->getCardName() == currentPlayer->getPlayerLocation()->getCityName()) //check players hand for the city card.
         {
             hasCard=true;//Players card was found
@@ -78,5 +80,17 @@ void PlayerMove::shuttleFlight(cityClass* toMove)
         else
             cout<<"You may only shuttle flights to cities with research stations"<<endl;
     }
+    
+}
+
+void PlayerMove::shareKnowledge(Player* _who, Card* _toGive){
+    
+    for (int i =0;i<=currentPlayer->getHandSize()-1;i++)
+        if (currentPlayer->getHand()[i]->getCardName() == currentPlayer->getPlayerLocation()->getCityName()) //
+        {
+            _who->addCard(currentPlayer->getHand()[i]);
+            currentPlayer->removeCard(i);
+        
+        }
     
 }

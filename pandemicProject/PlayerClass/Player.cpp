@@ -21,13 +21,7 @@ void Player::removeCard(int _toRemove){//swaps the back card with the card being
 
 }
 /* possibly used by MVC
-void Player::shareKnowledge(Player* _who, int _toGive){
 
-    if (_toGive<=hand.size()-1)
-    _who->addCard(hand[_toGive]);
-    removeCard(_toGive);
-    
-}
 
 void Player::recieveKnowledge(Player* _who, int _toGet)
 {
