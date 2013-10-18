@@ -10,6 +10,7 @@ public:
 	int getNumberofCities();		// returns number of cities
 	cityClass locateCity(string);	// takes in city name and returns cityClass
 	string infectedList();			// returns formatted list of infected cities
+	string researchList();			// returns formatted list of cities housing research stations
 
 	vector<cityClass> worldMap;
 };
