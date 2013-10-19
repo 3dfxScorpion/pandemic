@@ -15,7 +15,7 @@ class EventCard : public Card {
 
     string ToString() {
         ostringstream out;
-        out << "(" << this->getID() << ")" << this->getCity();
+        out << "(" << this->getID() << ")" << this->getCardName();
         return out.str();
     }
 };

@@ -22,6 +22,7 @@ class Deck {
     Deck(vector<Card*> _deck) : deck(_deck) {}
     int getSize() const { return size; }
     vector<Card*> getDeck() { return deck; }
+    void setDeck(vector<Card*> d) { deck = d; }
     void buildDeck(vector<Card*>&);
     void shuffleDeck(vector<Card*>&);
     void dealCards();

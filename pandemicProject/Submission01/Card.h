@@ -8,18 +8,18 @@ using std::ostringstream;
 
 class Card {
   public:
-    Card(int _id, string _city) : id(_id), city(_city) {}
+    Card(int _id, string _name) : id(_id), name(_name) {}
 
     int    getID()   { return id;   }
-    string getCity() { return city; }
+    string getCardName() { return name; }
     virtual string ToString() {
         ostringstream out;
-        out << "(" << this->getID() << ")" << this->getCity();
+        out << "(" << this->getID() << ")" << this->getCardName();
         return out.str();
     }
   private:
     int    id;
-    string city;
+    string name;
 };
 
 #endif

@@ -16,4 +16,11 @@ two player's hands, and a sample menu list.
 
 -- Derrick(3dfxScorpion)
 
+ISSUES:
+Currently, only option 2 "Direct Flight" does... more than nothing.  :)
+
+TODO:
+- Expand methods out to appropriate classes (MVC Design)
+- Provide an easier means to move to city with simplified City constructor
+- provide more game details and parameters (see Issues under GitHub)
 

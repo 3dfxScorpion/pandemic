@@ -16,7 +16,7 @@ class CityCard : public Card {
     string getCountry() { return country; }
     string ToString() {
         ostringstream out;
-        out << "(" << this->getID() << ")" << this->getCity();
+        out << "(" << this->getID() << ")" << this->getCardName();
         return out.str();
     }
 };

@@ -16,7 +16,7 @@
 #include "City.h"
 using namespace std;
 
-class Player{
+class Player {
 private:
     string playerName;
     string playerRole;
