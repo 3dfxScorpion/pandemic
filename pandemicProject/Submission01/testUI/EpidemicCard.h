@@ -1,21 +1,21 @@
-#ifndef EVENTCARD_H
-#define EVENTCARD_H
+#ifndef EPIDEMICCARD_H
+#define EPIDEMICCARD_H
 
 #include "Card.h"
 
-class EventCard : public Card {
+class EpidemicCard : public Card {
   private: 
     string description;
 
   public:
-    EventCard(int id, string name, string desc = "tbd") :
+    EpidemicCard(int id, string name, string desc = "tbd") :
         Card(id, name),	description(desc) {}
 
     string getDescription() {	return description; }
 
     string ToString() {
         ostringstream out;
-        out << "(" << this->getID() << ")" << this->getCardName();
+        out << "!!-Epidemic-!!";
         return out.str();
     }
 };
