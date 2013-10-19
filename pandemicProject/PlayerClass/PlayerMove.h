@@ -25,7 +25,7 @@ public:
     void shuttleFlight(cityClass*);
     void buildRStation();
     void treatDisease();
-    void cureDisease(Card*);
+    bool cureDisease(string);//returns true if successful
     void shareKnowledge(Player*, Card*);
     Player * getCurrentPlayer(){return currentPlayer;}
 private:

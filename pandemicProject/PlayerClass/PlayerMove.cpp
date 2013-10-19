@@ -7,9 +7,9 @@
 //
 
 
-
+#include "CureStatusIdeas.cpp"
 #include "PlayerMove.h"
-
+#include "CityCard.h"
 PlayerMove::PlayerMove(){
 }//default constructor to keep my compiler happy.
 
@@ -92,5 +92,28 @@ void PlayerMove::shareKnowledge(Player* _who, Card* _toGive){
             currentPlayer->removeCard(i);
         
         }
+    
+}
+
+bool PlayerMove::cureDisease(string color){//This will be updated later when we have a bit more user input.
+    int colorNum=0;                        //We will need to ask which 5 cards a player wants to discard
+    vector<int> toRemove;                   //if they have more than 5 cards of the same color.
+    CityCard * cityCaster;
+    for (int i = 0; i <= currentPlayer->getHandSize()-1;i++){
+        cityCaster=(CityCard*)currentPlayer->getHand()[i];   //hopefully its not too dangerous to cast like this, RTTI MAY BE REQUIRED
+        if (color == cityCaster->getColor())                 //wtb instanceof
+        {
+            toRemove.push_back(i);
+            colorNum++;
+        }
+        if (colorNum>=5){
+                //Right here I would call the cureDisease function in Darrens CureStatusIdeas.cpp
+            for (int k =0;k<=toRemove.size()-1;k++)
+                currentPlayer->removeCard(toRemove[k]);//discard the 5 city cards.
+            return true;
+        }
+    }
+    return false;
+    
     
 }
