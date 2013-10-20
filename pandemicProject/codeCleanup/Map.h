@@ -11,10 +11,10 @@ class Map {
     int populateMap(string);  // populates map from file
                               // (returns 0 if success, 1 if error)
     int getNumberofCities();  // returns number of cities
-    City locateCity(string);  // takes in city name and returns City
+    City* locateCity(string);  // takes in city name and returns City
     string infectedList();    // returns formatted list of infected cities
 
-    vector<City> worldMap;
+    vector<City*> worldMap;
 };
 
 #include "Map.cpp"

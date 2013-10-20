@@ -69,16 +69,16 @@ int Map::populateMap(string cityFile) {
                 }
                 else if ( first == "Adj:   " ) {
                 // populate map vector with cities
-                    City currentCity =
-                        City(cityName, cityColor, population,
-                             black, blue, red, yellow, station);
-                    currentCity.setAdjCity(second);
+                    City* currentCity =
+                        new City(cityName, cityColor, population,
+                                 black, blue, red, yellow, station);
+                    currentCity->setAdjCity(second);
                     while ( !cityInfoFile.eof() ) {
                         second.clear();
                         getline(cityInfoFile,fileInput);
                         if ( fileInput.empty() ) break;
                         second.append(fileInput.begin()+8,fileInput.end());
-                        currentCity.setAdjCity(second);
+                        currentCity->setAdjCity(second);
                     }
                     worldMap.push_back(currentCity);
                 }
@@ -96,10 +96,10 @@ int Map::getNumberofCities() {
     return worldMap.size();
 }
 
-City Map::locateCity(string cityName) {
-    City located;
+City* Map::locateCity(string cityName) {
+    City* located;
     for ( int i = 0; i < worldMap.size(); i++ ) {
-        if ( worldMap[i].getCityName() == cityName ) {
+        if ( worldMap[i]->getCityName() == cityName ) {
             located = worldMap[i];
             break;
         }
@@ -113,12 +113,12 @@ string Map::infectedList() {
                    << "Black:" << setw(8) << "Blue:"   << setw(8)
                    << "Red:"   << setw(8) << "Yellow:" << endl;
     for ( int i = 0; i < worldMap.size(); i++ ) {
-        if ( worldMap[i].getInfectedBool() ) {
-            infectedCities << setw(15) << left << worldMap[i].getCityName()
-                << setw(8) << worldMap[i].getInfectedBlack()
-                << setw(8) << worldMap[i].getInfectedBlue()
-                << setw(8) << worldMap[i].getInfectedRed()
-                << setw(8) << worldMap[i].getInfectedYellow() << endl;
+        if ( worldMap[i]->getInfectedBool() ) {
+            infectedCities << setw(15) << left << worldMap[i]->getCityName()
+                << setw(8) << worldMap[i]->getInfectedBlack()
+                << setw(8) << worldMap[i]->getInfectedBlue()
+                << setw(8) << worldMap[i]->getInfectedRed()
+                << setw(8) << worldMap[i]->getInfectedYellow() << endl;
         }
     }
     return infectedCities.str();
