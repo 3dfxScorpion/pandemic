@@ -33,5 +33,4 @@ class Deck {
     int size;
 };
 
-#include "Deck.cpp"
 #endif

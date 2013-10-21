@@ -27,11 +27,6 @@ or:
 .
 #endif
 
-A bonus addition I added was including the associating .cpp file
-from within its header file by added this just before "#endif":
-
-#include "Bar.cpp"
-
 (if anyone doesn't know, the foo/bar combo is simply placeholder
  names referring to whatever would actually fit in that statement.)
 

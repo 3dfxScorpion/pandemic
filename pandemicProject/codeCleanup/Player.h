@@ -40,5 +40,4 @@ public:
     int    getHandSize() { return (int)hand.size(); }    
 };
 
-#include "Player.cpp"
 #endif

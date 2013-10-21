@@ -33,5 +33,4 @@ class PlayerMove {
     Player * currentPlayer;
 };
 
-#include "PlayerMove.cpp"
 #endif /* defined(__pandemic__PlayerMove__) */

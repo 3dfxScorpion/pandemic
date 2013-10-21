@@ -51,5 +51,4 @@ class City {
     vector<string> adjCity;            // vector of adjacent cities
 };
 
-#include "City.cpp"
 #endif
