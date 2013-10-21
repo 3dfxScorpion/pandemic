@@ -13,10 +13,10 @@ class Map {
     int getNumberofCities();  // returns number of cities
     City* locateCity(string);  // takes in city name and returns City
     string infectedList();    // returns formatted list of infected cities
+    string researchList();      // returns formatted list of cities housing research stations
 
     vector<City*> worldMap;
 };
 
-#include "Map.cpp"
 #endif
 
