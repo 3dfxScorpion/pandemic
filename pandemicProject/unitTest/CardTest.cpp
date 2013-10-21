@@ -5,11 +5,10 @@
 using std::cout;
 using std::string;
 
-Card testCard(10, "testName");
-
 class TestCard : public TestSuite::Test {
 public:
     void run() {
+        Card testCard(10, "testName");
         test_( testCard.getID() == 10);
         test_( testCard.getCardName() == "testName");
     }
