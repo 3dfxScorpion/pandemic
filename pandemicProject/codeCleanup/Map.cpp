@@ -128,9 +128,9 @@ string Map::researchList() {
     ostringstream researchCities;
     researchCities << "Research Station Locations:" << endl;
     for ( int i = 0; i < worldMap.size(); i++ ) {
-      if ( worldMap[i]->getResearchStationBool() ) {
-          researchCities << worldMap[i]->getCityName() << endl;
-      }
+        if ( worldMap[i]->getResearchStationBool() ) {
+            researchCities << worldMap[i]->getCityName() << endl;
+        }
     }
     return researchCities.str();
 }
