@@ -10,7 +10,7 @@ class City {
     // default constructor
     City();
 
-    // City(cityName, population, black, blue, red, yellow, station)
+    // City(cityName, cityColor, population, black, blue, red, yellow, station)
     City(string, string, int, int, int, int, int, bool);
 
     void setCityName(string);          // sets city name
