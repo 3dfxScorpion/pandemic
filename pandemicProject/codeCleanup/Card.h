@@ -9,7 +9,7 @@ class Card {
   public:
     Card(int _id, string _name) : id(_id), name(_name) {}
 
-    int    getID()   { return id;   }
+    int    getID()       { return id;   }
     string getCardName() { return name; }
     virtual string ToString() {
         ostringstream out;

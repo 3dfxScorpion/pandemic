@@ -1,6 +1,5 @@
 #ifndef EPIDEMICCARD_H
 #define EPIDEMICCARD_H
-
 #include "Card.h"
 
 class EpidemicCard : public Card {

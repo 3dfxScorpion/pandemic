@@ -5,6 +5,7 @@
 #include "EventCard.h"
 #include "EpidemicCard.h"
 
+using std::string;
 using std::vector;
 
 static const size_t CITIES = 48;  // city card total

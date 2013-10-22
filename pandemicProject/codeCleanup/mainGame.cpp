@@ -10,6 +10,7 @@
 
 using std::cin;
 using std::cout;
+using std::setw;
 using std::string;
 using std::streamsize;
 using std::numeric_limits;

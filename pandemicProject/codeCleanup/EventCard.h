@@ -1,6 +1,5 @@
 #ifndef EVENTCARD_H
 #define EVENTCARD_H
-
 #include "Card.h"
 
 class EventCard : public Card {

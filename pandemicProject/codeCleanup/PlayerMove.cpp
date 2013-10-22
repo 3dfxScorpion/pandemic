@@ -1,3 +1,4 @@
+#include<iostream>
 #include "PlayerMove.h"
 //
 //  PlayerMove.cpp
@@ -6,6 +7,10 @@
 //  Created by Jefffrey McIntire on 10/17/13.
 //  Copyright (c) 2013 Jefffrey McIntire. All rights reserved.
 //
+
+using std::cout;
+using std::endl;
+
 PlayerMove::PlayerMove() {} // default constructor to keep my compiler happy.
 
 //The player moves to any city adjacent to it on the map.

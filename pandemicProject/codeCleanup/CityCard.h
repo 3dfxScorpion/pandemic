@@ -1,6 +1,5 @@
 #ifndef CITYCARD_H
 #define CITYCARD_H
-
 #include "Card.h"
 
 class CityCard : public Card {
