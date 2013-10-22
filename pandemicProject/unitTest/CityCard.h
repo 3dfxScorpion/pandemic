@@ -9,7 +9,7 @@ class CityCard : public Card {
     string country;
 
   public:
-    CityCard(int id, string name, string col = "tbd", string cou = "tbd") :
+    CityCard(int id, string name, string col, string cou) :
         Card(id, name), color(col), country(cou) {}
 
     string getColor()   { return color; }
