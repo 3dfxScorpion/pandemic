@@ -78,6 +78,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Submission01\City.cpp" />
+    <ClCompile Include="Submission01\Deck.cpp" />
+    <ClCompile Include="Submission01\mainGame.cpp" />
+    <ClCompile Include="Submission01\Map.cpp" />
+    <ClCompile Include="Submission01\Player.cpp" />
+    <ClCompile Include="Submission01\PlayerMove.cpp" />
     <ClCompile Include="testCode.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +91,21 @@
     <ClInclude Include="CityCard.h" />
     <ClInclude Include="EventCard.h" />
     <ClInclude Include="PlayerCityCard.h" />
+    <ClInclude Include="Submission01\Card.h" />
+    <ClInclude Include="Submission01\City.h" />
+    <ClInclude Include="Submission01\CityCard.h" />
+    <ClInclude Include="Submission01\Deck.h" />
+    <ClInclude Include="Submission01\EpidemicCard.h" />
+    <ClInclude Include="Submission01\EventCard.h" />
+    <ClInclude Include="Submission01\Map.h" />
+    <ClInclude Include="Submission01\Player.h" />
+    <ClInclude Include="Submission01\PlayerMove.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="InfectionCards.txt" />
+    <Text Include="Submission01\Cities.txt" />
+    <Text Include="Submission01\Cities_test.txt" />
+    <Text Include="Submission01\README.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

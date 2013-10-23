@@ -1,0 +1,59 @@
+Here is a list of all the infection cards in the deck:
+
+x48 Total:
+
+x12 Red Cards:
+-Sydney
+-Bangkok
+-Tokyo
+-Manila
+-Beijing
+-Ho Chi Minh City
+-Hong Kong
+-Taipei
+-Shanghai
+-Seoul
+-Osaka
+-Jakarta
+
+x12 Blue Cards:
+-Washington
+-St. Petersburg
+-Essen
+-Montreal
+-Chicago
+-Milan
+-San Francisco
+-Atlanta
+-London
+-Paris
+-Madrid
+-New York
+
+x12 Yellow Cards:
+-Miami
+-Mexico City
+-Los Angeles
+-Kinshasa
+-Lagos
+-Bogota
+-Lima
+-Santiago
+-Khartoum
+-San Paulo
+-Buenos Aires
+-Johannesburg
+
+x12 Black Cards:
+-Karachi
+-Istanbul
+-Dehli
+-Mumbai
+-Chennai
+-Moscow
+-Riyadh
+-Algiers
+-Baghdad
+-Kolkata
+-Tehran
+-Cairo

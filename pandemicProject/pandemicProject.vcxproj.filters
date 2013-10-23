@@ -13,10 +13,31 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Submission1">
+      <UniqueIdentifier>{c23ae3a0-d6c2-4d7f-ae5c-6cb6e9152a9d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="testCode.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Submission01\PlayerMove.cpp">
+      <Filter>Submission1</Filter>
+    </ClCompile>
+    <ClCompile Include="Submission01\Player.cpp">
+      <Filter>Submission1</Filter>
+    </ClCompile>
+    <ClCompile Include="Submission01\Map.cpp">
+      <Filter>Submission1</Filter>
+    </ClCompile>
+    <ClCompile Include="Submission01\mainGame.cpp">
+      <Filter>Submission1</Filter>
+    </ClCompile>
+    <ClCompile Include="Submission01\Deck.cpp">
+      <Filter>Submission1</Filter>
+    </ClCompile>
+    <ClCompile Include="Submission01\City.cpp">
+      <Filter>Submission1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -32,5 +53,46 @@
     <ClInclude Include="EventCard.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Submission01\PlayerMove.h">
+      <Filter>Submission1</Filter>
+    </ClInclude>
+    <ClInclude Include="Submission01\Player.h">
+      <Filter>Submission1</Filter>
+    </ClInclude>
+    <ClInclude Include="Submission01\Map.h">
+      <Filter>Submission1</Filter>
+    </ClInclude>
+    <ClInclude Include="Submission01\EventCard.h">
+      <Filter>Submission1</Filter>
+    </ClInclude>
+    <ClInclude Include="Submission01\EpidemicCard.h">
+      <Filter>Submission1</Filter>
+    </ClInclude>
+    <ClInclude Include="Submission01\Deck.h">
+      <Filter>Submission1</Filter>
+    </ClInclude>
+    <ClInclude Include="Submission01\CityCard.h">
+      <Filter>Submission1</Filter>
+    </ClInclude>
+    <ClInclude Include="Submission01\City.h">
+      <Filter>Submission1</Filter>
+    </ClInclude>
+    <ClInclude Include="Submission01\Card.h">
+      <Filter>Submission1</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Submission01\README.txt">
+      <Filter>Submission1</Filter>
+    </Text>
+    <Text Include="Submission01\Cities_test.txt">
+      <Filter>Submission1</Filter>
+    </Text>
+    <Text Include="Submission01\Cities.txt">
+      <Filter>Submission1</Filter>
+    </Text>
+    <Text Include="InfectionCards.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
