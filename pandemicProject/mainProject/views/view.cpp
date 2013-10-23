@@ -8,7 +8,3 @@ void view::printTitle()
 	cout << "Set player count: ";
 }
 
-void view::printNamePrompt(int num)
-{
-	cout << "Enter player " << num+1 << "'s name: ";
-}
