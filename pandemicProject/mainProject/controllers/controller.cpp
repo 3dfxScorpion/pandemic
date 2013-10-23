@@ -37,8 +37,9 @@ int main()
 	int temp;
 	string tempStr;
 	City* cityP = 0;			//pointer to a city
-	vector<Card*> cardP;		//temporary
+	ICard* iCardP = 0;			//pointer to an iCard
 
+	
 	// Print title, get num players
 	view.printTitle();			// view handles all input and output
 	cin >> temp;				// controller is what reads in values and performs most of the logic
@@ -81,7 +82,6 @@ int main()
 	//	Shuffle deck, distribute epidemic cards evenly (4, 5, or 6 epids for easy med hard)
 	//	Deal cards: 2 players-4 cards, 3players-3 cards, 4 players -2 cards
 	cityP = model.worldMap.locateCity("Atlanta");//find atlanta
-	cout << ".";
 	cityP->setResearchStation(true);//set the station
 	model.incResSta();//increment ressta count
 	for (int i = 0; i < model.getNumPlayers(); i++)  //for all players
@@ -103,11 +103,44 @@ int main()
 
 
 	//Infect nine cities:
-	//  perhaps initialInfect method in model - 3 cities x 3 cubes, 3 cities x 2 cubes, 3 cities x 1 cube
-	//  NEEDS: infection deck  
+	//  3x3, then 3x2, then 3x1
+	//	
+	for(int i = 3; i>0; i--)//for changing cube counts each passr
+	{
+		int color;
+		string s;
+								
+		for(int j=0; j<3; j++){
+		
+			iCardP = model.infectedDeck.takeCard();										//get a card
+			s = iCardP->getName();														//store its name
+			color = iCardP->getColor();													//store enumerated color
+			cityP = model.worldMap.locateCity(s);										//get a pointer to the city based on its name
+
+			if (color == red){
+				cityP->setInfectedRed(cityP->getInfectedRed() + (i));					//For the appropriate color increase their cubes, remove them from the
+				model.removeCubes(red,(i));												//stock of available cubes
+			}
+			else if (color == yellow){
+				cityP->setInfectedYellow(cityP->getInfectedYellow() + (i));
+				model.removeCubes(yellow,(i));
+			}
+			else if (color == blue){
+				cityP->setInfectedBlue(cityP->getInfectedBlue() + (i));
+				model.removeCubes(blue,(i));
+			}
+			else if (color == black){
+				cityP->setInfectedBlack(cityP->getInfectedBlack() + (i));
+				model.removeCubes(black,(i));
+			}
+		}
+	}   
+
+	//print inf cities list
+	view.printInfectedCities(model.worldMap.infectedList());
 	
 
-
+	
 
 	//Main game loop - this way to check game ending conditions is absolutely temporary, as meeting any one of the quit conditions would have no effect
 	//	on gameplay until all users finish turns this round.  Maybe throw exceptions?
