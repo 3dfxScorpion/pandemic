@@ -1,0 +1,58 @@
+Infection cards:
+Total: 48, 12 per color
+
+Blue:
+San Francisco
+Chicago
+Atlanta
+Toronto
+New York
+Washington
+London
+Madrid
+Paris
+Essen
+Milan
+St. Petersburg
+
+Yellow:
+Los Angeles
+Mexico City
+Miami
+Bogota
+Lima
+Santiago
+Buenos Aires
+Sao Paulo
+Lagos
+Khartoum
+Kinshasa
+Johannesburg
+
+Black:
+Algiers
+Istanbul
+Cairo
+Moscow
+Baghdad
+Riyadh
+Tehran
+Karachi
+Mumbai
+Delhi
+Chennai 
+Kolkata
+
+Red:
+Bangkok
+Jakarta
+Hong Kong
+Ho Chi Minh City
+Shanghai
+Beijing
+Seoul
+Tokyo
+Osaka
+Taipei
+Manila
+Sydney
