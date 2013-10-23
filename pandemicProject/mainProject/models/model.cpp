@@ -7,8 +7,7 @@ model::model()
 {
 	//set default values
 	numPlayers = -1;								
-	currentRate = 0;
-	outbreak = 0;
+	currentRate = outbreak = resSta = 0;							//inits
 	infRate[0] = infRate[1] = infRate[2] = 2;
 	infRate[3] = infRate[4] = 3;
 	infRate[5] = infRate[6] = 4; 
@@ -20,20 +19,19 @@ model::model()
 		cubes[i] = 24;
 		cureStatus[i] = uncured;
 	}
+
+	//set the roles vector
+	rolesDeck.push_back("Contingency Planner");
+	rolesDeck.push_back("Operations Expert");
+	rolesDeck.push_back("Dispatcher");
+	rolesDeck.push_back("Quarantine Specialist");
+	rolesDeck.push_back("Medic");
+	rolesDeck.push_back("Scientist");
+	rolesDeck.push_back("Researcher");
 }
 
 
-void model::setNumPlayers(int num)
-{
-	numPlayers = num;
-	return;
-}
 
-void model::incOutbreak()
-{
-	outbreak++;
-	return;
-}
 
 // currentRate six indexes seventh and highest infection rate
 // method increments if not already at six
@@ -67,34 +65,24 @@ void model::eradicateDisease(int disease)
 }
 
 
-//removes "count" cubes from the available amount
-// possible for cubes[color] to be negative, which should be a quit condition in the controller
-void model::removeCubes(int color, int count)
+// returns a random role as a string
+string model::drawRole()
 {
-	cubes[color] = cubes[color] - count;
-}
+	int num;
+	string tmp;
+	srand(time_t(0));									//getting seedy
+	num = rand() % rolesDeck.size();					//index into the deck;
+	tmp = rolesDeck[num];								//store the role
+	rolesDeck.erase(rolesDeck.begin()+num);				//erase from ze vectah
 
-//takes index of desired disease as parameter, returns number of cubes to be played
-// function currently ignores improper parameter value
-int model::getCubeCount(int disease)
-{
-	return(cubes[disease]);
-}
-
-
-int model::getInfRate()
-{
-	return( infRate[currentRate] );
+	return tmp;											//return that bad bitch
 }
 
 
-int model::getNumPlayers()
-{
-	return numPlayers;
-}
 
 
-int model::getOutbreak()
-{
-	return outbreak;
-}
+
+
+
+
+
