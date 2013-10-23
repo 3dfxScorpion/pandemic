@@ -41,12 +41,13 @@ public:
 	string drawRole();																//returns a random role card, removes it from the role deck
 
 	
-	vector<string> rolesDeck;	
+		
 
 	Player players[4];																//Not necessarily final implementation, here to illustrate functionality
 	Map worldMap;																	//The map, bitch!
 	Deck playerDeck;																//Player deck
 private:
+	vector<string> rolesDeck;
 	int numPlayers, currentRate, outbreak, resSta, difficulty;						// currentRate is index into inf level array
 	int cubes[4];
 	int infRate[7];
