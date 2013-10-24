@@ -1,0 +1,52 @@
+// This is a list of all 48 cities
+// The spelling of all cities shown here
+// have been checked if wikipedia links are included
+
+San Francisco		http://en.wikipedia.org/wiki/San_Francisco
+Chicago				http://en.wikipedia.org/wiki/Chicago
+Atlanta				http://en.wikipedia.org/wiki/Atlanta
+Montreal			http://en.wikipedia.org/wiki/Montreal
+New York			http://en.wikipedia.org/wiki/New_york
+Washington			http://en.wikipedia.org/wiki/Washington,_D.C.
+London				http://en.wikipedia.org/wiki/London
+Madrid				http://en.wikipedia.org/wiki/Madrid
+Paris				http://en.wikipedia.org/wiki/Paris
+Essen				http://en.wikipedia.org/wiki/Essen
+Milan				http://en.wikipedia.org/wiki/Milan
+St. Petersburg		http://en.wikipedia.org/wiki/St._petersburg
+Los Angeles			http://en.wikipedia.org/wiki/Los_angeles
+Mexico City			http://en.wikipedia.org/wiki/Mexico_city
+Miami				http://en.wikipedia.org/wiki/Miami
+Bogota				http://en.wikipedia.org/wiki/Bogota
+Lima				http://en.wikipedia.org/wiki/Lima
+Santiago			http://en.wikipedia.org/wiki/Santiago
+Sao Paulo			http://en.wikipedia.org/wiki/Sao_paulo
+Buenos Aires		http://en.wikipedia.org/wiki/Buenos_Aires
+Lagos				http://en.wikipedia.org/wiki/Lagos
+Kinshasa			http://en.wikipedia.org/wiki/Kinshasa
+Khartoum			http://en.wikipedia.org/wiki/Khartoum
+Johannesburg		http://en.wikipedia.org/wiki/Johannesburg
+Algiers				http://en.wikipedia.org/wiki/Algiers
+Cairo				http://en.wikipedia.org/wiki/Cairo
+Istanbul			http://en.wikipedia.org/wiki/Istanbul
+Moscow				http://en.wikipedia.org/wiki/Moscow
+Tehran				http://en.wikipedia.org/wiki/Tehran
+Baghdad				http://en.wikipedia.org/wiki/Baghdad
+Riyadh				http://en.wikipedia.org/wiki/Riyadh
+Karachi				http://en.wikipedia.org/wiki/Karachi
+Mumbai				http://en.wikipedia.org/wiki/Mumbai
+Delhi				http://en.wikipedia.org/wiki/Dehli
+Kolkata				http://en.wikipedia.org/wiki/Kolkata
+Chennai				http://en.wikipedia.org/wiki/Chennai
+Bangkok				http://en.wikipedia.org/wiki/Bankok
+Jakarta				http://en.wikipedia.org/wiki/Jakarta
+Beijing				http://en.wikipedia.org/wiki/Beijing
+Shanghai			http://en.wikipedia.org/wiki/Shanghai
+Hong Kong			http://en.wikipedia.org/wiki/Hong_kong
+Ho Chi Minh City	http://en.wikipedia.org/wiki/Ho_Chi_Minh_City
+Seoul				http://en.wikipedia.org/wiki/Seoul
+Taipei				http://en.wikipedia.org/wiki/Taipei
+Manila				http://en.wikipedia.org/wiki/Manila
+Sydney				http://en.wikipedia.org/wiki/Sydney
+Tokyo				http://en.wikipedia.org/wiki/Tokyo
+Osaka				http://en.wikipedia.org/wiki/Osaka
