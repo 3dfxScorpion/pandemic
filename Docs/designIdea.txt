@@ -1,5 +1,5 @@
 Here is a design layout I came up with for now. Of course this is up for critique and changes to whatever you guys think would be better! 
-But it's good that there is something laid out now so that we can create a stub and build a project off of a design created.
+But it's good that there is something laid out now so that we can create a stub and build a project off of a design created...
 
 ******************************
 *    Welcome to Pandemic     *
