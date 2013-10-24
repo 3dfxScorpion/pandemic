@@ -1,0 +1,154 @@
+******************************
+*    Welcome to Pandemic     *
+******************************
+
+
+How many players will be playing? (2-4): 
+
+What difficulty would you like to play in? (Introductory – 4, Standard – 5, Heroic – 6):
+
+Setting up game…
+
+-setUpBoard() //This would set the outbreak markers, infection rate, disease statuses, place the decks where they needed to be after shuffling, and the # of cubes/stations.
+
+-infectCities() //This is where the game will set up the infection of each city, 3 cubes to the first 3 cards off the infection deck, 2 to the next 3, and then 1 on the last 3. So NINE cities will be infected at the start with whatever colors were chosen. 
+
+Infecting cities…
+
+3 [color] disease cubes were placed on [insert first city drawn] x 3times
+2 [color] disease cubes were placed on [insert first city drawn] x 3times
+1 [color] disease cube was placed on [insert first city drawn] x 3times
+
+
+Dealing player roles…
+-dealRoleCards() //Depending on the # of players, shuffle the role deck and deal a card to each player that’s playing.
+
+Player 1 is a [insert role here]
+Player 2 is a [insert role here]
+and so on…
+
+-placePawns() //Places the respective player pawns on Atlanta. Maybe this can be included in dealRoleCards? Once these are placed, remove all other pawns from the game.
+
+Dealing hands to the players…
+-dealPlayerCards() //Shuffle the player deck (city and event cards) and give a # of cards to each player depending on how many are playing:
+
+2: 4 cards ea.
+3: 3 cards ea. 
+4: 2 cards ea.
+
+Setting up player deck…
+
+-shuffleEpidemicsIn() //shuffles the # of epidemics in the deck. The # depends on the difficulty. The remaining player deck will be split by the # of epidemics, then one card will be placed in each stack and shuffled. THEN these n stacks will be …stacked on top of one another to make 1 complete player deck stack.
+
+-checkWhoGoesFirst() //checks which player’s hand has the city player card with the highest population. So basically a search algorithm for the highest value. That player goes first.
+
+Player X has the card with the highest population. You may begin.
+
+-displayGameState() //Something to display the status of each city, what’s infected, what’s the infection rate/outbreak marker value so maybe something like this:
+State of the World
+
+Infected Cities:
+City	Red	Blue	Yellow    Black
+city1   0       0       2         0
+
+..and so on
+
+Infection Rate: 2
+Outbreak Number: 0
+
+# of player cards left in the deck: 30
+
+
+-displayPlayerHand(player) //Should we display all players hands? For strategic purposes?
+
+-displayOptions() //This should display the player menu. It would be nice to have checking options to omit options if they possibly cannot do something with what cards they have. So maybe something like this:
+
+Player X, please select your first(2nd, 3rd, 4th) action:
+
+1. Drive/Ferry {
+    Where would you like to move to?:
+	-1. San Francisco
+	-2. city 2
+	-3. etc…
+    Their choice moves their location to the chosen city, and the # of actions is subtracted by 1.
+}
+
+2. Direct Flight (If they have city cards in their hand other than the one their pawn is in) {
+
+Where would you like to directly fly to?:
+	-display cities
+	-make decision
+	-move player
+	-actions -1
+}
+
+3. Charter Flight (If they have a city card in their hand that matches the name of the city their pawn is in) {
+
+Where would you like to charter fly to?:
+	-display cities
+	-make decision
+	-move player
+}
+
+4. Shuttle Flight (Only if another research station exists) {
+
+Which city would you like to shuttle fly to?:
+	-display cities
+	-make decision
+	-move player
+}
+
+5. Treat Disease (Only if a cube exists on the same location the player is on) {
+
+If there is only 1 kind of cube color AND not cured: remove 1 cube
+If there is only 1 kind of cube color AND is cured: remove all cubes
+If there are more than 1 kind of cube: Player needs to decide which color, then just use the if cases above.
+
+Treating disease…
+
+-checkCubeStatus() //Whatever color they removed, the game should check if anymore remain on the map ONLY if this disease has been cured. If no more remain on the board, the disease status is set to eradicated. If there is no cure, ignore this function.
+
+-checkWinOrLose() //checks ALL cases on whether the players won or lost. In this case, it checks if all diseases are eradicated by the end of this turn
+
+}
+
+6. Share Knowledge (If two players are in the same location and either one of them own that city player card) {
+
+	What would you like to do?
+	- Give player a card
+	- Take player card (maybe should ask if the player agrees? Or is this forced?)
+
+Sharing knowledge…
+Player X received [city Card] from Player N.
+
+-checkPlayerHandLimits() //Checks if each player has 7 or less cards. If not, they must discard one immediately.
+
+}
+
+7. Discover Cure (ONLY if a player has 5 of the same color card AND is in a city that has a research station) {
+
+	-Player discards said 5 cards, and the disease status of that color changes to cured.
+
+The [color] disease has been cured!
+
+}
+
+8. Pass //Just pass your turn, making the action counter equal 0 or 4 (whatever we choose to count them) and moves on.
+
+9. Quit //End the game. Do not do anything else and just say quitting the game or something.
+
+//After 4 actions.
+
+-drawTwoCards() //Player draws 2 cards and adds it to their hand. There is NO limit as long as the first epidemic has not been drawn yet. This function should be able to handle what happens when epidemics are drawn and if so, perform some performEpidemic() function. If the player cannot draw any cards, the players LOSE!
+
+-infectTwoCities() //Player draws 2 infection cards and places 1 disease cube of such color on that drawn city. This function must handle what happens when outbreaks occur as well. If there are no more cubes to distribute, OR if the outbreak number reaches 8, the players LOSE!
+
+-moveToNextPlayer() //Just move to the next player. How we decide who goes next is up to us I guess…since this is text based. This assumes everything is okay and no one has caused the game to end.
+
+If the players have lose:
+
+Display the reason the players lost and say they lost, asking if they’d like to play again or quit.
+
+If the players won: 
+
+Just display that they have won and congratulate them…then asks if they’d like to play again.
