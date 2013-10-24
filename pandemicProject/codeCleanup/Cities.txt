@@ -420,7 +420,7 @@ Adj:    Chennai
         Delhi
         Karachi
 
-NAME:   Dehli
+NAME:   Delhi
 Color:  Black
 Pop:    0
 Black:  0
