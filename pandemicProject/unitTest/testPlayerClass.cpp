@@ -29,8 +29,9 @@ class TestPlayerMove : public TestSuite::Test {
     /* END Test Card creations */
 
         Player *p1 = new Player("Player 1","Warlock");
-        Player *p2 = new Player("player 2","priest");
-
+        Player *p2 = new Player("Player 2","Priest");
+        Plyaer *p3 = new Player("Player 3","Warrior");
+        Plyaer *p4 = new Player("Player 4","Mage");
     /* BEGIN Test Player creations */
         test_( p1->getPlayerName() == "Player 1" );
         test_( p1->getPlayerRole() == "Warlock" ); 
@@ -40,6 +41,10 @@ class TestPlayerMove : public TestSuite::Test {
 
         p1->addCard(newCard);
         p1->addCard(newCard2);
+        p3->addCard(newCard);
+        p3->addCard(newCard2);
+        p4->addCard(newCard);
+        p4->addCard(newCard2);
         p2->addCard(newCard1);
         viewPlayerHand(*p1);
         viewPlayerHand(*p2);
@@ -76,17 +81,20 @@ class TestPlayerMove : public TestSuite::Test {
     /* END Test Player move */
 
 
-      /*//Begin direct flight test
+      //Begin direct flight test
 
-        cout <<"right now p1 is located"<<p1->getPlayerLocation()->getCityName()<<endl;
-        mover.setCurrentPlayer(p1);
-        p1->addCard(miamiCard);
-        viewPlayerHand(*p1);
+        cout << "right now p3 is located"
+             << p3->getPlayerLocation()->getCityName()<<endl;
+        test_( p3->getPlayerLocation()->getCityName() == "Atlanta" );
+        mover.setCurrentPlayer(p3);
+        p3->addCard(miamiCard);
+        viewPlayerHand(*p3);
         City miamiCity = newMap->locateCity("Miami");
         citypointer = &miamiCity;
         mover.directFlight(citypointer);
-         cout <<"NOW p1 is located"<<p1->getPlayerLocation()->getCityName()<<endl;
-        viewPlayerHand(*p1);
+         cout <<"NOW p1 is located"<<p3->getPlayerLocation()->getCityName()<<endl;
+        test_( p1->getPlayerLocation()->getCityName() == "Miami" );
+        viewPlayerHand(*p3);
 
       //end Direct flight test*/
 
