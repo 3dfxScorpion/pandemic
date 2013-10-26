@@ -23,6 +23,14 @@ void displayOptions();
 void drawTwoCards();
 void infectTwoCities();
 void moveToNextPlayer();
+bool outbreakTest(int,int);		//int params for simplicity, tailor to actual types when headers included
+void doOutbreak(int, int);		//
+bool validMove(int);
+void moveCurrentPlayer(int);
+void buildResearch(int);
+void treatDisease(int);
+void shareKnowledge(int, int);
+
 
 int main()
 {
@@ -30,7 +38,7 @@ int main()
     
     int numOfPlayers = getNumOfPlayers();
     int difficulty = getDifficulty();
-    
+    int cityP, cityP2, numToAdd, choice, cardP, playerID ;
     setUpBoard();
     infectCities();
     
@@ -42,20 +50,32 @@ int main()
     checkWhoGoesFirst();
     
     int infectionRate[7] = {2, 2, 2, 3, 3, 4, 4};
-    int outbreakNumber[9] = {0, 1, 2, 3, 4, 5, 6, 7, 8}; //Does this start at one? I have to double check!
+    int outbreakNumber = 0; //Does this start at one? I have to double check!  Array values were the offset, int seems more appropriate.
     
     //Main menu of the game
     
-    displayGameState(infectionRate[0], outbreakNumber[0]); //probably some while loops here
+    displayGameState(infectionRate[0], outbreakNumber); //probably some while loops here
     displayPlayerHand();
     displayOptions();
     
     //After the players' turns
     
+	if(choice == 1 && validMove(cityP))
+		moveCurrentPlayer(cityP);
+	else if (choice == 700)
+		buildResearch(cityP);
+	else if (choice == 999)
+		treatDisease(cityP);
+	else if (choice == 42)
+		shareKnowledge(cardP, playerID);
     drawTwoCards();
     infectTwoCities();
+	if (outbreakTest(cityP, numToAdd))
+		doOutbreak(cityP2, 0);
     moveToNextPlayer();
     infectTwoCities();
+	if (outbreakTest(cityP, numToAdd))
+		doOutbreak(cityP2, 0);
     moveToNextPlayer();
     
     return 0;
@@ -286,7 +306,58 @@ void moveToNextPlayer() {
  
  */
 
+bool outbreakTest(int city, int cubesToAdd)
+{
+	//recieves pointer to a city, and the number of cubes being added (1 if infect cities round, 3 if epidemic)
+	//tests to see if doing other would cause an outbreak and returns bool 
+
+	return false;
+}
+
+void doOutbreak(int city, int alreadyDone)
+{
+	//recieves pointer to a city, performs an outbreak;
+	//will recurse if additional outbreaks occur, second parameter is a list of cities that
+	// have already experienced an outbreak in this chain to avoid repeats
+
+	return;
+}
+
+bool validMove(int cityP)
+{
+	//checks conditions necessary for a move (adjacency, requisite number of cards) ignoring event cards
+	//returns true if the move is possible
+	return true;
+}
 
 
+void moveCurrentPlayer(int cityP)
+{
+	//gets pointer to city, sets player location to that city
+	return;
+}
 
 
+void buildResearch(int cityP)
+{
+	//checks number of stations built
+	// if less than six, places one at pointer cityP and increments number in play
+	// if six, calls displayResearch to list them, and lets user choose which to relocate
+
+	return;
+}
+
+void treatDisease(int cityP)
+{
+	//reduces the number of disease cubes by 1, or more if medic
+	// gets pointer to players current city
+	// 
+
+	return;
+}
+
+void shareKnowledge(int cardP, int playerID)
+{
+	//transfers the card pointed to to the player player pointed to
+	//
+}
