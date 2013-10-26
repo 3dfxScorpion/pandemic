@@ -30,35 +30,33 @@ class TestPlayerMove : public TestSuite::Test {
 
         Player *p1 = new Player("Player 1","Warlock");
         Player *p2 = new Player("Player 2","Priest");
-        Plyaer *p3 = new Player("Player 3","Warrior");
-        Plyaer *p4 = new Player("Player 4","Mage");
+        Player *p3 = new Player("Player 3","Warrior");
+        Player *p4 = new Player("Player 4","Mage");
     /* BEGIN Test Player creations */
         test_( p1->getPlayerName() == "Player 1" );
         test_( p1->getPlayerRole() == "Warlock" ); 
-        test_( p2->getPlayerName() == "player 2" );
-        test_( p2->getPlayerRole() == "priest" );
+        test_( p2->getPlayerName() == "Player 2" );
+        test_( p2->getPlayerRole() == "Priest" );
     /* END Test Player creations */
 
         p1->addCard(newCard);
         p1->addCard(newCard2);
+        p2->addCard(newCard);
+        p2->addCard(newCard2);
         p3->addCard(newCard);
         p3->addCard(newCard2);
         p4->addCard(newCard);
         p4->addCard(newCard2);
-        p2->addCard(newCard1);
-        viewPlayerHand(*p1);
-        viewPlayerHand(*p2);
-        // p1->shareKnowledge(p2, 0);
-        viewPlayerHand(*p1);
-        viewPlayerHand(*p2);
+
         Map * newMap = new Map();
-        newMap->populateMap("Cities.txt");
+        newMap->populateMap("/Users/jmcintire/Desktop/CodeCleanup/Cities.txt");
         City * atlantaCity = newMap->locateCity("Atlanta");
-  
-        City * citypointer = atlantaCity;
-        City * citypointer2;
-        citypointer->setResearchStation(false);
-        p1->setPlayerLocation(citypointer);//player is in atlanta
+
+        atlantaCity->setResearchStation(false);
+        p1->setPlayerLocation(atlantaCity);//player is in atlanta
+        p2->setPlayerLocation(atlantaCity);
+        p3->setPlayerLocation(atlantaCity);
+        p4->setPlayerLocation(atlantaCity);
         vector<string> testVector = p1->getPlayerLocation()->getAdjCity();
 
         for ( int i = 0; i <= testVector.size() - 1; i++ )
@@ -67,64 +65,73 @@ class TestPlayerMove : public TestSuite::Test {
         PlayerMove mover;
 
     /* BEGIN Test Player move */
-        cout << "right now p1 is located"
-             << p1->getPlayerLocation()->getCityName() << endl;
+        cout << "right now p1 is located in "
+             << p1->getPlayerLocation()->getCityName()
+             << endl;
         test_( p1->getPlayerLocation()->getCityName() == "Atlanta" );
         City * chicagoCity = newMap->locateCity("Chicago");
-        citypointer2 = chicagoCity;
         mover.setCurrentPlayer(p1);
-        mover.moveAdjacent(citypointer2);
-        cout << "NOW p1 is located"
+        mover.moveAdjacent(chicagoCity);
+        cout << "NOW p1 is located in "
              <<p1->getPlayerLocation()->getCityName() << endl;
         test_( p1->getPlayerLocation()->getCityName() == "Chicago" );
         viewPlayerHand(*p1);
     /* END Test Player move */
 
 
+        //Start shuttle flight test
+         
+         cout << "right now p2 is located in "
+              << p2->getPlayerLocation()->getCityName()
+              << endl;
+         mover.setCurrentPlayer(p2);
+         City * SFCity = newMap->locateCity("San Francisco");
+         SFCity->setResearchStation(true);
+         mover.shuttleFlight(SFCity);
+         cout << "NOW p1 is located in "
+              << p2->getPlayerLocation()->getCityName()
+              << endl;
+         viewPlayerHand(*p2);
+         //end shuttle flight test*/
+
       //Begin direct flight test
 
-        cout << "right now p3 is located"
-             << p3->getPlayerLocation()->getCityName()<<endl;
+        cout << "right now p3 is located in "
+             << p3->getPlayerLocation()->getCityName()
+             << endl;
         test_( p3->getPlayerLocation()->getCityName() == "Atlanta" );
         mover.setCurrentPlayer(p3);
         p3->addCard(miamiCard);
         viewPlayerHand(*p3);
-        City miamiCity = newMap->locateCity("Miami");
-        citypointer = &miamiCity;
-        mover.directFlight(citypointer);
-         cout <<"NOW p1 is located"<<p3->getPlayerLocation()->getCityName()<<endl;
-        test_( p1->getPlayerLocation()->getCityName() == "Miami" );
+        City * miamiCity = newMap->locateCity("Miami");
+        mover.directFlight(miamiCity);
+         cout << "NOW p3 is located in "
+              << p3->getPlayerLocation()->getCityName()
+              << endl;
+        test_( p3->getPlayerLocation()->getCityName() == "Miami" );
         viewPlayerHand(*p3);
 
       //end Direct flight test*/
-
-
-      /*//Begin charter flight test
-        p1->addCard(atlantaCard);
-        cout <<"right now p1 is located"<<p1->getPlayerLocation()->getCityName()<<endl;
-        mover.setCurrentPlayer(p1);
-        viewPlayerHand(*p1);
-        City SFCity = newMap->locateCity("San Francisco");
-        citypointer = &SFCity;
-        mover.charterFlight(citypointer);
-        cout <<"NOW p1 is located"<<p1->getPlayerLocation()->getCityName()<<endl;
-        viewPlayerHand(*p1);
+        
+      //Begin charter flight test
+        p4->addCard(atlantaCard);
+        cout << "right now p4 is located in "
+             << p4->getPlayerLocation()->getCityName()
+             << endl;
+        test_( p4->getPlayerLocation()->getCityName() == "Atlanta" );
+        mover.setCurrentPlayer(p4);
+        viewPlayerHand(*p4);
+        mover.charterFlight(SFCity);
+        cout << "NOW p4 is located in "
+             << p4->getPlayerLocation()->getCityName()
+             << endl;
+        test_( p4->getPlayerLocation()->getCityName() == "San Francisco" );
+        viewPlayerHand(*p4);
      
       //end charter flight test*/
 
 
 
-      /*//Start shuttle flight test
-
-        cout <<"right now p1 is located"<<p1->getPlayerLocation()->getCityName()<<endl;
-        mover.setCurrentPlayer(p1);
-        City SFCity = newMap->locateCity("San Francisco");
-        citypointer2 = &SFCity;
-        citypointer2->setResearchStation(true);
-        mover.shuttleFlight(citypointer2);
-        cout <<"NOW p1 is located"<<p1->getPlayerLocation()->getCityName()<<endl;
-        viewPlayerHand(*p1);
-      //end shuttle flight test*/
 
     }
 };
