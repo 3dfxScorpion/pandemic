@@ -24,12 +24,19 @@ void drawTwoCards();
 void infectTwoCities();
 void moveToNextPlayer();
 bool outbreakTest(int,int);		//int params for simplicity, tailor to actual types when headers included
-void doOutbreak(int, int);		//
+void doOutbreak(int, int);
 bool validMove(int);
 void moveCurrentPlayer(int);
 void buildResearch(int);
 void treatDisease(int);
 void shareKnowledge(int, int);
+void performAnAction();
+void performDirectFlight(int);
+void performCharterFlight(int);
+void performShuttleFlight(int);
+void discoverCure();
+void passTurn();
+int quitGame();
 
 
 int main()
@@ -38,7 +45,8 @@ int main()
     
     int numOfPlayers = getNumOfPlayers();
     int difficulty = getDifficulty();
-    int cityP, cityP2, numToAdd, choice, cardP, playerID ;
+    bool didTheyWin = false;
+    
     setUpBoard();
     infectCities();
     
@@ -53,30 +61,45 @@ int main()
     int outbreakNumber = 0; //Does this start at one? I have to double check!  Array values were the offset, int seems more appropriate.
     
     //Main menu of the game
+    while (didTheyWin != true) {
+        displayGameState(infectionRate[0], outbreakNumber); //probably some while loops here
+        displayPlayerHand();
+        
+        int moveCount = 0;
+        
+        while (moveCount != 4) {
+            cout << "Player X: Move number " << moveCount+1 << "\n\n";
+            performAnAction();
+            moveCount++;
+        }
+        
+        //After the players' turns
+        
+        drawTwoCards();
+        infectTwoCities();
+        
+        int numToAdd = 2;
+        int cityP = 2;
+        int cityP2 = 1;
+        
+        if (outbreakTest(cityP, numToAdd)) {
+            doOutbreak(cityP2, 0);
+        }
+        
+        moveToNextPlayer();
+    }
     
-    displayGameState(infectionRate[0], outbreakNumber); //probably some while loops here
-    displayPlayerHand();
-    displayOptions();
-    
-    //After the players' turns
-    
-	if(choice == 1 && validMove(cityP))
-		moveCurrentPlayer(cityP);
-	else if (choice == 700)
-		buildResearch(cityP);
-	else if (choice == 999)
-		treatDisease(cityP);
-	else if (choice == 42)
-		shareKnowledge(cardP, playerID);
-    drawTwoCards();
-    infectTwoCities();
-	if (outbreakTest(cityP, numToAdd))
-		doOutbreak(cityP2, 0);
-    moveToNextPlayer();
-    infectTwoCities();
-	if (outbreakTest(cityP, numToAdd))
-		doOutbreak(cityP2, 0);
-    moveToNextPlayer();
+    /*
+     
+     If the players have lost:
+     
+     Display the reason the players lost and say they lost, asking if they’d like to play again or quit.
+     
+     If the players won:
+     
+     Just display that they have won and congratulate them…then asks if they’d like to play again.
+     
+     */
     
     return 0;
 }
@@ -128,10 +151,10 @@ void infectCities() {
     cout << "Infecting Cities...\n\n";
     
     /*This is where the game will set up the infection of each city, 3 cubes to the first 3 cards off the infection deck, 2
-    to the next 3, and then 1 on the last 3. So NINE cities will be infected at the start with whatever colors were
-    chosen.
+     to the next 3, and then 1 on the last 3. So NINE cities will be infected at the start with whatever colors were
+     chosen.
      
-    Maybe something like: */
+     Maybe something like: */
     
     for (int i = 3; i > 0; i--) {
         for (int j = 3; j > 0; j--) {
@@ -146,9 +169,9 @@ void dealRoleCards(int playerCount) {
     
     //Some shuffling of the role cards and dealing of cards is done here.
     
-    //Obviously some count until 0 will happen. Probably a for loop. I hardcoded a min of 2 players.
-    cout << "Player " << playerCount << " is assigned the role: Medic.\n\n";
-    cout << "Player " << playerCount-1 << " is assigned the role: Scientist.\n\n";
+    for (int pCount = 1; pCount <= playerCount; pCount++) {
+        cout << "Player " << pCount << " is assigned the role: [random assigned role]!\n\n";
+    }
     
 }
 
@@ -179,138 +202,97 @@ void displayGameState(int infectRate, int outbreakNum) {
     //Something to display the status of each city, what’s infected, what’s the infection rate/outbreak marker value so
     //maybe something like this:
     
-    cout << "------------------------------------------------------------\n";
-    cout << "                 State of the World\n\n\n";
+    cout << "--------------------------------------------------------------------------\n";
+    cout << "                 State of the World\n\n";
     cout << "Infected Cities:\n";
     cout << "City	Red	  Blue	Yellow  Black\n"; //obviously some setw stuff to be done here
-    cout << "city1   0      0     2       0\n\n";
+    cout << "City:           Blk: Blu: Red: Yel:    City:           Blk: Blu: Red: Yel:\n";
+    cout << "San Francisco    1    0    1    0      Algiers          1    0    1    0  \n";
+    cout << "Chicago          1    1    0    0      Cairo            0    0    1    1  \n";
+    cout << "Atlanta          0    1    1    0      Istanbul         0    1    1    0  \n";
+    cout << "Montreal         1    1    0    1      Moscow           0    1    0    1  \n";
+    cout << "New York         0    1    1    1      Tehran           1    0    1    1  \n";
+    cout << "Washington       1    0    1    1      Baghdad          1    1    1    0  \n";
+    cout << "London           0    1    0    1      Riyadh           1    0    1    0  \n";
+    cout << "Madrid           0    1    1    0      Karachi          1    1    0    0  \n";
+    cout << "Paris            0    1    1    1      Mumbai           0    0    1    1  \n";
+    cout << "Essen            1    0    1    0      Delhi            1    0    0    1  \n";
+    cout << "Milan            0    1    1    1      Kolkata          0    1    1    0  \n";
+    cout << "St. Petersburg   1    0    0    0      Chennai          1    1    1    0  \n";
+    cout << "Los Angeles      0    1    0    1      Bangkok          0    1    1    0  \n";
+    cout << "Mexico City      1    1    0    0      Jakarta          1    0    1    0  \n";
+    cout << "Miami            0    1    1    0      Beijing          0    1    1    1  \n";
+    cout << "Bogota           1    0    0    1      Shanghai         1    0    0    1  \n";
+    cout << "Lima             1    1    0    0      Hong Kong        0    1    1    0  \n";
+    cout << "Santiago         1    1    0    0      Ho Chi Minh City 1    1    1    0  \n";
+    cout << "Sao Paulo        1    1    0    0      Seoul            0    1    1    0  \n";
+    cout << "Buenos Aires     0    1    1    1      Taipei           0    1    0    1  \n";
+    cout << "Lagos            1    1    0    0      Manila           1    0    0    0  \n";
+    cout << "Kinshasa         1    0    1    0      Sydney           0    0    1    0  \n";
+    cout << "Khartoum         1    0    1    0      Tokyo            1    1    1    1  \n";
+    cout << "Johannesburg     1    0    1    0      Osaka            1    0    1    0  \n";
+    cout << "--------------------------------------------------------------------------\n";
     cout << "Infection rate: " << infectRate << "\n";
     cout << "Outbreak number: " << outbreakNum << "\n\n";
     cout << "Number of remaining player cards: 30\n";
-    cout << "------------------------------------------------------------\n";
 }
 
 void displayPlayerHand() {
-    //Should this display ALL player hands? For strategic purposes?
+    cout << "-----------------------------------------------------------------------------------------\n";
+    cout << "   Player1                 Player2                 Player3                 Player4     \n";
+    cout << "-----------------------------------------------------------------------------------------\n";
+    cout << "(0)Cairo                (1)Taipei               (2)Washington           (3)Mexico City:\n";
+    cout << "(4)Mexico City          (5)Washington           (6)Khartoum             (7)Tokyo\n";
+    cout << "(8)Bangkok              (9)Paris                (10)Kolkata             (11)Milan\n";
+    cout << "!!-Epidemic-!!          (12)Seoul               (13)Shanghai            (14)Johannesburg\n";
+    cout << "-----------------------------------------------------------------------------------------\n";
 }
 
 void displayOptions() {
-    /*
      
-     This should display the player menu. It would be nice to have checking options to omit options if they possibly cannot do something with what cards they have. So maybe something like this:
-     
-     Player X, please select your first(2nd, 3rd, 4th) action:
-     
-     1. Drive/Ferry {
-     Where would you like to move to?:
-     -1. San Francisco
-     -2. city 2
-     -3. etc…
-     Their choice moves their location to the chosen city, and the # of actions is subtracted by 1.
-     }
-     
-     2. Direct Flight (If they have city cards in their hand other than the one their pawn is in) {
-     
-     Where would you like to directly fly to?:
-     -display cities
-     -make decision
-     -move player
-     -actions -1
-     }
-     
-     3. Charter Flight (If they have a city card in their hand that matches the name of the city their pawn is in) {
-     
-     Where would you like to charter fly to?:
-     -display cities
-     -make decision
-     -move player
-     }
-     
-     4. Shuttle Flight (Only if another research station exists) {
-     
-     Which city would you like to shuttle fly to?:
-     -display cities
-     -make decision
-     -move player
-     }
-     
-     5. Treat Disease (Only if a cube exists on the same location the player is on) {
-     
-     If there is only 1 kind of cube color AND not cured: remove 1 cube
-     If there is only 1 kind of cube color AND is cured: remove all cubes
-     If there are more than 1 kind of cube: Player needs to decide which color, then just use the if cases above.
-     
-     Treating disease…
-     
-     -checkCubeStatus() //Whatever color they removed, the game should check if anymore remain on the map ONLY if this disease has been cured. If no more remain on the board, the disease status is set to eradicated. If there is no cure, ignore this function.
-     
-     -checkWinOrLose() //checks ALL cases on whether the players won or lost. In this case, it checks if all diseases are eradicated by the end of this turn
-     
-     }
-     
-     6. Share Knowledge (If two players are in the same location and either one of them own that city player card) {
-     
-     What would you like to do?
-     - Give player a card
-     - Take player card (maybe should ask if the player agrees? Or is this forced?)
-     
-     Sharing knowledge…
-     Player X received [city Card] from Player N.
-     
-     -checkPlayerHandLimits() //Checks if each player has 7 or less cards. If not, they must discard one immediately.
-     
-     }
-     
-     7. Discover Cure (ONLY if a player has 5 of the same color card AND is in a city that has a research station) {
-     
-     -Player discards said 5 cards, and the disease status of that color changes to cured.
-     
-     The [color] disease has been cured!
-     
-     }
-     
-     8. Pass //Just pass your turn, making the action counter equal 0 or 4 (whatever we choose to count them) and moves on.
-     
-     9. Quit //End the game. Do not do anything else and just say quitting the game or something.
-     
-     */
+    cout << "1. Drive/Ferry\n";
+    cout << "2. Direct Flight\n";
+    cout << "3. Charter Flight\n";
+    cout << "4. Shuttle Flight\n";
+    cout << "5. Treat Disease\n";
+    cout << "6. Share Knowledge\n";
+    cout << "7. Discover Cure\n";
+    cout << "8. Build Research Station\n";
+    cout << "9. Pass\n";
+    cout << "10. Quit Game\n\n";
 }
 
 void drawTwoCards() {
     //Player draws 2 cards and adds it to their hand. There is NO limit as long as the first epidemic has not been drawn
     //yet. This function should be able to handle what happens when epidemics are drawn and if so, perform some
     //performEpidemic() function. If the player cannot draw any cards, the players LOSE!
-
+    cout << "It is the end of your turn. Drawing two Player cards...\n\n";
+    cout << "You have drawn: cityX!\n";
+    cout << "You have drawn: cityY!\n\n";
+    
 }
 
 void infectTwoCities() {
     //Player draws 2 infection cards and places 1 disease cube of such color on that drawn city. This function must handle
     //what happens when outbreaks occur as well. If there are no more cubes to distribute, OR if the outbreak number
     //reaches 8, the players LOSE!
+    cout << "Now infecting two cities...\n\n";
+    cout << "City Z has been infected with 1 [color here] cube!!\n";
+    cout << "City A has been infected with 1 [color here] cube!!\n";
 }
 
 void moveToNextPlayer() {
     //Just move to the next player. How we decide who goes next is up to us I guess…since this is text based. This assumes
     //everything is okay and no one has caused the game to end.
+    
+    cout << "It is now Player F's turn!\n\n";
 }
-
-/*
- 
- If the players have lose:
- 
- Display the reason the players lost and say they lost, asking if they’d like to play again or quit.
- 
- If the players won:
- 
- Just display that they have won and congratulate them…then asks if they’d like to play again.
- 
- */
 
 bool outbreakTest(int city, int cubesToAdd)
 {
 	//recieves pointer to a city, and the number of cubes being added (1 if infect cities round, 3 if epidemic)
-	//tests to see if doing other would cause an outbreak and returns bool 
-
+	//tests to see if doing other would cause an outbreak and returns bool
+    
 	return false;
 }
 
@@ -319,7 +301,7 @@ void doOutbreak(int city, int alreadyDone)
 	//recieves pointer to a city, performs an outbreak;
 	//will recurse if additional outbreaks occur, second parameter is a list of cities that
 	// have already experienced an outbreak in this chain to avoid repeats
-
+    
 	return;
 }
 
@@ -334,7 +316,16 @@ bool validMove(int cityP)
 void moveCurrentPlayer(int cityP)
 {
 	//gets pointer to city, sets player location to that city
-	return;
+    
+    int choice;
+    
+    cout << "Where would you like to move to?:\n";
+    cout << "1. adjacentCity1\n";
+    cout << "2. adjacentCity2\n";
+    cout << "3. adjacentCity3\n\n";
+    
+    cin >> choice;
+    cout << "You have chosen choice " << choice << " and moved to city X.\n\n";
 }
 
 
@@ -343,21 +334,123 @@ void buildResearch(int cityP)
 	//checks number of stations built
 	// if less than six, places one at pointer cityP and increments number in play
 	// if six, calls displayResearch to list them, and lets user choose which to relocate
-
-	return;
+    
+	cout << "You have built a research station on CityP!\n\n";
 }
 
 void treatDisease(int cityP)
 {
 	//reduces the number of disease cubes by 1, or more if medic
 	// gets pointer to players current city
-	// 
-
-	return;
+	//
+    
+	cout << "Treating blue disease cube!\n\n";
 }
 
 void shareKnowledge(int cardP, int playerID)
 {
 	//transfers the card pointed to to the player player pointed to
 	//
+    
+    cout << "Sharing knowledge with Player 4\n\n";
+}
+
+void performDirectFlight(int cityP) {
+    int choice;
+    
+    cout << "Where would you like to directly fly to?:\n";
+    cout << "1. adjacentCity1\n";
+    cout << "2. adjacentCity2\n";
+    cout << "3. adjacentCity3\n\n";
+    
+    cin >> choice;
+    cout << "You have chosen choice " << choice << " and moved to city X.\n\n";
+    
+}
+
+void performCharterFlight(int cityP) {
+    int choice;
+    
+    cout << "Where would you like to charter fly to?:\n";
+    cout << "1. adjacentCity1\n";
+    cout << "2. adjacentCity2\n";
+    cout << "3. adjacentCity3\n\n";
+    
+    cin >> choice;
+    cout << "You have chosen choice " << choice << " and moved to city X.\n\n";
+}
+
+void performShuttleFlight(int cityP) {
+    int choice;
+    
+    cout << "Where would you like to shuttle fly to?:\n";
+    cout << "1. adjacentCity1\n";
+    cout << "2. adjacentCity2\n";
+    cout << "3. adjacentCity3\n\n";
+    
+    cin >> choice;
+    cout << "You have chosen choice " << choice << " and moved to city X.\n\n";
+}
+
+void discoverCure() {
+    cout << "Select which cards to discard: \n\n";
+    cout << "There are actually no cards to discard for a cure yet.\n\n";
+}
+
+void passTurn() {
+    cout << "Passing turn. It is now Player Z's turn...\n\n";
+    
+}
+
+int quitGame() {
+    //Probably should ask if they're sure, just in case it's an accident...
+    
+    cout << "Quitting game...\n\n";
+    exit(0);
+}
+
+void performAnAction() {
+    int cityP = 1;
+    int cardP = 4;
+    int playerID = 5 ;
+    int decision = 0;
+    do {
+        displayOptions();
+        cin >> decision;
+        
+        switch (decision) {
+            case 1:
+                moveCurrentPlayer(1);
+                break;
+            case 2:
+                performDirectFlight(cityP);
+                break;
+            case 3:
+                performCharterFlight(cityP);
+                break;
+            case 4:
+                performShuttleFlight(cityP);
+                break;
+            case 5:
+                treatDisease(cityP);
+                break;
+            case 6:
+                shareKnowledge(cardP, playerID);
+                break;
+            case 7:
+                discoverCure();
+                break;
+            case 8:
+                buildResearch(cityP);
+                break;
+            case 9:
+                passTurn(); //there needs to be a return that sets player moves back to 0.
+                break;
+            case 10:
+                quitGame();
+                break;
+            default:
+                cout << "You didn't choose a valid option, please try again\n\n";
+        }
+    } while (decision < 1 || decision > 10);
 }
