@@ -181,8 +181,7 @@ void displayGameState(int infectRate, int outbreakNum) {
     
     cout << "--------------------------------------------------------------------------\n";
     cout << "                 State of the World\n\n";
-    cout << "Infected Cities:\n";
-    cout << "City	Red	  Blue	Yellow  Black\n"; //obviously some setw stuff to be done here
+    cout << "                    Infections                             Infections     \n";
     cout << "City:           Blk: Blu: Red: Yel:    City:           Blk: Blu: Red: Yel:\n";
     cout << "San Francisco    1    0    1    0      Algiers          1    0    1    0  \n";
     cout << "Chicago          1    1    0    0      Cairo            0    0    1    1  \n";
