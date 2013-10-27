@@ -237,10 +237,7 @@ void displayGameState(int infectRate, int outbreakNum) {
 }
 
 void displayPlayerHand() {
-<<<<<<< HEAD
-=======
     //Should this display ALL player hands? For strategic purposes?
->>>>>>> 30115963e03dba3ddcfa6290ffd1a95598fd193d
     cout << "-----------------------------------------------------------------------------------------\n";
     cout << "   Player1                 Player2                 Player3                 Player4     \n";
     cout << "-----------------------------------------------------------------------------------------\n";
@@ -357,8 +354,6 @@ void shareKnowledge(int cardP, int playerID)
 {
 	//transfers the card pointed to to the player player pointed to
 	//
-<<<<<<< HEAD
-    
     cout << "Sharing knowledge with Player 4\n\n";
 }
 
@@ -460,6 +455,4 @@ void performAnAction() {
                 cout << "You didn't choose a valid option, please try again\n\n";
         }
     } while (decision < 1 || decision > 10);
-=======
->>>>>>> 30115963e03dba3ddcfa6290ffd1a95598fd193d
 }
