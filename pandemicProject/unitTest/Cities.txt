@@ -32,7 +32,7 @@ Black:  0
 Blue:   0
 Red:    0
 Yellow: 0
-HasSta: FALSE
+HasSta: TRUE
 Adj:    Chicago
         Miami
         Washington
