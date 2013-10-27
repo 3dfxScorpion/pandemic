@@ -21,5 +21,4 @@ class Map {
     vector<City*> worldMap;
 };
 
-#include "Map.cpp"
 #endif
