@@ -179,20 +179,55 @@ void displayGameState(int infectRate, int outbreakNum) {
     //Something to display the status of each city, what’s infected, what’s the infection rate/outbreak marker value so
     //maybe something like this:
     
-    cout << "------------------------------------------------------------\n";
-    cout << "                 State of the World\n\n\n";
+    cout << "--------------------------------------------------------------------------\n";
+    cout << "                 State of the World\n\n";
     cout << "Infected Cities:\n";
     cout << "City	Red	  Blue	Yellow  Black\n"; //obviously some setw stuff to be done here
-    cout << "city1   0      0     2       0\n\n";
+    cout << "City:           Blk: Blu: Red: Yel:    City:           Blk: Blu: Red: Yel:\n";
+    cout << "San Francisco    1    0    1    0      Algiers          1    0    1    0  \n";
+    cout << "Chicago          1    1    0    0      Cairo            0    0    1    1  \n";
+    cout << "Atlanta          0    1    1    0      Istanbul         0    1    1    0  \n";
+    cout << "Montreal         1    1    0    1      Moscow           0    1    0    1  \n";
+    cout << "New York         0    1    1    1      Tehran           1    0    1    1  \n";
+    cout << "Washington       1    0    1    1      Baghdad          1    1    1    0  \n";
+    cout << "London           0    1    0    1      Riyadh           1    0    1    0  \n";
+    cout << "Madrid           0    1    1    0      Karachi          1    1    0    0  \n";
+    cout << "Paris            0    1    1    1      Mumbai           0    0    1    1  \n";
+    cout << "Essen            1    0    1    0      Delhi            1    0    0    1  \n";
+    cout << "Milan            0    1    1    1      Kolkata          0    1    1    0  \n";
+    cout << "St. Petersburg   1    0    0    0      Chennai          1    1    1    0  \n";
+    cout << "Los Angeles      0    1    0    1      Bangkok          0    1    1    0  \n";
+    cout << "Mexico City      1    1    0    0      Jakarta          1    0    1    0  \n";
+    cout << "Miami            0    1    1    0      Beijing          0    1    1    1  \n";
+    cout << "Bogota           1    0    0    1      Shanghai         1    0    0    1  \n";
+    cout << "Lima             1    1    0    0      Hong Kong        0    1    1    0  \n";
+    cout << "Santiago         1    1    0    0      Ho Chi Minh City 1    1    1    0  \n";
+    cout << "Sao Paulo        1    1    0    0      Seoul            0    1    1    0  \n";
+    cout << "Buenos Aires     0    1    1    1      Taipei           0    1    0    1  \n";
+    cout << "Lagos            1    1    0    0      Manila           1    0    0    0  \n";
+    cout << "Kinshasa         1    0    1    0      Sydney           0    0    1    0  \n";
+    cout << "Khartoum         1    0    1    0      Tokyo            1    1    1    1  \n";
+    cout << "Johannesburg     1    0    1    0      Osaka            1    0    1    0  \n";
+    cout << "--------------------------------------------------------------------------\n";
     cout << "Infection rate: " << infectRate << "\n";
     cout << "Outbreak number: " << outbreakNum << "\n\n";
     cout << "Number of remaining player cards: 30\n";
-    cout << "------------------------------------------------------------\n";
 }
 
 void displayPlayerHand() {
     //Should this display ALL player hands? For strategic purposes?
+    cout << "-----------------------------------------------------------------------------------------\n";
+    cout << "   Player1                 Player2                 Player3                 Player4     \n";
+    cout << "-----------------------------------------------------------------------------------------\n";
+    cout << "(0)Cairo                (1)Taipei               (2)Washington           (3)Mexico City:\n";
+    cout << "(4)Mexico City          (5)Washington           (6)Khartoum             (7)Tokyo\n";
+    cout << "(8)Bangkok              (9)Paris                (10)Kolkata             (11)Milan\n";
+    cout << "!!-Epidemic-!!          (12)Seoul               (13)Shanghai            (14)Johannesburg\n";
+    cout << "-----------------------------------------------------------------------------------------\n";
 }
+
+
+
 
 void displayOptions() {
     /*
