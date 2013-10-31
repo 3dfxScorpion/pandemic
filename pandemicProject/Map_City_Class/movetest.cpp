@@ -2,23 +2,22 @@
 #include <string>
 #include <iomanip>
 #include <vector>
-//#include <sys/ioctl.h>
 #include "Map.h"
 #include "City.h"
 
 using namespace std;
 
 int main() {
-	Map worldMap;
+	Map* worldMap = new Map();
 	
-	if(worldMap.populateMap("Cities.txt")) {
+	if(worldMap->populateMap("Cities.txt")) {
 		cout << "Error Creating Map\n";
 		cout << "Press any key to exit\n";
 		cin.get();
 		exit(1);
 	}
 
-	City* currentCity = worldMap.locateCity("Atlanta");		// Game default starting city
+	City* currentCity = worldMap->locateCity("Atlanta");		// Game default starting city
 
 	int i = -1;
 	while(i != 0) {
@@ -35,7 +34,7 @@ int main() {
 		cout << "Please enter destination: ";
 		cin >> i;
 		if(i != 0) {
-			currentCity = worldMap.locateCity(list[i-1]);		// change current city
+			currentCity = worldMap->locateCity(list[i-1]);		// change current city
 			system("CLS");
 		}
 	}

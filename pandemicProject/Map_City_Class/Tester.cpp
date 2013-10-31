@@ -17,11 +17,20 @@ int main() {
 
 /*
 	// Used for testing setting infected levels and function for checking if isInfected changes properly
-	gameMap.worldMap[3].setInfectedBlack(0);
-	gameMap.worldMap[3].setInfectedBlue(0);
-	gameMap.worldMap[3].setInfectedRed(0);
-	gameMap.worldMap[3].setInfectedYellow(0);
+	gameMap.worldMap[13].setInfectedBlack(1);
+	gameMap.worldMap[24].setInfectedBlue(2);
+	gameMap.worldMap[35].setInfectedRed(3);
+	gameMap.worldMap[46].setInfectedYellow(1);
 */
+
+	// test of searching map for city and returning city info
+	cityClass* currentCity = gameMap.locateCity("Montreal");
+	if(currentCity != NULL) {
+		// cout << currentCity->getCityName() << endl;
+		currentCity->setInfectedBlue(3);
+	}
+
+/*
 	// outputs cities in map - how to access information contained in each city
 	for(int i = 0; i < gameMap.getNumberofCities(); i++) {
 		cout << "City:   " << gameMap.worldMap[i].getCityName()			<< endl;
@@ -33,25 +42,18 @@ int main() {
 		cout << "Yellow: " << gameMap.worldMap[i].getInfectedYellow()	<< endl;
 		cout << "IsInf:  " << gameMap.worldMap[i].getInfected()			<< endl;
 		cout << "HasSta: " << gameMap.worldMap[i].getResearchStation()	<< endl;
+
 		vector<string> cityList(gameMap.worldMap[i].getAdjCity());
 		cout << "Adj:    " << cityList[0] << endl;
-		for(int i = 1; i < cityList.size(); i++) {
+		for(size_t i = 1; i < cityList.size(); i++) {
 			cout << "        " << cityList[i] << endl;
 		}
 		cout << endl;
 	}
-
-/*
-	// test of searching map for city and returning city info
-	cityClass currentCity = gameMap.locateCity("Essen");
-	cout << currentCity.getCityName() << endl;
 */
-	
+
 	// test of infectedList formatted output
 	cout << endl << gameMap.infectedList() << endl;
-
-	// testing researchList to return string of research locations
-	cout << endl << gameMap.researchList() << endl;
 	
 	cout << "Press any key to exit.";
 	cin.get();
