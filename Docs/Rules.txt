@@ -1,0 +1,101 @@
+GAME RULES
+	INTRODUCTION
+****************************************************************************************************
+	OVERVIEW
+****************************************************************************************************
+	SETUP
+		PLAYER SETUP
+****************************************************************************************************
+		INFECTION SETUP
+****************************************************************************************************
+		EPIDEMIC SETUP
+****************************************************************************************************
+	PLAY
+		Each player turn is divided into 3 parts:
+		1. Do 4 actions.
+		2. Draw 2 Player cards.
+		3. Infect cities.
+		
+		After the Infect Cities step, you switch control to the next player, and their turn begins.
+		A player's hand can have City and Event cards in it. City cards are used in some actions 
+		and Event cards can be played whenever the opportunity arises.
+****************************************************************************************************
+	ACTIONS
+		You may do up to 4 actions each turn.
+		Select any combination of the actions listed on the next two pages. You may do the same 
+		action several times, each time counting as 1 action. Your role's special abilities may 
+		change how an action is done. Some actions involve discarding a card from your hand; all 
+		these discards go to the Player Discard Pile.
+		
+		MOVEMENT ACTIONS
+			Drive/Ferry: Move to a city connected by a line to the one you are in.
+			Direct Flight: Discard a City card to move to the city named on the card.
+			Charter Flight: Discard the City card that matches the city you are in to move to any 
+				city.
+			Shuttle Flight: Move from a city with a research station to any other city that has a 
+				research station.
+				
+		OTHER ACTIONS
+			Build a Research Station: Discard the city card that matches the city you are in to 
+				place a research station there. Take the station from the supply. If all 6 research 
+				stations have been built, take a research station from anywhere on the board.
+			Treat Disease:
+			Share Knowledge: You can do this action in two ways:
+				- give the City card that matches the city you are in to another player, or
+				- take the City card that matches the city you are in from another player.
+				The other player must also be in the city with you.
+				If the player who gets the card now has more than 7 cards, that player must 
+				immediately discard a card or play an Event card.
+****************************************************************************************************
+	DRAW
+		EPIDEMIC CARDS
+		HAND LIMIT
+****************************************************************************************************
+	INFECT CITIES
+****************************************************************************************************
+	OUTBREAKS
+****************************************************************************************************
+	TURN END
+****************************************************************************************************
+	EVENT CARDS
+****************************************************************************************************
+	GAME END
+		You win as soon as cures to all 4 diseases are discovered.
+		
+		You do NOT have to eradicate all 4 diseases to win; just cure them. Once all diseases are 
+		cured, the game ends and you win immediately, no matter how many cubes are on the board.
+		
+		There are 3 ways for the game to end and the players to lose:
+			- if the Outbreaks Track fills completely,
+			- if you are unable to place the number of disease cubes actually needed on the board, or
+			- if a player cannot draw 2 Player cards after doing actions.
+****************************************************************************************************
+	COMMONLY OVERLOOKED RULES
+		You do not draw a replacement card after drawing an Epidemic card.
+		
+		You may Discover a Cure at any Research Station: the color of its city does not need to 
+			match the disease you are curing.
+		
+		On your turn, you may take a card from another player, if you are both in the city that 
+			matches the card you are taking.
+		
+		On your turn, you may take any City card from the Researcher(only), if you are both in the 
+			same city.
+		
+		Your hand limit applies immediately after getting a card from another player.
+****************************************************************************************************
+	ROLES
+		CONTINGENCY PLANNER
+		DISPATCHER
+		MEDIC
+		OPERATIONS EXPERT
+		QUARANTINE SPECIALIST
+		RESEARCHER
+		SCIENTIST
+****************************************************************************************************
+	EVENT CARDS
+		AIRLIFT
+		FORECAST
+		GOVERNMENT GRANT
+		ONE QUIET NIGHT
+		RESILIENT POPULATION
