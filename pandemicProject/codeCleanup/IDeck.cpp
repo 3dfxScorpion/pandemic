@@ -15,7 +15,7 @@ void IDeck::buildDeck( vector<ICard*>& tmpDeck)
 		"Sydney","Bangkok","Tokyo","Manila","Beijing","Ho Chi Minh City","Hong Kong","Taipei",
 		"Shanghai",	"Seoul","Osaka","Jakarta","Washington","St. Petersburg","Essen","Montreal","Chicago","Milan","San Francisco","Atlanta"
 		"London","Paris","Madrid","New York","Miami","Mexico City","Los Angeles","Kinshasa","Lagos","Bogota","Lima","Santiago","Khartoum",
-		"San Paulo","Buenos Aires","Johannesburg","Karachi","Istanbul","Dehli","Mumbai","Chennai","Moscow","Riyadh","Algiers","Baghdad","Kolkata",
+		"Sao Paulo","Buenos Aires","Johannesburg","Karachi","Istanbul","Delhi","Mumbai","Chennai","Moscow","Riyadh","Algiers","Baghdad","Kolkata",
 		"Tehran","Cairo"};
 	enum {red, yellow, blue, black};
 
