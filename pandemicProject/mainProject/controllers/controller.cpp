@@ -62,11 +62,8 @@ int main()
 	cin.sync();
 	model.setDifficulty(temp);
 
-	// Populate World Map
-	if ( model.worldMap.populateMap("Cities.txt") != 0 ) {
-        cout << "Please make sure file is located in working directory...\n";    //update later to throw exception
-        return 0;
-    }
+	model.prepareGame();															//assigns roles, draws initial player hands based on player count
+	model.initialInfect();															//perform the initial infection of nine cities
 		
 
 	//
@@ -74,70 +71,48 @@ int main()
 	//Most set/get methods belong to model or its subclasses, most logic is done by controller
 	//Improper method names are probably used, and the rest are made up on the spot
 	//This is not guaranteed to be correct right now.  Basically just a way to lay out individual tasks that we can all contribute to.
-	
-
-	//Set up the game:
-	//	Place research  and players in atlantastation in Atlanta
-	//	Assign roles to players
-	//	Shuffle deck, distribute epidemic cards evenly (4, 5, or 6 epids for easy med hard)
-	//	Deal cards: 2 players-4 cards, 3players-3 cards, 4 players -2 cards
-	cityP = model.worldMap.locateCity("Atlanta");//find atlanta
-	cityP->setResearchStation(true);//set the station
-	model.incResSta();//increment ressta count
-	for (int i = 0; i < model.getNumPlayers(); i++)  //for all players
-	{
-		model.players[i].setPlayerRole(model.drawRole());	// assign a random role
-		model.players[i].setPlayerLocation(cityP);			//set all player locations to Atlanta
-	}
-
-	//draw inital hand:
-	// players initially draw (6-numPlayers) cards
-	for(int j=0; j < model.getNumPlayers(); j++)
-	{
-		for(int i=0; i < (6-model.getNumPlayers()); i++)					// inefficiency ignored for the moment
+	while(true){//infinite for now
+		for (int i=0; i<model.getNumPlayers(); i++)			//each players turn
 		{
-			model.players[j].addCard(model.playerDeck.takeCard());		//draw a card
+			for(int j = 0; j<4; j++){
+				view.displayPlayerInfo(model.players[i].getPlayerName(), model.players[i].getPlayerRole(), model.players[i].getPlayerLocStr());
+				view.printMenu();
+				cin >> temp;
+
+				if(temp==1){//player move code goes here**********************
+					cityP = model.worldMap.locateCity(model.players[i].getPlayerLocStr());//store pointer to current location
+					view.printAdj(cityP->getAdjCity());//print the list of adj cities
+				}
+				else{				
+					view.printInfectedCities(model.worldMap.infectedList());//print inf cities list
+					view.printCubeCount(model.getCubeCount(red), model.getCubeCount(yellow), model.getCubeCount(blue), model.getCubeCount(black)); //holy crap
+					j--;													//don't consume a move
+				}
+			}
+
+			for(int i=0; i<2; i++){
+				//infect cities
+				iCardP = model.infectedDeck.takeCard();//draw a card
+			
+				view.printInfConfirmation(iCardP->getName());//print confirmation of it
+				model.infectCity(model.worldMap.locateCity(iCardP->getName()),iCardP->getColor(), 1);//infect the city
+			}
+
+			view.printInfectedCities(model.worldMap.infectedList());//print inf cities list after update
+			view.printCubeCount(model.getCubeCount(red), model.getCubeCount(yellow), model.getCubeCount(blue), model.getCubeCount(black)); //holy crap
+			
+			if(model.outOfCubes()){ 
+				view.printNoCubes();     //game over when no cubes remain
+				cin.clear();
+				cin.sync();
+				cin.get();
+				return 1;
+			}
 		}
 	}
 
 
-
-	//Infect nine cities:
-	//  3x3, then 3x2, then 3x1
-	//	
-	for(int i = 3; i>0; i--)//for changing cube counts each passr
-	{
-		int color;
-		string s;
-								
-		for(int j=0; j<3; j++){
-		
-			iCardP = model.infectedDeck.takeCard();										//get a card
-			s = iCardP->getName();														//store its name
-			color = iCardP->getColor();													//store enumerated color
-			cityP = model.worldMap.locateCity(s);										//get a pointer to the city based on its name
-
-			if (color == red){
-				cityP->setInfectedRed(cityP->getInfectedRed() + (i));					//For the appropriate color increase their cubes, remove them from the
-				model.removeCubes(red,(i));												//stock of available cubes
-			}
-			else if (color == yellow){
-				cityP->setInfectedYellow(cityP->getInfectedYellow() + (i));
-				model.removeCubes(yellow,(i));
-			}
-			else if (color == blue){
-				cityP->setInfectedBlue(cityP->getInfectedBlue() + (i));
-				model.removeCubes(blue,(i));
-			}
-			else if (color == black){
-				cityP->setInfectedBlack(cityP->getInfectedBlack() + (i));
-				model.removeCubes(black,(i));
-			}
-		}
-	}   
-
-	//print inf cities list
-	view.printInfectedCities(model.worldMap.infectedList());
+	
 	
 
 	
@@ -197,22 +172,5 @@ int main()
 
 
 
-void setupBoard()
-{
-	//Set up the game:
-	//	Place research station in Atlanta
-	//	Assign roles to players
-	//	Shuffle deck, distribute epidemic cards evenly (4, 5, or 6 epids for easy med hard)
-	//	Deal cards: 2 players-4 cards, 3players-3 cards, 4 players -2 cards
 
 
-	return;
-}
-
-
-// Recieves a pointer to a city, builds research station there
-// -needs to include process for move a city from one place to another
-void buildResearch(City* location)
-{
-	
-}
