@@ -13,7 +13,7 @@ void IDeck::buildDeck( vector<ICard*>& tmpDeck)
 	const time_t CARDS = 48;
 	string infStr[CARDS]= {
 		"Sydney","Bangkok","Tokyo","Manila","Beijing","Ho Chi Minh City","Hong Kong","Taipei",
-		"Shanghai",	"Seoul","Osaka","Jakarta","Washington","St. Petersburg","Essen","Montreal","Chicago","Milan","San Francisco","Atlanta"
+		"Shanghai",	"Seoul","Osaka","Jakarta","Washington","St. Petersburg","Essen","Montreal","Chicago","Milan","San Francisco","Atlanta",
 		"London","Paris","Madrid","New York","Miami","Mexico City","Los Angeles","Kinshasa","Lagos","Bogota","Lima","Santiago","Khartoum",
 		"Sao Paulo","Buenos Aires","Johannesburg","Karachi","Istanbul","Delhi","Mumbai","Chennai","Moscow","Riyadh","Algiers","Baghdad","Kolkata",
 		"Tehran","Cairo"};
