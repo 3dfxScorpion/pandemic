@@ -1,14 +1,19 @@
-#include <iostream>
-#include <iomanip>
-#include <ostream>
-#include <string>
+#include<iostream>
+#include<iomanip>
+#include<limits>
+#include<ostream>
+#include<string>
 #include "Menu.h"
 
+using std::cin;
 using std::cout;
 using std::left;
 using std::right;
 using std::setw;
+using std::max;
+using std::numeric_limits;
 using std::ostringstream;
+using std::streamsize;
 
 string Menu::menuCities(Map& m) {
     ostringstream out;
@@ -81,3 +86,26 @@ string Menu::menuHands(vector<Player*> plyrs) {
     return out.str();
 }
 
+string Menu::menuCommands(vector<string> commands) {
+    ostringstream out;
+    const int NUM_COMMANDS = commands.size();
+    int choice = NUM_COMMANDS - 1;
+        cout << "Select from the following:\n";
+        for (int i = 0; i < NUM_COMMANDS; i++) {
+            out << i << " " << commands[i] << "\n";
+        }
+    return out.str();
+}
+
+void Menu::showMenu() {
+    system("cls");
+    ostringstream out;
+    out << "Welcome to Pandemic\n";
+    out << "==========================================================================================\n";
+    out << menuCities(map);
+    out << "==========================================================================================\n";
+    out << menuHands(players);
+    out << "==========================================================================================\n";
+    out << menuCommands(commands);
+    cout << out.str();
+}

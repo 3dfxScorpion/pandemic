@@ -13,19 +13,24 @@ using std::vector;
 class Menu {
   public:
     Menu() {}
-    Menu(Map& map, vector<Player*> plyrs)
-        : menuMap(map), menuPlayers(plyrs) {}
+    Menu(Map& m, vector<Player*> p, vector<string> c)
+        : map(m), players(p), commands(c) {}
 
-    Map& getMenuMap() { return menuMap; }
-    vector<Player*> getMenuPlayers() { return menuPlayers; }
-    void setMenuMap(Map& m) { menuMap = m; }
-    void setMenuPlayers(vector<Player*> p) { menuPlayers = p; }
+    Map&            getMenuMap()      { return map;      }
+    vector<Player*> getMenuPlayers()  { return players;  }
+    vector<string>  getMenuCommands() { return commands; }
+    void setMenuMap(Map& m)                { map      = m; }
+    void setMenuPlayers(vector<Player*> p) { players  = p; }
+    void setMenuCommands(vector<string> s) { commands = s; }
     string menuCities(Map&);
     string menuHands(vector<Player*>);
+    string menuCommands(vector<string>);
+    void showMenu();
 
   private:
-    Map menuMap;
-    vector<Player*> menuPlayers;
+    Map map;
+    vector<string> commands;
+    vector<Player*> players;
     int numCities;
 };
 

@@ -16,8 +16,31 @@ using std::setw;
 using std::ostringstream;
 
 int main() {
-    Menu m1;
+    Menu m1, m2;
     string filename = "Cities_test.txt";
+    string cmds01[] = {
+        "Move To City",
+        "Charter Flight",
+        "Direct Flight",
+        "Shuttle Flight",
+        "Build Station",
+        "Treat Disease",
+        "Cure Disease",
+        "Share Knowledge",
+        "Done with Actions",
+        "Exit"
+    };
+    string cmds02[] = {
+        "Sub Menu 01",
+        "Sub Menu 01",
+        "Sub Menu 03",
+        "Sub Menu 04",
+        "Sub Menu 05",
+        "Sub Menu 06",
+        "Exit"
+    };
+    vector<string> mainCommands ( cmds01, cmds01 + sizeof(cmds01) / sizeof(cmds01[0]) );
+    vector<string> moveCommands ( cmds02, cmds02 + sizeof(cmds02) / sizeof(cmds02[0]) );
     Map theMap;
     cout << "Opening " << filename << "\n";
     if ( theMap.populateMap(filename) != 0 ) {
@@ -43,13 +66,12 @@ int main() {
     }
     m1.setMenuMap(theMap);
     m1.setMenuPlayers(thePlayers);
-    string theCities = m1.menuCities(theMap);
-    string theHands  = m1.menuHands(thePlayers);
-    cout << "Welcome to Pandemic\n"
-         << "==========================================================================================\n"
-         << theCities
-         << "==========================================================================================\n"
-         << theHands
-         << "==========================================================================================\n";
+    m1.setMenuCommands(mainCommands);
+    m1.showMenu();
+system("pause");
+    m2.setMenuMap(theMap);
+    m2.setMenuPlayers(thePlayers);
+    m2.setMenuCommands(moveCommands);
+    m2.showMenu();
     return 0;
 }
