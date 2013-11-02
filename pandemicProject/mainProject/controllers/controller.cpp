@@ -43,6 +43,7 @@ int main()
 	// Print title, get num players
 	view.printTitle();			// view handles all input and output
 	cin >> temp;				// controller is what reads in values and performs most of the logic
+    cin.ignore();
 	model.setNumPlayers(temp);	//model stores the game's state
 
 	// Read in player names
@@ -51,13 +52,14 @@ int main()
 		view.printNamePrompt(i);						// view prints prompt
 		cin.clear();									//clear input buffer
 		cin.sync();										//was being weird, but this fixed it
-		getline(cin, tempStr, '\n');					//read player name							
+		getline(cin, tempStr, '\n');					//read player name
 		model.players[i].setPlayerName(tempStr);		//model stores data
 	}
 
 	//get difficulty
 	view.printDiffPrompt();
 	cin >> temp;
+    cin.ignore();
 	cin.clear();
 	cin.sync();
 	model.setDifficulty(temp);
@@ -74,14 +76,19 @@ int main()
 	while(true){//infinite for now
 		for (int i=0; i<model.getNumPlayers(); i++)			//each players turn
 		{
+            Player * currentPlayer = &model.players[i];
+            model.mover.setCurrentPlayer(currentPlayer);
 			for(int j = 0; j<4; j++){
 				view.displayPlayerInfo(model.players[i].getPlayerName(), model.players[i].getPlayerRole(), model.players[i].getPlayerLocStr());
 				view.printMenu();
 				cin >> temp;
-
+                cin.ignore();
 				if(temp==1){//player move code goes here**********************
 					cityP = model.worldMap.locateCity(model.players[i].getPlayerLocStr());//store pointer to current location
 					view.printAdj(cityP->getAdjCity());//print the list of adj cities
+                    string cityInput;
+                    getline(cin,cityInput,'\n');
+                    model.mover.moveAdjacent(model.worldMap.locateCity(cityInput));
 				}
 				else{				
 					view.printInfectedCities(model.worldMap.infectedList());//print inf cities list

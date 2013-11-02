@@ -53,6 +53,7 @@ public:
 	Map worldMap;																	//The map, bitch!
 	Deck playerDeck;																//Player deck
 	IDeck infectedDeck;																//Infected Deck
+    PlayerMove mover;
 private:
 	vector<string> rolesDeck;
 	int numPlayers, currentRate, outbreak, resSta, difficulty;						// currentRate is index into inf level array
