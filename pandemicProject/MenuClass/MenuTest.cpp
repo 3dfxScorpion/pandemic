@@ -32,7 +32,7 @@ int main() {
     };
     string cmds02[] = {
         "Sub Menu 01",
-        "Sub Menu 01",
+        "Sub Menu 02",
         "Sub Menu 03",
         "Sub Menu 04",
         "Sub Menu 05",
@@ -68,10 +68,13 @@ int main() {
     m1.setMenuPlayers(thePlayers);
     m1.setMenuCommands(mainCommands);
     m1.showMenu();
-system("pause");
+    m1.processMenu();
+/*
     m2.setMenuMap(theMap);
     m2.setMenuPlayers(thePlayers);
     m2.setMenuCommands(moveCommands);
     m2.showMenu();
+*/
+//    m2.processMenu();
     return 0;
 }

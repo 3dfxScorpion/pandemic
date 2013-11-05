@@ -25,6 +25,7 @@ class Menu {
     string menuCities(Map&);
     string menuHands(vector<Player*>);
     string menuCommands(vector<string>);
+    void processMenu();
     void showMenu();
 
   private:

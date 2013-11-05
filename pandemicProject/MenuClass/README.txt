@@ -3,7 +3,8 @@
 file(s):  adding MenuClass folder
 
 This will currnently take a Map and vector<Player*> and display them nicely
-in a menu format.
+in a menu format.  I need to add the means to associate primary or submenu(s)
+to appropriate switch/case decision tree.
 
 Welcome to Pandemic
 ==========================================================================================
@@ -35,18 +36,26 @@ Khartoum          1      0      1      0      Tokyo             1      1      1 
 ==========================================================================================
    Player 1                 Player 2                 Player 3                 Player 4
 ==========================================================================================
-(0)Montreal              (1)Istanbul              (2)New York              (3)Resilient Population
-(4)Mumbai                (5)Riyadh                !!-Epidemic-!!           (7)Baghdad
-(8)Jakarta               (9)Airlift               (10)Seoul                (11)Paris
-(12)Hong Kong            (13)Khartoum             (14)San Francisco        (15)Mexico City
-(16)Miami                (17)Manila               (18)Forecast             (19)Government Grant
-!!-Epidemic-!!           (21)Los Angeles          (22)Shanghai             (23)Tokyo
-(24)One Quiet Night      (25)Bangkok              !!-Epidemic-!!           (27)Johannesburg
-(28)Chennai              (29)Kinshasa             (30)Milan                (31)Cairo
-(32)Lagos                (33)Tehran               (34)Chicago              !!-Epidemic-!!
-(36)Buenos Aires         (37)Essen                (38)Karachi              (39)St. Petersburg
+(0)Manila                (1)Tehran                (2)Lagos                 (3)Washington
+(4)Government Grant      (5)Bogota                (6)Khartoum              (7)Essen
+(8)Mumbai                (9)Baghdad               !!-Epidemic-!!           (11)Santiago
+(12)St. Petersburg       (13)New York             !!-Epidemic-!!           (15)Moscow
+(16)Paris                (17)Resilient Population (18)Tokyo                (19)Montreal
+(20)Ho Chi Minh City     (21)Bangkok              (22)Chicago              (23)Miami
+(24)Jakarta              (25)Mexico City          (26)Hong Kong            !!-Epidemic-!!
+(28)Sao Paulo            (29)Istanbul             (30)Kinshasa             (31)London
+!!-Epidemic-!!           (33)Kolkata              (34)Milan                (35)Beijing
+(36)Chennai              (37)Forecast             (38)Taipei               (39)Cairo
 ==========================================================================================
+Select from the following:
+(0)Move To City             (5)Treat Disease
+(1)Charter Flight           (6)Cure Disease
+(2)Direct Flight            (7)Share Knowledge
+(3)Shuttle Flight           (8)Done with Actions
+(4)Build Station            (9)Exit
+9
 
+Goodbye...
 
 Methods:
 
@@ -63,4 +72,5 @@ Thanks,
 -- Derrick(3dfxScorpion)
 
 to do:
-  Implement command menu for starters...
+  Associate switch/case decision tree to appropriate command menu
+
