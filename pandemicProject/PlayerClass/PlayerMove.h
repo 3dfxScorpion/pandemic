@@ -23,8 +23,11 @@ class PlayerMove {
     void moveToCity(City*);
     void moveAdjacent(City*);
     void charterFlight(City*);
+    bool canCharterFlight(City*);
     void directFlight(City*);
+    bool canDirectFlight(City*);
     void shuttleFlight(City*);
+    bool canShuttleFlight(City*);
     void buildRStation();
     void treatDisease();
     bool cureDisease(string);
