@@ -30,8 +30,8 @@ int main()
 {
 	
 
-	view view;
-	model model;
+	View view;
+	Model model;
 		
 	int temp;
 	string tempStr;

@@ -3,7 +3,7 @@
 
 
 // Default constructor
-model::model()
+Model::Model()
 {
 	//set default values
 	numPlayers = -1;								
@@ -30,7 +30,7 @@ model::model()
 	rolesDeck.push_back("Researcher");
 
 	// Populate World Map
-	if (worldMap.populateMap("Cities.txt") != 0 ) {
+	if (worldMap.populateMap("/Users/Dannykat/Desktop/pandemic/pandemicProject/Submission02/Cities.txt") != 0 ) {
         cout << "Please make sure file is located in working directory...\n";    //update later to throw exception
         
     }
@@ -41,7 +41,7 @@ model::model()
 
 // currentRate six indexes seventh and highest infection rate
 // method increments if not already at six
-void model::incCurrentRate()
+void Model::incrementCurrentRate()
 {
 	if(currentRate < 6)
 		currentRate++;
@@ -51,7 +51,7 @@ void model::incCurrentRate()
 
 //takes index of desired disease as parameter, changes cure status to cured
 //function currently ignores improper parameter value
-void model::cureDisease(int disease)
+void Model::cureDisease(int disease)
 {
 	if (0 <= disease && disease <= 3)
 		cureStatus[disease] = cured;
@@ -62,7 +62,7 @@ void model::cureDisease(int disease)
 
 //takes index of desired disease as parameter, changes cure status to erad
 //function currently ignores improper parameter value
-void model::eradicateDisease(int disease)
+void Model::eradicateDisease(int disease)
 {
 	if (0 <= disease && disease <= 3)
 		cureStatus[disease] = eradicated;
@@ -72,7 +72,7 @@ void model::eradicateDisease(int disease)
 
 
 // returns a random role as a string
-string model::drawRole()
+string Model::drawRole()
 {
 	int num;
 	string tmp;
@@ -87,7 +87,7 @@ string model::drawRole()
 
 
 
-void model::prepareGame()
+void Model::prepareGame()
 {
 	City* cityP;
 	//Set up the game:
@@ -116,7 +116,7 @@ void model::prepareGame()
 }
 
 
-void model::initialInfect()
+void Model::initialInfect()
 {
 	ICard* iCardP;
 	City* cityP;
@@ -142,7 +142,7 @@ void model::initialInfect()
 }
 
 
-void model::infectCity(City* cityP, int color, int count)
+void Model::infectCity(City* cityP, int color, int count)
 {
 	if (color == red){
 				cityP->setInfectedRed(cityP->getInfectedRed() + (count));					//For the appropriate color increase their cubes, remove them from the

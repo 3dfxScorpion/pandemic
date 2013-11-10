@@ -7,7 +7,7 @@
 #include <vector>
 using namespace std;
 
-class view
+class View
 {
 public:
 	void printTitle();

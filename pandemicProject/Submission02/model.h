@@ -19,10 +19,10 @@ enum {badCities};
 enum {red, yellow, blue, black};										//enumeration
 enum {uncured, cured, eradicated};
 
-class model
+class Model
 {
 public:
-	model();
+	Model();
 	void setNumPlayers(int num) {
         numPlayers = num;
     }
