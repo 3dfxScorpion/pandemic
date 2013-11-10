@@ -91,24 +91,35 @@ int main()
             model.mover.setCurrentPlayer(currentPlayer);
             
 			for(int j = 0; j<4; j++) {
-				view.displayPlayerInfo(model.players[i].getPlayerName(), model.players[i].getPlayerRole(), model.players[i].getPlayerLocStr());
                 
-				view.printMenu();
-				cin >> temp;
-                cin.ignore();
+                int option = -1;
                 
-				if(temp == 1) { //player move code goes here**********************
-					cityP = model.worldMap.locateCity(model.players[i].getPlayerLocStr());//store pointer to current location
-					view.printAdj(cityP->getAdjCity());//print the list of adj cities
+                while (option < 0 || option > 2) {
+                    view.displayPlayerInfo(model.players[i].getPlayerName(), model.players[i].getPlayerRole(), model.players[i].getPlayerLocStr());
+                    view.printMenu();
+                    cin >> option;
+                    cin.ignore();
                     string cityInput;
-                    getline(cin,cityInput,'\n');
-                    model.mover.moveAdjacent(model.worldMap.locateCity(cityInput));
-				}
-				else{				
-					view.printInfectedCities(model.worldMap.infectedList());//print inf cities list
-					view.printCubeCount(model.getCubeCount(red), model.getCubeCount(yellow), model.getCubeCount(blue), model.getCubeCount(black)); //holy crap
-					j--;													//don't consume a move
-				}
+                
+                    switch (option) {
+                        case 1:
+                            cityP = model.worldMap.locateCity(model.players[i].getPlayerLocStr());
+                            view.printAdj(cityP->getAdjCity());
+                            getline(cin,cityInput,'\n');
+                            model.mover.moveAdjacent(model.worldMap.locateCity(cityInput));
+                            break;
+                        
+                        case 2:
+                            view.printInfectedCities(model.worldMap.infectedList());//print inf cities list
+                            view.printCubeCount(model.getCubeCount(red), model.getCubeCount(yellow), model.getCubeCount(blue), model.getCubeCount(black)); //holy crap
+                            j--;													//don't consume a move
+                            break;
+                        
+                        default:
+                            cout << "Invalid choice... Please enter in a valid option number.\n\n";
+                        
+                    }
+                }
 			}
 
 			for(int i=0; i<2; i++){
