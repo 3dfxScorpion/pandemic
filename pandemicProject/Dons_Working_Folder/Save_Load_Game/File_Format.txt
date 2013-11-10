@@ -1,0 +1,9 @@
+// Comments will not be in save file
+// format is csv (comma separated values)
+
+num_of_players			// used during load function
+player_name, player_location, etc...
+
+// map saved here
+// saves only cities which differ from default
+city_name, numInfectedBlack, numInfectedBlue, numInfectedRed, numInfectedYellow, researchStation
