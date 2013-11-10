@@ -30,7 +30,7 @@ Model::Model()
 	rolesDeck.push_back("Researcher");
 
 	// Populate World Map
-	if (worldMap.populateMap("/Users/Dannykat/Desktop/pandemic/pandemicProject/Submission02/Cities.txt") != 0 ) {
+	if (worldMap.populateMap("Cities.txt") != 0 ) {
         cout << "Please make sure file is located in working directory...\n";    //update later to throw exception
         
     }
