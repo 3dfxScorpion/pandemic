@@ -93,14 +93,12 @@ int Map::populateMap(string cityFile) {
 }
 
 City* Map::locateCity(string cityName) {
-    City* located = NULL;
     for ( int i = 0; i < worldMap.size(); i++ ) {
         if ( worldMap[i]->getCityName() == cityName ) {
-            located = worldMap[i];
-            return located;
+            return worldMap[i];
         }
     }
-    return located;
+    return NULL;
 }
 
 string Map::infectedList() {

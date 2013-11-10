@@ -44,7 +44,11 @@ int main()
         view.askNumOfPlayers();
         cin >> temp;				// controller is what reads in values and performs most of the logic
         cin.ignore();
-        if (temp < 2 || temp > 4) {
+        
+        if (cin.fail()) {
+            cout << "User entered in a non-numeric input, ending program.\n\n";
+            return 0;
+        } else if (temp < 2 || temp > 4) {
             cout << "Invalid number of players. Please try again and choose between 2 and 4 players.\n\n";
         }
     }
@@ -67,7 +71,11 @@ int main()
         view.printDiffPrompt();
         cin >> difficulty;
         cin.ignore();
-        if (difficulty < 1 || difficulty > 3) {
+        
+        if (cin.fail()) {
+            cout << "User entered in a non-numeric input, ending program.\n\n";
+            return 0;
+        } else if (difficulty < 1 || difficulty > 3) {
             cout << "Invalid difficulty. Please try again and choose between 1 and 3.\n\n";
         }
         cin.clear();
