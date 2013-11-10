@@ -5,7 +5,10 @@ void view::printTitle()
 	cout << "******************************" << endl;
 	cout << "*    Welcome to Pandemic     *" << endl;
 	cout << "******************************" << endl << endl << endl;
-	cout << "Set player count: ";
+}
+
+void view::askNumOfPlayers() {
+    cout << "Set player count: ";
 }
 
 void view::displayPlayerInfo(string name, string role, string city)

@@ -32,18 +32,21 @@ int main()
 
 	view view;
 	model model;
-	
-	
+		
 	int temp;
 	string tempStr;
 	City* cityP = 0;			//pointer to a city
 	ICard* iCardP = 0;			//pointer to an iCard
 
-	
-	// Print title, get num players
 	view.printTitle();			// view handles all input and output
-	cin >> temp;				// controller is what reads in values and performs most of the logic
-    cin.ignore();
+    while (temp < 2 || temp > 4) {
+        view.askNumOfPlayers();
+        cin >> temp;				// controller is what reads in values and performs most of the logic
+        cin.ignore();
+        if (temp < 2 || temp > 4) {
+            cout << "Invalid number of players. Please try again and choose between 2 and 4 players.\n\n";
+        }
+    }
 	model.setNumPlayers(temp);	//model stores the game's state
 
 	// Read in player names
