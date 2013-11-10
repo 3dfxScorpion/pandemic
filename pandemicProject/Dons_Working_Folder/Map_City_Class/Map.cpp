@@ -97,14 +97,14 @@ int Map::getNumberofCities() {
 }
 
 City* Map::locateCity(string cityName) {
-    City* located;
+    City* located = NULL;
     for ( int i = 0; i < worldMap.size(); i++ ) {
         if ( worldMap[i]->getCityName() == cityName ) {
             located = worldMap[i];
-            break;
+		        return located;
         }
     }
-    return located;
+		return located;
 }
 
 string Map::infectedList() {

@@ -30,20 +30,25 @@ int main()
 {
 	
 
-	view view;
-	model model;
-	
-	
+	View view;
+	Model model;
+		
 	int temp;
 	string tempStr;
 	City* cityP = 0;			//pointer to a city
 	ICard* iCardP = 0;			//pointer to an iCard
 
-	
-	// Print title, get num players
 	view.printTitle();			// view handles all input and output
-	cin >> temp;				// controller is what reads in values and performs most of the logic
-    cin.ignore();
+    
+    while (temp < 2 || temp > 4) {
+        view.askNumOfPlayers();
+        cin >> temp;				// controller is what reads in values and performs most of the logic
+        cin.ignore();
+        if (temp < 2 || temp > 4) {
+            cout << "Invalid number of players. Please try again and choose between 2 and 4 players.\n\n";
+        }
+    }
+    
 	model.setNumPlayers(temp);	//model stores the game's state
 
 	// Read in player names
@@ -56,12 +61,18 @@ int main()
 		model.players[i].setPlayerName(tempStr);		//model stores data
 	}
 
-	//get difficulty
-	view.printDiffPrompt();
-	cin >> temp;
-    cin.ignore();
-	cin.clear();
-	cin.sync();
+    int difficulty = -1;
+    while (difficulty < 1 || difficulty > 3) {
+        //get difficulty
+        view.printDiffPrompt();
+        cin >> difficulty;
+        cin.ignore();
+        if (difficulty < 1 || difficulty > 3) {
+            cout << "Invalid difficulty. Please try again and choose between 1 and 3.\n\n";
+        }
+        cin.clear();
+        cin.sync();
+    }
 	model.setDifficulty(temp);
 
 	model.prepareGame();															//assigns roles, draws initial player hands based on player count
@@ -78,23 +89,37 @@ int main()
 		{
             Player * currentPlayer = &model.players[i];
             model.mover.setCurrentPlayer(currentPlayer);
-			for(int j = 0; j<4; j++){
-				view.displayPlayerInfo(model.players[i].getPlayerName(), model.players[i].getPlayerRole(), model.players[i].getPlayerLocStr());
-				view.printMenu();
-				cin >> temp;
-                cin.ignore();
-				if(temp==1){//player move code goes here**********************
-					cityP = model.worldMap.locateCity(model.players[i].getPlayerLocStr());//store pointer to current location
-					view.printAdj(cityP->getAdjCity());//print the list of adj cities
+            
+			for(int j = 0; j<4; j++) {
+                
+                int option = -1;
+                
+                while (option < 0 || option > 2) {
+                    view.displayPlayerInfo(model.players[i].getPlayerName(), model.players[i].getPlayerRole(), model.players[i].getPlayerLocStr());
+                    view.printMenu();
+                    cin >> option;
+                    cin.ignore();
                     string cityInput;
-                    getline(cin,cityInput,'\n');
-                    model.mover.moveAdjacent(model.worldMap.locateCity(cityInput));
-				}
-				else{				
-					view.printInfectedCities(model.worldMap.infectedList());//print inf cities list
-					view.printCubeCount(model.getCubeCount(red), model.getCubeCount(yellow), model.getCubeCount(blue), model.getCubeCount(black)); //holy crap
-					j--;													//don't consume a move
-				}
+                
+                    switch (option) {
+                        case 1:
+                            cityP = model.worldMap.locateCity(model.players[i].getPlayerLocStr());
+                            view.printAdj(cityP->getAdjCity());
+                            getline(cin,cityInput,'\n');
+                            model.mover.moveAdjacent(model.worldMap.locateCity(cityInput));
+                            break;
+                        
+                        case 2:
+                            view.printInfectedCities(model.worldMap.infectedList());//print inf cities list
+                            view.printCubeCount(model.getCubeCount(red), model.getCubeCount(yellow), model.getCubeCount(blue), model.getCubeCount(black)); //holy crap
+                            j--;													//don't consume a move
+                            break;
+                        
+                        default:
+                            cout << "Invalid choice... Please enter in a valid option number.\n\n";
+                        
+                    }
+                }
 			}
 
 			for(int i=0; i<2; i++){
