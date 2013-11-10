@@ -101,10 +101,11 @@ City* Map::locateCity(string cityName) {
     for ( int i = 0; i < worldMap.size(); i++ ) {
         if ( worldMap[i]->getCityName() == cityName ) {
             located = worldMap[i];
-            return located;
+            break;
         }
     }
-    return located;
+    if(located)
+		return located;
 }
 
 string Map::infectedList() {

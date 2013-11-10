@@ -1,27 +1,30 @@
 #include "view.h"
 
-void view::printTitle()
+void View::printTitle()
 {
 	cout << "******************************" << endl;
 	cout << "*    Welcome to Pandemic     *" << endl;
 	cout << "******************************" << endl << endl << endl;
-	cout << "Set player count: ";
 }
 
-void view::displayPlayerInfo(string name, string role, string city)
+void View::askNumOfPlayers() {
+    cout << "Set player count: ";
+}
+
+void View::displayPlayerInfo(string name, string role, string city)
 {
 	cout <<  "\n**Player: " << name <<  " Role: " << role << " Current Location: "  << city << "**" << endl;
 
 }
 
-void view::printCubeCount(int red, int yellow, int blue, int black)
+void View::printCubeCount(int red, int yellow, int blue, int black)
 {
 	cout << "Cubes remaining:\n";
 	cout << "Red: " << red << " Yellow: " << yellow << " Blue: " << blue << " Black: " << black << endl;
 
 }
 
-void view::printAdj(vector<string>cities)
+void View::printAdj(vector<string>cities)
 {
 	cout << "\nAdjacent cities:\n";
 	while(!cities.empty())

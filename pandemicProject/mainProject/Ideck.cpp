@@ -5,6 +5,7 @@
 #include "IDeck.h"
 #include "ICard.h"
 #include <time.h>
+#include <cstdlib>
 using namespace std;
 
 
@@ -31,7 +32,7 @@ void IDeck::buildDeck( vector<ICard*>& tmpDeck)
     }
 
 	/* create Deck */
-    size_t ep = 0;
+    //size_t ep = 0;
     iItr = ids.begin();
 	int tempI;
     for ( size_t n = 0; n < CARDS; n++ ) {
