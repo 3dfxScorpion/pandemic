@@ -39,6 +39,7 @@ int main()
 	ICard* iCardP = 0;			//pointer to an iCard
 
 	view.printTitle();			// view handles all input and output
+    
     while (temp < 2 || temp > 4) {
         view.askNumOfPlayers();
         cin >> temp;				// controller is what reads in values and performs most of the logic
@@ -47,6 +48,7 @@ int main()
             cout << "Invalid number of players. Please try again and choose between 2 and 4 players.\n\n";
         }
     }
+    
 	model.setNumPlayers(temp);	//model stores the game's state
 
 	// Read in player names
@@ -59,12 +61,18 @@ int main()
 		model.players[i].setPlayerName(tempStr);		//model stores data
 	}
 
-	//get difficulty
-	view.printDiffPrompt();
-	cin >> temp;
-    cin.ignore();
-	cin.clear();
-	cin.sync();
+    int difficulty = -1;
+    while (difficulty < 1 || difficulty > 3) {
+        //get difficulty
+        view.printDiffPrompt();
+        cin >> difficulty;
+        cin.ignore();
+        if (difficulty < 1 || difficulty > 3) {
+            cout << "Invalid difficulty. Please try again and choose between 1 and 3.\n\n";
+        }
+        cin.clear();
+        cin.sync();
+    }
 	model.setDifficulty(temp);
 
 	model.prepareGame();															//assigns roles, draws initial player hands based on player count
@@ -81,12 +89,15 @@ int main()
 		{
             Player * currentPlayer = &model.players[i];
             model.mover.setCurrentPlayer(currentPlayer);
-			for(int j = 0; j<4; j++){
+            
+			for(int j = 0; j<4; j++) {
 				view.displayPlayerInfo(model.players[i].getPlayerName(), model.players[i].getPlayerRole(), model.players[i].getPlayerLocStr());
+                
 				view.printMenu();
 				cin >> temp;
                 cin.ignore();
-				if(temp==1){//player move code goes here**********************
+                
+				if(temp == 1) { //player move code goes here**********************
 					cityP = model.worldMap.locateCity(model.players[i].getPlayerLocStr());//store pointer to current location
 					view.printAdj(cityP->getAdjCity());//print the list of adj cities
                     string cityInput;
