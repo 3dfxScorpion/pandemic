@@ -2,6 +2,8 @@
 // format is csv (comma separated values)
 // version 0.1 11/10/2013
 
+game_difficulty
+
 outbreak_level, infection_rate
 
 infection_deck
