@@ -65,8 +65,10 @@ int main()
 		model.players[i].setPlayerName(tempStr);		//model stores data
 	}
 
-    int difficulty = -1;
-    while (difficulty < 1 || difficulty > 3) {
+	
+    //int difficulty = -1;
+    // while (difficulty < 1 || difficulty > 3) {
+	for(int difficulty = 0; cin.fail() || difficulty < 1 || difficulty > 3; ) {
         //get difficulty
         view.printDiffPrompt();
         cin >> difficulty;
