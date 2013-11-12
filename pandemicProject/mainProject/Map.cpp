@@ -11,10 +11,12 @@ using std::left;
 using std::setw;
 using std::string;
 using std::ifstream;
+using std::ofstream;
 using std::ostringstream;
 
 
 Map::Map() {}  // default constructor does nothing
+
 // parse file
 int Map::populateMap(string cityFile) {
     ifstream cityInfoFile;
@@ -93,7 +95,7 @@ int Map::populateMap(string cityFile) {
 }
 
 City* Map::locateCity(string cityName) {
-    for ( int i = 0; i < worldMap.size(); i++ ) {
+    for ( size_t i = 0; i < worldMap.size(); i++ ) {
         if ( worldMap[i]->getCityName() == cityName ) {
             return worldMap[i];
         }
@@ -106,7 +108,7 @@ string Map::infectedList() {
     infectedCities << setw(15) << left    << "City:"   << setw(8)
                    << "Black:" << setw(8) << "Blue:"   << setw(8)
                    << "Red:"   << setw(8) << "Yellow:" << endl;
-    for ( int i = 0; i < worldMap.size(); i++ ) {
+    for ( size_t i = 0; i < worldMap.size(); i++ ) {
         if ( worldMap[i]->getInfectedBool() ) {
             infectedCities << setw(15) << left << worldMap[i]->getCityName()
                 << setw(8) << worldMap[i]->getInfectedBlack()
@@ -121,10 +123,30 @@ string Map::infectedList() {
 string Map::researchList() {
     ostringstream researchCities;
     researchCities << "Research Station Locations:" << endl;
-    for ( int i = 0; i < worldMap.size(); i++ ) {
+    for ( size_t i = 0; i < worldMap.size(); i++ ) {
         if ( worldMap[i]->getResearchStationBool() ) {
             researchCities << worldMap[i]->getCityName() << endl;
         }
     }
     return researchCities.str();
+}
+
+int Map::loadGame(ifstream &fp) {
+
+	return 0;
+}
+
+void Map::saveGame(ofstream &fp) {
+	for(size_t i = 0; i < worldMap.size(); i++) {
+		if( worldMap[i]->getInfectedBlack()  != 0 || worldMap[i]->getInfectedBlue()   != 0 ||
+			worldMap[i]->getInfectedRed()    != 0 || worldMap[i]->getInfectedYellow() != 0 ||
+			worldMap[i]->getResearchStationBool() ) {
+				fp	<< worldMap[i]->getCityName()		<< ","
+					<< worldMap[i]->getInfectedBlack()	<< ","
+					<< worldMap[i]->getInfectedBlue()	<< ","
+					<< worldMap[i]->getInfectedRed()	<< ","
+					<< worldMap[i]->getInfectedYellow()	<< ","
+					<< worldMap[i]->getResearchStation()<< endl;
+		}
+	}
 }
