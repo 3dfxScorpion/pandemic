@@ -74,7 +74,9 @@ public:
         return resSta;
     }												//gets current Research Station count
 	string drawRole();																//returns a random role card, removes it from the role deck
-
+    int getCureStatus(int i){
+        return cureStatus[i];
+    }
 	
 		
 
