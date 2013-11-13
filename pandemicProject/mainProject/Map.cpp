@@ -14,7 +14,7 @@ using std::ifstream;
 using std::ofstream;
 using std::ostringstream;
 
-enum {badMap};															//for thrown exceptions
+													
 Map::Map() {}  // default constructor does nothing
 
 // parse file
@@ -23,7 +23,8 @@ int Map::populateMap(string cityFile) {
     string fileInput;
 	cityInfoFile.open(cityFile,ifstream::in);
     if ( cityInfoFile.fail() ) {
-       throw badMap;									//0 is badmap
+       cout << "ERROR: failed opening file.\n";
+        return 1;
     }
     if ( cityInfoFile.eof() )
         return 1;
