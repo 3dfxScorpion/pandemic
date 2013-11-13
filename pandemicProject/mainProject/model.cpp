@@ -16,7 +16,7 @@ Model::Model()
 	//initialize cube count to 24, and all diseases to uncured
 	for(int i = 0; i <4; i++)
 	{
-		cubes[i] = 12;
+		cubes[i] = 24;
 		cureStatus[i] = uncured;
 	}
 

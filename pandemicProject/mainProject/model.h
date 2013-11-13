@@ -15,9 +15,10 @@
 
 
 
-enum {badCities};
-enum {red, yellow, blue, black};										//enumeration
-enum {uncured, cured, eradicated};
+enum {badCities};														//odd
+enum {red, yellow, blue, black};										//cube colors
+enum {uncured, cured, eradicated};										//disease status
+enum {badMap};															//for thrown exceptions 
 
 class Model
 {
