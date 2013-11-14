@@ -150,14 +150,7 @@ void Controller::run()
 	{
 		doPlayerTurns();
 
-		//this is temporary - will be replaced with exception check in model infect routine
-		if(model.outOfCubes()){ 
-			view.printNoCubes();     //game over when no cubes remain
-			cin.clear();
-			cin.sync();
-			cin.get();
-			return;
-		}
+		
 	}
 	
 }

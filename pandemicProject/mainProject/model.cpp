@@ -30,10 +30,8 @@ Model::Model()
 	rolesDeck.push_back("Researcher");
 
 	// Populate World Map
-	if (worldMap.populateMap("Cities.txt") != 0 ) {
-        cout << "Please make sure file is located in working directory...\n";    //update later to throw exception
-        
-    }
+	worldMap.populateMap("Cities.txt");				//populate the map
+ 
 }
 
 
@@ -159,5 +157,10 @@ void Model::infectCity(City* cityP, int color, int count)
 			else if (color == black){
 				cityP->setInfectedBlack(cityP->getInfectedBlack() + (count));
 				removeCubes(black,(count));
+			}
+
+			//Check for out of cubes game over state
+			if(cubes[color] < 0){
+				throw PandemicException("A disease has spread too much! Game over!");
 			}
 }

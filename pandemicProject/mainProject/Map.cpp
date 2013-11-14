@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include "Map.h"
+#include "PandemicException.h"
 
 using std::cout;
 using std::endl;
@@ -23,8 +24,7 @@ int Map::populateMap(string cityFile) {
     string fileInput;
 	cityInfoFile.open(cityFile,ifstream::in);
     if ( cityInfoFile.fail() ) {
-       cout << "ERROR: failed opening file.\n";
-        return 1;
+		throw PandemicException("Error Loading Map");
     }
     if ( cityInfoFile.eof() )
         return 1;

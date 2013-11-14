@@ -15,7 +15,10 @@ public:
     void printAdj(vector<string>);
     void displayPlayerInfo(string, string, string);
     void askNumOfPlayers();
-    
+    void printNonNumeric() {cout << "User entered in a non-numeric input, ending program.\n\n";}
+	void printBadPlayerCt() {cout << "Invalid number of players. Please try again and choose between 2 and 4 players.\n\n";}
+	void printBadDiff() {cout << "Invalid difficulty. Please try again and choose between 1 and 3.\n\n";}
+	void printBadTurnChoice() {cout << "Invalid choice... Please enter in a valid option number.\n\n";}
 	void printNamePrompt(int num) {
         cout << "Enter player " << num+1 << "'s name: ";
     }

@@ -12,7 +12,7 @@
 #include "Player.h"
 #include "PlayerMove.h"
 #include "IDeck.h"
-
+#include "PandemicException.h"
 
 
 enum {badCities};														//odd
@@ -53,9 +53,7 @@ public:
     }	//reduces the amount of available color cubes by count (for after cubes have been added elsewhere)
 	void infectCity(City*, int, int);												//adds cubes of specified color to city, removes cubes from board
 
-	int outOfCubes() {
-        return (cubes[red] < 0 || cubes[yellow] < 0 || cubes[blue] < 0 || cubes[black]<0);
-    } //returns 1 if we ran out of a color
+
 	int getNumPlayers() {
         return numPlayers;
     }
@@ -96,3 +94,4 @@ private:
 	
 	
 };
+
