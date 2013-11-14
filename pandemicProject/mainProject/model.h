@@ -2,6 +2,8 @@
 // Class: model
 // Stores the game state.
 //#include "Player.h"
+#ifndef MODEL_H
+#define MODEL_H
 #include<iostream>
 #include<iomanip>
 #include<sstream>
@@ -94,4 +96,4 @@ private:
 	
 	
 };
-
+#endif
