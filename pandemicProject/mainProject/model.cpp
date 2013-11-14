@@ -206,29 +206,55 @@ void Model::treatDisease(int col, int status){
         case blue:
             if (mover.getCurrentPlayer()->getPlayerRole() == "Medic" ||
                 status == cured ) //if medic or disease is cured, remove all cubes.
-                toTreat->setInfectedBlue(0);
+            {
+                addCubes(blue, toTreat->getInfectedBlue());//adds the amount of cubes being removed
+                toTreat->setInfectedBlue(0);            //clears the city of infection
+            }
             else
-                toTreat->setInfectedBlue(toTreat->getInfectedBlue()-1);//decrement by 1
+            {
+                toTreat->setInfectedBlue(toTreat->getInfectedBlue()-1);//decrement amount of cubes by one
+                addCubes(blue, 1);//add one cube back to the board.
+            }
             break;
-        case black:
+        case black:                                                     //same as blue except black
             if (mover.getCurrentPlayer()->getPlayerRole() == "Medic" ||
                 status == cured )
+            {
+                addCubes(black, toTreat->getInfectedBlack());
                 toTreat->setInfectedBlack(0);
+            }
             else
+            {
                 toTreat->setInfectedBlack(toTreat->getInfectedBlack()-1);
+                addCubes(black,1);
+            }
             break;
-        case yellow:
+        case yellow:                                                    //same as blue except yellow
             if (mover.getCurrentPlayer()->getPlayerRole() == "Medic" ||
                 status == cured )
+            {
+                addCubes(yellow,toTreat->getInfectedYellow());
                 toTreat->setInfectedYellow(0);
+            }
             else
+            {
                 toTreat->setInfectedYellow(toTreat->getInfectedYellow()-1);
+                addCubes(yellow,1);
+            }
             break;
-        case red:
+        case red:                                                       //same as blue except red
             if (mover.getCurrentPlayer()->getPlayerRole() == "Medic" ||
                 status == cured )
+            {
+                addCubes(red, toTreat->getInfectedRed());
                 toTreat->setInfectedRed(0);
+            }
             else
+            {
                 toTreat->setInfectedRed(toTreat->getInfectedRed()-1);
+                addCubes(red,1);
+            }
     }
+    if (cubes[col]==24)     //if there are no more cubes on the board then cure disease
+        eradicateDisease(col);
 }
