@@ -33,7 +33,8 @@ public:
 	void doPlayerTurns();
 	void doInfectRound();
 	void run();
-
+    void checkMedicSpecial();
+    bool QSautoContain(ICard*);
 private:
 	View view;							//the view we're using
 	Model model;						//the model
