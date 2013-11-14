@@ -164,3 +164,71 @@ void Model::infectCity(City* cityP, int color, int count)
 				throw PandemicException("A disease has spread too much! Game over!");
 			}
 }
+
+bool Model::QSautoContain(ICard* icardP){
+    vector<string> toCheck = worldMap.locateCity(icardP->getName())->getAdjCity();
+    for (int i = 0; i < toCheck.size(); i++)
+        for (int k = 0; k < getNumPlayers(); k++)
+            if (players[k].getPlayerRole() == "Quarantine Specialist" &&  //If the player is QS
+                (players[k].getPlayerLocation()->getCityName() == toCheck[i] || //and player is in an adj city
+                 players[k].getPlayerLocation()->getCityName() == icardP->getName()))// or player is on the city
+                return true;                            //return true so that city wont be infected.
+    // end of both looops.
+    
+    return false;//otherwise return false so the city will be infected.
+}
+
+void Model::checkMedicSpecial(){
+    Player* toCheck = mover.getCurrentPlayer();
+    if (mover.getCurrentPlayer()->getPlayerRole() == "Medic")
+    {
+        if (getCureStatus(red) == cured &&
+            toCheck->getPlayerLocation()->getInfectedRed() > 0)//If red is cured
+            toCheck->getPlayerLocation()->setInfectedRed(0);//Auto treat red on move
+        
+        if (getCureStatus(red) == cured &&
+            toCheck->getPlayerLocation()->getInfectedYellow() > 0)//if yellow...
+            toCheck->getPlayerLocation()->setInfectedYellow(0);// the same...
+        
+        if (getCureStatus(red) == cured &&
+            toCheck->getPlayerLocation()->getInfectedBlue() > 0)
+            toCheck->getPlayerLocation()->setInfectedBlue(0);
+        
+        if (getCureStatus(red) == cured &&
+            toCheck->getPlayerLocation()->getInfectedBlack() > 0)
+            toCheck->getPlayerLocation()->setInfectedBlack(0);
+    }
+}
+
+void Model::treatDisease(int col, int status){
+    City* toTreat = mover.getCurrentPlayer()->getPlayerLocation();
+    switch(col){
+        case blue:
+            if (mover.getCurrentPlayer()->getPlayerRole() == "Medic" ||
+                status == cured ) //if medic or disease is cured, remove all cubes.
+                toTreat->setInfectedBlue(0);
+            else
+                toTreat->setInfectedBlue(toTreat->getInfectedBlue()-1);//decrement by 1
+            break;
+        case black:
+            if (mover.getCurrentPlayer()->getPlayerRole() == "Medic" ||
+                status == cured )
+                toTreat->setInfectedBlack(0);
+            else
+                toTreat->setInfectedBlack(toTreat->getInfectedBlack()-1);
+            break;
+        case yellow:
+            if (mover.getCurrentPlayer()->getPlayerRole() == "Medic" ||
+                status == cured )
+                toTreat->setInfectedYellow(0);
+            else
+                toTreat->setInfectedYellow(toTreat->getInfectedYellow()-1);
+            break;
+        case red:
+            if (mover.getCurrentPlayer()->getPlayerRole() == "Medic" ||
+                status == cured )
+                toTreat->setInfectedRed(0);
+            else
+                toTreat->setInfectedRed(toTreat->getInfectedRed()-1);
+    }
+}

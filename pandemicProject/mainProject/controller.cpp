@@ -99,7 +99,7 @@ void Controller::doPlayerTurns()
                         getline(cin,cityInput,'\n');
                         
                         model.mover.moveAdjacent(model.worldMap.locateCity(cityInput));
-                        checkMedicSpecial();//Handles medic AutoTreatment ability.
+                        model.checkMedicSpecial();//Handles medic AutoTreatment ability.
                         break;
                         
                     case 2:
@@ -133,7 +133,7 @@ void Controller::doInfectRound()
         iCardP = model.infectedDeck.takeCard();//draw a card
         
         view.printInfConfirmation(iCardP->getName());//print confirmation of it
-        if (!QSautoContain(iCardP))
+        if (!model.QSautoContain(iCardP))
         model.infectCity(model.worldMap.locateCity(iCardP->getName()),iCardP->getColor(), 1);//infect the city
 	}
     
@@ -158,37 +158,3 @@ void Controller::run()
 	
 }
 
-bool Controller::QSautoContain(ICard* icardP){
-    vector<string> toCheck = model.worldMap.locateCity(icardP->getName())->getAdjCity();
-    for (int i = 0; i < toCheck.size(); i++)
-        for (int k = 0; k < model.getNumPlayers(); k++)
-            if (model.players[k].getPlayerRole() == "Quarantine Specialist" &&  //If the player is QS
-                (model.players[k].getPlayerLocation()->getCityName() == toCheck[i] || //and player is in an adj city
-                 model.players[k].getPlayerLocation()->getCityName() == icardP->getName()))// or player is on the city
-                    return true;                            //return true so that city wont be infected.
-                // end of both looops.
-    
-    return false;//otherwise return false so the city will be infected.
-}
-
-void Controller::checkMedicSpecial(){
-    Player* toCheck = model.mover.getCurrentPlayer();
-    if (model.mover.getCurrentPlayer()->getPlayerRole() == "Medic")
-    {
-        if (model.getCureStatus(red) == cured &&
-        toCheck->getPlayerLocation()->getInfectedRed() > 0)//If red is cured
-            toCheck->getPlayerLocation()->setInfectedRed(0);//Auto treat red on move
-        
-        if (model.getCureStatus(red) == cured &&
-        toCheck->getPlayerLocation()->getInfectedYellow() > 0)//if yellow...
-            toCheck->getPlayerLocation()->setInfectedYellow(0);// the same...
-        
-        if (model.getCureStatus(red) == cured &&
-        toCheck->getPlayerLocation()->getInfectedBlue() > 0)
-            toCheck->getPlayerLocation()->setInfectedBlue(0);
-        
-        if (model.getCureStatus(red) == cured &&
-        toCheck->getPlayerLocation()->getInfectedBlack() > 0)
-            toCheck->getPlayerLocation()->setInfectedBlack(0);
-    }
-}

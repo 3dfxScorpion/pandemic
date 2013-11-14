@@ -171,35 +171,3 @@ bool PlayerMove::cureDisease(string color){//This will be updated later when we 
     
 }
 //Accepts a color and cured status//DOES NOT CHECK IF THERE ARE 0 CUBES, that should be handled by controller.
-void PlayerMove::treatDisease(int col, int status){
-       City* toTreat = currentPlayer->getPlayerLocation();
-    switch(col){
-        case blue:
-            if (currentPlayer->getPlayerRole() == "Medic" ||
-                status == cured ) //if medic or disease is cured, remove all cubes.
-                toTreat->setInfectedBlue(0);
-            else
-            toTreat->setInfectedBlue(toTreat->getInfectedBlue()-1);//decrement by 1
-            break;
-        case black:
-            if (currentPlayer->getPlayerRole() == "Medic" ||
-                status == cured )
-                toTreat->setInfectedBlack(0);
-            else
-            toTreat->setInfectedBlack(toTreat->getInfectedBlack()-1);
-            break;
-        case yellow:
-            if (currentPlayer->getPlayerRole() == "Medic" ||
-                status == cured )
-                toTreat->setInfectedYellow(0);
-            else
-             toTreat->setInfectedYellow(toTreat->getInfectedYellow()-1);
-            break;
-        case red:
-            if (currentPlayer->getPlayerRole() == "Medic" ||
-                status == cured )
-                toTreat->setInfectedRed(0);
-            else
-             toTreat->setInfectedRed(toTreat->getInfectedRed()-1);
-    }
-}

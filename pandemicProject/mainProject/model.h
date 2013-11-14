@@ -26,6 +26,9 @@ class Model
 {
 public:
 	Model();
+    void checkMedicSpecial();
+    bool QSautoContain(ICard*);
+    void treatDisease(int col, int status);
 	void setNumPlayers(int num) {
         numPlayers = num;
     }
@@ -37,7 +40,8 @@ public:
 	void incrementOutbreak() {
         outbreak++;
     }
-    
+    void addCubes(int color,int count){
+        cubes[color] += count;  }
 	void incrementCurrentRate();
 	void prepareGame();																//draws initial hands, assigns roles
 	void initialInfect();
@@ -74,11 +78,12 @@ public:
 	int getResSta() {
         return resSta;
     }												//gets current Research Station count
-	string drawRole();																//returns a random role card, removes it from the role deck
     int getCureStatus(int i){
         return cureStatus[i];
     }
-	
+    
+    string drawRole();					//returns a random role card, removes it from the role deck
+
 		
 
 	Player players[4];																//Not necessarily final implementation, here to illustrate functionality
