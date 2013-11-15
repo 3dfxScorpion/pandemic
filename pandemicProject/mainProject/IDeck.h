@@ -18,6 +18,8 @@ public:
 	void buildDeck(vector<ICard*>&);
 	ICard* takeCard();
 	void shuffleDiscard();
+	void loadGame(ifstream &);
+	void saveGame(ofstream &);
 
 private:
 		vector<ICard*> deck;

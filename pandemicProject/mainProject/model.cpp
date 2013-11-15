@@ -256,7 +256,7 @@ void Model::savegame(string filename) {
 	if(fp_out.is_open()) {					// test if file is open
 											// save game difficulty
 											// save outbreak and infection levels
-											// save infection deck
+		infectedDeck.saveGame(fp_out);		// save infection deck & discard ddeck
 											// save city deck
 											// save cube counts
 											// save players

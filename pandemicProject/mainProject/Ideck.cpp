@@ -6,6 +6,7 @@
 #include "ICard.h"
 #include <time.h>
 #include <cstdlib>
+#include <fstream>
 using namespace std;
 
 
@@ -82,5 +83,17 @@ void IDeck::shuffleDiscard()
 		deck.insert(deck.begin(),ptr);	//add it to the play deck
 		discard.erase(discard.begin()+x);
 		size++;
+	}
+}
+
+void IDeck::saveGame(ofstream &fp) {
+	fp << "Infection Deck," << deck.size() << endl;
+	for(int i = 0; i < deck.size(); i++) {
+		fp << deck[i]->getName() << "," << deck[i]->getColor() << endl;
+	}
+
+	fp << "Discard Deck," << discard.size() << endl;
+	for(int i = 0; i < discard.size(); i++) {
+		fp << discard[i]->getName() << "," << discard[i]->getColor() << endl;
 	}
 }
