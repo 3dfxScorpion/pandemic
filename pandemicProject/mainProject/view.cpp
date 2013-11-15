@@ -8,7 +8,7 @@ void View::printTitle()
 }
 
 void View::askNumOfPlayers() {
-    cout << "Set player count: ";
+    cout << "\nSet player count: ";
 }
 
 void View::displayPlayerInfo(string name, string role, string city)
@@ -33,4 +33,16 @@ void View::printAdj(vector<string>cities)
 		cities.erase(cities.begin());
 	}
 	cout << "Type a city's name to move: \n";
+}
+
+void View::askLoadGame() {
+	cout << "Would you like to load a game? (Y/N) ";
+}
+
+void View::askLoadScenario() {
+	cout << "Would you like to load a scenario? (Y/N) ";
+}
+
+void View::askFileName() {
+	cout << "Please enter a file name (Leave blank for autosave): ";
 }

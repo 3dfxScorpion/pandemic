@@ -32,11 +32,9 @@ public:
 	void setNumPlayers(int num) {
         numPlayers = num;
     }
-    
 	void setDifficulty(int diff) {
         difficulty = diff;
     }
-    
 	void incrementOutbreak() {
         outbreak++;
     }
@@ -58,8 +56,6 @@ public:
         cubes[color] = cubes[color] - count;
     }	//reduces the amount of available color cubes by count (for after cubes have been added elsewhere)
 	void infectCity(City*, int, int);												//adds cubes of specified color to city, removes cubes from board
-
-
 	int getNumPlayers() {
         return numPlayers;
     }
@@ -81,9 +77,9 @@ public:
     int getCureStatus(int i){
         return cureStatus[i];
     }
-    
     string drawRole();					//returns a random role card, removes it from the role deck
-
+	void savegame(string filename);
+	void loadgame(string filename);
 		
 
 	Player players[4];																//Not necessarily final implementation, here to illustrate functionality
@@ -97,8 +93,5 @@ private:
 	int cubes[4];
 	int infRate[7];
 	int cureStatus[4];
-	
-	
-	
 };
 #endif

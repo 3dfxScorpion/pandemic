@@ -10,7 +10,6 @@ Controller::Controller()
 	iCardP = 0;
 }
 
-
 //Prompts for input, reads input, error checks input
 void Controller::setPlayerCount()
 {
@@ -36,6 +35,7 @@ void Controller::setPlayerCount()
     
 	return;
 }
+
 //prompts for names, reads them
 void Controller::setPlayerNames()
 {
@@ -60,7 +60,7 @@ void Controller::setDifficulty()
         view.printDiffPrompt();
         cin >> difficulty;
         cin.ignore();
-        
+      
 		//error checking
         if (cin.fail()) {
             view.printNonNumeric();
@@ -99,7 +99,7 @@ void Controller::doPlayerTurns()
                         getline(cin,cityInput,'\n');
                         
                         model.mover.moveAdjacent(model.worldMap.locateCity(cityInput));
-                        model.checkMedicSpecial();//Handles medic AutoTreatment ability.
+                        model.checkMedicSpecial();	//Handles medic AutoTreatment ability.
                         break;
                         
                     case 2:
@@ -107,7 +107,13 @@ void Controller::doPlayerTurns()
                         view.printCubeCount(model.getCubeCount(red), model.getCubeCount(yellow), model.getCubeCount(blue), model.getCubeCount(black)); //holy crap
                         j--;													//don't consume a move
                         break;
-                        
+                    
+					case 3:
+						getSaveGame();
+						j--;
+						break;
+
+
                     default:
                         view.printBadTurnChoice();
                         
@@ -141,20 +147,67 @@ void Controller::doInfectRound()
 
 void Controller::run()
 {
-	
+	bool test = false;
+
 	view.printTitle();					//print title screen
-	setPlayerCount();					//read and set count of players
-	setPlayerNames();					//read and set player names
-	setDifficulty();					//read and set difficulty
-	model.prepareGame();				//assigns roles, draws initial player hands based on player count, sets resSta and player location to atlanta
-	model.initialInfect();				//perform the initial infection of nine cities
+	test = getLoadGame();				// ask to load game
+	if(!test)							// skips load scenario if game loaded
+		test = getLoadScenario();		// ask to load scenario
+	if(!test) {							// skips game setup if loading game or scenario
+		setPlayerCount();				//read and set count of players
+		setPlayerNames();				//read and set player names
+		setDifficulty();				//read and set difficulty
+		model.prepareGame();			//assigns roles, draws initial player hands based on player count, sets resSta and player location to atlanta
+		model.initialInfect();			//perform the initial infection of nine cities
+	}
     
 	while(true)							//play until quit condition reached
 	{
 		doPlayerTurns();
-        
-		
 	}
-	
 }
 
+bool Controller::getLoadGame() {
+	char input = 'A';
+	while(input != 'Y' || input != 'N') {
+		view.askLoadGame();
+		cin >> input;
+		cin.ignore();
+		if(input == 'Y') {
+			//return true;
+			return false;		// just until working
+		}
+		if(input == 'N')
+			return false;
+	}
+}
+
+bool Controller::getLoadScenario() {
+	char input = 'A';
+	while(input != 'Y' || input != 'N') {
+		view.askLoadScenario();
+		cin >> input;
+		cin.ignore();
+		if(input == 'Y') {
+			//return true;
+			return false;		// just until working
+		}
+		if(input == 'N')
+			return false;
+	}
+}
+
+void Controller::getSaveGame() {
+	string filename = "autosave";
+	string name;
+
+	view.askFileName();
+	getline(cin, name);		// get savegame name from user
+
+	if(!name.empty()) {
+		filename = name;
+	}
+
+	model.savegame(filename);
+	cout << endl;
+}

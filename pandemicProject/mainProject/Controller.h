@@ -33,6 +33,10 @@ public:
 	void doPlayerTurns();
 	void doInfectRound();
 	void run();
+	bool getLoadGame();
+	bool getLoadScenario();
+	void getSaveGame();
+
 private:
 	View view;							//the view we're using
 	Model model;						//the model

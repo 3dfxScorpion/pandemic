@@ -130,9 +130,41 @@ string Map::researchList() {
     return researchCities.str();
 }
 
-int Map::loadGame(ifstream &fp) {
-
-	return 0;
+void Map::loadGame(ifstream &fp) {
+	City* current;
+	
+	while(fp.good()) {
+		string temp;
+		bool researchStatus = false;
+		
+		getline(fp,temp,',');
+		if(!fp.good())
+			break;
+		current = locateCity(temp);
+		
+		getline(fp,temp,',');
+		current->setInfectedBlack(stoi(temp));
+		
+		getline(fp,temp,',');
+		current->setInfectedBlue(stoi(temp));
+		
+		getline(fp,temp,',');
+		current->setInfectedRed(stoi(temp));
+		
+		getline(fp,temp,',');
+		current->setInfectedYellow(stoi(temp));
+		
+		current->setInfected();
+		
+		getline(fp,temp);
+		if(temp == "TRUE")
+			researchStatus = true;
+		else if(temp == "FALSE")
+			researchStatus = false;
+		else
+			cout << "Error parsing file\n";
+		current->setResearchStation(researchStatus);
+	}
 }
 
 void Map::saveGame(ofstream &fp) {

@@ -34,9 +34,6 @@ Model::Model()
  
 }
 
-
-
-
 // currentRate six indexes seventh and highest infection rate
 // method increments if not already at six
 void Model::incrementCurrentRate()
@@ -68,7 +65,6 @@ void Model::eradicateDisease(int disease)
 	return;
 }
 
-
 // returns a random role as a string
 string Model::drawRole()
 {
@@ -82,9 +78,6 @@ string Model::drawRole()
 	return tmp;											//return that bad bitch
 }
 
-
-
-
 void Model::prepareGame()
 {
 	City* cityP;
@@ -93,12 +86,12 @@ void Model::prepareGame()
 	//	Assign roles to players
 	//	Shuffle deck, distribute epidemic cards evenly (4, 5, or 6 epids for easy med hard)
 	//	Deal cards: 2 players-4 cards, 3players-3 cards, 4 players -2 cards
-	cityP = worldMap.locateCity("Atlanta");//find atlanta
-	cityP->setResearchStation(true);//set the station
-	incResSta();//increment ressta count
-	for (int i = 0; i < getNumPlayers(); i++)  //for all players
+	cityP = worldMap.locateCity("Atlanta");		//find atlanta
+	cityP->setResearchStation(true);			//set the station
+	incResSta();								//increment ressta count
+	for (int i = 0; i < getNumPlayers(); i++)	//for all players
 	{
-		players[i].setPlayerRole(drawRole());	// assign a random role
+		players[i].setPlayerRole(drawRole());			// assign a random role
 		players[i].setPlayerLocation(cityP);			//set all player locations to Atlanta
 	}
 
@@ -113,32 +106,30 @@ void Model::prepareGame()
 	}
 }
 
-
 void Model::initialInfect()
 {
-	ICard* iCardP;
-	City* cityP;
 	//Infect nine cities:
 	//  3x3, then 3x2, then 3x1
 	//	
 	for(int i = 3; i>0; i--)//for changing cube counts each passr
 	{
 		int color;
-		string s;
-								
+			
 		for(int j=0; j<3; j++){
-		
+			ICard* iCardP;
+			City* cityP;
+			string s;
 			iCardP = infectedDeck.takeCard();									//get a card
 			s = iCardP->getName();												//store its name
 			color = iCardP->getColor();											//store enumerated color
 			cityP = worldMap.locateCity(s);										//get a pointer to the city based on its name
-
+			if(cityP == NULL)
+				cout << "Houston, we've had a problem.\nFailure in Model::initialInfect()\n";
 			infectCity(cityP, color, i);										//infect the city 
 			
 		}
 	}   
 }
-
 
 void Model::infectCity(City* cityP, int color, int count)
 {
@@ -257,4 +248,32 @@ void Model::treatDisease(int col, int status){
     }
     if (cubes[col]==24)     //if there are no more cubes on the board then cure disease
         eradicateDisease(col);
+}
+
+void Model::savegame(string filename) {
+	ofstream fp_out(filename, ios::out);	// open/create savegame file with name(filename)
+	
+	if(fp_out.is_open()) {					// test if file is open
+											// save game difficulty
+											// save outbreak and infection levels
+											// save infection deck
+											// save city deck
+											// save cube counts
+											// save players
+		worldMap.saveGame(fp_out);			// save map to file
+		fp_out.close();						// close file
+	}
+	else
+		cout << "Error opening file." << endl;
+}
+
+void Model::loadgame(string filename) {
+	ifstream fp_in(filename, ios::in);
+	
+	if(fp_in.is_open()) {
+		worldMap.loadGame(fp_in);
+		fp_in.close();
+	}
+	else
+		cout << "Error opening file." << endl;
 }
