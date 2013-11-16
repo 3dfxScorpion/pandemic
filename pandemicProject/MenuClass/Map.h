@@ -18,7 +18,7 @@ class Map {
     City* locateCity(string);  // takes in city name and returns City*
     string infectedList();     // returns formatted list of infected cities
     string researchList();     // returns formatted list of cities housing research stations
-	int loadGame(ifstream &);
+	void loadGame(ifstream &);
 	void saveGame(ofstream &);
 
   private:

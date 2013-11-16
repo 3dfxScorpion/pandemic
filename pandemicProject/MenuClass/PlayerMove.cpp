@@ -1,6 +1,8 @@
 #include<iostream>
 #include "PlayerMove.h"
 #include "CityCard.h"
+#include "model.h"
+#include <string>
 //
 //  PlayerMove.cpp
 //  pandemic
@@ -27,7 +29,13 @@ void PlayerMove::moveAdjacent(City* toMove) {
         }
     }
     if ( isAdj )
+    {
+       /* if (this->getCurrentPlayer()->getPlayerRole()=="Medic")
+            if ( toMove->getInfectedBool())
+                if (toMove->getInfectedBlack()>=0 && */
         currentPlayer->setPlayerLocation(toMove);
+        
+    }
     else
         cout << "Requested city is not adjacent";
     
@@ -134,8 +142,8 @@ void PlayerMove::shareKnowledge(Player* _who, Card* _toGive) {
     for ( int i = 0; i <= currentPlayer->getHandSize() - 1; i++ ) {
         if ( currentPlayer->getHand()[i]->getCardName() ==
             currentPlayer->getPlayerLocation()->getCityName() ) {
-            _who->addCard(currentPlayer->getHand()[i]);
-            currentPlayer->removeCard(i);
+            _who->addCard(currentPlayer->getHand()[i]);//add card to other palyers hand
+            currentPlayer->removeCard(i);//remove the card from your hand
         }
     }
 }
@@ -162,3 +170,4 @@ bool PlayerMove::cureDisease(string color){//This will be updated later when we 
     
     
 }
+//Accepts a color and cured status//DOES NOT CHECK IF THERE ARE 0 CUBES, that should be handled by controller.

@@ -1,5 +1,3 @@
-#ifndef PlayerMove_H
-#define PlayerMove_H
 //
 //  PlayerMove.h
 //  pandemic
@@ -7,6 +5,8 @@
 //  Created by Jefffrey McIntire on 10/17/13.
 //  Copyright (c) 2013 Jefffrey McIntire. All rights reserved.
 //
+#ifndef PLAYERMOVE_H
+#define PLAYERMOVE_H
 #include "Card.h"
 #include "City.h"
 #include "Player.h"
@@ -29,7 +29,7 @@ class PlayerMove {
     void shuttleFlight(City*);
     bool canShuttleFlight(City*);
     void buildRStation();
-    void treatDisease();
+    void treatDisease(int,int);
     bool cureDisease(string);
     void shareKnowledge(Player*, Card*);
   private:

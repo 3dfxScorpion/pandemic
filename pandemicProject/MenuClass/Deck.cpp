@@ -10,7 +10,7 @@ using std::string;
 using std::vector;
 
 void Deck::buildDeck(vector<Card*>& tmpDeck) {
-    srand( (unsigned)time( NULL ) );
+    srand(time_t(0));
     const size_t ceCards  = ( CITIES + EVENTS );
     const size_t totCards = ( ceCards + EPICS );
     string allCards[ceCards] = {

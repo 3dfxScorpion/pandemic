@@ -1,11 +1,11 @@
 NAME:   San Francisco
 Color:  Blue
 Pop:    0
-Black:  0
+Black:  1
 Blue:   0
-Red:    0
+Red:    1
 Yellow: 0
-HasSta: FALSE
+HasSta: TRUE
 Adj:    Chicago
         Los Angeles
         Manila
@@ -14,8 +14,8 @@ Adj:    Chicago
 NAME:   Chicago
 Color:  Blue
 Pop:    0
-Black:  0
-Blue:   0
+Black:  1
+Blue:   1
 Red:    0
 Yellow: 0
 HasSta: FALSE
@@ -29,8 +29,8 @@ NAME:   Atlanta
 Color:  Blue
 Pop:    0
 Black:  0
-Blue:   0
-Red:    0
+Blue:   1
+Red:    1
 Yellow: 0
 HasSta: FALSE
 Adj:    Chicago
@@ -40,10 +40,10 @@ Adj:    Chicago
 NAME:   Montreal
 Color:  Blue
 Pop:    0
-Black:  0
-Blue:   0
+Black:  1
+Blue:   1
 Red:    0
-Yellow: 0
+Yellow: 1
 HasSta: FALSE
 Adj:    Chicago
         New York
@@ -53,10 +53,10 @@ NAME:   New York
 Color:  Blue
 Pop:    0
 Black:  0
-Blue:   0
-Red:    0
-Yellow: 0
-HasSta: FALSE
+Blue:   1
+Red:    1
+Yellow: 1
+HasSta: TRUE
 Adj:    London
         Madrid
         Montreal
@@ -65,11 +65,11 @@ Adj:    London
 NAME:   Washington
 Color:  Blue
 Pop:    0
-Black:  0
+Black:  1
 Blue:   0
-Red:    0
-Yellow: 0
-HasSta: FALSE
+Red:    1
+Yellow: 1
+HasSta: TRUE
 Adj:    Atlanta
         Miami
         Montreal
@@ -79,9 +79,9 @@ NAME:   London
 Color:  Blue
 Pop:    0
 Black:  0
-Blue:   0
+Blue:   1
 Red:    0
-Yellow: 0
+Yellow: 1
 HasSta: FALSE
 Adj:    Essen
         Madrid
@@ -92,8 +92,8 @@ NAME:   Madrid
 Color:  Blue
 Pop:    0
 Black:  0
-Blue:   0
-Red:    0
+Blue:   1
+Red:    1
 Yellow: 0
 HasSta: FALSE
 Adj:    Algiers
@@ -106,10 +106,10 @@ NAME:   Paris
 Color:  Blue
 Pop:    0
 Black:  0
-Blue:   0
-Red:    0
-Yellow: 0
-HasSta: FALSE
+Blue:   1
+Red:    1
+Yellow: 1
+HasSta: TRUE
 Adj:    Algiers
         Essen
         London
@@ -119,9 +119,9 @@ Adj:    Algiers
 NAME:   Essen
 Color:  Blue
 Pop:    0
-Black:  0
+Black:  1
 Blue:   0
-Red:    0
+Red:    1
 Yellow: 0
 HasSta: FALSE
 Adj:    London
@@ -133,9 +133,9 @@ NAME:   Milan
 Color:  Blue
 Pop:    0
 Black:  0
-Blue:   0
-Red:    0
-Yellow: 0
+Blue:   1
+Red:    1
+Yellow: 1
 HasSta: FALSE
 Adj:    Essen
         Istanbul
@@ -144,7 +144,7 @@ Adj:    Essen
 NAME:   St. Petersburg
 Color:  Blue
 Pop:    0
-Black:  0
+Black:  1
 Blue:   0
 Red:    0
 Yellow: 0
@@ -157,10 +157,10 @@ NAME:   Los Angeles
 Color:  Yellow
 Pop:    0
 Black:  0
-Blue:   0
+Blue:   1
 Red:    0
-Yellow: 0
-HasSta: FALSE
+Yellow: 1
+HasSta: TRUE
 Adj:    Chicago
         Mexico City
         San Francisco
@@ -169,8 +169,8 @@ Adj:    Chicago
 NAME:   Mexico City
 Color:  Yellow
 Pop:    0
-Black:  0
-Blue:   0
+Black:  1
+Blue:   1
 Red:    0
 Yellow: 0
 HasSta: FALSE
@@ -184,8 +184,8 @@ NAME:   Miami
 Color:  Yellow
 Pop:    0
 Black:  0
-Blue:   0
-Red:    0
+Blue:   1
+Red:    1
 Yellow: 0
 HasSta: FALSE
 Adj:    Atlanta
@@ -196,10 +196,10 @@ Adj:    Atlanta
 NAME:   Bogota
 Color:  Yellow
 Pop:    0
-Black:  0
+Black:  1
 Blue:   0
 Red:    0
-Yellow: 0
+Yellow: 1
 HasSta: FALSE
 Adj:    Buenos Aires
         Lima
@@ -210,8 +210,8 @@ Adj:    Buenos Aires
 NAME:   Lima
 Color:  Yellow
 Pop:    0
-Black:  0
-Blue:   0
+Black:  1
+Blue:   1
 Red:    0
 Yellow: 0
 HasSta: FALSE
@@ -222,18 +222,18 @@ Adj:    Bogota
 NAME:   Santiago
 Color:  Yellow
 Pop:    0
-Black:  0
-Blue:   0
+Black:  1
+Blue:   1
 Red:    0
 Yellow: 0
-HasSta: FALSE
+HasSta: TRUE
 Adj:    Lima
 
 NAME:   Sao Paulo
 Color:  Yellow
 Pop:    0
-Black:  0
-Blue:   0
+Black:  1
+Blue:   1
 Red:    0
 Yellow: 0
 HasSta: FALSE
@@ -246,18 +246,18 @@ NAME:   Buenos Aires
 Color:  Yellow
 Pop:    0
 Black:  0
-Blue:   0
-Red:    0
-Yellow: 0
-HasSta: FALSE
+Blue:   1
+Red:    1
+Yellow: 1
+HasSta: TRUE
 Adj:    Bogota
         Sao Paulo
 
 NAME:   Lagos
 Color:  Yellow
 Pop:    0
-Black:  0
-Blue:   0
+Black:  1
+Blue:   1
 Red:    0
 Yellow: 0
 HasSta: FALSE
@@ -268,9 +268,9 @@ Adj:    Khartoum
 NAME:   Kinshasa
 Color:  Yellow
 Pop:    0
-Black:  0
+Black:  1
 Blue:   0
-Red:    0
+Red:    1
 Yellow: 0
 HasSta: FALSE
 Adj:    Johannesburg
@@ -280,9 +280,9 @@ Adj:    Johannesburg
 NAME:   Khartoum
 Color:  Yellow
 Pop:    0
-Black:  0
+Black:  1
 Blue:   0
-Red:    0
+Red:    1
 Yellow: 0
 HasSta: FALSE
 Adj:    Cairo
@@ -293,9 +293,9 @@ Adj:    Cairo
 NAME:   Johannesburg
 Color:  Yellow
 Pop:    0
-Black:  0
+Black:  1
 Blue:   0
-Red:    0
+Red:    1
 Yellow: 0
 HasSta: FALSE
 Adj:    Khartoum
@@ -304,9 +304,9 @@ Adj:    Khartoum
 NAME:   Algiers
 Color:  Black
 Pop:    0
-Black:  0
+Black:  1
 Blue:   0
-Red:    0
+Red:    1
 Yellow: 0
 HasSta: FALSE
 Adj:    Cairo
@@ -319,8 +319,8 @@ Color:  Black
 Pop:    0
 Black:  0
 Blue:   0
-Red:    0
-Yellow: 0
+Red:    1
+Yellow: 1
 HasSta: FALSE
 Adj:    Algiers
         Baghdad
@@ -332,8 +332,8 @@ NAME:   Istanbul
 Color:  Black
 Pop:    0
 Black:  0
-Blue:   0
-Red:    0
+Blue:   1
+Red:    1
 Yellow: 0
 HasSta: FALSE
 Adj:    Algiers
@@ -347,9 +347,9 @@ NAME:   Moscow
 Color:  Black
 Pop:    0
 Black:  0
-Blue:   0
+Blue:   1
 Red:    0
-Yellow: 0
+Yellow: 1
 HasSta: FALSE
 Adj:    Istanbul
         St. Petersburg
@@ -358,10 +358,10 @@ Adj:    Istanbul
 NAME:   Tehran
 Color:  Black
 Pop:    0
-Black:  0
+Black:  1
 Blue:   0
-Red:    0
-Yellow: 0
+Red:    1
+Yellow: 1
 HasSta: FALSE
 Adj:    Baghdad
         Delhi
@@ -371,9 +371,9 @@ Adj:    Baghdad
 NAME:   Baghdad
 Color:  Black
 Pop:    0
-Black:  0
-Blue:   0
-Red:    0
+Black:  1
+Blue:   1
+Red:    1
 Yellow: 0
 HasSta: FALSE
 Adj:    Cairo
@@ -385,9 +385,9 @@ Adj:    Cairo
 NAME:   Riyadh
 Color:  Black
 Pop:    0
-Black:  0
+Black:  1
 Blue:   0
-Red:    0
+Red:    1
 Yellow: 0
 HasSta: FALSE
 Adj:    Baghdad
@@ -397,8 +397,8 @@ Adj:    Baghdad
 NAME:   Karachi
 Color:  Black
 Pop:    0
-Black:  0
-Blue:   0
+Black:  1
+Blue:   1
 Red:    0
 Yellow: 0
 HasSta: FALSE
@@ -413,8 +413,8 @@ Color:  Black
 Pop:    0
 Black:  0
 Blue:   0
-Red:    0
-Yellow: 0
+Red:    1
+Yellow: 1
 HasSta: FALSE
 Adj:    Chennai
         Delhi
@@ -423,10 +423,10 @@ Adj:    Chennai
 NAME:   Delhi
 Color:  Black
 Pop:    0
-Black:  0
+Black:  1
 Blue:   0
 Red:    0
-Yellow: 0
+Yellow: 1
 HasSta: FALSE
 Adj:    Chennai
         Karachi
@@ -438,8 +438,8 @@ NAME:   Kolkata
 Color:  Black
 Pop:    0
 Black:  0
-Blue:   0
-Red:    0
+Blue:   1
+Red:    1
 Yellow: 0
 HasSta: FALSE
 Adj:    Bangkok
@@ -450,9 +450,9 @@ Adj:    Bangkok
 NAME:   Chennai
 Color:  Black
 Pop:    8865000
-Black:  0
-Blue:   0
-Red:    0
+Black:  1
+Blue:   1
+Red:    1
 Yellow: 0
 HasSta: FALSE
 Adj:    Bangkok
@@ -464,8 +464,8 @@ NAME:   Bangkok
 Color:  Red
 Pop:    0
 Black:  0
-Blue:   0
-Red:    0
+Blue:   1
+Red:    1
 Yellow: 0
 HasSta: FALSE
 Adj:    Chennai
@@ -477,9 +477,9 @@ Adj:    Chennai
 NAME:   Jakarta
 Color:  Red
 Pop:    0
-Black:  0
+Black:  1
 Blue:   0
-Red:    0
+Red:    1
 Yellow: 0
 HasSta: FALSE
 Adj:    Bangkok
@@ -491,9 +491,9 @@ NAME:   Beijing
 Color:  Red
 Pop:    0
 Black:  0
-Blue:   0
-Red:    0
-Yellow: 0
+Blue:   1
+Red:    1
+Yellow: 1
 HasSta: FALSE
 Adj:    Seoul
         Shanghai
@@ -501,10 +501,10 @@ Adj:    Seoul
 NAME:   Shanghai
 Color:  Red
 Pop:    0
-Black:  0
+Black:  1
 Blue:   0
 Red:    0
-Yellow: 0
+Yellow: 1
 HasSta: FALSE
 Adj:    Beijing
         Hong Kong
@@ -516,10 +516,10 @@ NAME:   Hong Kong
 Color:  Red
 Pop:    0
 Black:  0
-Blue:   0
-Red:    0
+Blue:   1
+Red:    1
 Yellow: 0
-HasSta: FALSE
+HasSta: TRUE
 Adj:    Bankok
         Ho Chi Minh City
         Kolkata
@@ -530,9 +530,9 @@ Adj:    Bankok
 NAME:   Ho Chi Minh City
 Color:  Red
 Pop:    0
-Black:  0
-Blue:   0
-Red:    0
+Black:  1
+Blue:   1
+Red:    1
 Yellow: 0
 HasSta: FALSE
 Adj:    Bangkok
@@ -544,8 +544,8 @@ NAME:   Seoul
 Color:  Red
 Pop:    0
 Black:  0
-Blue:   0
-Red:    0
+Blue:   1
+Red:    1
 Yellow: 0
 HasSta: FALSE
 Adj:    Beijing
@@ -556,9 +556,9 @@ NAME:   Taipei
 Color:  Red
 Pop:    0
 Black:  0
-Blue:   0
+Blue:   1
 Red:    0
-Yellow: 0
+Yellow: 1
 HasSta: FALSE
 Adj:    Hong Kong
         Manila
@@ -568,11 +568,11 @@ Adj:    Hong Kong
 NAME:   Manila
 Color:  Red
 Pop:    20767000
-Black:  0
+Black:  1
 Blue:   0
 Red:    0
 Yellow: 0
-HasSta: FALSE
+HasSta: TRUE
 Adj:    Ho Chi Minh City
         Hong Kong
         San Francisco
@@ -584,9 +584,9 @@ Color:  Red
 Pop:    0
 Black:  0
 Blue:   0
-Red:    0
+Red:    1
 Yellow: 0
-HasSta: FALSE
+HasSta: TRUE
 Adj:    Jakarta
         Los Angeles
         Manila
@@ -594,10 +594,10 @@ Adj:    Jakarta
 NAME:   Tokyo
 Color:  Red
 Pop:    0
-Black:  0
-Blue:   0
-Red:    0
-Yellow: 0
+Black:  1
+Blue:   1
+Red:    1
+Yellow: 1
 HasSta: FALSE
 Adj:    Osaka
         San Francisco
@@ -607,9 +607,9 @@ Adj:    Osaka
 NAME:   Osaka
 Color:  Red
 Pop:    0
-Black:  0
+Black:  1
 Blue:   0
-Red:    0
+Red:    1
 Yellow: 0
 HasSta: FALSE
 Adj:    Taipei

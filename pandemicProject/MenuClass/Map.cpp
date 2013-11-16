@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include "Map.h"
+#include "PandemicException.h"
 
 using std::cout;
 using std::endl;
@@ -14,18 +15,16 @@ using std::ifstream;
 using std::ofstream;
 using std::ostringstream;
 
-
+													
 Map::Map() {}  // default constructor does nothing
 
 // parse file
 int Map::populateMap(string cityFile) {
     ifstream cityInfoFile;
     string fileInput;
-
-    cityInfoFile.open(cityFile,ifstream::in);
+	cityInfoFile.open(cityFile,ifstream::in);
     if ( cityInfoFile.fail() ) {
-        cout << "ERROR: failed opening file.\n";
-        return 1;
+		throw PandemicException("Error Loading Map");
     }
     if ( cityInfoFile.eof() )
         return 1;
@@ -131,9 +130,41 @@ string Map::researchList() {
     return researchCities.str();
 }
 
-int Map::loadGame(ifstream &fp) {
-
-	return 0;
+void Map::loadGame(ifstream &fp) {
+	City* current;
+	
+	while(fp.good()) {
+		string temp;
+		bool researchStatus = false;
+		
+		getline(fp,temp,',');
+		if(!fp.good())
+			break;
+		current = locateCity(temp);
+		
+		getline(fp,temp,',');
+		current->setInfectedBlack(stoi(temp));
+		
+		getline(fp,temp,',');
+		current->setInfectedBlue(stoi(temp));
+		
+		getline(fp,temp,',');
+		current->setInfectedRed(stoi(temp));
+		
+		getline(fp,temp,',');
+		current->setInfectedYellow(stoi(temp));
+		
+		current->setInfected();
+		
+		getline(fp,temp);
+		if(temp == "TRUE")
+			researchStatus = true;
+		else if(temp == "FALSE")
+			researchStatus = false;
+		else
+			cout << "Error parsing file\n";
+		current->setResearchStation(researchStatus);
+	}
 }
 
 void Map::saveGame(ofstream &fp) {
