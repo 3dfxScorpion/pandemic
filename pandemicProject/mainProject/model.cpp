@@ -70,7 +70,7 @@ string Model::drawRole()
 {
 	int num;
 	string tmp;
-	srand(time_t(NULL));								//getting seedy
+	srand(unsigned int(time(NULL)));					//getting seedy
 	num = rand() % rolesDeck.size();					//index into the deck;
 	tmp = rolesDeck[num];								//store the role
 	rolesDeck.erase(rolesDeck.begin()+num);				//erase from ze vectah

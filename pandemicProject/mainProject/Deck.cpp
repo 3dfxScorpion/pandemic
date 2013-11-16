@@ -14,7 +14,7 @@ using std::ifstream;
 using std::ofstream;
 
 void Deck::buildDeck(vector<Card*>& tmpDeck) {
-    srand(time_t(NULL));
+    srand(unsigned int(time(NULL)));
     const size_t ceCards  = ( CITIES + EVENTS );
     const size_t totCards = ( ceCards + EPICS );
     string allCards[ceCards] = {
