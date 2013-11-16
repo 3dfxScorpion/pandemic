@@ -113,6 +113,8 @@ void Controller::doPlayerTurns()
 						j--;
 						break;
 
+					case 4:
+						exit(0);
 
                     default:
                         view.printBadTurnChoice();
@@ -180,6 +182,7 @@ bool Controller::getLoadGame() {
 		if(input == 'N')
 			return false;
 	}
+	return false;
 }
 
 bool Controller::getLoadScenario() {
@@ -195,6 +198,7 @@ bool Controller::getLoadScenario() {
 		if(input == 'N')
 			return false;
 	}
+	return false;
 }
 
 void Controller::getSaveGame() {

@@ -32,7 +32,8 @@ public:
         cout << "Please choose an action:\n\n";
         cout << "1. Move adjacent\n";
         cout << "2. Display infected cities\n";
-		cout << "3. Save game\n\n";
+		cout << "3. Save game\n";
+		cout << "4. Quit\n\n";
         cout << "Your choice: ";
     }
 	void printInfConfirmation(string city) {

@@ -1,12 +1,15 @@
 #ifndef DECK_H
 #define DECK_H
 #include<vector>
+#include <fstream>
 #include "CityCard.h"
 #include "EventCard.h"
 #include "EpidemicCard.h"
 
 using std::string;
 using std::vector;
+using std::ifstream;
+using std::ofstream;
 
 static const size_t CITIES = 48;  // city card total
 static const size_t EVENTS = 5;   // event card total
@@ -29,6 +32,9 @@ class Deck {
     void dealCards();
     Card* takeCard();
     void ToString();
+	void loadGame(ifstream &);
+	void saveGame(ofstream &);
+
   private:
     vector<Card*> deck;
     int size;

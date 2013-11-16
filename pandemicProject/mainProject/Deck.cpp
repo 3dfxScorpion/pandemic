@@ -3,11 +3,15 @@
 #include<cstdlib>
 #include<vector>
 #include<unordered_set>
+#include <fstream>
 #include"Deck.h"
 
 using std::cout;
+using std::endl;
 using std::string;
 using std::vector;
+using std::ifstream;
+using std::ofstream;
 
 void Deck::buildDeck(vector<Card*>& tmpDeck) {
     srand(time_t(0));
@@ -85,4 +89,15 @@ void Deck::ToString() {
         if ( n % 4 == 0 )
             cout << "\n";
     }
+}
+
+void Deck::saveGame(ofstream &fp) {
+	fp << deck.size() << endl;
+	for(int i = 0; i < int(deck.size()); i++) {
+		fp << deck[i]->getCardName() << "," << deck[i]->getID() << endl;
+	}
+}
+
+void Deck::loadGame(ifstream &fp) {
+
 }

@@ -74,26 +74,26 @@ ICard* IDeck::takeCard() {
 //Randomly places the discard pile at the top of the infection deck
 void IDeck::shuffleDiscard()
 {
-	srand(time( NULL ));			//lets get seedy
+	srand(unsigned int(time( NULL )));		//lets get seedy
 	ICard* ptr;
 	while(!discard.empty())
 	{
 		int x = rand() % discard.size();	//random card in discard
 		ptr = discard[x];					//save a pointer
-		deck.insert(deck.begin(),ptr);	//add it to the play deck
+		deck.insert(deck.begin(),ptr);		//add it to the play deck
 		discard.erase(discard.begin()+x);
 		size++;
 	}
 }
 
 void IDeck::saveGame(ofstream &fp) {
-	fp << "Infection Deck," << deck.size() << endl;
-	for(int i = 0; i < deck.size(); i++) {
+	fp << deck.size() << endl;
+	for(int i = 0; i < int(deck.size()); i++) {
 		fp << deck[i]->getName() << "," << deck[i]->getColor() << endl;
 	}
 
-	fp << "Discard Deck," << discard.size() << endl;
-	for(int i = 0; i < discard.size(); i++) {
+	fp << discard.size() << endl;
+	for(int i = 0; i < int(discard.size()); i++) {
 		fp << discard[i]->getName() << "," << discard[i]->getColor() << endl;
 	}
 }

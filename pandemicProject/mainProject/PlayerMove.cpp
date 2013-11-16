@@ -161,7 +161,7 @@ bool PlayerMove::cureDisease(string color){//This will be updated later when we 
         }
         if (colorNum>=5){
             //Right here I would call the cureDisease function in Darrens CureStatusIdeas.cpp
-            for (int k =0;k<=toRemove.size()-1;k++)
+            for (int k =0;k<=int(toRemove.size()-1);k++)
                 currentPlayer->removeCard(toRemove[k]);//discard the 5 city cards.
             return true;
         }

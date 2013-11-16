@@ -15,6 +15,7 @@ void Player::removeCard(int _toRemove) { //swaps back card with card being remov
     hand.pop_back();
 
 }
+
 /* possibly used by MVC
 
 

@@ -1,3 +1,4 @@
+#include <vector>
 #include "model.h"
 
 
@@ -70,7 +71,7 @@ string Model::drawRole()
 {
 	int num;
 	string tmp;
-	srand(time(NULL));									//getting seedy
+	srand(unsigned int(time(NULL)));					//getting seedy
 	num = rand() % rolesDeck.size();					//index into the deck;
 	tmp = rolesDeck[num];								//store the role
 	rolesDeck.erase(rolesDeck.begin()+num);				//erase from ze vectah
@@ -85,7 +86,7 @@ void Model::prepareGame()
 	//	Place research  and players in atlantastation in Atlanta
 	//	Assign roles to players
 	//	Shuffle deck, distribute epidemic cards evenly (4, 5, or 6 epids for easy med hard)
-	//	Deal cards: 2 players-4 cards, 3players-3 cards, 4 players -2 cards
+	//	Deal cards: 2 players-4 cards, 3players-3 cards, 4 players-2 cards
 	cityP = worldMap.locateCity("Atlanta");		//find atlanta
 	cityP->setResearchStation(true);			//set the station
 	incResSta();								//increment ressta count
@@ -158,7 +159,7 @@ void Model::infectCity(City* cityP, int color, int count)
 
 bool Model::QSautoContain(ICard* icardP){
     vector<string> toCheck = worldMap.locateCity(icardP->getName())->getAdjCity();
-    for (int i = 0; i < toCheck.size(); i++)
+    for (int i = 0; i < int(toCheck.size()); i++)
         for (int k = 0; k < getNumPlayers(); k++)
             if (players[k].getPlayerRole() == "Quarantine Specialist" &&  //If the player is QS
                 (players[k].getPlayerLocation()->getCityName() == toCheck[i] || //and player is in an adj city
@@ -251,17 +252,35 @@ void Model::treatDisease(int col, int status){
 }
 
 void Model::savegame(string filename) {
-	ofstream fp_out(filename, ios::out);	// open/create savegame file with name(filename)
+	ofstream fp_out(filename, ios::out);				// open/create savegame file with name(filename)
 	
-	if(fp_out.is_open()) {					// test if file is open
-											// save game difficulty
-											// save outbreak and infection levels
-		infectedDeck.saveGame(fp_out);		// save infection deck & discard ddeck
-											// save city deck
-											// save cube counts
-											// save players
-		worldMap.saveGame(fp_out);			// save map to file
-		fp_out.close();						// close file
+	if(fp_out.is_open()) {								// test if file is open
+		fp_out << "***** Game Difficulty *****" << endl;
+														// save game difficulty
+		fp_out << "***** Cube Counts *****" << endl;
+														// save cube counts
+		fp_out << "***** Outbreak & Infection Levels *****" << endl;
+														// save outbreak and infection levels
+		fp_out << "***** Players *****" << endl;
+		for(int i = 0; i < getNumPlayers(); i++) {		// save players
+			fp_out	<< players[i].getPlayerName()	<< ","
+					<< players[i].getPlayerRole()	<< ","
+					<< players[i].getPlayerLocStr() << endl;
+			vector<Card*> playerHand = players[i].getHand();
+			for(int j = 0; j < playerHand.size(); j++) {
+				fp_out	<< playerHand[j]->getCardName()
+						<< "," << playerHand[j]->getID()
+						<< endl;
+			}
+			fp_out << endl;
+		}
+		fp_out << "***** Infection & Discard Decks *****" << endl;
+		infectedDeck.saveGame(fp_out);					// save infection deck & discard deck
+		fp_out << "***** City Deck *****" << endl;
+		playerDeck.saveGame(fp_out);					// save city deck
+		fp_out << "***** Map *****" << endl;
+		worldMap.saveGame(fp_out);						// save map to file
+		fp_out.close();									// close file
 	}
 	else
 		cout << "Error opening file." << endl;

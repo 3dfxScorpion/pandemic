@@ -38,7 +38,7 @@ public:
     City * getPlayerLocation() { return location; }
 	string getPlayerLocStr(){ return location->getCityName();}
     vector<Card*> getHand() { return hand; }
-    int    getHandSize() { return (int)hand.size(); }    
+    int    getHandSize() { return (int)hand.size(); }
 };
 
 #endif
