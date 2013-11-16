@@ -45,4 +45,5 @@ public:
 	void askLoadGame();
 	void askLoadScenario();
 	void askFileName();
+	void playAgain(){cout << "Play again? [1 for yes, - for no]: ";}
 };

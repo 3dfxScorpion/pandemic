@@ -32,7 +32,7 @@ public:
 	void setDifficulty();
 	void doPlayerTurns();
 	void doInfectRound();
-	void run();
+	int run();
 	bool getLoadGame();
 	bool getLoadScenario();
 	void getSaveGame();

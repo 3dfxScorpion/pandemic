@@ -147,25 +147,43 @@ void Controller::doInfectRound()
     
 }
 
-void Controller::run()
+int Controller::run()
 {
 	bool test = false;
-
-	view.printTitle();					//print title screen
-	test = getLoadGame();				// ask to load game
-	if(!test)							// skips load scenario if game loaded
-		test = getLoadScenario();		// ask to load scenario
-	if(!test) {							// skips game setup if loading game or scenario
-		setPlayerCount();				//read and set count of players
-		setPlayerNames();				//read and set player names
-		setDifficulty();				//read and set difficulty
-		model.prepareGame();			//assigns roles, draws initial player hands based on player count, sets resSta and player location to atlanta
-		model.initialInfect();			//perform the initial infection of nine cities
-	}
-    
-	while(true)							//play until quit condition reached
+	
+	try
 	{
-		doPlayerTurns();
+		view.printTitle();					//print title screen
+		test = getLoadGame();				// ask to load game
+		if(!test)							// skips load scenario if game loaded
+			test = getLoadScenario();		// ask to load scenario
+		if(!test) {							// skips game setup if loading game or scenario
+			model.buildMap();				//builds map
+			setPlayerCount();				//read and set count of players
+			setPlayerNames();				//read and set player names
+			setDifficulty();				//read and set difficulty
+			model.prepareGame();			//assigns roles, draws initial player hands based on player count, sets resSta and player location to atlanta
+			model.initialInfect();			//perform the initial infection of nine cities
+		}
+    
+		while(true)							//play until quit condition reached
+		{
+			doPlayerTurns();
+		}
+	}
+	catch(PandemicException const& e)
+	{
+		int x = -1;
+		cerr << "\nException caught: " << e.what() << "\n" << endl;		//quit condition or error occured
+
+		while ( x < 0 || x > 1)
+		{
+			view.playAgain();												//prompt for new game
+			cin >> x;
+			cin.clear();
+			cin.sync();
+		}
+		return x;											
 	}
 }
 

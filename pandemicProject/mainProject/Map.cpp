@@ -23,9 +23,13 @@ int Map::populateMap(string cityFile) {
     ifstream cityInfoFile;
     string fileInput;
 	cityInfoFile.open(cityFile,ifstream::in);
-    if ( cityInfoFile.fail() ) {
+
+	
+	if ( cityInfoFile.fail() ) {
 		throw PandemicException("Error Loading Map");
-    }
+	}
+		
+
     if ( cityInfoFile.eof() )
         return 1;
     else {
@@ -91,8 +95,8 @@ int Map::populateMap(string cityFile) {
         }
     }
     return 0;
+	
 }
-
 City* Map::locateCity(string cityName) {
     for ( size_t i = 0; i < worldMap.size(); i++ ) {
         if ( worldMap[i]->getCityName() == cityName ) {

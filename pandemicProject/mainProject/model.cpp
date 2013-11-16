@@ -30,8 +30,7 @@ Model::Model()
 	rolesDeck.push_back("Scientist");
 	rolesDeck.push_back("Researcher");
 
-	// Populate World Map
-	worldMap.populateMap("Cities.txt");				//populate the map
+	
  
 }
 

@@ -29,22 +29,10 @@ void buildResearch(City*);
 int main()
 {
 	int tmp = 1;
-
-	while(tmp)
+	Controller controller;
+	while(controller.run())
 	{
-		try
-		{			
-			Controller controller;								// I don't really like this inside of a loop. Temp for now until I decide the best way to 
-																// handle exceptions while allowing user to restart
-			controller.run();
-		}	
-		catch(PandemicException const& e)
-		{
-			cerr << "\nException caught: " << e.what() << "\n" << endl;
-		}
-	
-		cout << "Play again? [1 for yes, - for no]: ";
-		cin >> tmp;
+															
 	}
 
 

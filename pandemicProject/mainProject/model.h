@@ -20,7 +20,7 @@
 enum {badCities};														//odd
 enum {red, yellow, blue, black};										//cube colors
 enum {uncured, cured, eradicated};										//disease status
-enum {badMap};															//for thrown exceptions 
+
 
 class Model
 {
@@ -80,6 +80,7 @@ public:
     string drawRole();					//returns a random role card, removes it from the role deck
 	void savegame(string filename);
 	void loadgame(string filename);
+	void buildMap(){worldMap.populateMap("Cities.txt");}				//populate the map}}
 		
 
 	Player players[4];																//Not necessarily final implementation, here to illustrate functionality
