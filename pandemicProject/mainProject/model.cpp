@@ -71,7 +71,7 @@ string Model::drawRole()
 {
 	int num;
 	string tmp;
-	srand(unsigned int(time(NULL)));					//getting seedy
+	srand(time_t(NULL));								//getting seedy
 	num = rand() % rolesDeck.size();					//index into the deck;
 	tmp = rolesDeck[num];								//store the role
 	rolesDeck.erase(rolesDeck.begin()+num);				//erase from ze vectah
@@ -267,7 +267,7 @@ void Model::savegame(string filename) {
 					<< players[i].getPlayerRole()	<< ","
 					<< players[i].getPlayerLocStr() << endl;
 			vector<Card*> playerHand = players[i].getHand();
-			for(int j = 0; j < playerHand.size(); j++) {
+			for(int j = 0; j < int(playerHand.size()); j++) {
 				fp_out	<< playerHand[j]->getCardName()
 						<< "," << playerHand[j]->getID()
 						<< endl;

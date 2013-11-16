@@ -171,15 +171,15 @@ void Controller::run()
 
 bool Controller::getLoadGame() {
 	char input = 'A';
-	while(input != 'Y' || input != 'N') {
+	while(1) {
 		view.askLoadGame();
 		cin >> input;
 		cin.ignore();
-		if(input == 'Y') {
+		if(input == 'Y' || input == 'y') {
 			//return true;
 			return false;		// just until working
 		}
-		if(input == 'N')
+		if(input == 'N' || input == 'n')
 			return false;
 	}
 	return false;
@@ -187,15 +187,15 @@ bool Controller::getLoadGame() {
 
 bool Controller::getLoadScenario() {
 	char input = 'A';
-	while(input != 'Y' || input != 'N') {
+	while(1) {
 		view.askLoadScenario();
 		cin >> input;
 		cin.ignore();
-		if(input == 'Y') {
+		if(input == 'Y' || input == 'y') {
 			//return true;
 			return false;		// just until working
 		}
-		if(input == 'N')
+		if(input == 'N' || input == 'n')
 			return false;
 	}
 	return false;

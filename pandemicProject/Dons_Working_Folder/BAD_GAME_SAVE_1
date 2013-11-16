@@ -1,0 +1,131 @@
+***** Game Difficulty *****
+***** Cube Counts *****
+***** Outbreak & Infection Levels *****
+***** Players *****
+1,Quarantine Specialist,Atlanta
+Kolkata,0
+Sao Paulo,1
+Cairo,2
+Chicago,3
+
+2,Operations Expert,Atlanta
+Miami,4
+Tokyo,5
+Madrid,6
+EPIDEMIC,7
+
+***** Infection & Discard Decks *****
+39
+Tehran,3
+Kinshasa,1
+Hong Kong,0
+Los Angeles,1
+Khartoum,1
+Cairo,3
+Lima,1
+Sao Paulo,1
+Bogota,1
+Moscow,3
+San Francisco,2
+Chicago,2
+Taipei,0
+Jakarta,0
+Karachi,3
+Algiers,3
+Istanbul,3
+Milan,2
+Atlanta,2
+Seoul,0
+London,2
+Tokyo,0
+Riyadh,3
+Ho Chi Minh City,0
+Chennai,3
+Bangkok,0
+Santiago,1
+Mexico City,1
+Beijing,0
+Baghdad,3
+Osaka,0
+Sydney,0
+Madrid,2
+Kolkata,3
+Delhi,3
+Washington,2
+Montreal,2
+Paris,2
+Lagos,1
+9
+Essen,2
+Johannesburg,1
+Manila,0
+Miami,1
+Shanghai,0
+St. Petersburg,2
+Buenos Aires,1
+New York,2
+Mumbai,3
+***** City Deck *****
+51
+Paris,8
+Hong Kong,9
+London,10
+Jakarta,11
+Santiago,12
+Government Grant,13
+Essen,14
+Washington,15
+Delhi,16
+EPIDEMIC,17
+Lagos,18
+Lima,19
+San Francisco,20
+One Quiet Night,21
+Buenos Aires,22
+Atlanta,23
+Seoul,24
+St. Petersburg,25
+Moscow,26
+Forecast,27
+Resilient Population,28
+EPIDEMIC,29
+Montreal,30
+EPIDEMIC,31
+Los Angeles,32
+Sydney,33
+Ho Chi Minh City,34
+New York,35
+Airlift,36
+Milan,37
+Istanbul,38
+EPIDEMIC,39
+Beijing,40
+Bangkok,41
+Shanghai,42
+Bogota,43
+Mumbai,44
+Karachi,45
+Kinshasa,46
+Chennai,47
+Mexico City,48
+Khartoum,49
+Taipei,50
+Baghdad,51
+Manila,52
+EPIDEMIC,53
+Tehran,54
+Osaka,55
+Algiers,56
+Johannesburg,57
+Riyadh,58
+***** Map *****
+Atlanta,0,0,0,0,TRUE
+New York,0,1,0,0,FALSE
+Essen,0,3,0,0,FALSE
+St. Petersburg,0,2,0,0,FALSE
+Miami,0,0,0,2,FALSE
+Buenos Aires,0,0,0,1,FALSE
+Johannesburg,0,0,0,3,FALSE
+Mumbai,1,0,0,0,FALSE
+Shanghai,0,0,2,0,FALSE
+Manila,0,0,3,0,FALSE

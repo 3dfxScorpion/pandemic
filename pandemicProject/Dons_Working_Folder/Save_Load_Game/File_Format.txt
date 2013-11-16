@@ -10,6 +10,8 @@ infection_deck
 city_deck
 discard_decks...
 
+cube_counts
+
 num_of_players			// used during load function
 player_name, player_role, player_location, etc...
 
