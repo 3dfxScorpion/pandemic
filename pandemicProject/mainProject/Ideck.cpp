@@ -12,7 +12,7 @@ using namespace std;
 
 void IDeck::buildDeck( vector<ICard*>& tmpDeck)
 {
-	srand(unsigned int(time(NULL)));
+	srand((unsigned int)time(NULL));
 	const time_t CARDS = 48;
 	string infStr[CARDS]= {
 		"Sydney","Bangkok","Tokyo","Manila","Beijing","Ho Chi Minh City","Hong Kong","Taipei",
@@ -74,7 +74,7 @@ ICard* IDeck::takeCard() {
 //Randomly places the discard pile at the top of the infection deck
 void IDeck::shuffleDiscard()
 {
-	srand(unsigned int(time(NULL)));		//lets get seedy
+	srand((unsigned int)time(NULL));		//lets get seedy
 	ICard* ptr;
 	while(!discard.empty())
 	{

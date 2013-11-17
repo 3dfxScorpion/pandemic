@@ -42,10 +42,16 @@ void Controller::setPlayerNames()
 	// Read in player names
 	for(int i = 0; i < model.getNumPlayers(); i++)		//controller controls the flow
 	{
-		view.printNamePrompt(i);						// view prints prompt
-		cin.clear();									//clear input buffer
-		cin.sync();										//was being weird, but this fixed it
-		getline(cin, tempStr, '\n');					//read player name
+        string tempStr = "";
+        while (tempStr == "") {
+            view.printNamePrompt(i);						// view prints prompt
+            cin.clear();									//clear input buffer
+            cin.sync();										//was being weird, but this fixed it
+            getline(cin, tempStr, '\n');					//read player name
+            if (tempStr == "") {
+                view.printEmptyPlayerNameMessage();
+            }
+        }
 		model.players[i].setPlayerName(tempStr);		//model stores data
 	}
     
