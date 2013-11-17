@@ -33,15 +33,15 @@ public:
     }
 	void printMenu() {
         cout << "Please choose an action:\n\n";
-        cout << "1. Drive/Ferry\n";
-        cout << "2. Direct Flight\n";
-        cout << "3. Charter Flight\n";
-        cout << "4. Shuttle Flight\n";
-        cout << "5. Treat Disease\n";
-        cout << "6. Share Knowledge\n";
-        cout << "7. Discover Cure\n";
-        cout << "8. Build Research Station\n";
-        cout << "9. Display infected cities\n";
+        cout << " 1. Drive/Ferry\n";
+        cout << " 2. Direct Flight\n";
+        cout << " 3. Charter Flight\n";
+        cout << " 4. Shuttle Flight\n";
+        cout << " 5. Treat Disease\n";
+        cout << " 6. Share Knowledge\n";
+        cout << " 7. Discover Cure\n";
+        cout << " 8. Build Research Station\n";
+        cout << " 9. Display infected cities\n";
 		cout << "10. Save game\n";
 		cout << "11. Quit Game\n\n";
         cout << "Your choice: ";

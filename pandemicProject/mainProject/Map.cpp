@@ -108,12 +108,12 @@ City* Map::locateCity(string cityName) {
 
 string Map::infectedList() {
     ostringstream infectedCities;
-    infectedCities << setw(15) << left    << "City:"   << setw(8)
+    infectedCities << setw(17) << left    << "City:"   << setw(8)
                    << "Black:" << setw(8) << "Blue:"   << setw(8)
                    << "Red:"   << setw(8) << "Yellow:" << endl;
     for ( size_t i = 0; i < worldMap.size(); i++ ) {
         if ( worldMap[i]->getInfectedBool() ) {
-            infectedCities << setw(15) << left << worldMap[i]->getCityName()
+            infectedCities << setw(17) << left << worldMap[i]->getCityName()
                 << setw(8) << worldMap[i]->getInfectedBlack()
                 << setw(8) << worldMap[i]->getInfectedBlue()
                 << setw(8) << worldMap[i]->getInfectedRed()

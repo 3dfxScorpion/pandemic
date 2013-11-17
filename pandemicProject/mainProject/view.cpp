@@ -20,7 +20,7 @@ void View::displayPlayerInfo(string name, string role, string city)
 void View::printCubeCount(int red, int yellow, int blue, int black)
 {
 	cout << "Cubes remaining:\n";
-	cout << "Red: " << red << " Yellow: " << yellow << " Blue: " << blue << " Black: " << black << endl;
+	cout << "Black: " << black << " Blue: " << blue << " Red: " << red << " Yellow: " << yellow <<  endl;
 
 }
 
