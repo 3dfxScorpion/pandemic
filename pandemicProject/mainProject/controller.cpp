@@ -126,6 +126,24 @@ void Controller::doPlayerTurns()
 						break;
 
 					case 11:
+                        char quittingAnswer;
+                        cout << "Are you sure you want to quit? (Y/N): ";
+                        cin >> quittingAnswer;
+                        cin.ignore();
+                        if (quittingAnswer == 'Y' || quittingAnswer == 'y') {
+                            char saveAnswer;
+                            cout << "\nWould you like to save your progress? (Y/N): ";
+                            cin >> saveAnswer;
+                            cin.ignore();
+                            
+                            if (saveAnswer == 'Y' || saveAnswer == 'y') {
+                                getSaveGame();
+                            }
+                        } else if (quittingAnswer == 'N' || quittingAnswer == 'n') {
+                            cout << "Resuming game...\n\n";
+                            j--;
+                            break;
+                        }
                         cout << "Quitting game...";
 						exit(0);
 
@@ -244,5 +262,6 @@ void Controller::getSaveGame() {
 	}
 
 	model.savegame(filename);
+    cout << "\nYour progress has been saved.\n";
 	cout << endl;
 }
