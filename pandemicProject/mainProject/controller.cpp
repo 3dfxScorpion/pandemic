@@ -107,19 +107,26 @@ void Controller::doPlayerTurns()
                         model.mover.moveAdjacent(model.worldMap.locateCity(cityInput));
                         model.checkMedicSpecial();	//Handles medic AutoTreatment ability.
                         break;
+                    
+                    case 2: case 3: case 4: case 5: case 6: case 7: case 8:
+                        //Filler for other actions until we put them there.
+                        cout << "This option is not available right now and is still under development.\n\n";
+                        j--;
+                        break;
                         
-                    case 2:
+                    case 9:
                         view.printInfectedCities(model.worldMap.infectedList());//print inf cities list
                         view.printCubeCount(model.getCubeCount(red), model.getCubeCount(yellow), model.getCubeCount(blue), model.getCubeCount(black)); //holy crap
                         j--;													//don't consume a move
                         break;
                     
-					case 3:
+					case 10:
 						getSaveGame();
 						j--;
 						break;
 
-					case 4:
+					case 11:
+                        cout << "Quitting game...";
 						exit(0);
 
                     default:
