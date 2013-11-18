@@ -1,7 +1,7 @@
 #include<iostream>
 #include "PlayerMove.h"
 #include "CityCard.h"
-#include "Model.h"
+#include "model.h"
 #include <string>
 //
 //  PlayerMove.cpp

@@ -2,8 +2,9 @@
 // Controller class - controls the flow of pandemic
 //
 
-#include "model.h"
-#include "view.h"
+#include "Model.h"
+#include "View.h"
+#include "Menu.h"
 #include<iostream>
 #include<iomanip>
 #include<sstream>
@@ -26,22 +27,24 @@ using std::ostringstream;
 class Controller
 {
 public:
-	Controller();
-	void setPlayerCount();
-	void setPlayerNames();
-	void setDifficulty();
-	void doPlayerTurns();
-	void doInfectRound();
-	int run();
-	bool getLoadGame();
-	bool getLoadScenario();
-	void getSaveGame();
+  Controller();
+  void setPlayerCount();
+  void setPlayerNames();
+  void setDifficulty();
+  void doPlayerTurns();
+  void doInfectRound();
+  int run();
+  bool getLoadGame();
+  bool getLoadScenario();
+  void getSaveGame();
+  void doProcessMenu(Player*);
 
 private:
-	View view;							//the view we're using
-	Model model;						//the model
-	int temp;
-	string tempStr;
-	City* cityP;			//pointer to a city
-	ICard* iCardP;			//pointer to an iCard
+  View view;              //the view we're using
+  Model model;            //the model
+  Menu menu;            //the menu
+  int temp;
+  string tempStr;
+  City* cityP;      //pointer to a city
+  ICard* iCardP;      //pointer to an iCard
 };

@@ -83,7 +83,7 @@ public:
 	void buildMap(){worldMap.populateMap("Cities.txt");}				//populate the map}}
 		
 
-	vector<Player*> players;																//Not necessarily final implementation, here to illustrate functionality
+	Player players[4];																//Not necessarily final implementation, here to illustrate functionality
 	Map worldMap;																	//The map, bitch!
 	Deck playerDeck;																//Player deck
 	IDeck infectedDeck;																//Infected Deck

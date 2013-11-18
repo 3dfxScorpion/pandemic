@@ -1,4 +1,4 @@
-#include "View.h"
+#include "view.h"
 
 void View::printTitle()
 {

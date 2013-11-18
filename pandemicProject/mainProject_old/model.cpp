@@ -1,5 +1,5 @@
 #include <vector>
-#include "Model.h"
+#include "model.h"
 
 
 
@@ -91,8 +91,8 @@ void Model::prepareGame()
 	incResSta();								//increment ressta count
 	for (int i = 0; i < getNumPlayers(); i++)	//for all players
 	{
-		players[i]->setPlayerRole(drawRole());			// assign a random role
-		players[i]->setPlayerLocation(cityP);			//set all player locations to Atlanta
+		players[i].setPlayerRole(drawRole());			// assign a random role
+		players[i].setPlayerLocation(cityP);			//set all player locations to Atlanta
 	}
 
 	//draw inital hand:
@@ -101,7 +101,7 @@ void Model::prepareGame()
 	{
 		for(int i=0; i < (6-getNumPlayers()); i++)					// inefficiency ignored for the moment
 		{
-			players[j]->addCard(playerDeck.takeCard());		//draw a card
+			players[j].addCard(playerDeck.takeCard());		//draw a card
 		}
 	}
 }
@@ -160,9 +160,9 @@ bool Model::QSautoContain(ICard* icardP){
     vector<string> toCheck = worldMap.locateCity(icardP->getName())->getAdjCity();
     for (int i = 0; i < int(toCheck.size()); i++)
         for (int k = 0; k < getNumPlayers(); k++)
-            if (players[k]->getPlayerRole() == "Quarantine Specialist" &&  //If the player is QS
-                (players[k]->getPlayerLocation()->getCityName() == toCheck[i] || //and player is in an adj city
-                 players[k]->getPlayerLocation()->getCityName() == icardP->getName()))// or player is on the city
+            if (players[k].getPlayerRole() == "Quarantine Specialist" &&  //If the player is QS
+                (players[k].getPlayerLocation()->getCityName() == toCheck[i] || //and player is in an adj city
+                 players[k].getPlayerLocation()->getCityName() == icardP->getName()))// or player is on the city
                 return true;                            //return true so that city wont be infected.
     // end of both looops.
     
@@ -262,10 +262,10 @@ void Model::savegame(string filename) {
 														// save outbreak and infection levels
 		fp_out << "***** Players *****" << endl;
 		for(int i = 0; i < getNumPlayers(); i++) {		// save players
-			fp_out	<< players[i]->getPlayerName()	<< ","
-					<< players[i]->getPlayerRole()	<< ","
-					<< players[i]->getPlayerLocStr() << endl;
-			vector<Card*> playerHand = players[i]->getHand();
+			fp_out	<< players[i].getPlayerName()	<< ","
+					<< players[i].getPlayerRole()	<< ","
+					<< players[i].getPlayerLocStr() << endl;
+			vector<Card*> playerHand = players[i].getHand();
 			for(int j = 0; j < int(playerHand.size()); j++) {
 				fp_out	<< playerHand[j]->getCardName()
 						<< "," << playerHand[j]->getID()
