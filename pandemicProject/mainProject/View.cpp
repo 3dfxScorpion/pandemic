@@ -52,3 +52,12 @@ void View::printReasearchStations(vector<string> cities){
 void View::printAdjCities(City* toCheck){
     cout << menuAdjCities(toCheck);
 }
+
+void View::askCanCure(string color){
+    cout << "Do you want to cure the "
+         << color
+         << " disease? (y/n)\n";
+    
+}
+
+

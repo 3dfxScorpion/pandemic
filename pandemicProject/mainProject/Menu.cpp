@@ -92,7 +92,7 @@ string menuRSCities(vector<string> RScities) {         // static method for exte
     str[0] << setw(12) << right << "Research Stations ";
     str[1] << setw(12) << right << "-----------------";
     
-    size_t cityCount = RScities.size();  // size of adjacent city vector
+    size_t cityCount = RScities.size();  // size of city vector
     size_t cityIndex = 2;               // city index is third line down
     // first display actual cards in city
     for ( cItr = RScities.begin(); cItr != RScities.end(); cItr++ ) {
@@ -111,11 +111,6 @@ string menuRSCities(vector<string> RScities) {         // static method for exte
     }
     return out.str();
 }
-
-
-
-
-
 
 
 

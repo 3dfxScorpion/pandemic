@@ -339,3 +339,70 @@ void Model::buildResearchStation(){
     }
 
 }
+
+bool Model::canCureDisease(int col){//This will be updated later when we have a bit more user input.
+   
+   string color = colorToString(col);
+    int colorNum=0;
+    CityCard * cityCaster;
+    if (!mover.getCurrentPlayer()->getPlayerLocation()->getResearchStationBool()) //if player isnt on research station
+        return false;
+    for (int i = 0; i <= mover.getCurrentPlayer()->getHandSize()-1;i++){
+        cityCaster=(CityCard*)mover.getCurrentPlayer()->getHand()[i];   
+        if (color == cityCaster->getColor())                 //wtb instanceof
+        {
+            colorNum++;
+        }
+        if (colorNum>=5){
+            cureDisease(col);
+            return true;
+        }
+    }
+    return false;
+}
+
+
+void Model::doCureDisease(int col){
+    
+    string color = colorToString(col);
+    int colorNum=0;                        //We will need to ask which 5 cards a player wants to discard
+    vector<int> toRemove;                   //if they have more than 5 cards of the same color.
+    CityCard * cityCaster;
+    if (!mover.getCurrentPlayer()->getPlayerLocation()->getResearchStationBool()) //if player isnt on research station
+        return;
+    for (int i = 0; i <= mover.getCurrentPlayer()->getHandSize()-1;i++){
+        cityCaster=(CityCard*)mover.getCurrentPlayer()->getHand()[i];
+        if (color == cityCaster->getColor())                 //wtb instanceof
+        {
+            toRemove.push_back(i);
+            colorNum++;
+        }
+        if (colorNum>=5){
+            cureDisease(col);
+            for (int k =0;k<=int(toRemove.size()-1);k++)
+                mover.getCurrentPlayer()->removeCard(toRemove[k]);//discard the 5 city cards.
+        }
+    }
+}
+
+string Model::colorToString(int col){
+    string color;
+switch (col)
+{
+    case red:
+        color = "red";
+        break;
+    case blue:
+        color = "blue";
+        break;
+    case yellow:
+        color = "yellow";
+        break;
+    case black:
+        color = "black";
+        break;
+    default:
+        cout << "error in model::cureDisease\n";
+        }
+    return color;
+}

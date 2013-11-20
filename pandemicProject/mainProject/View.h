@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include "Model.h"
 #include "Menu.h"
 #include <vector>
 using namespace std;
@@ -12,6 +13,8 @@ class View
 {
 public:
 	void printTitle();
+    void printInfected();
+    void askCanCure(string);
     void printCantBuildRS(){cout << "You do not have the required card to build an RS here\n";}
     void printCubeCount(int red, int yellow, int blue, int black);
     void askLocationShuttleFlight(){cout << "Which city would you like to take a shuttle flight to?\n";}

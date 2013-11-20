@@ -12,7 +12,7 @@ string cmds01[] = {
     "Discover Cure",
     "Share Knowledge",
     "Build Research Station",
-    "Save game" 
+    "Save game"
 };
 // populate string vectors
 vector<string> mainCommands ( cmds01, cmds01 + sizeof(cmds01) / sizeof(cmds01[0]) );
@@ -27,12 +27,12 @@ Controller::Controller() {
 
 //Prompts for input, reads input, error checks input
 void Controller::setPlayerCount() {
-//get num players
+    //get num players
     view.askNumOfPlayers();
     cin >> temp;
     cin.ignore();
     
-//if improper input, loop till proper
+    //if improper input, loop till proper
     while (temp < 2 || temp > 4) {
         if (cin.fail()) {
             view.printNonNumeric();//print quit error
@@ -54,7 +54,7 @@ void Controller::setPlayerCount() {
 
 //prompts for names, reads them
 void Controller::setPlayerNames() {
-// Read in player names
+    // Read in player names
     for(int i = 0; i < model.getNumPlayers(); i++) { //controller controls the flow
         string tempStr = "";
         while (tempStr == "") {
@@ -72,14 +72,14 @@ void Controller::setPlayerNames() {
 
 //prompts for difficulty, reads it, sets it
 void Controller::setDifficulty() {
-// while (difficulty < 1 || difficulty > 3) {
+    // while (difficulty < 1 || difficulty > 3) {
     for(int difficulty = 0; cin.fail() || difficulty < 1 || difficulty > 3; ) {
         //get difficulty
         view.printDiffPrompt();
         cin >> difficulty;
         cin.ignore();
-      
-//error checking
+        
+        //error checking
         if (cin.fail()) {
             view.printNonNumeric();
             return;
@@ -103,68 +103,68 @@ void Controller::doPlayerTurns() {
             int option = -1;
             
             doProcessMenu(currentPlayer);
-/*
-            while (option < 0 || option > 2) {
-                view.displayPlayerInfo(model.players[i]->getPlayerName(), model.players[i]->getPlayerRole(), model.players[i]->getPlayerLocStr());
-                view.printMenu();
-                cin >> option;
-                cin.ignore();
-                string cityInput;
-                
-                switch (option) {
-                    case 1:
-                        cityP = model.worldMap.locateCity(model.players[i]->getPlayerLocStr());
-                        view.printAdj(cityP->getAdjCity());
-                        getline(cin,cityInput,'\n');
-                        
-                        model.mover.moveAdjacent(model.worldMap.locateCity(cityInput));
-                        model.checkMedicSpecial();//Handles medic AutoTreatment ability.
-                        break;
-                    
-                    case 2: case 3: case 4: case 5: case 6: case 7: case 8:
-                        //Filler for other actions until we put them there.
-                        cout << "This option is not available right now and is still under development.\n\n";
-                        j--;
-                        break;
-                        
-                    case 9:
-                        view.printInfectedCities(model.worldMap.infectedList());//print inf cities list
-                        view.printCubeCount(model.getCubeCount(red), model.getCubeCount(yellow), model.getCubeCount(blue), model.getCubeCount(black)); //holy crap
-                        j--;//don't consume a move
-                        break;
-                    
-                    case 10:
-                        getSaveGame();
-                        j--;
-                        break;
-                    case 11:
-                        char quittingAnswer;
-                        cout << "Are you sure you want to quit? (Y/N): ";
-                        cin >> quittingAnswer;
-                        cin.ignore();
-                        if (quittingAnswer == 'Y' || quittingAnswer == 'y') {
-                            char saveAnswer;
-                            cout << "\nWould you like to save your progress? (Y/N): ";
-                            cin >> saveAnswer;
-                            cin.ignore();
-                            
-                            if (saveAnswer == 'Y' || saveAnswer == 'y') {
-                                getSaveGame();
-                            }
-                        } else if (quittingAnswer == 'N' || quittingAnswer == 'n') {
-                            cout << "Resuming game...\n\n";
-                            j--;
-                            break;
-                        }
-                        cout << "Quitting game...";
-                        exit(0);
-
-                    default:
-                        view.printBadTurnChoice();
-                        
-                }
-            }
-*/
+            /*
+             while (option < 0 || option > 2) {
+             view.displayPlayerInfo(model.players[i]->getPlayerName(), model.players[i]->getPlayerRole(), model.players[i]->getPlayerLocStr());
+             view.printMenu();
+             cin >> option;
+             cin.ignore();
+             string cityInput;
+             
+             switch (option) {
+             case 1:
+             cityP = model.worldMap.locateCity(model.players[i]->getPlayerLocStr());
+             view.printAdj(cityP->getAdjCity());
+             getline(cin,cityInput,'\n');
+             
+             model.mover.moveAdjacent(model.worldMap.locateCity(cityInput));
+             model.checkMedicSpecial();//Handles medic AutoTreatment ability.
+             break;
+             
+             case 2: case 3: case 4: case 5: case 6: case 7: case 8:
+             //Filler for other actions until we put them there.
+             cout << "This option is not available right now and is still under development.\n\n";
+             j--;
+             break;
+             
+             case 9:
+             view.printInfectedCities(model.worldMap.infectedList());//print inf cities list
+             view.printCubeCount(model.getCubeCount(red), model.getCubeCount(yellow), model.getCubeCount(blue), model.getCubeCount(black)); //holy crap
+             j--;//don't consume a move
+             break;
+             
+             case 10:
+             getSaveGame();
+             j--;
+             break;
+             case 11:
+             char quittingAnswer;
+             cout << "Are you sure you want to quit? (Y/N): ";
+             cin >> quittingAnswer;
+             cin.ignore();
+             if (quittingAnswer == 'Y' || quittingAnswer == 'y') {
+             char saveAnswer;
+             cout << "\nWould you like to save your progress? (Y/N): ";
+             cin >> saveAnswer;
+             cin.ignore();
+             
+             if (saveAnswer == 'Y' || saveAnswer == 'y') {
+             getSaveGame();
+             }
+             } else if (quittingAnswer == 'N' || quittingAnswer == 'n') {
+             cout << "Resuming game...\n\n";
+             j--;
+             break;
+             }
+             cout << "Quitting game...";
+             exit(0);
+             
+             default:
+             view.printBadTurnChoice();
+             
+             }
+             }
+             */
         } // four moves consumed
         
         doInfectRound();//perform the infection round
@@ -181,9 +181,9 @@ void Controller::doPlayerTurns() {
 void Controller::doProcessMenu(Player* p) {
     const size_t NUM_COMMANDS = menu.getMenuCommands().size();
     size_t choice = NUM_COMMANDS - 1;
-
+    
     menu.showMenu(p);
-    while( !( cin >> choice ) ) { 
+    while( !( cin >> choice ) ) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Invalid input.  Try again: ";
@@ -210,7 +210,7 @@ void Controller::doInfectRound() {
 
 int Controller::run() {
     bool test = false;
-
+    
     try {
         view.printTitle();//print title screen
         test = getLoadGame();// ask to load game
@@ -224,7 +224,7 @@ int Controller::run() {
             model.prepareGame();//assigns roles, draws initial player hands based on player count, sets resSta and player location to atlanta
             model.initialInfect();//perform the initial infection of nine cities
         }
-    
+        
         menu.setMenuMap(model.worldMap);
         menu.setMenuPlayers(model.players);
         menu.setMenuCommands(mainCommands);
@@ -233,7 +233,7 @@ int Controller::run() {
         menu.setMappedCubes("blue", model.getCubeCount(blue));
         menu.setMappedCubes("red", model.getCubeCount(red));
         menu.setMappedCubes("yellow", model.getCubeCount(yellow));
-
+        
         while(true) {  //play until quit condition reached
             doPlayerTurns();
         }
@@ -241,7 +241,7 @@ int Controller::run() {
     catch(PandemicException const& e) {
         int x = -1;
         cerr << "\nException caught: " << e.what() << "\n" << endl;//quit condition or error occured
-
+        
         while ( x < 0 || x > 1) {
             view.playAgain();//prompt for new game
             cin >> x;
@@ -259,7 +259,7 @@ bool Controller::getLoadGame() {
         cin >> input;
         cin.ignore();
         if(input == 'Y' || input == 'y') {
-        //return true;
+            //return true;
             return false;// just until working
         }
         if(input == 'N' || input == 'n')
@@ -275,7 +275,7 @@ bool Controller::getLoadScenario() {
         cin >> input;
         cin.ignore();
         if(input == 'Y' || input == 'y') {
-        //return true;
+            //return true;
             return false;// just until working
         }
         if(input == 'N' || input == 'n')
@@ -287,14 +287,14 @@ bool Controller::getLoadScenario() {
 void Controller::getSaveGame() {
     string filename = "autosave";
     string name;
-
+    
     view.askFileName();
     getline(cin, name);// get savegame name from user
-
+    
     if(!name.empty()) {
         filename = name;
     }
-
+    
     model.savegame(filename);
     cout << "\nYour progress has been saved.\n";
     cout << endl;
@@ -307,12 +307,12 @@ void Controller::do_drive_ferry() {
     vector<string> adjs = p->getPlayerLocation()->getAdjCity();
     vSize = adjs.size();
     view.printAdjCities(p->getPlayerLocation());
-    while (input < 1 || input > vSize)
+    while (input < 1 || input > vSize) //loop until proper input
     {
         cin >> input;
+        if (input == 10)
+            return;
     }
-    if (input == 10)
-        return;
     model.mover.moveAdjacent(model.worldMap.locateCity(adjs[input-1]));// minus one to get synced with menu.
 }
 
@@ -326,7 +326,7 @@ void Controller::do_direct_flight() {
     cin >> pick;
     if ( pick == 10 )
         return;
-
+    
     vector<Card*>::iterator hItr;
     for ( hItr = hand.begin(); hItr != hand.end(); hItr++ ) {
         Card* tmp = *hItr;
@@ -348,14 +348,17 @@ void Controller::do_charter_flight() {
 }
 
 void Controller::do_shuttle_flight() {
-    Player * p = model.mover.getCurrentPlayer();
     view.askLocationShuttleFlight();
     vector <string> RScities = model.getReasearchStationCities();
+    int vSize = RScities.size();
     view.printReasearchStations(RScities);
     int input = 0;
-    cin >> input;
-    if ( input == 10 )
-        return;
+    while (input < 1 || input > vSize)
+    {
+        cin >> input;
+        if ( input == 10 )
+            return;
+    }
     cin.ignore();
     City* toMove = model.worldMap.locateCity(RScities[input-1]);
     model.mover.shuttleFlight(toMove);
@@ -365,8 +368,21 @@ void Controller::do_treat_disease() {
     cout << "treat disease...\n";
 }
 
-void Controller::do_cure_disease() {
-    
+void Controller::do_cure_disease() {//TODO needs a role check.
+    char input;
+    for (int i = red; i <=black;i++)//loops and checks if they can cure
+    {
+        if (model.canCureDisease(i))//self checking since player can never have more than one cure available
+        {
+            view.askCanCure(model.colorToString(i));
+            while (input != 'Y'|| input !='y' || input !='n' || input != 'N')
+                cin>> input;//loop for input
+            if (input == 'Y' || input == 'y')
+                model.doCureDisease(i);
+            else
+                return;
+        }
+    }
 }
 
 void Controller::do_share_knowledge() {

@@ -27,6 +27,7 @@ class Model
 public:
 	Model();
     void checkMedicSpecial();
+    string colorToString(int);
     bool QSautoContain(ICard*);
     void treatDisease(int col, int status);
 	void setNumPlayers(int num) {
@@ -77,6 +78,8 @@ public:
     int getCureStatus(int i){
         return cureStatus[i];
     }
+    bool canCureDisease(int);
+    void doCureDisease(int);
     bool canBuildResearchStation();
     void buildResearchStation();
     vector<string> getReasearchStationCities();//returns vector containing all of the cities with research stations
@@ -84,7 +87,6 @@ public:
 	void savegame(string filename);
 	void loadgame(string filename);
 	void buildMap(){worldMap.populateMap("Cities.txt");}				//populate the map}}
-    
 
 	vector<Player*> players;																//Not necessarily final implementation, here to illustrate functionality
 	Map worldMap;																	//The map, bitch!
