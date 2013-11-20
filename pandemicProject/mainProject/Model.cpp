@@ -314,7 +314,7 @@ bool Model::canBuildResearchStation(){
     vector<Card*>::iterator hItr;
     for ( hItr = hand.begin(); hItr != hand.end(); hItr++ ) {
         Card* tmp = *hItr;
-        if (tmp->getCardName()==curr->getPlayerLocation()->getCityName())
+        if (tmp->getCardName()==curr->getPlayerLocation()->getCityName() && !curr->getPlayerLocation()->getResearchStationBool())
             return true;// If the player has a card that matches the city they are in they can build.
     }
     return false;
@@ -385,7 +385,7 @@ void Model::doCureDisease(int col){
     }
 }
 
-string Model::colorToString(int col){
+string Model::colorToString(int col){//Just to make life easier
     string color;
 switch (col)
 {

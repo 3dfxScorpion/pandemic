@@ -316,7 +316,7 @@ void Controller::do_drive_ferry() {
     model.mover.moveAdjacent(model.worldMap.locateCity(adjs[input-1]));// minus one to get synced with menu.
 }
 
-void Controller::do_direct_flight() {
+void Controller::do_direct_flight() {//If it aint broke
     Player * p = model.mover.getCurrentPlayer();
     size_t num = 0, pick;
     vector<Card*> hand = p->getHand();
@@ -341,7 +341,7 @@ void Controller::do_direct_flight() {
     }
 }
 
-void Controller::do_charter_flight() {
+void Controller::do_charter_flight() {//Need a menu to list all cities or let character enter input :S
     Player * p = model.mover.getCurrentPlayer();
     cout << "charter flight to city...\n";
     cout << menuAdjCities(p->getPlayerLocation()) << "\n";
@@ -349,11 +349,11 @@ void Controller::do_charter_flight() {
 
 void Controller::do_shuttle_flight() {
     view.askLocationShuttleFlight();
-    vector <string> RScities = model.getReasearchStationCities();
+    vector <string> RScities = model.getReasearchStationCities();//Get all cities with RSs
     int vSize = RScities.size();
     view.printReasearchStations(RScities);
     int input = 0;
-    while (input < 1 || input > vSize)
+    while (input < 1 || input > vSize)//Get user input, loop till good input
     {
         cin >> input;
         if ( input == 10 )
@@ -368,7 +368,7 @@ void Controller::do_treat_disease() {
     cout << "treat disease...\n";
 }
 
-void Controller::do_cure_disease() {//TODO needs a role check.
+void Controller::do_cure_disease() {//TODO needs a role check. Needs more testing!!!
     char input;
     for (int i = red; i <=black;i++)//loops and checks if they can cure
     {
@@ -390,7 +390,7 @@ void Controller::do_share_knowledge() {
 }
 
 void Controller::do_build_station() {
-    if (!model.canBuildResearchStation())
+    if (!model.canBuildResearchStation())//Check if possible
         view.printCantBuildRS();
     else
         model.buildResearchStation();
