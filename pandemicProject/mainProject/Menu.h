@@ -52,4 +52,5 @@ class Menu {
 };
 
 string menuAdjCities(City*);
+string menuRSCities(vector<string>);
 #endif

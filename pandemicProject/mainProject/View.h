@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include "Menu.h"
 #include <vector>
 using namespace std;
 
@@ -11,7 +12,10 @@ class View
 {
 public:
 	void printTitle();
+    void printCantBuildRS(){cout << "You do not have the required card to build an RS here\n";}
     void printCubeCount(int red, int yellow, int blue, int black);
+    void askLocationShuttleFlight(){cout << "Which city would you like to take a shuttle flight to?\n";}
+    void askLocationCharterFlight(){cout << "Which city would you like to charter a flight to?\n";};
     void printAdj(vector<string>);
     void displayPlayerInfo(string, string, string);
     void askNumOfPlayers();
@@ -56,4 +60,6 @@ public:
 	void askLoadScenario();
 	void askFileName();
 	void playAgain(){cout << "Play again? [1 for yes, - for no]: ";}
+    void printReasearchStations(vector<string> cities);
+    void printAdjCities(City*);
 };

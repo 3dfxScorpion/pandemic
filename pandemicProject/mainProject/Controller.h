@@ -24,7 +24,7 @@ using std::numeric_limits;
 using std::ostringstream;
 
 class Controller;
-typedef void (Controller::*menuFunctions)(Player *);
+typedef void (Controller::*menuFunctions)();
 class Controller
 {
 public:
@@ -33,15 +33,15 @@ public:
   void setPlayerNames();
   void setDifficulty();
   // menu functions
-  void do_drive_ferry(Player*);
-  void do_direct_flight(Player*);
-  void do_charter_flight(Player*);
-  void do_shuttle_flight(Player*);
-  void do_treat_disease(Player*);
-  void do_cure_disease(Player*);
-  void do_share_knowledge(Player*);
-  void do_build_station(Player*);
-  void do_save_game(Player*);
+  void do_drive_ferry();
+  void do_direct_flight();
+  void do_charter_flight();
+  void do_shuttle_flight();
+  void do_treat_disease();
+  void do_cure_disease();
+  void do_share_knowledge();
+  void do_build_station();
+  void do_save_game();
   // map menu functions
   void setMappedFunctions() {
       menuFunctions fns[] = {

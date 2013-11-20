@@ -77,11 +77,14 @@ public:
     int getCureStatus(int i){
         return cureStatus[i];
     }
+    bool canBuildResearchStation();
+    void buildResearchStation();
+    vector<string> getReasearchStationCities();//returns vector containing all of the cities with research stations
     string drawRole();					//returns a random role card, removes it from the role deck
 	void savegame(string filename);
 	void loadgame(string filename);
 	void buildMap(){worldMap.populateMap("Cities.txt");}				//populate the map}}
-		
+    
 
 	vector<Player*> players;																//Not necessarily final implementation, here to illustrate functionality
 	Map worldMap;																	//The map, bitch!

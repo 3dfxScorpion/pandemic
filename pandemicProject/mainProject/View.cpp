@@ -20,7 +20,7 @@ void View::displayPlayerInfo(string name, string role, string city)
 void View::printCubeCount(int red, int yellow, int blue, int black)
 {
 	cout << "Cubes remaining:\n";
-	cout << "Black: " << black << " Blue: " << blue << " Red: " << red << " Yellow: " << yellow <<  endl;
+	cout << "Black: " << black << " Blue: " << blue << " Red: " << red<< " Yellow: " << yellow <<  endl;
 
 }
 
@@ -45,4 +45,10 @@ void View::askLoadScenario() {
 
 void View::askFileName() {
 	cout << "Please enter a file name (Leave blank for autosave): ";
+}
+void View::printReasearchStations(vector<string> cities){
+    cout << menuRSCities(cities);
+}
+void View::printAdjCities(City* toCheck){
+    cout << menuAdjCities(toCheck);
 }

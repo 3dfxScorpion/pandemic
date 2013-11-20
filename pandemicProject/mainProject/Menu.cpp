@@ -81,6 +81,45 @@ string menuAdjCities(City* c) {         // static method for external purposes
     return out.str();
 }
 
+string menuRSCities(vector<string> RScities) {         // static method for external purposes
+    size_t cityID = 1;
+    const size_t totalCount = 8;        // number of slots for cards
+    ostringstream out;
+    ostringstream str[totalCount];
+    
+    vector<string>::iterator cItr;      // city iterator
+    
+    str[0] << setw(12) << right << "Research Stations ";
+    str[1] << setw(12) << right << "-----------------";
+    
+    size_t cityCount = RScities.size();  // size of adjacent city vector
+    size_t cityIndex = 2;               // city index is third line down
+    // first display actual cards in city
+    for ( cItr = RScities.begin(); cItr != RScities.end(); cItr++ ) {
+        string cTmp = *cItr;
+        str[cityIndex++] << "(" << cityID++ << ")"
+        << setw(25) << left << cTmp;
+    }
+    // display blanks if no more cities to chow
+    for ( size_t i = cityIndex; i < totalCount; i++ ) {
+        string tmp = " ";
+        str[cityIndex++] << setw(25) << left << tmp;
+    }
+    
+    for ( size_t i = 0; i < totalCount; i++ ) {
+        out << str[i].str() << "\n";
+    }
+    return out.str();
+}
+
+
+
+
+
+
+
+
+
 string Menu::menuHands(vector<Player*> plyrs) {
     size_t playerCount = 1;
     const size_t totalCount = 13;        // number of slots for cards

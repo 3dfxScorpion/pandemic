@@ -295,3 +295,47 @@ void Model::loadgame(string filename) {
 	else
 		cout << "Error opening file." << endl;
 }
+
+vector<string> Model::getReasearchStationCities(){
+    vector<string> ret;
+    vector<City*> cities = worldMap.getWorldMap();
+    vector<City*>::iterator cItr;
+    for (cItr = cities.begin(); cItr != cities.end(); cItr++){ //gets a list of research stations
+        City * tmp = *cItr;
+        if (tmp->getResearchStationBool())
+            ret.push_back(tmp->getCityName());
+    }
+    return ret;
+}
+
+bool Model::canBuildResearchStation(){
+    Player * curr = mover.getCurrentPlayer();
+    vector<Card*> hand = curr->getHand();
+    vector<Card*>::iterator hItr;
+    for ( hItr = hand.begin(); hItr != hand.end(); hItr++ ) {
+        Card* tmp = *hItr;
+        if (tmp->getCardName()==curr->getPlayerLocation()->getCityName())
+            return true;// If the player has a card that matches the city they are in they can build.
+    }
+    return false;
+    
+}
+
+void Model::buildResearchStation(){
+    Player * curr = mover.getCurrentPlayer();
+    int index = 0;
+    vector<Card*> hand = curr->getHand();
+    vector<Card*>::iterator hItr;
+    for ( hItr = hand.begin(); hItr != hand.end(); hItr++ ) {
+        Card* tmp = *hItr;
+        if (tmp->getCardName()==curr->getPlayerLocation()->getCityName())
+        {
+            
+            curr->getPlayerLocation()->setResearchStation(true);//builds the RS
+            curr->removeCard(index);//remove card
+            
+        }
+        index++;
+    }
+
+}

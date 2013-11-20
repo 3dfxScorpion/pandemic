@@ -190,7 +190,7 @@ void Controller::doProcessMenu(Player* p) {
     }
     cin.ignore(numeric_limits<size_t>::max(), '\n');
     if ( choice < getMappedFunctions().size() )
-        (this->*getMappedFunctions()[choice])(p);
+        (this->*getMappedFunctions()[choice])();
     if  (choice == 10 ) {
         cout << "\nGoodbye...\n"; exit(0);
     }
@@ -301,12 +301,23 @@ void Controller::getSaveGame() {
 }
 
 // these functions are accessible snce function pointer passed into Menu Class
-void Controller::do_drive_ferry(Player* p) {
-    cout << "drive/ferry...\n";
-    cout << menuAdjCities(p->getPlayerLocation()) << "\n";
+void Controller::do_drive_ferry() {
+    Player * p = model.mover.getCurrentPlayer();
+    int input, vSize;
+    vector<string> adjs = p->getPlayerLocation()->getAdjCity();
+    vSize = adjs.size();
+    view.printAdjCities(p->getPlayerLocation());
+    while (input < 1 || input > vSize)
+    {
+        cin >> input;
+    }
+    if (input == 10)
+        return;
+    model.mover.moveAdjacent(model.worldMap.locateCity(adjs[input-1]));// minus one to get synced with menu.
 }
 
-void Controller::do_direct_flight(Player* p) {
+void Controller::do_direct_flight() {
+    Player * p = model.mover.getCurrentPlayer();
     size_t num = 0, pick;
     vector<Card*> hand = p->getHand();
     for ( size_t i = 0; i < hand.size(); i++ )
@@ -330,33 +341,46 @@ void Controller::do_direct_flight(Player* p) {
     }
 }
 
-void Controller::do_charter_flight(Player* p) {
+void Controller::do_charter_flight() {
+    Player * p = model.mover.getCurrentPlayer();
     cout << "charter flight to city...\n";
     cout << menuAdjCities(p->getPlayerLocation()) << "\n";
 }
 
-void Controller::do_shuttle_flight(Player* p) {
-    cout << "shuttle flight to city...\n";
-    cout << menuAdjCities(p->getPlayerLocation()) << "\n";
+void Controller::do_shuttle_flight() {
+    Player * p = model.mover.getCurrentPlayer();
+    view.askLocationShuttleFlight();
+    vector <string> RScities = model.getReasearchStationCities();
+    view.printReasearchStations(RScities);
+    int input = 0;
+    cin >> input;
+    if ( input == 10 )
+        return;
+    cin.ignore();
+    City* toMove = model.worldMap.locateCity(RScities[input-1]);
+    model.mover.shuttleFlight(toMove);
 }
 
-void Controller::do_treat_disease(Player* p) {
+void Controller::do_treat_disease() {
     cout << "treat disease...\n";
 }
 
-void Controller::do_cure_disease(Player* p) {
-    cout << "discover_cure...\n";
+void Controller::do_cure_disease() {
+    
 }
 
-void Controller::do_share_knowledge(Player* p) {
+void Controller::do_share_knowledge() {
     cout << "share knowledge, are you crazy???\n";
 }
 
-void Controller::do_build_station(Player* p) {
-    cout << "building station...\n";
+void Controller::do_build_station() {
+    if (!model.canBuildResearchStation())
+        view.printCantBuildRS();
+    else
+        model.buildResearchStation();
 }
 
-void Controller::do_save_game(Player* p) {
+void Controller::do_save_game() {
     cout << "save game...\n";
 }
 
