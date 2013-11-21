@@ -70,6 +70,22 @@ ICard* IDeck::takeCard() {
 }
 
 
+//Draws the bottom card from the deck (for epidemic)
+ICard* IDeck::takeBottomCard()
+{
+	if (deck.empty() ){
+		return NULL;
+	}
+	ICard* tmp;								
+	tmp = deck.back();						//store bottom card
+	discard.push_back(tmp);					//discard it
+	deck.pop_back();						//remove it from the ideck
+	size--;									//shrinkage
+	return tmp;								//return it
+}
+
+
+
 //
 //Randomly places the discard pile at the top of the infection deck
 void IDeck::shuffleDiscard()

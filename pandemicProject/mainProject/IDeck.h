@@ -17,6 +17,7 @@ public:
 		size = deck.size();};
 	void buildDeck(vector<ICard*>&);
 	ICard* takeCard();
+	ICard* takeBottomCard();
 	void shuffleDiscard();
 	void loadGame(ifstream &);
 	void saveGame(ofstream &);

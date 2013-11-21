@@ -203,10 +203,20 @@ void Controller::doInfectRound() {
         iCardP = model.infectedDeck.takeCard();//draw a card
         
         view.printInfConfirmation(iCardP->getName());//print confirmation of it
-        if (!model.QSautoContain(iCardP))
+        if (!model.QSautoContain(iCardP))			
             model.infectCity(model.worldMap.locateCity(iCardP->getName()),iCardP->getColor(), 1);//infect the city
     }
 }
+
+//TBC - FINISH ME DARREN
+void Controller::doEpidemic(){
+	int x;
+	
+	view.printInfConfirmation(iCardP->getName());	//print confirmation of it, TODO: change this to epidemic
+	iCardP = model.infectedDeck.takeBottomCard();	//draw bottom card
+
+}
+
 
 int Controller::run() {
     bool test = false;

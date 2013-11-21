@@ -65,6 +65,7 @@ public:
   void doPlayerTurns();
   void doInfectRound();
   void doProcessMenu(Player*);
+  void doEpidemic();
   int run();
 
 private:

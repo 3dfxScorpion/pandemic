@@ -87,8 +87,9 @@ public:
 	void savegame(string filename);
 	void loadgame(string filename);
 	void buildMap(){worldMap.populateMap("Cities.txt");}				//populate the map}}
+	
 
-	vector<Player*> players;																//Not necessarily final implementation, here to illustrate functionality
+	vector<Player*> players;														//
 	Map worldMap;																	//The map, bitch!
 	Deck playerDeck;																//Player deck
 	IDeck infectedDeck;																//Infected Deck
