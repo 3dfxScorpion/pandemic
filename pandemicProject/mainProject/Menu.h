@@ -4,8 +4,6 @@
 #include "Card.h"
 #include "Deck.h"
 #include "Map.h"
-#include "Menu.h"
-#include "Player.h"
 #include "Player.h"
 
 using std::map;

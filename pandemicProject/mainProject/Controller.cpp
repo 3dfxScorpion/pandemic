@@ -303,7 +303,8 @@ void Controller::getSaveGame() {
 // these functions are accessible snce function pointer passed into Menu Class
 void Controller::do_drive_ferry() {
     Player * p = model.mover.getCurrentPlayer();
-    int input, vSize;
+    int input = -1; 
+	int vSize;
     vector<string> adjs = p->getPlayerLocation()->getAdjCity();
     vSize = adjs.size();
     view.printAdjCities(p->getPlayerLocation());
@@ -369,7 +370,7 @@ void Controller::do_treat_disease() {
 }
 
 void Controller::do_cure_disease() {//TODO needs a role check. Needs more testing!!!
-    char input;
+    char input = 'x';
     for (int i = red; i <=black;i++)//loops and checks if they can cure
     {
         if (model.canCureDisease(i))//self checking since player can never have more than one cure available

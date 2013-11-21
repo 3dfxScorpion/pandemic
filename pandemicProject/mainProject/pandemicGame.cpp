@@ -5,14 +5,7 @@
 
 #include "Controller.h"
 #include<iostream>
-#include<iomanip>
-#include<sstream>
-#include<limits>
-#include<vector>
-#include "Map.h"
-#include "Deck.h"
-#include "Player.h"
-#include "PlayerMove.h"
+
 
 using std::cin;
 using std::cout;
