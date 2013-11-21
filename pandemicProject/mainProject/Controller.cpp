@@ -1,5 +1,3 @@
-//
-// Implements Controller.h
 #include "Controller.h"
 
 // primary commands
@@ -14,6 +12,7 @@ string cmds01[] = {
     "Build Research Station",
     "Save game"
 };
+
 // populate string vectors
 vector<string> mainCommands ( cmds01, cmds01 + sizeof(cmds01) / sizeof(cmds01[0]) );
 // vector<string> mainCommands ( cmds02, cmds02 + sizeof(cmds02) / sizeof(cmds02[0]) );
@@ -25,9 +24,7 @@ Controller::Controller() {
     setMappedFunctions();
 }
 
-//Prompts for input, reads input, error checks input
 void Controller::setPlayerCount() {
-    //get num players
     view.askNumOfPlayers();
     cin >> temp;
     cin.ignore();
@@ -35,7 +32,7 @@ void Controller::setPlayerCount() {
     //if improper input, loop till proper
     while (temp < 2 || temp > 4) {
         if (cin.fail()) {
-            view.printNonNumeric();//print quit error
+            view.printNonNumeric();
             return;
         } else if (temp < 2 || temp > 4) {
             view.printBadPlayerCt();
@@ -45,20 +42,18 @@ void Controller::setPlayerCount() {
         }
     }
     
-    model.setNumPlayers(temp);//set player count in model
+    model.setNumPlayers(temp);
     for ( size_t i = 0; i < temp; i++ ) {
         model.players.push_back(new Player());
     }
     return;
 }
 
-//prompts for names, reads them
 void Controller::setPlayerNames() {
-    // Read in player names
     for(int i = 0; i < model.getNumPlayers(); i++) { //controller controls the flow
         string tempStr = "";
         while (tempStr == "") {
-            view.printNamePrompt(i);// view prints prompt
+            view.printNamePrompt(i);
             cin.clear();//clear input buffer
             cin.sync();//was being weird, but this fixed it
             getline(cin, tempStr, '\n');//read player name
@@ -70,7 +65,6 @@ void Controller::setPlayerNames() {
     }
 }
 
-//prompts for difficulty, reads it, sets it
 void Controller::setDifficulty() {
     // while (difficulty < 1 || difficulty > 3) {
     for(int difficulty = 0; cin.fail() || difficulty < 1 || difficulty > 3; ) {
@@ -79,28 +73,27 @@ void Controller::setDifficulty() {
         cin >> difficulty;
         cin.ignore();
         
-        //error checking
         if (cin.fail()) {
             view.printNonNumeric();
             return;
         } else if (difficulty < 1 || difficulty > 3) {
             view.printBadDiff();
         }
+        
         cin.clear();
         cin.sync();
     }
-    model.setDifficulty(temp);//set difficulty in model
+    model.setDifficulty(temp);
 }
 
 void Controller::doPlayerTurns() {
-    for (int i=0; i<model.getNumPlayers(); i++)//each players turn
-    {
+    for (int i=0; i<model.getNumPlayers(); i++) { //each players turn
         Player * currentPlayer = model.players[i];
         model.mover.setCurrentPlayer(currentPlayer);
         
         for(int j = 0; j<4; j++) {
             
-            int option = -1;
+            //int option = -1;
             
             doProcessMenu(currentPlayer);
             /*
@@ -186,31 +179,36 @@ void Controller::doProcessMenu(Player* p) {
     while( !( cin >> choice ) ) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Invalid input.  Try again: ";
+        view.printInvalidInputMsg();
     }
     cin.ignore(numeric_limits<size_t>::max(), '\n');
-    if ( choice < getMappedFunctions().size() )
+    
+    if (choice < getMappedFunctions().size()) {
         (this->*getMappedFunctions()[choice])();
-    if  (choice == 10 ) {
-        cout << "\nGoodbye...\n"; exit(0);
+    }
+    
+    if (choice == 10) {
+        view.printGoodbye();
+        exit(0);
     }
     system("pause");  // this will go away
 }
 
 void Controller::doInfectRound() {
-    for(int i=0; i<2; i++){
-        //infect cities
-        iCardP = model.infectedDeck.takeCard();//draw a card
+    for (int i = 0; i < 2; i++) {
+        iCardP = model.infectedDeck.takeCard();
         
-        view.printInfConfirmation(iCardP->getName());//print confirmation of it
-        if (!model.QSautoContain(iCardP))			
-            model.infectCity(model.worldMap.locateCity(iCardP->getName()),iCardP->getColor(), 1);//infect the city
+        view.printInfConfirmation(iCardP->getName());
+        
+        if (!model.QSautoContain(iCardP)) {
+            model.infectCity(model.worldMap.locateCity(iCardP->getName()),iCardP->getColor(), 1);
+        }
     }
 }
 
 //TBC - FINISH ME DARREN
-void Controller::doEpidemic(){
-	int x;
+void Controller::doEpidemic() {
+	//int x;
 	
 	view.printInfConfirmation(iCardP->getName());	//print confirmation of it, TODO: change this to epidemic
 	iCardP = model.infectedDeck.takeBottomCard();	//draw bottom card
@@ -222,17 +220,20 @@ int Controller::run() {
     bool test = false;
     
     try {
-        view.printTitle();//print title screen
-        test = getLoadGame();// ask to load game
-        if(!test)// skips load scenario if game loaded
-            test = getLoadScenario();// ask to load scenario
-        if(!test) {// skips game setup if loading game or scenario
-            model.buildMap();//builds map
-            setPlayerCount();//read and set count of players
-            setPlayerNames();//read and set player names
-            setDifficulty();//read and set difficulty
-            model.prepareGame();//assigns roles, draws initial player hands based on player count, sets resSta and player location to atlanta
-            model.initialInfect();//perform the initial infection of nine cities
+        view.printTitle();
+        test = getLoadGame();
+        
+        if(!test) {    // skips load scenario if game loaded
+            test = getLoadScenario();   // ask to load scenario
+        }
+        
+        if(!test) {    // skips game setup if loading game or scenario
+            model.buildMap();
+            setPlayerCount();
+            setPlayerNames();
+            setDifficulty();
+            model.prepareGame();    //assigns roles, draws initial player hands based on player count, sets resSta and player location to atlanta
+            model.initialInfect();
         }
         
         menu.setMenuMap(model.worldMap);
@@ -250,10 +251,10 @@ int Controller::run() {
     }
     catch(PandemicException const& e) {
         int x = -1;
-        cerr << "\nException caught: " << e.what() << "\n" << endl;//quit condition or error occured
+        cerr << "\nException caught: " << e.what() << "\n\n";   //quit condition or error occured
         
         while ( x < 0 || x > 1) {
-            view.playAgain();//prompt for new game
+            view.playAgain();   //prompt for new game
             cin >> x;
             cin.clear();
             cin.sync();
@@ -264,32 +265,38 @@ int Controller::run() {
 
 bool Controller::getLoadGame() {
     char input = 'A';
-    while(1) {
+    while(true) {
         view.askLoadGame();
         cin >> input;
         cin.ignore();
-        if(input == 'Y' || input == 'y') {
+        
+        if (input == 'Y' || input == 'y') {
             //return true;
             return false;// just until working
         }
-        if(input == 'N' || input == 'n')
+        
+        if (input == 'N' || input == 'n') {
             return false;
+        }
     }
     return false;
 }
 
 bool Controller::getLoadScenario() {
     char input = 'A';
-    while(1) {
+    while(true) {
         view.askLoadScenario();
         cin >> input;
         cin.ignore();
-        if(input == 'Y' || input == 'y') {
+        
+        if (input == 'Y' || input == 'y') {
             //return true;
             return false;// just until working
         }
-        if(input == 'N' || input == 'n')
+        
+        if (input == 'N' || input == 'n') {
             return false;
+        }
     }
     return false;
 }
@@ -299,18 +306,17 @@ void Controller::getSaveGame() {
     string name;
     
     view.askFileName();
-    getline(cin, name);// get savegame name from user
+    getline(cin, name);    // get savegame name from user
     
-    if(!name.empty()) {
+    if (!name.empty()) {
         filename = name;
     }
     
     model.savegame(filename);
-    cout << "\nYour progress has been saved.\n";
-    cout << endl;
+    view.printProgressSavedMsg();
 }
 
-// these functions are accessible snce function pointer passed into Menu Class
+// these functions are accessible since function pointer passed into Menu Class
 void Controller::do_drive_ferry() {
     Player * p = model.mover.getCurrentPlayer();
     int input = -1; 
@@ -321,22 +327,28 @@ void Controller::do_drive_ferry() {
     while (input < 1 || input > vSize) //loop until proper input
     {
         cin >> input;
-        if (input == 10)
+        if (input == 10) {
             return;
+        }
     }
-    model.mover.moveAdjacent(model.worldMap.locateCity(adjs[input-1]));// minus one to get synced with menu.
+    model.mover.moveAdjacent(model.worldMap.locateCity(adjs[input-1]));    // minus one to get synced with menu.
 }
 
-void Controller::do_direct_flight() {//If it aint broke
+void Controller::do_direct_flight() {   //If it aint broke
     Player * p = model.mover.getCurrentPlayer();
     size_t num = 0, pick;
     vector<Card*> hand = p->getHand();
-    for ( size_t i = 0; i < hand.size(); i++ )
+    
+    for ( size_t i = 0; i < hand.size(); i++ ) {
         cout << hand[i]->ToString() << "\n";
-    cout << "Where to (\"10\" to return to main menu) ? ";
+    }
+    
+    view.askWhereTo();
     cin >> pick;
-    if ( pick == 10 )
+    
+    if ( pick == 10 ) {
         return;
+    }
     
     vector<Card*>::iterator hItr;
     for ( hItr = hand.begin(); hItr != hand.end(); hItr++ ) {
@@ -352,23 +364,24 @@ void Controller::do_direct_flight() {//If it aint broke
     }
 }
 
-void Controller::do_charter_flight() {//Need a menu to list all cities or let character enter input :S
+void Controller::do_charter_flight() {    //Need a menu to list all cities or let character enter input :S
     Player * p = model.mover.getCurrentPlayer();
-    cout << "charter flight to city...\n";
+    view.printCharterFlightMsg();
     cout << menuAdjCities(p->getPlayerLocation()) << "\n";
 }
 
 void Controller::do_shuttle_flight() {
     view.askLocationShuttleFlight();
-    vector <string> RScities = model.getReasearchStationCities();//Get all cities with RSs
+    vector <string> RScities = model.getReasearchStationCities();   //Get all cities with RSs
     int vSize = RScities.size();
     view.printReasearchStations(RScities);
     int input = 0;
-    while (input < 1 || input > vSize)//Get user input, loop till good input
+    while (input < 1 || input > vSize)  //Get user input, loop till good input
     {
         cin >> input;
-        if ( input == 10 )
+        if ( input == 10 ) {
             return;
+        }
     }
     cin.ignore();
     City* toMove = model.worldMap.locateCity(RScities[input-1]);
@@ -376,39 +389,43 @@ void Controller::do_shuttle_flight() {
 }
 
 void Controller::do_treat_disease() {
-    cout << "treat disease...\n";
+    view.printTreatDiseaseMsg();
 }
 
-void Controller::do_cure_disease() {//TODO needs a role check. Needs more testing!!!
+void Controller::do_cure_disease() {    //TODO needs a role check. Needs more testing!!!
     char input = 'x';
-    for (int i = red; i <=black;i++)//loops and checks if they can cure
-    {
-        if (model.canCureDisease(i))//self checking since player can never have more than one cure available
-        {
+    
+    for (int i = red; i <=black;i++) {    //loops and checks if they can cure
+        if (model.canCureDisease(i)) {    //self checking since player can never have more than one cure available
             view.askCanCure(model.colorToString(i));
-            while (input != 'Y'|| input !='y' || input !='n' || input != 'N')
-                cin>> input;//loop for input
-            if (input == 'Y' || input == 'y')
+            
+            while (input != 'Y'|| input !='y' || input !='n' || input != 'N') {
+                cin >> input;    //loop for input
+            }
+            
+            if (input == 'Y' || input == 'y') {
                 model.doCureDisease(i);
-            else
+            } else {
                 return;
+            }
         }
     }
 }
 
 void Controller::do_share_knowledge() {
-    cout << "share knowledge, are you crazy???\n";
+    view.printShareKnowledgeMsg();
 }
 
 void Controller::do_build_station() {
-    if (!model.canBuildResearchStation())//Check if possible
+    if (!model.canBuildResearchStation()) {     //Check if possible
         view.printCantBuildRS();
-    else
+    } else {
         model.buildResearchStation();
+    }
 }
 
 void Controller::do_save_game() {
-    cout << "save game...\n";
+    view.printSaveGameMsg();
 }
 
 

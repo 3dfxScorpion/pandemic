@@ -13,6 +13,13 @@ class View
 {
 public:
 	void printTitle();
+    void printInvalidInputMsg();
+    void printGoodbye();
+    void printProgressSavedMsg();
+    void printCharterFlightMsg();
+    void printTreatDiseaseMsg();
+    void printShareKnowledgeMsg();
+    void printSaveGameMsg();
     void printInfected();
     void askCanCure(string);
     void printCantBuildRS(){cout << "You do not have the required card to build an RS here\n";}
@@ -62,6 +69,7 @@ public:
 	void askLoadGame();
 	void askLoadScenario();
 	void askFileName();
+    void askWhereTo();
 	void playAgain(){cout << "Play again? [1 for yes, - for no]: ";}
     void printReasearchStations(vector<string> cities);
     void printAdjCities(City*);
