@@ -327,6 +327,8 @@ void Controller::do_drive_ferry() {
     while (input < 1 || input > vSize) //loop until proper input
     {
         cin >> input;
+        cin.clear();
+        cin.ignore();
         if (input == 10) {
             return;
         }
@@ -379,6 +381,8 @@ void Controller::do_shuttle_flight() {
     while (input < 1 || input > vSize)  //Get user input, loop till good input
     {
         cin >> input;
+        cin.clear();
+        cin.ignore();
         if ( input == 10 ) {
             return;
         }
@@ -401,6 +405,8 @@ void Controller::do_cure_disease() {    //TODO needs a role check. Needs more te
             
             while (input != 'Y'|| input !='y' || input !='n' || input != 'N') {
                 cin >> input;    //loop for input
+                cin.clear();
+                cin.ignore();
             }
             
             if (input == 'Y' || input == 'y') {
