@@ -5,6 +5,7 @@
 #include<unordered_set>
 #include <fstream>
 #include"Deck.h"
+#include "PandemicException.h"
 
 using std::cout;
 using std::endl;
@@ -69,8 +70,7 @@ void Deck::dealCards() {
 }
 Card* Deck::takeCard() {
     if ( deck.empty() ) {
-        cout << "deck empty\n";
-        return NULL;
+        throw PandemicException("Your team ran out of time!");
     }
     Card* tmp;
 		tmp = deck.front();
@@ -100,4 +100,37 @@ void Deck::saveGame(ofstream &fp) {
 
 void Deck::loadGame(ifstream &fp) {
 
+}
+
+bool Deck::isEventCard(Card* card)
+{
+	string name = card->getCardName();
+
+	if( name == "One Quiet Night" || name == "Airlift" || name == "Forecast"		//Id rather we added a property to each card to determine this
+		|| name == "Government Grant" || name == "Resilient Population")
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+//
+// findEvents - gets a player hand (vector of cardPTR) and reference to vector of ints. populates vector with indexes of the event cards
+vector<int> Deck::findEvents(vector<Card*>hand, vector<int>&eventIndexes)
+{
+	int num;
+	num = hand.size();				//store size
+
+	for(int i=0; i<num; i++)
+	{
+		if(isEventCard(hand[i]))	//if current card is an event card
+		{
+			eventIndexes.push_back(i);//push the index onto the vector
+		}
+	}
+	
+	return eventIndexes;			//return
 }

@@ -93,13 +93,12 @@ void Controller::doPlayerTurns() {
         model.mover.setCurrentPlayer(currentPlayer);
         
         for(int j = 0; j<4; j++) {
-            
-            //int option = -1;
-            
+                        
             doProcessMenu(currentPlayer);
             
         } // four moves consumed
-        
+        		
+		doDrawRound(i);//perform the draw round
         doInfectRound();//perform the infection round
         
         menu.setMappedCubes("black", model.getCubeCount(black));
@@ -111,6 +110,122 @@ void Controller::doPlayerTurns() {
     }
 }
 
+//
+//
+//
+void Controller::doDrawRound(int current)
+{
+	Card* card1;
+	Card* card2;
+	vector<Card*> playerHand;
+	int x;
+	string ep = "!!-Epidemic-!!";						//to avoid retyping
+	card1 = model.playerDeck.takeCard();				//draw two cards
+	card2 = model.playerDeck.takeCard();
+
+	//card 1 behavior
+	if(card1->getCardName() == ep)
+	{
+		doEpidemic();									//if epidemic card drawn, do eet
+	}
+	else
+	{
+		model.players[current]->addCard(card1);				//otherwise regular card, add it to players hand
+		if(model.players[current]->getHandSize() > 7)		//enforce hand limit
+		{
+			doDiscard(model.players[current]->getHand(), current);	//do discard or play event card phase 
+		}
+	}//end card1 block
+
+
+
+	//Special circumstances if both cards are epidemics
+	if(card1->getCardName() == card2->getCardName() && card1->getCardName() == ep)//if both epidemics
+	{
+		vector<int> eventID;
+		model.infectedDeck.removeLastAdded();									//only second infection card gets added to the discard pile
+		model.playerDeck.findEvents(model.players[current]->getHand(), eventID);//get vector of indexes containing the players  event cards
+
+		if(!eventID.empty())//if player had some event cards
+		{
+			menu.doubleEpEventMenu(model.players[current]->getHand(), eventID);//display user choices
+
+			int temp = -1;
+			while (temp < 0  || temp >eventID.size())
+			{
+				cin >> temp;								//read which index value to play from the hand
+				cin.clear();
+				cin.ignore();
+			}
+
+			//play the users event card
+			//needs code to handle event cards. DO ME.
+			//the desired card's index into the player hand is in eventID[temp]
+
+		}
+
+	}// end double epidemic specials
+
+	//card two behavior
+	if(card2->getCardName() == ep)
+	{
+		doEpidemic();									//if epidemic card drawn, do eet
+	}
+	else
+	{
+		model.players[current]->addCard(card2);				//otherwise regular card, add it to players hand
+		if(model.players[current]->getHandSize() > 7)		//enforce hand limit
+		{
+			doDiscard(model.players[current]->getHand(), current);	//do discard or play event card phase 
+		}
+	}//end card2 block
+
+	
+}
+
+
+void Controller::doDiscard(vector<Card*>playerHand, int current)
+{
+	int x;
+	menu.discardMenu(playerHand);					//display the hand so user can choose
+
+	do
+	{
+		cin >> x;									//read x - the card to be removed
+		cin.clear();
+		cin.sync();
+	}while(0>x || x>= playerHand.size());			//while its not inside the range
+
+	if(model.playerDeck.isEventCard(playerHand[x]))	//if event card is chosen
+	{
+		view.printPlayOrDiscard();					//ask user to play the card or discard it
+
+		int temp=-1;
+		while(temp < 0 || temp > 1)
+		{
+			cin >> temp;
+			cin.ignore();
+			cin.sync();
+		}
+
+		if(temp == 0)
+		{
+			//code to play the event card goes here
+			//DO ME BITCHES
+		}
+		else
+		{
+			model.players[current]->removeCard(x);			//otherwise remove the card from current player
+		}
+			
+	}//end if event card
+	else
+	{
+		model.players[current]->removeCard(x);				//otherwise it's a city card, discard
+	}
+
+	return;
+}
 void Controller::doProcessMenu(Player* p) {
     const size_t NUM_COMMANDS = menu.getMenuCommands().size();
     size_t choice = NUM_COMMANDS - 1;
@@ -177,6 +292,7 @@ void Controller::doEpidemic()
 {
 	int tmp, clr;
 	vector<string> outbreakCities;
+	model.incrementCurrentRate();						//increment the infection rate
 	iCardP = model.infectedDeck.takeBottomCard();		//draw bottom card
 	clr = iCardP->getColor();							//store its color
 	cityP = model.worldMap.locateCity(iCardP->getName());//get pointer to the city

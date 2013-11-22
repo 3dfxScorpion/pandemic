@@ -57,6 +57,7 @@ public:
         resSta--;
     }
 	void cureDisease(int);															//sets the status of a disease to cured
+	bool allCured();
 	void eradicateDisease(int);														//sets the status of a disease to eradicated
 	void removeCubes(int color, int count) {
         cubes[color] = cubes[color] - count;

@@ -63,6 +63,8 @@ public:
   map<int, menuFunctions> getMappedFunctions()
     { return mappedFuncs; }
   void doPlayerTurns();
+  void doDrawRound(int);
+  void doDiscard(vector<Card*>, int);
   void doInfectRound();
   void doProcessMenu(Player*);
   void doEpidemic();

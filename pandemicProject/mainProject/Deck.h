@@ -34,6 +34,8 @@ class Deck {
     void ToString();
 	void loadGame(ifstream &);
 	void saveGame(ofstream &);
+	bool isEventCard(Card*);
+	vector<int> findEvents(vector<Card*>, vector<int>&eventIndexes);
 
   private:
     vector<Card*> deck;

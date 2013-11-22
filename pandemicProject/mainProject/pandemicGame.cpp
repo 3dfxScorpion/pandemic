@@ -16,12 +16,8 @@ using std::numeric_limits;
 using std::ostringstream;
 
 
-void setupBoard();
-void buildResearch(City*);
-
 int main()
 {
-	int tmp = 1;
 	Controller controller;
 	while(controller.run())
 	{

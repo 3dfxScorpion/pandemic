@@ -18,9 +18,11 @@ public:
 	void buildDeck(vector<ICard*>&);
 	ICard* takeCard();
 	ICard* takeBottomCard();
+	void removeLastAdded(){discard.pop_back();}
 	void shuffleDiscard();
 	void loadGame(ifstream &);
 	void saveGame(ofstream &);
+	
 
 private:
 		vector<ICard*> deck;

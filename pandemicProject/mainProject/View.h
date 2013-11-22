@@ -67,12 +67,13 @@ public:
         cout<<"*** " << city << " has experienced an epidemic! ***\n";
     }
 	
+	void printPlayOrDiscard(){cout << "\n You've chosen an event card.  Would you like to play it, or discard?\n(0)Play\n(1)Discard\n";}
 	void printOutbreaks(vector<string>);
 	void askLoadGame();
 	void askLoadScenario();
 	void askFileName();
     void askWhereTo();
-	void playAgain(){cout << "Play again? [1 for yes, - for no]: ";}
+	void playAgain(){cout << "Play again? [1 for yes, 0 for no]: ";}
     void printReasearchStations(vector<string> cities);
     void printAdjCities(City*);
 	

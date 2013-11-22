@@ -40,6 +40,8 @@ class Menu {
     string menuHands(vector<Player*>);
     string menuCommands(vector<string>);
     void   showMenu(Player*);
+	void discardMenu(vector<Card*>);
+	void doubleEpEventMenu(vector<Card*>, vector<int>);
 
   private:
     Map menuMap;

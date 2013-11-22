@@ -382,10 +382,32 @@ void Model::doCureDisease(int col){
         }
         if (colorNum>=5){
             cureDisease(col);
+			if(allCured())//win condition check after curing a disease
+			{
+				throw PandemicException("All diseases cured! You win!");
+			}
+
             for (int k =0;k<=int(toRemove.size()-1);k++)
                 mover.getCurrentPlayer()->removeCard(toRemove[k]);//discard the 5 city cards.
+
         }
     }
+}
+
+bool Model::allCured()
+{
+	if(
+		(cureStatus[blue] == cured || cureStatus[blue] == eradicated) &&
+		(cureStatus[red] == cured || cureStatus[red] == eradicated) &&
+		(cureStatus[black] == cured || cureStatus[black] == eradicated) &&
+		(cureStatus[yellow] == cured || cureStatus[yellow] == eradicated))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 string Model::colorToString(int col){//Just to make life easier

@@ -205,3 +205,42 @@ void Menu::showMenu(Player* p) {
     out << menuCommands(commands);
     cout << out.str();
 }
+
+//prints the hand passed to it -- using this in case of hand overflow
+void Menu::discardMenu(vector<Card*>hand)
+{
+	int num;
+	ostringstream out;
+    out << "====================================================================================================\n";
+	out << "You're holding too many cards.  Select one to discard or play (if event card chosen):\n";
+	out << "----------------------------------------------------------------------------------------------------\n";
+
+	num = hand.size();
+	for(int i=0; i<num; i++)
+	{
+		out << "(" << i << ")" << hand[i]->getCardName() << "\n";
+	}
+
+
+	cout << out.str();
+}
+
+//Gives user options to play an event card between two consecutive epidemics
+void Menu::doubleEpEventMenu(vector<Card*>hand, vector<int>index)
+{
+	int num;
+	int i=0;
+	ostringstream out;
+    out << "====================================================================================================\n";
+	out << "You've drawn two Epidemics! Choose an event card to play from below:\n";
+	out << "----------------------------------------------------------------------------------------------------\n";
+
+	num = index.size();
+	for(i; i<num; i++)	//for each index representing an event card
+	{
+		out << "(" << i << ")" << hand[index[i]]->getCardName() << "\n";
+	}
+
+	out << "(" << i << ")No thanks\n";									//option to do nothing
+	cout << out.str();
+}
