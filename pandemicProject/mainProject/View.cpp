@@ -31,7 +31,7 @@ void View::printTreatDiseaseMsg() {
 }
 
 void View::printSaveGameMsg() {
-    cout << "Save game...\n";
+    cout << "Please enter a file name (Leave blank for autosave): ";
 }
 
 void View::askNumOfPlayers() {
