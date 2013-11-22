@@ -38,7 +38,7 @@ Model::Model()
 // method increments if not already at six
 void Model::incrementCurrentRate()
 {
-	if(currentRate < 6)
+	if(currentRate < 6)//six is max
 		currentRate++;
 
 	return;
@@ -131,6 +131,8 @@ void Model::initialInfect()
 	}   
 }
 
+
+//TO DO: add outbreak checking for this method
 void Model::infectCity(City* cityP, int color, int count)
 {
 	if (color == red){
@@ -407,3 +409,66 @@ switch (col)
     return color;
 }
 
+
+//Does an outbreak
+//Function uses a reference to a vector to store the list of cities outbreaks occurred in during gameplay - controller uses this to pass to view
+void Model::doOutbreak(City* Cptr, int color, vector<string>&prevOB)
+{
+	int size, tmp;
+	City* currentAdj;
+	string cities;
+	vector<string> adjCities;											//stores vector of adjacent cities
+
+	if(!alreadyOutbreak(Cptr->getCityName(), prevOB))					//do if city hasnt already had outbreak this round
+	{
+		incrementOutbreak();											//increment count of outbreaks
+		prevOB.push_back(Cptr->getCityName());							//add current city to list of cities that had an outbreak this round
+		adjCities = Cptr->getAdjCity();									//get vector of adjacent city names
+		size = adjCities.size();										//store the size of the vector
+		
+		for(int i=0; i<size; i++)										//for each adjacent city in the list
+		{
+			currentAdj = worldMap.locateCity(adjCities[i]);				//save pointer to current adjacent city
+			
+			if(color == black)												//store the current count of cubes for specified color in tmp
+				tmp = currentAdj->getInfectedBlack();						//similar if else block used in controller
+			else if(color==blue)											//prime candidate for refactoring if time permits
+				tmp = currentAdj->getInfectedBlue();						//better way would be to remove this completely
+			else if(color ==red)											//and have the city method take the desired color as a parameter
+				tmp = currentAdj->getInfectedRed();							//---may do that later - D GOOSE
+			else
+				tmp = currentAdj->getInfectedYellow();
+
+
+			if(tmp<3)														//if infecting the city doesnt cause an outbreak
+			{
+				infectCity(currentAdj, color, 1);							//infect this city with a single cube of the specified color
+			}
+			else                                                            //otherwise a C-C-COMBO OUTBREAK OCCURS
+			{
+				doOutbreak(currentAdj, color, prevOB);						//C-C-C-COMBO
+			}
+		}
+
+	}
+	return;
+}
+
+
+//checks vector of city names to see if its there
+bool Model::alreadyOutbreak(string current, vector<string> previous)
+{
+	bool tmp = false;
+	int size = previous.size();
+
+	if(!previous.empty())					//if vector isnt empty
+	{
+		for(int i = 0; i<size; i++){       
+			if(current == previous[i]){     //tmp = true if this city name is in the vector
+				tmp = true;
+			}				
+		}
+	}
+	
+	return tmp;
+}

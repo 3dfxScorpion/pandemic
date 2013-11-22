@@ -38,6 +38,11 @@ public:
     }
 	void incrementOutbreak() {
         outbreak++;
+
+		if(outbreak==8)
+		{
+			throw PandemicException("Too many outbreaks! A worldwide panic has occurred!");
+		}
     }
     void addCubes(int color,int count){
         cubes[color] += count;  }
@@ -86,8 +91,10 @@ public:
     string drawRole();					//returns a random role card, removes it from the role deck
 	void savegame(string filename);
 	void loadgame(string filename);
-	void buildMap(){worldMap.populateMap("Cities.txt");}				//populate the map}}
+	void buildMap(){worldMap.populateMap("Cities_test.txt");}				//populate the map}}
 	
+	void doOutbreak(City*, int, vector<string>&);						//does outbreak
+	bool alreadyOutbreak(string, vector<string>);						//checks a vector for presence of a string
 
 	vector<Player*> players;														//
 	Map worldMap;																	//The map, bitch!

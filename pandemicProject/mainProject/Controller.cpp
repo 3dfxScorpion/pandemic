@@ -96,68 +96,7 @@ void Controller::doPlayerTurns() {
             //int option = -1;
             
             doProcessMenu(currentPlayer);
-            /*
-             while (option < 0 || option > 2) {
-             view.displayPlayerInfo(model.players[i]->getPlayerName(), model.players[i]->getPlayerRole(), model.players[i]->getPlayerLocStr());
-             view.printMenu();
-             cin >> option;
-             cin.ignore();
-             string cityInput;
-             
-             switch (option) {
-             case 1:
-             cityP = model.worldMap.locateCity(model.players[i]->getPlayerLocStr());
-             view.printAdj(cityP->getAdjCity());
-             getline(cin,cityInput,'\n');
-             
-             model.mover.moveAdjacent(model.worldMap.locateCity(cityInput));
-             model.checkMedicSpecial();//Handles medic AutoTreatment ability.
-             break;
-             
-             case 2: case 3: case 4: case 5: case 6: case 7: case 8:
-             //Filler for other actions until we put them there.
-             cout << "This option is not available right now and is still under development.\n\n";
-             j--;
-             break;
-             
-             case 9:
-             view.printInfectedCities(model.worldMap.infectedList());//print inf cities list
-             view.printCubeCount(model.getCubeCount(red), model.getCubeCount(yellow), model.getCubeCount(blue), model.getCubeCount(black)); //holy crap
-             j--;//don't consume a move
-             break;
-             
-             case 10:
-             getSaveGame();
-             j--;
-             break;
-             case 11:
-             char quittingAnswer;
-             cout << "Are you sure you want to quit? (Y/N): ";
-             cin >> quittingAnswer;
-             cin.ignore();
-             if (quittingAnswer == 'Y' || quittingAnswer == 'y') {
-             char saveAnswer;
-             cout << "\nWould you like to save your progress? (Y/N): ";
-             cin >> saveAnswer;
-             cin.ignore();
-             
-             if (saveAnswer == 'Y' || saveAnswer == 'y') {
-             getSaveGame();
-             }
-             } else if (quittingAnswer == 'N' || quittingAnswer == 'n') {
-             cout << "Resuming game...\n\n";
-             j--;
-             break;
-             }
-             cout << "Quitting game...";
-             exit(0);
-             
-             default:
-             view.printBadTurnChoice();
-             
-             }
-             }
-             */
+            
         } // four moves consumed
         
         doInfectRound();//perform the infection round
@@ -195,7 +134,8 @@ void Controller::doProcessMenu(Player* p) {
 }
 
 void Controller::doInfectRound() {
-    for (int i = 0; i < 2; i++) {
+	int infCount = model.getInfRate();
+    for (int i = 0; i < infCount; i++) {
         iCardP = model.infectedDeck.takeCard();
         
         view.printInfConfirmation(iCardP->getName());
@@ -206,13 +146,42 @@ void Controller::doInfectRound() {
     }
 }
 
-//TBC - FINISH ME DARREN
-void Controller::doEpidemic() {
-	//int x;
-	
-	view.printInfConfirmation(iCardP->getName());	//print confirmation of it, TODO: change this to epidemic
-	iCardP = model.infectedDeck.takeBottomCard();	//draw bottom card
+//performs necessary model/view calls to do an epidemic
+void Controller::doEpidemic()
+{
+	int tmp, clr;
+	vector<string> outbreakCities;
+	//iCardP = model.infectedDeck.takeBottomCard();		//draw bottom card
+	//clr = iCardP->getColor();							//store its color
+	//cityP = model.worldMap.locateCity(iCardP->getName());//get pointer to the city
 
+	clr = blue;  //for testing
+	cityP = model.worldMap.locateCity("Chicago");//more testing
+
+	if(clr == black)									//store the current count of cubes for specified color
+		tmp = cityP->getInfectedBlack();
+	else if(clr==blue)
+		tmp = cityP->getInfectedBlue();
+	else if(clr ==red)
+		tmp = cityP->getInfectedRed();
+	else
+		tmp = cityP->getInfectedYellow();
+
+
+	if(tmp == 0){
+		model.infectCity(cityP, clr, 3);				//if uninfected by the disease add three cubes
+	}
+	else
+	{
+														//otherwise outbreak HOLY SHIT	
+		tmp = 3 - tmp;									//number to add is 3-current to top it off to 3
+		model.infectCity(cityP, clr, tmp);				//top the infection cubes up to 3
+		model.doOutbreak(cityP, clr, outbreakCities);								//play the outbreak
+	}
+
+	model.infectedDeck.shuffleDiscard();				//shuffle the discard to the top of iDeck	
+
+	return;
 }
 
 
@@ -221,7 +190,7 @@ int Controller::run() {
     
     try {
         view.printTitle();
-        test = getLoadGame();
+	test = getLoadGame();
         
         if(!test) {    // skips load scenario if game loaded
             test = getLoadScenario();   // ask to load scenario
@@ -232,8 +201,9 @@ int Controller::run() {
             setPlayerCount();
             setPlayerNames();
             setDifficulty();
+
             model.prepareGame();    //assigns roles, draws initial player hands based on player count, sets resSta and player location to atlanta
-            model.initialInfect();
+            model.initialInfect();	//perform initial infection
         }
         
         menu.setMenuMap(model.worldMap);
@@ -248,7 +218,7 @@ int Controller::run() {
         while(true) {  //play until quit condition reached
             doPlayerTurns();
         }
-    }
+    }//end try
     catch(PandemicException const& e) {
         int x = -1;
         cerr << "\nException caught: " << e.what() << "\n\n";   //quit condition or error occured

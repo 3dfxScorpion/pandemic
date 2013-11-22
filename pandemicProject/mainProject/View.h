@@ -63,6 +63,10 @@ public:
 	void printInfConfirmation(string city) {
         cout<<"*** " << city << " infected ***\n";
     }
+	void printEpiConfirmation(string city) {
+        cout<<"*** " << city << " has experienced an epidemic! ***\n";
+    }
+	void printOutbreakList(){}//DO ME
 	void printNoCubes() {
         cout<<"*****\nGame over! You ran out of cubes!\n*****";
     }
