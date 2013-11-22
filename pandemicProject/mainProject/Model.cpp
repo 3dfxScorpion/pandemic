@@ -152,9 +152,10 @@ void Model::infectCity(City* cityP, int color, int count)
 				removeCubes(black,(count));
 			}
 
+
 			//Check for out of cubes game over state
 			if(cubes[color] < 0){
-				throw PandemicException("A disease has spread too much! Game over!");
+				throw PandemicException("A disease has spread too much!");
 			}
 }
 

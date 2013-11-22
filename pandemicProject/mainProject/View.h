@@ -66,10 +66,8 @@ public:
 	void printEpiConfirmation(string city) {
         cout<<"*** " << city << " has experienced an epidemic! ***\n";
     }
-	void printOutbreakList(){}//DO ME
-	void printNoCubes() {
-        cout<<"*****\nGame over! You ran out of cubes!\n*****";
-    }
+	
+	void printOutbreaks(vector<string>);
 	void askLoadGame();
 	void askLoadScenario();
 	void askFileName();
@@ -77,4 +75,5 @@ public:
 	void playAgain(){cout << "Play again? [1 for yes, - for no]: ";}
     void printReasearchStations(vector<string> cities);
     void printAdjCities(City*);
+	
 };

@@ -91,7 +91,7 @@ public:
     string drawRole();					//returns a random role card, removes it from the role deck
 	void savegame(string filename);
 	void loadgame(string filename);
-	void buildMap(){worldMap.populateMap("Cities_test.txt");}				//populate the map}}
+	void buildMap(){worldMap.populateMap("Cities.txt");}				//populate the map}}
 	
 	void doOutbreak(City*, int, vector<string>&);						//does outbreak
 	bool alreadyOutbreak(string, vector<string>);						//checks a vector for presence of a string

@@ -1,5 +1,6 @@
 #include "Controller.h"
 
+
 // primary commands
 string cmds01[] = {
     "Drive/Ferry",
@@ -135,15 +136,40 @@ void Controller::doProcessMenu(Player* p) {
 
 void Controller::doInfectRound() {
 	int infCount = model.getInfRate();
+	vector<string> outbreakCities;											//just in case of outbreaks
     for (int i = 0; i < infCount; i++) {
         iCardP = model.infectedDeck.takeCard();
         
         view.printInfConfirmation(iCardP->getName());
         
-        if (!model.QSautoContain(iCardP)) {
-            model.infectCity(model.worldMap.locateCity(iCardP->getName()),iCardP->getColor(), 1);
-        }
-    }
+        if (!model.QSautoContain(iCardP)) 
+		{
+			City* ptr = model.worldMap.locateCity(iCardP->getName());		//store city
+			int color = iCardP->getColor();									//store color
+			int tmp;
+
+			if(color == black)												//store the current count of cubes for specified color in tmp
+				tmp = ptr->getInfectedBlack();								//similar if else block used in model
+			else if(color==blue)											//prime candidate for refactoring if time permits
+				tmp = ptr->getInfectedBlue();								//better way would be to remove this completely
+			else if(color ==red)											//and have the city method take the desired color as a parameter
+				tmp = ptr->getInfectedRed();								//---may do that later - D GOOSE
+			else
+				tmp = ptr->getInfectedYellow();
+
+			if(tmp < 3)														//if this wont cause an outbreak
+			{
+				model.infectCity(ptr,color, 1);								//infect the city
+			}
+			else
+			{
+				model.doOutbreak(ptr, color, outbreakCities);				//otherwise outbreak
+				view.printOutbreaks(outbreakCities);						//and display the list of cities that had them
+			}
+
+		}
+       
+   }
 }
 
 //performs necessary model/view calls to do an epidemic
@@ -151,12 +177,10 @@ void Controller::doEpidemic()
 {
 	int tmp, clr;
 	vector<string> outbreakCities;
-	//iCardP = model.infectedDeck.takeBottomCard();		//draw bottom card
-	//clr = iCardP->getColor();							//store its color
-	//cityP = model.worldMap.locateCity(iCardP->getName());//get pointer to the city
+	iCardP = model.infectedDeck.takeBottomCard();		//draw bottom card
+	clr = iCardP->getColor();							//store its color
+	cityP = model.worldMap.locateCity(iCardP->getName());//get pointer to the city
 
-	clr = blue;  //for testing
-	cityP = model.worldMap.locateCity("Chicago");//more testing
 
 	if(clr == black)									//store the current count of cubes for specified color
 		tmp = cityP->getInfectedBlack();
@@ -176,7 +200,8 @@ void Controller::doEpidemic()
 														//otherwise outbreak HOLY SHIT	
 		tmp = 3 - tmp;									//number to add is 3-current to top it off to 3
 		model.infectCity(cityP, clr, tmp);				//top the infection cubes up to 3
-		model.doOutbreak(cityP, clr, outbreakCities);								//play the outbreak
+		model.doOutbreak(cityP, clr, outbreakCities);	//play the outbreak
+		view.printOutbreaks(outbreakCities);			//display the information
 	}
 
 	model.infectedDeck.shuffleDiscard();				//shuffle the discard to the top of iDeck	
@@ -201,7 +226,6 @@ int Controller::run() {
             setPlayerCount();
             setPlayerNames();
             setDifficulty();
-
             model.prepareGame();    //assigns roles, draws initial player hands based on player count, sets resSta and player location to atlanta
             model.initialInfect();	//perform initial infection
         }
@@ -221,7 +245,7 @@ int Controller::run() {
     }//end try
     catch(PandemicException const& e) {
         int x = -1;
-        cerr << "\nException caught: " << e.what() << "\n\n";   //quit condition or error occured
+        cerr << "\nGame Over! " << e.what() << "\n\n";   //quit condition or error occured
         
         while ( x < 0 || x > 1) {
             view.playAgain();   //prompt for new game

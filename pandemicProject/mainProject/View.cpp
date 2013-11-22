@@ -89,4 +89,25 @@ void View::askCanCure(string color){
     
 }
 
+void View::printOutbreaks(vector<string> cities)
+{
+	int num = cities.size();
 
+	cout<< "\n***** Outbreak";
+	if(num>1)
+		cout<<"s";
+	cout << " occured in the following: ";
+
+	for(int i =0; i<num; i++)
+	{
+		if(i>0)
+			cout << ", ";
+		if(num>0 && i==(num-1))
+			cout << "and ";
+			cout << cities[i];
+	}
+	cout <<"*****\n";
+	
+	return;
+
+}
