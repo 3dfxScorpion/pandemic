@@ -313,6 +313,9 @@ vector<string> Model::getReasearchStationCities(){
 
 bool Model::canBuildResearchStation(){
     Player * curr = mover.getCurrentPlayer();
+	if (curr->getPlayerRole() == "Operations Expert") {
+		return true;// If player is Operations Expert, can build research station without discarding.
+	}
     vector<Card*> hand = curr->getHand();
     vector<Card*>::iterator hItr;
     for ( hItr = hand.begin(); hItr != hand.end(); hItr++ ) {
