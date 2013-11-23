@@ -1,6 +1,5 @@
 #include "Controller.h"
 
-
 // primary commands
 string cmds01[] = {
     "Drive/Ferry",
@@ -113,23 +112,19 @@ void Controller::doPlayerTurns() {
     }
 }
 
-//
-//
-//
 void Controller::doDrawRound(int current)
 {
 	Card* card1;
 	Card* card2;
 	vector<Card*> playerHand;
-	int x;
-	string ep = "EPIDEMIC";						//to avoid retyping
-	card1 = model.playerDeck.takeCard();				//draw two cards
+	string ep = "EPIDEMIC";									//to avoid retyping
+	card1 = model.playerDeck.takeCard();					//draw two cards
 	card2 = model.playerDeck.takeCard();
 
 	//card 1 behavior
 	if(card1->getCardName() == ep)
 	{
-		doEpidemic();									//if epidemic card drawn, do eet
+		doEpidemic();										//if epidemic card drawn, do eet
 	}
 	else
 	{
@@ -188,7 +183,6 @@ void Controller::doDrawRound(int current)
 	
 }
 
-
 void Controller::doDiscard(vector<Card*>playerHand, int current)
 {
 	int x;
@@ -231,6 +225,7 @@ void Controller::doDiscard(vector<Card*>playerHand, int current)
 
 	return;
 }
+
 void Controller::doProcessMenu(Player* p) {
     const size_t NUM_COMMANDS = menu.getMenuCommands().size();
     size_t choice = NUM_COMMANDS - 1;
@@ -238,10 +233,10 @@ void Controller::doProcessMenu(Player* p) {
     menu.showMenu(p);
     while( !( cin >> choice ) ) {
         cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.ignore((numeric_limits<streamsize>::max)(), '\n');
         view.printInvalidInputMsg();
     }
-    cin.ignore(numeric_limits<size_t>::max(), '\n');
+    cin.ignore((numeric_limits<size_t>::max)(), '\n');
     
     if (choice < getMappedFunctions().size()) {
         (this->*getMappedFunctions()[choice])();
@@ -330,13 +325,34 @@ void Controller::doEpidemic()
 	return;
 }
 
-
 int Controller::run() {
+	HANDLE wHnd;    // Handle to write to the console.
+	HANDLE rHnd;    // Handle to read from the console.
+	
+	// Set up the handles for reading/writing:
+	wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
+	rHnd = GetStdHandle(STD_INPUT_HANDLE);
+
+	// Change the window title:
+	SetConsoleTitle(TEXT("Pandemic"));
+
+	// Set up the required window size:
+	SMALL_RECT windowSize = {0, 0, 99, 69};
+
+	// Change the console window size:
+	SetConsoleWindowInfo(wHnd, TRUE, &windowSize);
+
+	// Create a COORD to hold the buffer size:
+	COORD bufferSize = {100, 100};
+
+	// Change the internal buffer size:
+	SetConsoleScreenBufferSize(wHnd, bufferSize);
+
     bool test = false;
     
     try {
         view.printTitle();
-	test = getLoadGame();
+		test = getLoadGame();
         
         if(!test) {    // skips load scenario if game loaded
             test = getLoadScenario();   // ask to load scenario
@@ -414,21 +430,6 @@ bool Controller::getLoadScenario() {
         }
     }
     return false;
-}
-
-void Controller::getSaveGame() {
-    string filename = "autosave";
-    string name;
-    
-    view.askFileName();
-    getline(cin, name);    // get savegame name from user
-    
-    if (!name.empty()) {
-        filename = name;
-    }
-    
-    model.savegame(filename);
-    view.printProgressSavedMsg();
 }
 
 // these functions are accessible since function pointer passed into Menu Class
@@ -566,9 +567,23 @@ void Controller::do_build_station() {
 }
 
 void Controller::do_save_game() {
-    view.printSaveGameMsg();
+    string filename = "autosave";
+    string name;
+    
+    view.askFileName();
+    getline(cin, name);    // get savegame name from user
+    
+    if (!name.empty()) {
+        filename = name;
+    }
+    
+    model.savegame(filename);
+    view.printProgressSavedMsg();
 }
 
+void Controller::do_quit_game() {
+	exit(0);
+}
 
 bool Controller::isInVector(int x, vector<int>& vec)
 {

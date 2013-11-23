@@ -4,11 +4,12 @@
 //#include "Player.h"
 #ifndef MODEL_H
 #define MODEL_H
-#include<iostream>
-#include<iomanip>
-#include<sstream>
-#include<limits>
-#include<vector>
+#include <iostream>
+#include <iomanip>
+#include <sstream>
+#include <limits>
+#include <vector>
+#include <string>
 #include "Map.h"
 #include "Deck.h"
 #include "Player.h"
@@ -16,6 +17,7 @@
 #include "IDeck.h"
 #include "PandemicException.h"
 
+using std::getline;
 
 enum {badCities};														//odd
 enum {red, yellow, blue, black};										//cube colors
@@ -74,16 +76,26 @@ public:
     }
 	int getCubeCount(int disease) {
         return(cubes[disease]);
-    }							//gets the count of a single color of cube
+    }									//gets the count of a single color of cube
 	int getInfRate() {
-        return( infRate[currentRate] );
-    }								//gets the current infection rate (2,2,2,3,3,4,4)
+        //return( infRate[currentRate] );
+		return currentRate;
+    }									//gets the current infection rate (2,2,2,3,3,4,4)
 	int getResSta() {
         return resSta;
     }												//gets current Research Station count
     int getCureStatus(int i){
         return cureStatus[i];
     }
+	void setOutbreak(int outBreak) {
+		outbreak = outBreak;
+	}
+	void setInfection(int infection) {
+		currentRate = infection;
+	}
+	void setCubeCount(int disease, int number) {
+		cubes[disease] = number;
+	}
     bool canCureDisease(int);
     void doCureDisease(int);
     bool canBuildResearchStation();

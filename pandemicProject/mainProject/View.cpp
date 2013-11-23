@@ -15,7 +15,7 @@ void View::printGoodbye() {
 }
 
 void View::printProgressSavedMsg() {
-    cout << "\nYour progress has been saved.\n\n";
+    cout << "Your progress has been saved.\n";
 }
 
 void View::printCharterFlightMsg() {
@@ -31,7 +31,7 @@ void View::printTreatDiseaseMsg() {
 }
 
 void View::printSaveGameMsg() {
-    cout << "Save game...\n";
+    cout << "Please enter a file name (Leave blank for autosave): \n";
 }
 
 void View::askNumOfPlayers() {

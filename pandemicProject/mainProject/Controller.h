@@ -5,12 +5,14 @@
 #include "Model.h"
 #include "View.h"
 #include "Menu.h"
-#include<iostream>
-#include<iomanip>
-#include<sstream>
-#include<limits>
-#include<vector>
-
+#include <iostream>
+#include <iomanip>
+#include <sstream>
+#include <limits>
+#include <vector>
+#include <stdlib.h>
+#include <Windows.h>
+#include <Tchar.h>
 
 using std::cin;
 using std::cout;
@@ -39,6 +41,7 @@ public:
   void do_share_knowledge();
   void do_build_station();
   void do_save_game();
+  void do_quit_game();
   // map menu functions
   void setMappedFunctions() {
       menuFunctions fns[] = {
@@ -50,7 +53,8 @@ public:
           &Controller::do_cure_disease,
           &Controller::do_share_knowledge,
           &Controller::do_build_station,
-          &Controller::do_save_game
+          &Controller::do_save_game,
+		  &Controller::do_quit_game
       };
       for ( size_t idx = 0; idx < 9; idx++ ) {
           mappedFuncs[idx] = fns[idx];
@@ -59,7 +63,6 @@ public:
 
   bool getLoadGame();
   bool getLoadScenario();
-  void getSaveGame();
   map<int, menuFunctions> getMappedFunctions()
     { return mappedFuncs; }
   void doPlayerTurns();
@@ -72,13 +75,13 @@ public:
   bool isInVector(int, vector<int>&);
 
 private:
-  View view;              //the view we're using
-  Model model;            //the model
-  Menu menu;            //the menu
+  View view;				//the view we're using
+  Model model;				//the model
+  Menu menu;				//the menu
   int temp;
   string tempStr;
-  City* cityP;      //pointer to a city
-  ICard* iCardP;      //pointer to an iCard
+  City* cityP;				//pointer to a city
+  ICard* iCardP;			//pointer to an iCard
   map<int, menuFunctions> mappedFuncs;
   vector<string> commands;
 };

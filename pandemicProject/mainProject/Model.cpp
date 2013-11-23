@@ -1,8 +1,6 @@
 #include <vector>
 #include "Model.h"
 
-
-
 // Default constructor
 Model::Model()
 {
@@ -13,7 +11,6 @@ Model::Model()
 	infRate[3] = infRate[4] = 3;
 	infRate[5] = infRate[6] = 4; 
 	
-
 	//initialize cube count to 24, and all diseases to uncured
 	for(int i = 0; i <4; i++)
 	{
@@ -29,9 +26,6 @@ Model::Model()
 	rolesDeck.push_back("Medic");
 	rolesDeck.push_back("Scientist");
 	rolesDeck.push_back("Researcher");
-
-	
- 
 }
 
 // currentRate six indexes seventh and highest infection rate
@@ -82,7 +76,7 @@ void Model::prepareGame()
 {
 	City* cityP;
 	//Set up the game:
-	//	Place research  and players in atlantastation in Atlanta
+	//	Place research  and players in atlanta, research station in Atlanta
 	//	Assign roles to players
 	//	Shuffle deck, distribute epidemic cards evenly (4, 5, or 6 epids for easy med hard)
 	//	Deal cards: 2 players-4 cards, 3players-3 cards, 4 players-2 cards
@@ -130,7 +124,6 @@ void Model::initialInfect()
 		}
 	}   
 }
-
 
 //TO DO: add outbreak checking for this method
 void Model::infectCity(City* cityP, int color, int count)
@@ -257,46 +250,94 @@ void Model::savegame(string filename) {
 	ofstream fp_out(filename, ios::out);				// open/create savegame file with name(filename)
 	
 	if(fp_out.is_open()) {								// test if file is open
-		fp_out << "***** Game Difficulty *****" << endl;
-														// save game difficulty
-		fp_out << "***** Cube Counts *****" << endl;
-														// save cube counts
-		fp_out << "***** Outbreak & Infection Levels *****" << endl;
-														// save outbreak and infection levels
-		fp_out << "***** Players *****" << endl;
+		//fp_out << "***** Game Difficulty *****" << endl;
+		fp_out << getDifficulty() << endl;				// save game difficulty
+
+		//fp_out << "***** Cube Counts *****" << endl;
+		for(int i = 0; i < 4; i++) {
+			fp_out << getCubeCount(i) << ",";			// save cube counts
+		}
+		fp_out << endl;
+
+		//fp_out << "***** Outbreak & Infection Levels *****" << endl;
+		fp_out << getOutbreak() << ","					// save outbreak and infection levels
+			<< getInfRate() << endl;
+
+		//fp_out << "***** Players *****" << endl;
+		fp_out << getNumPlayers() << endl;
 		for(int i = 0; i < getNumPlayers(); i++) {		// save players
 			fp_out	<< players[i]->getPlayerName()	<< ","
 					<< players[i]->getPlayerRole()	<< ","
 					<< players[i]->getPlayerLocStr() << endl;
 			vector<Card*> playerHand = players[i]->getHand();
+			fp_out << playerHand.size() << endl;
 			for(int j = 0; j < int(playerHand.size()); j++) {
 				fp_out	<< playerHand[j]->getCardName()
 						<< "," << playerHand[j]->getID()
 						<< endl;
 			}
-			fp_out << endl;
 		}
-		fp_out << "***** Infection & Discard Decks *****" << endl;
+
+		//fp_out << "***** Infection & Discard Decks *****" << endl;
 		infectedDeck.saveGame(fp_out);					// save infection deck & discard deck
-		fp_out << "***** City Deck *****" << endl;
+
+		//fp_out << "***** City Deck *****" << endl;
 		playerDeck.saveGame(fp_out);					// save city deck
-		fp_out << "***** Map *****" << endl;
+
+		//fp_out << "***** Map *****" << endl;
 		worldMap.saveGame(fp_out);						// save map to file
 		fp_out.close();									// close file
 	}
 	else
-		cout << "Error opening file." << endl;
+		; // throw error
 }
 
 void Model::loadgame(string filename) {
+	std::string input;
+	std::string::size_type sz;
 	ifstream fp_in(filename, ios::in);
-	
+
 	if(fp_in.is_open()) {
-		worldMap.loadGame(fp_in);
-		fp_in.close();
-	}
-	else
-		cout << "Error opening file." << endl;
+		std::getline(fp_in,input);
+		setDifficulty(std::stoi(input,&sz));		// game difficulty
+
+		for(int i = 0; i < 4; i++) {				// cube counts
+			std::getline(fp_in,input, ',');
+			setCubeCount(i,std::stoi(input,&sz));
+		}
+
+		std::getline(fp_in,input,',');
+		setOutbreak(std::stoi(input,&sz));			// outbreak
+
+		std::getline(fp_in,input);
+		setInfection(std::stoi(input,&sz));			// infection
+
+		std::getline(fp_in,input);
+		setNumPlayers(std::stoi(input,&sz));		// number of players
+
+		for(int i = 0; i < getNumPlayers(); i++) {
+			string playerName, playerRole, playerLocation;
+			std::getline(fp_in,playerName,',');
+			std::getline(fp_in,playerRole,',');
+			std::getline(fp_in,playerLocation);
+			players.push_back(new Player(playerName, playerRole, worldMap.locateCity(playerLocation)));
+			std::getline(fp_in,input);
+			for(int j = 0; j < std::stoi(input,&sz); j++) {
+				// restore player hand
+			}
+		}
+
+//		playerDeck.loadGame(fp_in);					// player deck
+
+//		infectedDeck.loadGame(fp_in);				// infected deck
+
+//		worldMap.loadGame(fp_in);					// world map
+
+		fp_in.close();								// close file
+   }
+
+   else
+		; // throw error
 }
 
 vector<string> Model::getReasearchStationCities(){
@@ -363,7 +404,6 @@ bool Model::canCureDisease(int col){//This will be updated later when we have a 
     }
     return false;
 }
-
 
 void Model::doCureDisease(int col){
     
@@ -432,7 +472,6 @@ switch (col)
     return color;
 }
 
-
 //Does an outbreak
 //Function uses a reference to a vector to store the list of cities outbreaks occurred in during gameplay - controller uses this to pass to view
 void Model::doOutbreak(City* Cptr, int color, vector<string>&prevOB)
@@ -476,7 +515,6 @@ void Model::doOutbreak(City* Cptr, int color, vector<string>&prevOB)
 	}
 	return;
 }
-
 
 //checks vector of city names to see if its there
 bool Model::alreadyOutbreak(string current, vector<string> previous)

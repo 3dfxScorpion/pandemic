@@ -112,9 +112,6 @@ string menuRSCities(vector<string> RScities) {         // static method for exte
     return out.str();
 }
 
-
-
-
 string Menu::menuHands(vector<Player*> plyrs) {
     size_t playerCount = 1;
     const size_t totalCount = 13;        // number of slots for cards

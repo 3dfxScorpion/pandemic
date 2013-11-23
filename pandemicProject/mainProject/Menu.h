@@ -39,7 +39,7 @@ class Menu {
     string menuCities(Map&);
     string menuHands(vector<Player*>);
     string menuCommands(vector<string>);
-    void   showMenu(Player*);
+    void showMenu(Player*);
 	void discardMenu(vector<Card*>);
 	void doubleEpEventMenu(vector<Card*>, vector<int>);
 
