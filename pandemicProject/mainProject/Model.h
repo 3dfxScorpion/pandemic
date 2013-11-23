@@ -9,7 +9,6 @@
 #include<sstream>
 #include<limits>
 #include<vector>
-#include<string>
 #include "Map.h"
 #include "Deck.h"
 #include "Player.h"
@@ -77,8 +76,7 @@ public:
         return(cubes[disease]);
     }							//gets the count of a single color of cube
 	int getInfRate() {
-        //return( infRate[currentRate] );
-		return currentRate;
+        return( infRate[currentRate] );
     }								//gets the current infection rate (2,2,2,3,3,4,4)
 	int getResSta() {
         return resSta;
@@ -86,15 +84,6 @@ public:
     int getCureStatus(int i){
         return cureStatus[i];
     }
-	void setOutbreak(int outBreak) {
-		outbreak = outBreak;
-	}
-	void setInfection(int infection) {
-		currentRate = infection;
-	}
-	void setCubeCount(int disease, int number) {
-		cubes[disease] = number;
-	}
     bool canCureDisease(int);
     void doCureDisease(int);
     bool canBuildResearchStation();

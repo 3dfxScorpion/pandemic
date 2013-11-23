@@ -76,5 +76,7 @@ public:
 	void playAgain(){cout << "Play again? [1 for yes, 0 for no]: ";}
     void printReasearchStations(vector<string> cities);
     void printAdjCities(City*);
+	void printDrawConfirmation(string card){cout  << card << " added to your hand.\n";}
+	void newLine(){cout << "\n";}
 	
 };

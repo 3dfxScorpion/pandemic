@@ -119,7 +119,7 @@ bool Deck::isEventCard(Card* card)
 
 //
 // findEvents - gets a player hand (vector of cardPTR) and reference to vector of ints. populates vector with indexes of the event cards
-vector<int> Deck::findEvents(vector<Card*>hand, vector<int>&eventIndexes)
+void Deck::findEvents(vector<Card*>hand, vector<int>&eventIndexes)
 {
 	int num;
 	num = hand.size();				//store size
@@ -132,5 +132,5 @@ vector<int> Deck::findEvents(vector<Card*>hand, vector<int>&eventIndexes)
 		}
 	}
 	
-	return eventIndexes;			//return
+	return;			//return
 }

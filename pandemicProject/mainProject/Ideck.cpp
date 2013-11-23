@@ -107,7 +107,7 @@ void IDeck::saveGame(ofstream &fp) {
 	for(int i = 0; i < int(deck.size()); i++) {
 		fp << deck[i]->getName() << "," << deck[i]->getColor() << endl;
 	}
-	fp << "***** Infection Deck *****" << endl;
+
 	fp << discard.size() << endl;
 	for(int i = 0; i < int(discard.size()); i++) {
 		fp << discard[i]->getName() << "," << discard[i]->getColor() << endl;

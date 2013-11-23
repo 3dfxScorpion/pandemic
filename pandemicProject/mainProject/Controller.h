@@ -5,14 +5,12 @@
 #include "Model.h"
 #include "View.h"
 #include "Menu.h"
-#include <iostream>
-#include <iomanip>
-#include <sstream>
-#include <limits>
-#include <vector>
-#include <stdlib.h>
-#include <Windows.h>
-#include <Tchar.h>
+#include<iostream>
+#include<iomanip>
+#include<sstream>
+#include<limits>
+#include<vector>
+
 
 using std::cin;
 using std::cout;

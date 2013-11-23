@@ -1,7 +1,7 @@
 #include <vector>
 #include "Model.h"
 
-using namespace std;
+
 
 // Default constructor
 Model::Model()
@@ -123,6 +123,8 @@ void Model::initialInfect()
 			s = iCardP->getName();												//store its name
 			color = iCardP->getColor();											//store enumerated color
 			cityP = worldMap.locateCity(s);										//get a pointer to the city based on its name
+			if(cityP == NULL)
+				cout << "Houston, we've had a problem.\nFailure in Model::initialInfect()\n";
 			infectCity(cityP, color, i);										//infect the city 
 			
 		}
@@ -255,71 +257,46 @@ void Model::savegame(string filename) {
 	ofstream fp_out(filename, ios::out);				// open/create savegame file with name(filename)
 	
 	if(fp_out.is_open()) {								// test if file is open
-		//fp_out << "***** Game Difficulty *****" << endl;
-		fp_out << getDifficulty() << endl;				// save game difficulty
-
-		//fp_out << "***** Cube Counts *****" << endl;
-		for(int i = 0; i < 4; i++) {
-			fp_out << getCubeCount(i) << ",";			// save cube counts
-		}
-		fp_out << endl;
-
-		//fp_out << "***** Outbreak & Infection Levels *****" << endl;
-		fp_out << getOutbreak() << ","					// save outbreak and infection levels
-				<< getInfRate() << endl;					
-
-		//fp_out << "***** Players *****" << endl;
-		fp_out << getNumPlayers() << endl;
+		fp_out << "***** Game Difficulty *****" << endl;
+														// save game difficulty
+		fp_out << "***** Cube Counts *****" << endl;
+														// save cube counts
+		fp_out << "***** Outbreak & Infection Levels *****" << endl;
+														// save outbreak and infection levels
+		fp_out << "***** Players *****" << endl;
 		for(int i = 0; i < getNumPlayers(); i++) {		// save players
 			fp_out	<< players[i]->getPlayerName()	<< ","
 					<< players[i]->getPlayerRole()	<< ","
 					<< players[i]->getPlayerLocStr() << endl;
 			vector<Card*> playerHand = players[i]->getHand();
-			fp_out << playerHand.size() << endl;
 			for(int j = 0; j < int(playerHand.size()); j++) {
 				fp_out	<< playerHand[j]->getCardName()
 						<< "," << playerHand[j]->getID()
 						<< endl;
 			}
+			fp_out << endl;
 		}
-
-		//fp_out << "***** Infection Deck *****" << endl;
+		fp_out << "***** Infection & Discard Decks *****" << endl;
 		infectedDeck.saveGame(fp_out);					// save infection deck & discard deck
-
-		//fp_out << "***** City Deck *****" << endl;
+		fp_out << "***** City Deck *****" << endl;
 		playerDeck.saveGame(fp_out);					// save city deck
-
-		//fp_out << "***** Map *****" << endl;
+		fp_out << "***** Map *****" << endl;
 		worldMap.saveGame(fp_out);						// save map to file
 		fp_out.close();									// close file
 	}
 	else
-		;	// throw error
+		cout << "Error opening file." << endl;
 }
 
 void Model::loadgame(string filename) {
 	ifstream fp_in(filename, ios::in);
-	int input = 0;
-	std::string::size_type sz;
-/*
+	
 	if(fp_in.is_open()) {
-		std::getline(fp_in,input);
-		setDifficulty(std::stoi(input,&sz,0));			// game difficulty
-		for(int i = 0; i < 4; i++) {	// cube counts
-			std::getline(fp_in,input, ',');
-			setCubeCount(i,std::stoi(input,&sz));
-		}
-		setOutbreak(input);				// outbreak
-		setInfection(input);			// infection
-		setNumPlayers(input);			// number of players
-		infectedDeck.loadGame(fp_in);	// infected deck
-		playerDeck.loadGame(fp_in);		// player deck
-		worldMap.loadGame(fp_in);		// world map
-		fp_in.close();					// close file
+		worldMap.loadGame(fp_in);
+		fp_in.close();
 	}
 	else
-		; // throw error
-*/
+		cout << "Error opening file." << endl;
 }
 
 vector<string> Model::getReasearchStationCities(){
@@ -336,9 +313,6 @@ vector<string> Model::getReasearchStationCities(){
 
 bool Model::canBuildResearchStation(){
     Player * curr = mover.getCurrentPlayer();
-	if (curr->getPlayerRole() == "Operations Expert") {
-		return true;// If player is Operations Expert, can build research station without discarding.
-	}
     vector<Card*> hand = curr->getHand();
     vector<Card*>::iterator hItr;
     for ( hItr = hand.begin(); hItr != hand.end(); hItr++ ) {

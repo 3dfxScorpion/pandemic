@@ -98,8 +98,11 @@ void Controller::doPlayerTurns() {
             
         } // four moves consumed
         		
+		view.newLine();
 		doDrawRound(i);//perform the draw round
+		view.newLine();
         doInfectRound();//perform the infection round
+		system("Pause");
         
         menu.setMappedCubes("black", model.getCubeCount(black));
         menu.setMappedCubes("blue", model.getCubeCount(blue));
@@ -118,8 +121,8 @@ void Controller::doDrawRound(int current)
 	Card* card1;
 	Card* card2;
 	vector<Card*> playerHand;
-	//int x;
-	string ep = "!!-Epidemic-!!";						//to avoid retyping
+	int x;
+	string ep = "EPIDEMIC";						//to avoid retyping
 	card1 = model.playerDeck.takeCard();				//draw two cards
 	card2 = model.playerDeck.takeCard();
 
@@ -130,6 +133,7 @@ void Controller::doDrawRound(int current)
 	}
 	else
 	{
+		view.printDrawConfirmation(card1->getCardName());	//print add confirm
 		model.players[current]->addCard(card1);				//otherwise regular card, add it to players hand
 		if(model.players[current]->getHandSize() > 7)		//enforce hand limit
 		{
@@ -173,6 +177,7 @@ void Controller::doDrawRound(int current)
 	}
 	else
 	{
+		view.printDrawConfirmation(card2->getCardName());	//print add confirm
 		model.players[current]->addCard(card2);				//otherwise regular card, add it to players hand
 		if(model.players[current]->getHandSize() > 7)		//enforce hand limit
 		{
@@ -233,10 +238,10 @@ void Controller::doProcessMenu(Player* p) {
     menu.showMenu(p);
     while( !( cin >> choice ) ) {
         cin.clear();
-        cin.ignore((numeric_limits<streamsize>::max)(), '\n');
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         view.printInvalidInputMsg();
     }
-    cin.ignore((numeric_limits<size_t>::max)(), '\n');
+    cin.ignore(numeric_limits<size_t>::max(), '\n');
     
     if (choice < getMappedFunctions().size()) {
         (this->*getMappedFunctions()[choice])();
@@ -328,32 +333,10 @@ void Controller::doEpidemic()
 
 int Controller::run() {
     bool test = false;
-
-	HANDLE wHnd;    // Handle to write to the console.
-	HANDLE rHnd;    // Handle to read from the console.
-
-	// Set up the handles for reading/writing:
-    wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
-    rHnd = GetStdHandle(STD_INPUT_HANDLE);
-
-    // Change the window title:
-    SetConsoleTitle(TEXT("Pandemic"));
-
-    // Set up the required window size:
-    SMALL_RECT windowSize = {0, 0, 99, 69};
-    
-    // Change the console window size:
-    SetConsoleWindowInfo(wHnd, TRUE, &windowSize);
-
-    // Create a COORD to hold the buffer size:
-    COORD bufferSize = {100, 100};
-
-    // Change the internal buffer size:
-    SetConsoleScreenBufferSize(wHnd, bufferSize);
     
     try {
         view.printTitle();
-		test = getLoadGame();
+	test = getLoadGame();
         
         if(!test) {    // skips load scenario if game loaded
             test = getLoadScenario();   // ask to load scenario
@@ -563,18 +546,7 @@ void Controller::do_build_station() {
 }
 
 void Controller::do_save_game() {
-	string filename = "autosave";
-	string name;
-
     view.printSaveGameMsg();
-		getline(cin, name);		// get savegame name from user
-
-	if(!name.empty()) {
-		filename = name;
-	}
-
-	model.savegame(filename);
-	cout << endl;
 }
 
 
