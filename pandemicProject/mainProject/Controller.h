@@ -69,6 +69,7 @@ public:
   void doProcessMenu(Player*);
   void doEpidemic();
   int run();
+  bool isInVector(int, vector<int>&);
 
 private:
   View view;              //the view we're using
@@ -81,3 +82,5 @@ private:
   map<int, menuFunctions> mappedFuncs;
   vector<string> commands;
 };
+
+

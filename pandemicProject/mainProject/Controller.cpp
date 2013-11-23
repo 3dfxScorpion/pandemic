@@ -455,14 +455,34 @@ void Controller::do_direct_flight() {   //If it aint broke
     Player * p = model.mover.getCurrentPlayer();
     size_t num = 0, pick;
     vector<Card*> hand = p->getHand();
-    
+	
+     
     for ( size_t i = 0; i < hand.size(); i++ ) {
-        cout << hand[i]->ToString() << "\n";
+		if(!model.playerDeck.isEventCard(hand[i]))
+			cout << hand[i]->ToString() << "\n";		//don't display event cards in direct flight options - does nothing to prevent their use 
     }
     
-    view.askWhereTo();
-    cin >> pick;
-    
+	vector<int> eventID;								//indexes of event cards in hand
+	model.playerDeck.findEvents(hand, eventID);			//find the indexes of event cards (this is so much easier with a  new data field in the cards, but w/e)
+
+	while(true)
+	{
+		view.askWhereTo();
+		cin >> pick;
+		cin.ignore();
+		cin.sync();
+
+		if(isInVector(pick, eventID))
+		{
+			continue;
+		}
+		else
+		{
+			break;
+		}
+	
+	}
+
     if ( pick == 10 ) {
         return;
     }
@@ -550,3 +570,17 @@ void Controller::do_save_game() {
 }
 
 
+bool Controller::isInVector(int x, vector<int>& vec)
+{
+	if(!vec.empty())		//if it isnt empty
+	{
+		int size = vec.size();
+		for(int i = 0; i<size; i++)
+		{
+			if(x == vec[i])
+				return true;
+		}
+	}
+
+	return false;
+}
