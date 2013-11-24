@@ -11,8 +11,11 @@
 #include <limits>
 #include <vector>
 #include <stdlib.h>
+
+#ifdef _WIN32
 #include <Windows.h>
 #include <Tchar.h>
+#endif
 
 using std::cin;
 using std::cout;
