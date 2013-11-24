@@ -1,0 +1,42 @@
+NAME:   San Francisco
+Color:  Blue
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+HasSta: TRUE
+Adj:    Chicago
+
+NAME:   Chicago
+Color:  Black
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+HasSta: FALSE
+Adj:    Atlanta
+        San Francisco
+        Montreal
+
+NAME:   Atlanta
+Color:  Red
+Pop:    0
+Black:  0
+Blue:   3
+Red:    0
+Yellow: 0
+HasSta: TRUE
+Adj:    Chicago
+        San Francisco
+
+NAME:   Montreal
+Color:  Yellow
+Pop:    0
+Black:  0
+Blue:   0
+Red:    0
+Yellow: 0
+HasSta: FALSE
+Adj:    Chicago
