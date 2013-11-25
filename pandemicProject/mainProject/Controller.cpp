@@ -608,9 +608,9 @@ void Controller::do_save_game() {
     string name;
     
     view.askFileName();
-    getline(cin, name);    // get savegame name from user
-    cin.ignore();
-    cin.clear();
+    getline(cin, name);		// get savegame name from user (reads whole line and discards end of line) cin will be empty after this call...
+    // cin.ignore();		// so this was removed because it waits for user to enter a line (or press enter)
+	// cin.clear();			// and you should not need this...
     if (!name.empty()) {
         filename = name;
     }
