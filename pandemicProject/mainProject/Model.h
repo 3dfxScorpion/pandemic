@@ -97,9 +97,14 @@ public:
 		cubes[disease] = number;
 	}
     bool canCureDisease(int);
+    vector<Player*> getSharablePlayers(string);
     void doCureDisease(int);
     bool canBuildResearchStation();
     void buildResearchStation();
+    bool canGetKnowledge();
+    bool canGiveKnowledge();
+    void giveCard(Player* p,string s);//Current player gives parameter p the card name that matches parameter s
+    void getCard(Player* p,string s);//Current player gets a card from parameter p that matches parameter s
     vector<string> getReasearchStationCities();//returns vector containing all of the cities with research stations
     string drawRole();					//returns a random role card, removes it from the role deck
 	void savegame(string filename);

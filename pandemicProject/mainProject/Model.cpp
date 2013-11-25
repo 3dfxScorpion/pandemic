@@ -515,6 +515,61 @@ void Model::doOutbreak(City* Cptr, int color, vector<string>&prevOB)
 	}
 	return;
 }
+vector<Player*> Model::getSharablePlayers(string giveOrTake)
+{
+    vector<Player*> ret;
+    string card = "";
+    vector<Card*> pHand = mover.getCurrentPlayer()->getHand();
+    if (giveOrTake == "give" || giveOrTake == "Give"){// If we want to get the players we can give
+    for (int k = 0 ; k<= pHand.size()-1; k++)
+        if (pHand[k]->getCardName() == mover.getCurrentPlayer()->getPlayerLocStr())
+            card = pHand[k]->getCardName();//finds the card that the player has
+    
+    for (int i = 0 ; i <= players.size()-1; i++)
+     if (players[i]->getPlayerLocStr() == card &&               //if Player is in the same spot as the card
+         players[i]->getPlayerName() != mover.getCurrentPlayer()->getPlayerName())//And player isnt the current player
+         ret.push_back(players[i]);
+    }
+    else    //else we are finding the players we can get information from.
+    {
+        for (int i = 0 ; i <= players.size()-1; i++){
+            pHand = players[i]->getHand();
+            for (int k = 0 ; k<= pHand.size()-1; k++)
+                {
+                    if (pHand[k]->getCardName() == mover.getCurrentPlayer()->getPlayerLocStr() &&
+                        players[i]->getPlayerName() != mover.getCurrentPlayer()->getPlayerName())
+                        ret.push_back(players[i]);
+                }
+        }
+    }
+    return ret;
+}
+
+bool Model::canGiveKnowledge()
+{
+    string pLocation = mover.getCurrentPlayer()->getPlayerLocStr();
+    vector<Card*> pHand = mover.getCurrentPlayer()->getHand();
+    for (int i = 0 ; i <= players.size()-1; i++)
+        if (pLocation == players[i]->getPlayerLocStr() && players[i]->getPlayerName() != mover.getCurrentPlayer()->getPlayerName())//if there is a different player on the same location as current
+            for (int k = 0 ; k<= pHand.size()-1; k++)
+                if (pHand[k]->getCardName() == pLocation)//Curr player has the city card he is in
+                    return true;
+    return false;
+}
+bool Model::canGetKnowledge()
+{
+    string pLocation = mover.getCurrentPlayer()->getPlayerLocStr();
+    vector<Card*> pHand = mover.getCurrentPlayer()->getHand();
+    for (int i = 0 ; i <= players.size()-1; i++)
+        if (pLocation == players[i]->getPlayerLocStr() && players[i]->getPlayerName() != mover.getCurrentPlayer()->getPlayerName())//if there is a different player on the same location as current
+        {
+            pHand = players[i]->getHand();
+            for (int k = 0 ; k<= pHand.size()-1; k++)
+                if (pHand[k]->getCardName() == pLocation)//A player in the same location has
+                    return true;                         //the card
+        }
+    return false;
+}
 
 //checks vector of city names to see if its there
 bool Model::alreadyOutbreak(string current, vector<string> previous)

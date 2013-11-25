@@ -326,6 +326,7 @@ void Controller::doEpidemic()
 }
 
 int Controller::run() {
+#ifdef _WIN32
 	HANDLE wHnd;    // Handle to write to the console.
 	HANDLE rHnd;    // Handle to read from the console.
 	
@@ -347,7 +348,7 @@ int Controller::run() {
 
 	// Change the internal buffer size:
 	SetConsoleScreenBufferSize(wHnd, bufferSize);
-
+#endif
     bool test = false;
     
     try {

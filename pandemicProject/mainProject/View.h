@@ -20,8 +20,12 @@ public:
     void printTreatDiseaseMsg();
     void printShareKnowledgeMsg();
     void printSaveGameMsg();
+    void printGetOrGiveKnowlege(vector<string>);
     void printInfected();
     void askCanCure(string);
+    void printPlayersVector(vector<Player*>);
+    void askGiveKnowledge(vector<Player*>);
+    void askGetKnowledge(vector<Player*>);
     void printCantBuildRS(){cout << "You do not have the required card to build an RS here\n";}
     void printCubeCount(int red, int yellow, int blue, int black);
     void askLocationShuttleFlight(){cout << "Which city would you like to take a shuttle flight to?\n";}
@@ -80,3 +84,4 @@ public:
 	void newLine(){cout << "\n";}
 	
 };
+

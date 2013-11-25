@@ -349,7 +349,6 @@ int Controller::run() {
 	// Change the internal buffer size:
 	SetConsoleScreenBufferSize(wHnd, bufferSize);
 #endif
-
     bool test = false;
     
     try {
@@ -557,7 +556,43 @@ void Controller::do_cure_disease() {    //TODO needs a role check. Needs more te
 }
 
 void Controller::do_share_knowledge() {
-    view.printShareKnowledgeMsg();
+    int input = -1;
+    vector<string> giveOrGet;
+    if (model.canGiveKnowledge())
+        giveOrGet.push_back("give");
+    if (model.canGetKnowledge())
+        giveOrGet.push_back("get");
+    view.printGetOrGiveKnowlege(giveOrGet);
+    if (giveOrGet.size() != 0){
+        while (input != 1 && input != 2)
+        {
+            cin >> input;
+            cin.ignore();
+            cin.clear();
+            if (input == 10)//following the standard 10 exits.
+                return;
+        }
+        switch (input)
+        {
+            case 1:
+            {
+                vector<Player*> toGive = model.getSharablePlayers("give");
+                view.askGiveKnowledge(toGive);
+                cout <<"player gives card... TEMP";//temporary place holder
+                break;
+            }
+            case 2:
+            {
+                vector<Player*> toGet = model.getSharablePlayers("get");
+                view.askGetKnowledge(toGet);
+                cout <<"player gets card... TEMP";//temporary place holder
+                break;
+            }
+            default:
+                cout <<"error in do_share_knowledge switch statement";//debug code
+        }
+
+    }
 }
 
 void Controller::do_build_station() {
@@ -574,7 +609,8 @@ void Controller::do_save_game() {
     
     view.askFileName();
     getline(cin, name);    // get savegame name from user
-    
+    cin.ignore();
+    cin.clear();
     if (!name.empty()) {
         filename = name;
     }

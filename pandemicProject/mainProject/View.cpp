@@ -75,18 +75,32 @@ void View::askWhereTo() {
 }
 
 void View::printReasearchStations(vector<string> cities){
-    cout << menuRSCities(cities);
+    cout << menuStringVector(cities, "Research Stations");
 }
 
 void View::printAdjCities(City* toCheck){
     cout << menuAdjCities(toCheck);
 }
-
+void View::printPlayersVector(vector<Player*> players){
+    cout << menuPlayersVector(players);
+}
 void View::askCanCure(string color){
     cout << "Do you want to cure the "
          << color
          << " disease? (y/n)\n";
     
+}
+void View::printGetOrGiveKnowlege(vector<string> s){
+    cout<< menuStringVector(s,"Get or Give Knowledge?");
+}
+
+void View::askGiveKnowledge(vector<Player*> p){
+    cout << "Which of these players would you like to give knowledge?";
+    cout << menuPlayersVector(p);
+}
+void View::askGetKnowledge(vector<Player*> p){
+    cout << "Which of these players would you like to get knowledge?";
+    cout << menuPlayersVector(p);
 }
 
 void View::printOutbreaks(vector<string> cities)

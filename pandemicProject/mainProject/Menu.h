@@ -52,5 +52,6 @@ class Menu {
 };
 
 string menuAdjCities(City*);
-string menuRSCities(vector<string>);
+string menuStringVector(vector<string>,string);
+string menuPlayersVector(vector<Player*>);
 #endif
