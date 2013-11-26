@@ -31,7 +31,7 @@ class PlayerMove {
     void buildRStation();
     void treatDisease(int,int);
     bool cureDisease(string);
-    void shareKnowledge(Player*, Card*);
+    void shareKnowledge(Player*, Player*, Card*);
   private:
     Player * currentPlayer;
 };

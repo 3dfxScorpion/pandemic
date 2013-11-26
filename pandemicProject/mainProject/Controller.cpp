@@ -28,7 +28,7 @@ Controller::Controller() {
 void Controller::setPlayerCount() {
     view.askNumOfPlayers();
     cin >> temp;
-
+    
     //if improper input, loop till proper
     while (temp < 2 || temp > 4) {
         if (cin.fail()) {
@@ -93,11 +93,11 @@ void Controller::doPlayerTurns() {
         model.mover.setCurrentPlayer(currentPlayer);
         
         for(int j = 0; j<4; j++) {
-                        
+            
             doProcessMenu(currentPlayer);
             
         } // four moves consumed
-        		
+        
 		view.newLine();
 		doDrawRound(i);//perform the draw round
 		view.newLine();
@@ -119,7 +119,7 @@ void Controller::doDrawRound(int current)
 	string ep = "EPIDEMIC";									//to avoid retyping
 	card1 = model.playerDeck.takeCard();					//draw two cards
 	card2 = model.playerDeck.takeCard();
-
+    
 	//card 1 behavior
 	if(card1->getCardName() == ep)
 	{
@@ -131,23 +131,23 @@ void Controller::doDrawRound(int current)
 		model.players[current]->addCard(card1);				//otherwise regular card, add it to players hand
 		if(model.players[current]->getHandSize() > 7)		//enforce hand limit
 		{
-			doDiscard(model.players[current]->getHand(), current);	//do discard or play event card phase 
+			doDiscard(model.players[current]->getHand(), current);	//do discard or play event card phase
 		}
 	}//end card1 block
-
-
-
+    
+    
+    
 	//Special circumstances if both cards are epidemics
 	if(card1->getCardName() == card2->getCardName() && card1->getCardName() == ep)//if both epidemics
 	{
 		vector<int> eventID;
 		model.infectedDeck.removeLastAdded();									//only second infection card gets added to the discard pile
 		model.playerDeck.findEvents(model.players[current]->getHand(), eventID);//get vector of indexes containing the players  event cards
-
+        
 		if(!eventID.empty())//if player had some event cards
 		{
 			menu.doubleEpEventMenu(model.players[current]->getHand(), eventID);//display user choices
-
+            
 			int temp = -1;
 			while (temp < 0  || temp >eventID.size())
 			{
@@ -155,15 +155,15 @@ void Controller::doDrawRound(int current)
 				cin.clear();
 				cin.ignore();
 			}
-
+            
 			//play the users event card
 			//needs code to handle event cards. DO ME.
 			//the desired card's index into the player hand is in eventID[temp]
-
+            
 		}
-
+        
 	}// end double epidemic specials
-
+    
 	//card two behavior
 	if(card2->getCardName() == ep)
 	{
@@ -175,10 +175,10 @@ void Controller::doDrawRound(int current)
 		model.players[current]->addCard(card2);				//otherwise regular card, add it to players hand
 		if(model.players[current]->getHandSize() > 7)		//enforce hand limit
 		{
-			doDiscard(model.players[current]->getHand(), current);	//do discard or play event card phase 
+			doDiscard(model.players[current]->getHand(), current);	//do discard or play event card phase
 		}
 	}//end card2 block
-
+    
 	
 }
 
@@ -186,18 +186,18 @@ void Controller::doDiscard(vector<Card*>playerHand, int current)
 {
 	int x;
 	menu.discardMenu(playerHand);					//display the hand so user can choose
-
+    
 	do
 	{
 		cin >> x;									//read x - the card to be removed
 		cin.clear();
 		cin.sync();
 	}while(0>x || x>= playerHand.size());			//while its not inside the range
-
+    
 	if(model.playerDeck.isEventCard(playerHand[x]))	//if event card is chosen
 	{
 		view.printPlayOrDiscard();					//ask user to play the card or discard it
-
+        
 		int temp=-1;
 		while(temp < 0 || temp > 1)
 		{
@@ -205,7 +205,7 @@ void Controller::doDiscard(vector<Card*>playerHand, int current)
 			cin.ignore();
 			cin.sync();
 		}
-
+        
 		if(temp == 0)
 		{
 			//code to play the event card goes here
@@ -215,13 +215,13 @@ void Controller::doDiscard(vector<Card*>playerHand, int current)
 		{
 			model.players[current]->removeCard(x);			//otherwise remove the card from current player
 		}
-			
+        
 	}//end if event card
 	else
 	{
 		model.players[current]->removeCard(x);				//otherwise it's a city card, discard
 	}
-
+    
 	return;
 }
 
@@ -256,12 +256,12 @@ void Controller::doInfectRound() {
         
         view.printInfConfirmation(iCardP->getName());
         
-        if (!model.QSautoContain(iCardP)) 
+        if (!model.QSautoContain(iCardP))
 		{
 			City* ptr = model.worldMap.locateCity(iCardP->getName());		//store city
 			int color = iCardP->getColor();									//store color
 			int tmp;
-
+            
 			if(color == black)												//store the current count of cubes for specified color in tmp
 				tmp = ptr->getInfectedBlack();								//similar if else block used in model
 			else if(color==blue)											//prime candidate for refactoring if time permits
@@ -270,7 +270,7 @@ void Controller::doInfectRound() {
 				tmp = ptr->getInfectedRed();								//---may do that later - D GOOSE
 			else
 				tmp = ptr->getInfectedYellow();
-
+            
 			if(tmp < 3)														//if this wont cause an outbreak
 			{
 				model.infectCity(ptr,color, 1);								//infect the city
@@ -280,10 +280,10 @@ void Controller::doInfectRound() {
 				model.doOutbreak(ptr, color, outbreakCities);				//otherwise outbreak
 				view.printOutbreaks(outbreakCities);						//and display the list of cities that had them
 			}
-
+            
 		}
-       
-   }
+        
+    }
 }
 
 //performs necessary model/view calls to do an epidemic
@@ -295,8 +295,8 @@ void Controller::doEpidemic()
 	iCardP = model.infectedDeck.takeBottomCard();		//draw bottom card
 	clr = iCardP->getColor();							//store its color
 	cityP = model.worldMap.locateCity(iCardP->getName());//get pointer to the city
-
-
+    
+    
 	if(clr == black)									//store the current count of cubes for specified color
 		tmp = cityP->getInfectedBlack();
 	else if(clr==blue)
@@ -305,22 +305,22 @@ void Controller::doEpidemic()
 		tmp = cityP->getInfectedRed();
 	else
 		tmp = cityP->getInfectedYellow();
-
-
+    
+    
 	if(tmp == 0){
 		model.infectCity(cityP, clr, 3);				//if uninfected by the disease add three cubes
 	}
 	else
 	{
-														//otherwise outbreak HOLY SHIT	
+        //otherwise outbreak HOLY SHIT
 		tmp = 3 - tmp;									//number to add is 3-current to top it off to 3
 		model.infectCity(cityP, clr, tmp);				//top the infection cubes up to 3
 		model.doOutbreak(cityP, clr, outbreakCities);	//play the outbreak
 		view.printOutbreaks(outbreakCities);			//display the information
 	}
-
-	model.infectedDeck.shuffleDiscard();				//shuffle the discard to the top of iDeck	
-
+    
+	model.infectedDeck.shuffleDiscard();				//shuffle the discard to the top of iDeck
+    
 	return;
 }
 
@@ -332,23 +332,23 @@ int Controller::run() {
 	// Set up the handles for reading/writing:
 	wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
 	rHnd = GetStdHandle(STD_INPUT_HANDLE);
-
+    
 	// Change the window title:
 	SetConsoleTitle(TEXT("Pandemic"));
-
+    
 	// Set up the required window size:
 	SMALL_RECT windowSize = {0, 0, 119, 69};
-
+    
 	// Change the console window size:
 	SetConsoleWindowInfo(wHnd, TRUE, &windowSize);
-
+    
 	// Create a COORD to hold the buffer size:
 	COORD bufferSize = {120, 100};
-
+    
 	// Change the internal buffer size:
 	SetConsoleScreenBufferSize(wHnd, bufferSize);
 #endif
-
+    
 	bool test = false;
     
     try {
@@ -436,7 +436,7 @@ bool Controller::getLoadScenario() {
 // these functions are accessible since function pointer passed into Menu Class
 void Controller::do_drive_ferry() {
     Player * p = model.mover.getCurrentPlayer();
-    int input = -1; 
+    int input = -1;
 	int vSize = -1;
     vector<string> adjs = p->getPlayerLocation()->getAdjCity();
     vSize = adjs.size();
@@ -451,7 +451,7 @@ void Controller::do_drive_ferry() {
         }
     }
     model.mover.moveAdjacent(model.worldMap.locateCity(adjs[input-1]));    // minus one to get synced with menu.
-
+    
 }
 
 void Controller::do_direct_flight() {   //If it aint broke
@@ -459,22 +459,22 @@ void Controller::do_direct_flight() {   //If it aint broke
     size_t num = 0, pick;
     vector<Card*> hand = p->getHand();
 	
-     
+    
     for ( size_t i = 0; i < hand.size(); i++ ) {
 		if(!model.playerDeck.isEventCard(hand[i]))
-			cout << hand[i]->ToString() << "\n";		//don't display event cards in direct flight options - does nothing to prevent their use 
+			cout << hand[i]->ToString() << "\n";		//don't display event cards in direct flight options - does nothing to prevent their use
     }
     
 	vector<int> eventID;								//indexes of event cards in hand
 	model.playerDeck.findEvents(hand, eventID);			//find the indexes of event cards (this is so much easier with a  new data field in the cards, but w/e)
-
+    
 	while(true)
 	{
 		view.askWhereTo();
 		cin >> pick;
 		cin.ignore();
 		cin.sync();
-
+        
 		if(isInVector(pick, eventID))
 		{
 			continue;
@@ -483,9 +483,9 @@ void Controller::do_direct_flight() {   //If it aint broke
 		{
 			break;
 		}
-	
+        
 	}
-
+    
     if ( pick == 10 ) {
         return;
     }
@@ -562,50 +562,39 @@ void Controller::do_share_knowledge() {
     int pInput = -1;//Input for "which player do you want to give/get to/from"
     vector<string> giveOrGet;
     if (model.canGiveKnowledge())
-        giveOrGet.push_back("give");
-    if (model.canGetKnowledge())
-        giveOrGet.push_back("get");
-    view.printGetOrGiveKnowlege(giveOrGet);
-    if (giveOrGet.size() != 0){
-        while (input != 1 && input != 2)
+    {
+        vector<Player*> toGive = model.getSharablePlayers("give");
+        view.askGiveKnowledge(toGive);
+        while (pInput < 1 || pInput > toGive.size())
         {
-            cin >> input;
+            cin >> pInput;
             cin.ignore();
             cin.clear();
-            if (input == 10)//following the standard 10 exits.
-                return;
         }
-        switch (input)
-        {
-            case 1:
-            {
-                vector<Player*> toGive = model.getSharablePlayers("give");
-                view.askGiveKnowledge(toGive);
-                while (pInput < 1 || pInput > toGive.size())
-                {
-                    cin >> pInput;
-                    cin.ignore();
-                    cin.clear();
-                }
-                Card * giveCard = model.mover.getCurrentPlayer()->getHand()[model.getCardIndex(model.mover.getCurrentPlayer()->getPlayerLocStr(), model.mover.getCurrentPlayer())];
-                    //The above statment sets giveCard to the card that is in the players hand which
-                    // has the same name as the location he is in. The only way to get to this point is
-                    // to have already confirmed this card exists.
-                model.mover.shareKnowledge(toGive[pInput-1], giveCard);
-                break;
-            }
-            case 2:
-            {
-                vector<Player*> toGet = model.getSharablePlayers("get");
-                view.askGetKnowledge(toGet);
-                cout <<"player gets card... TEMP";//temporary place holder
-                break;
-            }
-            default:
-                cout <<"error in do_share_knowledge switch statement";//debug code
-        }
-
+        Card * giveCard = model.mover.getCurrentPlayer()->getHand()[model.getCardIndex(model.mover.getCurrentPlayer()->getPlayerLocStr(), model.mover.getCurrentPlayer())];
+        cout << "This is the give card " << giveCard->getCardName()<<endl;
+        //The above statment sets giveCard to the card that is in the players hand which
+        // has the same name as the location he is in. The only way to get to this point is
+        // to have already confirmed this card exists.
+        model.mover.shareKnowledge(model.mover.getCurrentPlayer(), toGive[pInput-1], giveCard);
     }
+    else if (model.canGetKnowledge())
+    {
+        vector<Player*> toGet = model.getSharablePlayers("get");
+        view.askGetKnowledge(toGet);
+        while (pInput < 1 || pInput > toGet.size())
+        {
+            cin >> pInput;
+            cin.ignore();
+            cin.clear();
+        }
+        Card * getCard = toGet[pInput-1]->getHand()[model.getCardIndex(model.mover.getCurrentPlayer()->getPlayerLocStr(),toGet[pInput-1])];
+            cout << "This is the get card " << getCard->getCardName()<<endl;
+        model.mover.shareKnowledge(toGet[pInput-1],model.mover.getCurrentPlayer(), getCard);
+    }
+    
+        
+    
 }
 
 void Controller::do_build_station() {
@@ -623,12 +612,12 @@ void Controller::do_save_game() {
     
     view.askFileName();
     getline(cin, name);			// get savegame name from user (reads whole line and discards end of line) cin will be empty after this call...
-
+    
 #ifdef __APPLE__ && __MACH__	// fix for 'certain' OSes...
     cin.ignore();
 	cin.clear();
 #endif
-
+    
     if (!name.empty()) {
         filename = name;
     }
@@ -652,7 +641,7 @@ bool Controller::isInVector(int x, vector<int>& vec)
 				return true;
 		}
 	}
-
+    
 	return false;
 }
 

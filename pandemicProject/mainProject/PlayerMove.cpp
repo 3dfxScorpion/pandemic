@@ -133,12 +133,12 @@ bool PlayerMove::canShuttleFlight(City* toMove){
     }
 }
 
-void PlayerMove::shareKnowledge(Player* _who, Card* _toGive) {
-    for ( int i = 0; i <= currentPlayer->getHandSize() - 1; i++ ) {
-        if ( currentPlayer->getHand()[i]->getCardName() ==
-            currentPlayer->getPlayerLocation()->getCityName() ) {
-            _who->addCard(currentPlayer->getHand()[i]);//add card to other palyers hand
-            currentPlayer->removeCard(i);//remove the card from your hand
+void PlayerMove::shareKnowledge(Player* giver, Player* reciever, Card* _toGive) {
+    for ( int i = 0; i <= giver->getHandSize() - 1; i++ ) {
+        if ( giver->getHand()[i]->getCardName() ==
+            giver->getPlayerLocation()->getCityName() ) {
+            reciever->addCard(giver->getHand()[i]);//add card to other palyers hand
+            giver->removeCard(i);//remove the card from your hand
         }
     }
 }
