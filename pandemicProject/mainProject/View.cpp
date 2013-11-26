@@ -95,14 +95,17 @@ void View::printGetOrGiveKnowlege(vector<string> s){
 }
 
 void View::askGiveKnowledge(vector<Player*> p){
-    cout << "Which of these players would you like to give knowledge?";
+    cout << "Which of these players would you like to give knowledge?\n";
     cout << menuPlayersVector(p);
 }
 void View::askGetKnowledge(vector<Player*> p){
-    cout << "Which of these players would you like to get knowledge?";
+    cout << "Which of these players would you like to get knowledge?\n";
     cout << menuPlayersVector(p);
 }
-
+void View::askForcedDiscard(vector<Card*> c){
+    cout << "Whick of these cards would you like to discard?\n";
+    cout << menuCardsVector(c, "Choose a card");
+}
 void View::printOutbreaks(vector<string> cities)
 {
 	int num = cities.size();

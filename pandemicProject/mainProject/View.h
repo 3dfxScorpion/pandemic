@@ -26,6 +26,9 @@ public:
     void printPlayersVector(vector<Player*>);
     void askGiveKnowledge(vector<Player*>);
     void askGetKnowledge(vector<Player*>);
+    void askForcedDiscard(vector<Card*>);
+    void askWhoToGiveCard(){cout << "Which player would you like to give a card to?\n";}
+    void askWhoToGetCard(){cout << "Which player would you like to get a card from?\n";}
     void printCantBuildRS(){cout << "You do not have the required card to build an RS here\n";}
     void printCubeCount(int red, int yellow, int blue, int black);
     void askLocationShuttleFlight(){cout << "Which city would you like to take a shuttle flight to?\n";}

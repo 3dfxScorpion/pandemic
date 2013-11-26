@@ -97,6 +97,7 @@ public:
 		cubes[disease] = number;
 	}
     bool canCureDisease(int);
+    int getCardIndex(string, Player*);//Takes the player and the name of a card and returns the hand index.
     vector<Player*> getSharablePlayers(string);
     void doCureDisease(int);
     bool canBuildResearchStation();

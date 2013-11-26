@@ -69,6 +69,7 @@ public:
   void doInfectRound();
   void doProcessMenu(Player*);
   void doEpidemic();
+  void forceDiscard(Player*);
   int run();
   bool isInVector(int, vector<int>&);
 

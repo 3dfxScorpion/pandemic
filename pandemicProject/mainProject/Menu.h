@@ -54,4 +54,5 @@ class Menu {
 string menuAdjCities(City*);
 string menuStringVector(vector<string>,string);
 string menuPlayersVector(vector<Player*>);
+string menuCardsVector(vector<Card*> cards,string label);
 #endif

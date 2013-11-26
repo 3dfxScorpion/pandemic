@@ -437,7 +437,7 @@ bool Controller::getLoadScenario() {
 void Controller::do_drive_ferry() {
     Player * p = model.mover.getCurrentPlayer();
     int input = -1; 
-	int vSize;
+	int vSize = -1;
     vector<string> adjs = p->getPlayerLocation()->getAdjCity();
     vSize = adjs.size();
     view.printAdjCities(p->getPlayerLocation());
@@ -451,6 +451,7 @@ void Controller::do_drive_ferry() {
         }
     }
     model.mover.moveAdjacent(model.worldMap.locateCity(adjs[input-1]));    // minus one to get synced with menu.
+
 }
 
 void Controller::do_direct_flight() {   //If it aint broke
@@ -501,6 +502,7 @@ void Controller::do_direct_flight() {   //If it aint broke
         }
         ++num;
     }
+    
 }
 
 void Controller::do_charter_flight() {    //Need a menu to list all cities or let character enter input :S
@@ -556,7 +558,8 @@ void Controller::do_cure_disease() {    //TODO needs a role check. Needs more te
 }
 
 void Controller::do_share_knowledge() {
-    int input = -1;
+    int input = -1;//Input for switch
+    int pInput = -1;//Input for "which player do you want to give/get to/from"
     vector<string> giveOrGet;
     if (model.canGiveKnowledge())
         giveOrGet.push_back("give");
@@ -578,7 +581,17 @@ void Controller::do_share_knowledge() {
             {
                 vector<Player*> toGive = model.getSharablePlayers("give");
                 view.askGiveKnowledge(toGive);
-                cout <<"player gives card... TEMP";//temporary place holder
+                while (pInput < 1 || pInput > toGive.size())
+                {
+                    cin >> pInput;
+                    cin.ignore();
+                    cin.clear();
+                }
+                Card * giveCard = model.mover.getCurrentPlayer()->getHand()[model.getCardIndex(model.mover.getCurrentPlayer()->getPlayerLocStr(), model.mover.getCurrentPlayer())];
+                    //The above statment sets giveCard to the card that is in the players hand which
+                    // has the same name as the location he is in. The only way to get to this point is
+                    // to have already confirmed this card exists.
+                model.mover.shareKnowledge(toGive[pInput-1], giveCard);
                 break;
             }
             case 2:
@@ -602,6 +615,7 @@ void Controller::do_build_station() {
         model.buildResearchStation();
     }
 }
+
 
 void Controller::do_save_game() {
     string filename = "autosave";
@@ -640,4 +654,24 @@ bool Controller::isInVector(int x, vector<int>& vec)
 	}
 
 	return false;
+}
+
+void Controller::forceDiscard(Player* p){
+    vector<Card*> pHand = p->getHand();
+    view.askForcedDiscard(pHand);   //get the players hand
+    int input = -1;
+    while (input < 1 || input > pHand.size())
+    {
+        cin >> input;
+        cin.ignore();
+        cin.clear();
+    }
+    //Instead of simply setting p->remove card directly I'm going through this loop to use the model.
+    for (int i = 0; i<=model.players.size()-1;i++)
+    {
+        if (model.players[i]->getPlayerName() == p->getPlayerName())
+            model.players[i]->removeCard(input-1);//remove selected card.
+    }
+    
+    
 }

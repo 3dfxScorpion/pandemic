@@ -554,7 +554,8 @@ bool Model::canGiveKnowledge()
     string pLocation = mover.getCurrentPlayer()->getPlayerLocStr();
     vector<Card*> pHand = mover.getCurrentPlayer()->getHand();
     for (int i = 0 ; i <= players.size()-1; i++)
-        if (pLocation == players[i]->getPlayerLocStr() && players[i]->getPlayerName() != mover.getCurrentPlayer()->getPlayerName())//if there is a different player on the same location as current
+        if (pLocation == players[i]->getPlayerLocStr() &&
+            players[i]->getPlayerName() != mover.getCurrentPlayer()->getPlayerName())//if there is a different player on the same location as current
             for (int k = 0 ; k<= pHand.size()-1; k++)
                 if (pHand[k]->getCardName() == pLocation)//Curr player has the city card he is in
                     return true;
@@ -576,6 +577,19 @@ bool Model::canGetKnowledge()
     return false;
 }
 
+int Model::getCardIndex(string cardName, Player * p){
+    vector<Card*>::iterator cItr;
+    vector<Card*> pHand = p->getHand();
+    int i = 0;
+    for (cItr = pHand.begin();cItr != pHand.end();cItr++){
+        Card* tmp = * cItr;
+        if (tmp->getCardName() == cardName)
+            return i;
+        i++;
+    }
+    return -1;// returns -1 if card doesn't exist
+    
+}
 //checks vector of city names to see if its there
 bool Model::alreadyOutbreak(string current, vector<string> previous)
 {
