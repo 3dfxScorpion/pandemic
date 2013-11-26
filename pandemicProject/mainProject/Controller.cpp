@@ -1,4 +1,5 @@
 #include "Controller.h"
+#include "displayOptions.h"
 
 // primary commands
 string cmds01[] = {
@@ -107,8 +108,6 @@ void Controller::doPlayerTurns() {
         menu.setMappedCubes("blue", model.getCubeCount(blue));
         menu.setMappedCubes("red", model.getCubeCount(red));
         menu.setMappedCubes("yellow", model.getCubeCount(yellow));
-        
-        
     }
 }
 
@@ -349,7 +348,8 @@ int Controller::run() {
 	// Change the internal buffer size:
 	SetConsoleScreenBufferSize(wHnd, bufferSize);
 #endif
-    bool test = false;
+
+	bool test = false;
     
     try {
         view.printTitle();
@@ -608,9 +608,13 @@ void Controller::do_save_game() {
     string name;
     
     view.askFileName();
-    getline(cin, name);		// get savegame name from user (reads whole line and discards end of line) cin will be empty after this call...
-    // cin.ignore();		// so this was removed because it waits for user to enter a line (or press enter)
-	// cin.clear();			// and you should not need this...
+    getline(cin, name);			// get savegame name from user (reads whole line and discards end of line) cin will be empty after this call...
+
+#ifdef __APPLE__ && __MACH__	// fix for 'certain' OSes...
+    cin.ignore();
+	cin.clear();
+#endif
+
     if (!name.empty()) {
         filename = name;
     }

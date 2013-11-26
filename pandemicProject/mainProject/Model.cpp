@@ -515,6 +515,7 @@ void Model::doOutbreak(City* Cptr, int color, vector<string>&prevOB)
 	}
 	return;
 }
+
 vector<Player*> Model::getSharablePlayers(string giveOrTake)
 {
     vector<Player*> ret;
@@ -556,6 +557,7 @@ bool Model::canGiveKnowledge()
                     return true;
     return false;
 }
+
 bool Model::canGetKnowledge()
 {
     string pLocation = mover.getCurrentPlayer()->getPlayerLocStr();
