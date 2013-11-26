@@ -337,13 +337,13 @@ int Controller::run() {
 	SetConsoleTitle(TEXT("Pandemic"));
 
 	// Set up the required window size:
-	SMALL_RECT windowSize = {0, 0, 99, 69};
+	SMALL_RECT windowSize = {0, 0, 119, 69};
 
 	// Change the console window size:
 	SetConsoleWindowInfo(wHnd, TRUE, &windowSize);
 
 	// Create a COORD to hold the buffer size:
-	COORD bufferSize = {100, 100};
+	COORD bufferSize = {120, 100};
 
 	// Change the internal buffer size:
 	SetConsoleScreenBufferSize(wHnd, bufferSize);
