@@ -263,6 +263,9 @@ void Model::savegame(string filename) {
 		fp_out << getOutbreak() << ","					// save outbreak and infection levels
 			<< getInfRate() << endl;
 
+		//fp_out << "***** Current Player *****" << endl;
+		fp_out << mover.getCurrentPlayer()->getPlayerName() << endl;
+
 		//fp_out << "***** Players *****" << endl;
 		fp_out << getNumPlayers() << endl;
 		for(int i = 0; i < getNumPlayers(); i++) {		// save players

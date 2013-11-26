@@ -22,7 +22,7 @@ void PlayerMove::moveAdjacent(City* toMove) {
     string destination = toMove->getCityName();
     vector<string> adjCities = currentPlayer->getPlayerLocation()->getAdjCity();
     //check if the requested city is adjacent
-    for ( int i = 0; i <= toMove->getNumberAdjacent(); i++ ) {
+    for ( int i = 0; i <= adjCities.size(); i++ ) {
         if ( destination == adjCities[i] ) {
             isAdj = true;  // if adj city is found set true
             break;         // found the city, no need to loop further.
@@ -58,7 +58,6 @@ void PlayerMove::directFlight(City* toMove) {
         << " does not have the required card to move to "
         << destination << endl;
 }
-
 
 bool PlayerMove::canDirectFlight(City* toMove){
     string destination = toMove->getCityName();
@@ -107,10 +106,6 @@ bool PlayerMove::canCharterFlight(City* toMove){
     
     return false;
 }
-
-
-
-
 
 //Move from city with research station to any other city that has research station.
 void PlayerMove::shuttleFlight(City* toMove) {

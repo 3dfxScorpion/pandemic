@@ -69,7 +69,6 @@ ICard* IDeck::takeCard() {
     return tmp;
 }
 
-
 //Draws the bottom card from the deck (for epidemic)
 ICard* IDeck::takeBottomCard()
 {
@@ -83,8 +82,6 @@ ICard* IDeck::takeBottomCard()
 	size--;									//shrinkage
 	return tmp;								//return it
 }
-
-
 
 //
 //Randomly places the discard pile at the top of the infection deck
@@ -108,6 +105,7 @@ void IDeck::saveGame(ofstream &fp) {
 		fp << deck[i]->getName() << "," << deck[i]->getColor() << endl;
 	}
 
+	//fp << "***** Infection Discard Pile *****" << endl;
 	fp << discard.size() << endl;
 	for(int i = 0; i < int(discard.size()); i++) {
 		fp << discard[i]->getName() << "," << discard[i]->getColor() << endl;
