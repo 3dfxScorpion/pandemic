@@ -27,19 +27,19 @@ Controller::Controller() {
 void Controller::setPlayerCount() {
     view.askNumOfPlayers();
     cin >> temp;
-    cin.ignore();
-    
+
     //if improper input, loop till proper
     while (temp < 2 || temp > 4) {
         if (cin.fail()) {
+			cin.clear();
+			cin.ignore(256,'\n');
             view.printNonNumeric();
-            return;
         } else if (temp < 2 || temp > 4) {
             view.printBadPlayerCt();
-            view.askNumOfPlayers();
-            cin >> temp;
-            cin.ignore();
         }
+		view.askNumOfPlayers();
+		cin >> temp;
+        cin.ignore();
     }
     
     model.setNumPlayers(temp);
