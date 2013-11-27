@@ -18,17 +18,17 @@ using std::ostringstream;
 
 int main()
 {
-	Controller controller;
-	while(controller.run())
-	{
-															
-	}
+    Controller controller;
+    while(controller.run())
+    {
+                                                            
+    }
 
 
-	
-	return 0;
+    
+    return 0;
 
-	
+    
 }
 
 

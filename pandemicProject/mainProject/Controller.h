@@ -52,7 +52,7 @@ public:
           &Controller::do_share_knowledge,
           &Controller::do_build_station,
           &Controller::do_save_game,
-		  &Controller::do_quit_game
+          &Controller::do_quit_game
       };
       for ( size_t idx = 0; idx < 9; idx++ ) {
           mappedFuncs[idx] = fns[idx];
@@ -74,13 +74,13 @@ public:
   bool isInVector(int, vector<int>&);
 
 private:
-  View view;				//the view we're using
-  Model model;				//the model
-  Menu menu;				//the menu
+  View view;                //the view we're using
+  Model model;                //the model
+  Menu menu;                //the menu
   int temp;
   string tempStr;
-  City* cityP;				//pointer to a city
-  ICard* iCardP;			//pointer to an iCard
+  City* cityP;                //pointer to a city
+  ICard* iCardP;            //pointer to an iCard
   map<int, menuFunctions> mappedFuncs;
   vector<string> commands;
 };

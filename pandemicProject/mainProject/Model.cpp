@@ -4,152 +4,152 @@
 // Default constructor
 Model::Model()
 {
-	//set default values
-	numPlayers = -1;								
-	currentRate = outbreak = resSta = 0;							//inits
-	infRate[0] = infRate[1] = infRate[2] = 2;
-	infRate[3] = infRate[4] = 3;
-	infRate[5] = infRate[6] = 4; 
-	
-	//initialize cube count to 24, and all diseases to uncured
-	for(int i = 0; i <4; i++)
-	{
-		cubes[i] = 24;
-		cureStatus[i] = uncured;
-	}
+    //set default values
+    numPlayers = -1;                                
+    currentRate = outbreak = resSta = 0;                            //inits
+    infRate[0] = infRate[1] = infRate[2] = 2;
+    infRate[3] = infRate[4] = 3;
+    infRate[5] = infRate[6] = 4; 
+    
+    //initialize cube count to 24, and all diseases to uncured
+    for(int i = 0; i <4; i++)
+    {
+        cubes[i] = 24;
+        cureStatus[i] = uncured;
+    }
 
-	//set the roles vector
-	rolesDeck.push_back("Contingency Planner");
-	rolesDeck.push_back("Operations Expert");
-	rolesDeck.push_back("Dispatcher");
-	rolesDeck.push_back("Quarantine Specialist");
-	rolesDeck.push_back("Medic");
-	rolesDeck.push_back("Scientist");
-	rolesDeck.push_back("Researcher");
+    //set the roles vector
+    rolesDeck.push_back("Contingency Planner");
+    rolesDeck.push_back("Operations Expert");
+    rolesDeck.push_back("Dispatcher");
+    rolesDeck.push_back("Quarantine Specialist");
+    rolesDeck.push_back("Medic");
+    rolesDeck.push_back("Scientist");
+    rolesDeck.push_back("Researcher");
 }
 
 // currentRate six indexes seventh and highest infection rate
 // method increments if not already at six
 void Model::incrementCurrentRate()
 {
-	if(currentRate < 6)//six is max
-		currentRate++;
+    if(currentRate < 6)//six is max
+        currentRate++;
 
-	return;
+    return;
 }
 
 //takes index of desired disease as parameter, changes cure status to cured
 //function currently ignores improper parameter value
 void Model::cureDisease(int disease)
 {
-	if (0 <= disease && disease <= 3)
-		cureStatus[disease] = cured;
+    if (0 <= disease && disease <= 3)
+        cureStatus[disease] = cured;
 
-	return;
-	
+    return;
+    
 }
 
 //takes index of desired disease as parameter, changes cure status to erad
 //function currently ignores improper parameter value
 void Model::eradicateDisease(int disease)
 {
-	if (0 <= disease && disease <= 3)
-		cureStatus[disease] = eradicated;
+    if (0 <= disease && disease <= 3)
+        cureStatus[disease] = eradicated;
 
-	return;
+    return;
 }
 
 // returns a random role as a string
 string Model::drawRole()
 {
-	int num;
-	string tmp;
-	srand((unsigned int)time(NULL));					//getting seedy
-	num = rand() % rolesDeck.size();					//index into the deck;
-	tmp = rolesDeck[num];								//store the role
-	rolesDeck.erase(rolesDeck.begin()+num);				//erase from ze vectah
+    int num;
+    string tmp;
+    srand((unsigned int)time(NULL));                    //getting seedy
+    num = rand() % rolesDeck.size();                    //index into the deck;
+    tmp = rolesDeck[num];                                //store the role
+    rolesDeck.erase(rolesDeck.begin()+num);                //erase from ze vectah
 
-	return tmp;											//return that bad bitch
+    return tmp;                                            //return that bad bitch
 }
 
 void Model::prepareGame()
 {
-	City* cityP;
-	//Set up the game:
-	//	Place research  and players in atlanta, research station in Atlanta
-	//	Assign roles to players
-	//	Shuffle deck, distribute epidemic cards evenly (4, 5, or 6 epids for easy med hard)
-	//	Deal cards: 2 players-4 cards, 3players-3 cards, 4 players-2 cards
-	cityP = worldMap.locateCity("Atlanta");		//find atlanta
-	cityP->setResearchStation(true);			//set the station
-	incResSta();								//increment ressta count
-	for (int i = 0; i < getNumPlayers(); i++)	//for all players
-	{
-		players[i]->setPlayerRole(drawRole());			// assign a random role
-		players[i]->setPlayerLocation(cityP);			//set all player locations to Atlanta
-	}
+    City* cityP;
+    //Set up the game:
+    //    Place research  and players in atlanta, research station in Atlanta
+    //    Assign roles to players
+    //    Shuffle deck, distribute epidemic cards evenly (4, 5, or 6 epids for easy med hard)
+    //    Deal cards: 2 players-4 cards, 3players-3 cards, 4 players-2 cards
+    cityP = worldMap.locateCity("Atlanta");        //find atlanta
+    cityP->setResearchStation(true);            //set the station
+    incResSta();                                //increment ressta count
+    for (int i = 0; i < getNumPlayers(); i++)    //for all players
+    {
+        players[i]->setPlayerRole(drawRole());            // assign a random role
+        players[i]->setPlayerLocation(cityP);            //set all player locations to Atlanta
+    }
 
-	//draw inital hand:
-	// players initially draw (6-numPlayers) cards
-	for(int j=0; j < getNumPlayers(); j++)
-	{
-		for(int i=0; i < (6-getNumPlayers()); i++)					// inefficiency ignored for the moment
-		{
-			players[j]->addCard(playerDeck.takeCard());		//draw a card
-		}
-	}
+    //draw inital hand:
+    // players initially draw (6-numPlayers) cards
+    for(int j=0; j < getNumPlayers(); j++)
+    {
+        for(int i=0; i < (6-getNumPlayers()); i++)                    // inefficiency ignored for the moment
+        {
+            players[j]->addCard(playerDeck.takeCard());        //draw a card
+        }
+    }
 }
 
 void Model::initialInfect()
 {
-	//Infect nine cities:
-	//  3x3, then 3x2, then 3x1
-	//	
-	for(int i = 3; i>0; i--)//for changing cube counts each passr
-	{
-		int color;
-			
-		for(int j=0; j<3; j++){
-			ICard* iCardP;
-			City* cityP;
-			string s;
-			iCardP = infectedDeck.takeCard();									//get a card
-			s = iCardP->getName();												//store its name
-			color = iCardP->getColor();											//store enumerated color
-			cityP = worldMap.locateCity(s);										//get a pointer to the city based on its name
-			if(cityP == NULL)
-				cout << "Houston, we've had a problem.\nFailure in Model::initialInfect()\n";
-			infectCity(cityP, color, i);										//infect the city 
-			
-		}
-	}   
+    //Infect nine cities:
+    //  3x3, then 3x2, then 3x1
+    //    
+    for(int i = 3; i>0; i--)//for changing cube counts each passr
+    {
+        int color;
+            
+        for(int j=0; j<3; j++){
+            ICard* iCardP;
+            City* cityP;
+            string s;
+            iCardP = infectedDeck.takeCard();                                    //get a card
+            s = iCardP->getName();                                                //store its name
+            color = iCardP->getColor();                                            //store enumerated color
+            cityP = worldMap.locateCity(s);                                        //get a pointer to the city based on its name
+            if(cityP == NULL)
+                cout << "Houston, we've had a problem.\nFailure in Model::initialInfect()\n";
+            infectCity(cityP, color, i);                                        //infect the city 
+            
+        }
+    }   
 }
 
 //TO DO: add outbreak checking for this method
 void Model::infectCity(City* cityP, int color, int count)
 {
-	if (color == red){
-				cityP->setInfectedRed(cityP->getInfectedRed() + (count));					//For the appropriate color increase their cubes, remove them from the
-				removeCubes(red,(count));												//stock of available cubes.  Would be more straightforward if setInfected... was addInfected
-			}
-			else if (color == yellow){
-				cityP->setInfectedYellow(cityP->getInfectedYellow() + (count));
-				removeCubes(yellow,(count));
-			}
-			else if (color == blue){
-				cityP->setInfectedBlue(cityP->getInfectedBlue() + (count));
-				removeCubes(blue,(count));
-			}
-			else if (color == black){
-				cityP->setInfectedBlack(cityP->getInfectedBlack() + (count));
-				removeCubes(black,(count));
-			}
+    if (color == red){
+                cityP->setInfectedRed(cityP->getInfectedRed() + (count));                    //For the appropriate color increase their cubes, remove them from the
+                removeCubes(red,(count));                                                //stock of available cubes.  Would be more straightforward if setInfected... was addInfected
+            }
+            else if (color == yellow){
+                cityP->setInfectedYellow(cityP->getInfectedYellow() + (count));
+                removeCubes(yellow,(count));
+            }
+            else if (color == blue){
+                cityP->setInfectedBlue(cityP->getInfectedBlue() + (count));
+                removeCubes(blue,(count));
+            }
+            else if (color == black){
+                cityP->setInfectedBlack(cityP->getInfectedBlack() + (count));
+                removeCubes(black,(count));
+            }
 
 
-			//Check for out of cubes game over state
-			if(cubes[color] < 0){
-				throw PandemicException("A disease has spread too much!");
-			}
+            //Check for out of cubes game over state
+            if(cubes[color] < 0){
+                throw PandemicException("A disease has spread too much!");
+            }
 }
 
 bool Model::QSautoContain(ICard* icardP){
@@ -247,100 +247,100 @@ void Model::treatDisease(int col, int status){
 }
 
 void Model::savegame(string filename) {
-	ofstream fp_out(filename, ios::out);				// open/create savegame file with name(filename)
-	
-	if(fp_out.is_open()) {								// test if file is open
-		//fp_out << "***** Game Difficulty *****" << endl;
-		fp_out << getDifficulty() << endl;				// save game difficulty
+    ofstream fp_out(filename, ios::out);                // open/create savegame file with name(filename)
+    
+    if(fp_out.is_open()) {                                // test if file is open
+        //fp_out << "***** Game Difficulty *****" << endl;
+        fp_out << getDifficulty() << endl;                // save game difficulty
 
-		//fp_out << "***** Cube Counts *****" << endl;
-		for(int i = 0; i < 4; i++) {
-			fp_out << getCubeCount(i) << ",";			// save cube counts
-		}
-		fp_out << endl;
+        //fp_out << "***** Cube Counts *****" << endl;
+        for(int i = 0; i < 4; i++) {
+            fp_out << getCubeCount(i) << ",";            // save cube counts
+        }
+        fp_out << endl;
 
-		//fp_out << "***** Outbreak & Infection Levels *****" << endl;
-		fp_out << getOutbreak() << ","					// save outbreak and infection levels
-			<< getInfRate() << endl;
+        //fp_out << "***** Outbreak & Infection Levels *****" << endl;
+        fp_out << getOutbreak() << ","                    // save outbreak and infection levels
+            << getInfRate() << endl;
 
-		//fp_out << "***** Players *****" << endl;
-		fp_out << getNumPlayers() << endl;
-		for(int i = 0; i < getNumPlayers(); i++) {		// save players
-			fp_out	<< players[i]->getPlayerName()	<< ","
-					<< players[i]->getPlayerRole()	<< ","
-					<< players[i]->getPlayerLocStr() << endl;
-			vector<Card*> playerHand = players[i]->getHand();
-			fp_out << playerHand.size() << endl;
-			for(int j = 0; j < int(playerHand.size()); j++) {
-				fp_out	<< playerHand[j]->getCardName()
-						<< "," << playerHand[j]->getID()
-						<< endl;
-			}
-		}
+        //fp_out << "***** Players *****" << endl;
+        fp_out << getNumPlayers() << endl;
+        for(int i = 0; i < getNumPlayers(); i++) {        // save players
+            fp_out    << players[i]->getPlayerName()    << ","
+                    << players[i]->getPlayerRole()    << ","
+                    << players[i]->getPlayerLocStr() << endl;
+            vector<Card*> playerHand = players[i]->getHand();
+            fp_out << playerHand.size() << endl;
+            for(int j = 0; j < int(playerHand.size()); j++) {
+                fp_out    << playerHand[j]->getCardName()
+                        << "," << playerHand[j]->getID()
+                        << endl;
+            }
+        }
 
-		//fp_out << "***** Current Player *****" << endl;
-		fp_out << mover.getCurrentPlayer()->getPlayerName() << endl;
+        //fp_out << "***** Current Player *****" << endl;
+        fp_out << mover.getCurrentPlayer()->getPlayerName() << endl;
 
-		//fp_out << "***** Infection Decks *****" << endl;
-		infectedDeck.saveGame(fp_out);					// save infection deck & discard deck
+        //fp_out << "***** Infection Decks *****" << endl;
+        infectedDeck.saveGame(fp_out);                    // save infection deck & discard deck
 
-		//fp_out << "***** City Deck *****" << endl;
-		playerDeck.saveGame(fp_out);					// save city deck
+        //fp_out << "***** City Deck *****" << endl;
+        playerDeck.saveGame(fp_out);                    // save city deck
 
-		//fp_out << "***** Map *****" << endl;
-		worldMap.saveGame(fp_out);						// save map to file
-		fp_out.close();									// close file
-	}
-	else
-		; // throw error
+        //fp_out << "***** Map *****" << endl;
+        worldMap.saveGame(fp_out);                        // save map to file
+        fp_out.close();                                    // close file
+    }
+    else
+        ; // throw error
 }
 
 void Model::loadgame(string filename) {
-	std::string input;
-	std::string::size_type sz;
-	ifstream fp_in(filename, ios::in);
+    std::string input;
+    std::string::size_type sz;
+    ifstream fp_in(filename, ios::in);
 
-	if(fp_in.is_open()) {
-		std::getline(fp_in,input);
-		setDifficulty(std::stoi(input,&sz));		// game difficulty
+    if(fp_in.is_open()) {
+        std::getline(fp_in,input);
+        setDifficulty(std::stoi(input,&sz));        // game difficulty
 
-		for(int i = 0; i < 4; i++) {				// cube counts
-			std::getline(fp_in,input, ',');
-			setCubeCount(i,std::stoi(input,&sz));
-		}
+        for(int i = 0; i < 4; i++) {                // cube counts
+            std::getline(fp_in,input, ',');
+            setCubeCount(i,std::stoi(input,&sz));
+        }
 
-		std::getline(fp_in,input,',');
-		setOutbreak(std::stoi(input,&sz));			// outbreak
+        std::getline(fp_in,input,',');
+        setOutbreak(std::stoi(input,&sz));            // outbreak
 
-		std::getline(fp_in,input);
-		setInfection(std::stoi(input,&sz));			// infection
+        std::getline(fp_in,input);
+        setInfection(std::stoi(input,&sz));            // infection
 
-		std::getline(fp_in,input);
-		setNumPlayers(std::stoi(input,&sz));		// number of players
+        std::getline(fp_in,input);
+        setNumPlayers(std::stoi(input,&sz));        // number of players
 
-		for(int i = 0; i < getNumPlayers(); i++) {
-			string playerName, playerRole, playerLocation;
-			std::getline(fp_in,playerName,',');
-			std::getline(fp_in,playerRole,',');
-			std::getline(fp_in,playerLocation);
-			players.push_back(new Player(playerName, playerRole, worldMap.locateCity(playerLocation)));
-			std::getline(fp_in,input);
-			for(int j = 0; j < std::stoi(input,&sz); j++) {
-				// restore player hand
-			}
-		}
+        for(int i = 0; i < getNumPlayers(); i++) {
+            string playerName, playerRole, playerLocation;
+            std::getline(fp_in,playerName,',');
+            std::getline(fp_in,playerRole,',');
+            std::getline(fp_in,playerLocation);
+            players.push_back(new Player(playerName, playerRole, worldMap.locateCity(playerLocation)));
+            std::getline(fp_in,input);
+            for(int j = 0; j < std::stoi(input,&sz); j++) {
+                // restore player hand
+            }
+        }
 
-//		playerDeck.loadGame(fp_in);					// player deck
+//        playerDeck.loadGame(fp_in);                    // player deck
 
-//		infectedDeck.loadGame(fp_in);				// infected deck
+//        infectedDeck.loadGame(fp_in);                // infected deck
 
-//		worldMap.loadGame(fp_in);					// world map
+//        worldMap.loadGame(fp_in);                    // world map
 
-		fp_in.close();								// close file
+        fp_in.close();                                // close file
    }
 
    else
-		; // throw error
+        ; // throw error
 }
 
 vector<string> Model::getReasearchStationCities(){
@@ -425,10 +425,10 @@ void Model::doCureDisease(int col){
         }
         if (colorNum>=5){
             cureDisease(col);
-			if(allCured())//win condition check after curing a disease
-			{
-				throw PandemicException("All diseases cured! You win!");
-			}
+            if(allCured())//win condition check after curing a disease
+            {
+                throw PandemicException("All diseases cured! You win!");
+            }
 
             for (int k =0;k<=int(toRemove.size()-1);k++)
                 mover.getCurrentPlayer()->removeCard(toRemove[k]);//discard the 5 city cards.
@@ -439,18 +439,18 @@ void Model::doCureDisease(int col){
 
 bool Model::allCured()
 {
-	if(
-		(cureStatus[blue] == cured || cureStatus[blue] == eradicated) &&
-		(cureStatus[red] == cured || cureStatus[red] == eradicated) &&
-		(cureStatus[black] == cured || cureStatus[black] == eradicated) &&
-		(cureStatus[yellow] == cured || cureStatus[yellow] == eradicated))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if(
+        (cureStatus[blue] == cured || cureStatus[blue] == eradicated) &&
+        (cureStatus[red] == cured || cureStatus[red] == eradicated) &&
+        (cureStatus[black] == cured || cureStatus[black] == eradicated) &&
+        (cureStatus[yellow] == cured || cureStatus[yellow] == eradicated))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 string Model::colorToString(int col){//Just to make life easier
@@ -479,44 +479,44 @@ switch (col)
 //Function uses a reference to a vector to store the list of cities outbreaks occurred in during gameplay - controller uses this to pass to view
 void Model::doOutbreak(City* Cptr, int color, vector<string>&prevOB)
 {
-	int size, tmp;
-	City* currentAdj;
-	string cities;
-	vector<string> adjCities;											//stores vector of adjacent cities
+    int size, tmp;
+    City* currentAdj;
+    string cities;
+    vector<string> adjCities;                                            //stores vector of adjacent cities
 
-	if(!alreadyOutbreak(Cptr->getCityName(), prevOB))					//do if city hasnt already had outbreak this round
-	{
-		incrementOutbreak();											//increment count of outbreaks
-		prevOB.push_back(Cptr->getCityName());							//add current city to list of cities that had an outbreak this round
-		adjCities = Cptr->getAdjCity();									//get vector of adjacent city names
-		size = adjCities.size();										//store the size of the vector
-		
-		for(int i=0; i<size; i++)										//for each adjacent city in the list
-		{
-			currentAdj = worldMap.locateCity(adjCities[i]);				//save pointer to current adjacent city
-			
-			if(color == black)												//store the current count of cubes for specified color in tmp
-				tmp = currentAdj->getInfectedBlack();						//similar if else block used in controller
-			else if(color==blue)											//prime candidate for refactoring if time permits
-				tmp = currentAdj->getInfectedBlue();						//better way would be to remove this completely
-			else if(color ==red)											//and have the city method take the desired color as a parameter
-				tmp = currentAdj->getInfectedRed();							//---may do that later - D GOOSE
-			else
-				tmp = currentAdj->getInfectedYellow();
+    if(!alreadyOutbreak(Cptr->getCityName(), prevOB))                    //do if city hasnt already had outbreak this round
+    {
+        incrementOutbreak();                                            //increment count of outbreaks
+        prevOB.push_back(Cptr->getCityName());                            //add current city to list of cities that had an outbreak this round
+        adjCities = Cptr->getAdjCity();                                    //get vector of adjacent city names
+        size = adjCities.size();                                        //store the size of the vector
+        
+        for(int i=0; i<size; i++)                                        //for each adjacent city in the list
+        {
+            currentAdj = worldMap.locateCity(adjCities[i]);                //save pointer to current adjacent city
+            
+            if(color == black)                                                //store the current count of cubes for specified color in tmp
+                tmp = currentAdj->getInfectedBlack();                        //similar if else block used in controller
+            else if(color==blue)                                            //prime candidate for refactoring if time permits
+                tmp = currentAdj->getInfectedBlue();                        //better way would be to remove this completely
+            else if(color ==red)                                            //and have the city method take the desired color as a parameter
+                tmp = currentAdj->getInfectedRed();                            //---may do that later - D GOOSE
+            else
+                tmp = currentAdj->getInfectedYellow();
 
 
-			if(tmp<3)														//if infecting the city doesnt cause an outbreak
-			{
-				infectCity(currentAdj, color, 1);							//infect this city with a single cube of the specified color
-			}
-			else                                                            //otherwise a C-C-COMBO OUTBREAK OCCURS
-			{
-				doOutbreak(currentAdj, color, prevOB);						//C-C-C-COMBO
-			}
-		}
+            if(tmp<3)                                                        //if infecting the city doesnt cause an outbreak
+            {
+                infectCity(currentAdj, color, 1);                            //infect this city with a single cube of the specified color
+            }
+            else                                                            //otherwise a C-C-COMBO OUTBREAK OCCURS
+            {
+                doOutbreak(currentAdj, color, prevOB);                        //C-C-C-COMBO
+            }
+        }
 
-	}
-	return;
+    }
+    return;
 }
 
 vector<Player*> Model::getSharablePlayers(string giveOrTake)
@@ -593,17 +593,17 @@ int Model::getCardIndex(string cardName, Player * p){
 //checks vector of city names to see if its there
 bool Model::alreadyOutbreak(string current, vector<string> previous)
 {
-	bool tmp = false;
-	int size = previous.size();
+    bool tmp = false;
+    int size = previous.size();
 
-	if(!previous.empty())					//if vector isnt empty
-	{
-		for(int i = 0; i<size; i++){       
-			if(current == previous[i]){     //tmp = true if this city name is in the vector
-				tmp = true;
-			}				
-		}
-	}
-	
-	return tmp;
+    if(!previous.empty())                    //if vector isnt empty
+    {
+        for(int i = 0; i<size; i++){       
+            if(current == previous[i]){     //tmp = true if this city name is in the vector
+                tmp = true;
+            }                
+        }
+    }
+    
+    return tmp;
 }

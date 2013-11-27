@@ -178,26 +178,28 @@ string menuCardsVector(vector<Card*> cards, string label) {         // static me
 
 string Menu::menuHands(vector<Player*> plyrs) {
     size_t playerCount = 1;
-    const size_t totalCount = 13;        // number of slots for cards
+    const size_t totalCount = 14;        // number of slots for cards
     ostringstream out;
     ostringstream str[totalCount];
     vector<Player*>::iterator pItr;      // players iterator
     vector<Card*>::iterator   cItr;      // cards iterator
-    str[2] << "----------------------------------------------------------------------------------------------------";
+    str[3] << "----------------------------------------------------------------------------------------------------";
     // loop for as many times as there are players
     for ( pItr = plyrs.begin(); pItr != plyrs.end(); pItr++ ) {
         Player* pTmp = *pItr;
         str[0] << setw(12) << right << pTmp->getPlayerName()
                << setw(12) << left << " ";
-        str[1] << " in " << setw(20) << left << pTmp->getPlayerLocStr();
+        str[1] << " the " << setw(18) << left << pTmp->getPlayerRole();
+        str[2] << " in " << setw(20) << left << pTmp->getPlayerLocStr();
 
         if ( playerCount < plyrs.size() )
             str[0] << " ";               // space, the final frontier...
             str[1] << " ";               // space, the final frontier...
+            str[2] << " ";               // space, the final frontier...
 
         vector<Card*> hand = pTmp->getHand();
         size_t cardCount = hand.size();  // hand size of current players
-        size_t cardIndex = 3;            // card index is third line down
+        size_t cardIndex = 4;            // card index is fourth line down
         // first display actual cards in hand
         for ( cItr = hand.begin(); cItr != hand.end(); cItr++ ) {
             Card* cTmp = *cItr;
@@ -248,6 +250,10 @@ string Menu::menuCommands(vector<string> commands) {
     for ( size_t j = 0; j < cubeCount; j++ ) {
         str[j] << setw(2) << left << mappedCubes[cubes[j]]; 
     }
+
+    /*  adding current infection rate... */
+    str[1] << setw(14) << right << getInfectionRate(); 
+
     for ( size_t i = 0; i < slotCount; i++ ) {
         out << str[i].str() << "\n";
     }
@@ -262,7 +268,7 @@ void Menu::showMenu(Player* p) {
     out << "====================================================================================================\n";
     out << menuHands(players);
     out << "====================================================================================================\n";
-    out << setw(12) << right << p->getPlayerName() << setw(45) << left << " select from the following (10 to Exit):" << "Cubes Remaining:\n";
+    out << setw(12) << right << p->getPlayerName() << setw(45) << left << " select from the following (10 to Exit):" << "Cubes Remaining:   Infection Rate:\n";
     out << menuCommands(commands);
     cout << out.str();
 }
@@ -270,38 +276,49 @@ void Menu::showMenu(Player* p) {
 //prints the hand passed to it -- using this in case of hand overflow
 void Menu::discardMenu(vector<Card*>hand)
 {
-	int num;
-	ostringstream out;
+    int num;
+    ostringstream out;
     out << "====================================================================================================\n";
-	out << "You're holding too many cards.  Select one to discard or play (if event card chosen):\n";
-	out << "----------------------------------------------------------------------------------------------------\n";
+    out << "You're holding too many cards.  Select one to discard or play (if event card chosen):\n";
+    out << "----------------------------------------------------------------------------------------------------\n";
 
-	num = hand.size();
-	for(int i=0; i<num; i++)
-	{
-		out << "(" << i << ")" << hand[i]->getCardName() << "\n";
-	}
+    num = hand.size();
+    for(int i=0; i<num; i++)
+    {
+        out << "(" << i << ")" << hand[i]->getCardName() << "\n";
+    }
 
 
-	cout << out.str();
+    cout << out.str();
 }
 
 //Gives user options to play an event card between two consecutive epidemics
 void Menu::doubleEpEventMenu(vector<Card*>hand, vector<int>index)
 {
-	int num;
-	int i=0;
-	ostringstream out;
+    int num;
+    int i=0;
+    ostringstream out;
     out << "====================================================================================================\n";
-	out << "You've drawn two Epidemics! Choose an event card to play from below:\n";
-	out << "----------------------------------------------------------------------------------------------------\n";
+    out << "You've drawn two Epidemics! Choose an event card to play from below:\n";
+    out << "----------------------------------------------------------------------------------------------------\n";
 
-	num = index.size();
-	for(i; i<num; i++)	//for each index representing an event card
-	{
-		out << "(" << i << ")" << hand[index[i]]->getCardName() << "\n";
-	}
+    num = index.size();
+    for(i; i<num; i++)    //for each index representing an event card
+    {
+        out << "(" << i << ")" << hand[index[i]]->getCardName() << "\n";
+    }
 
-	out << "(" << i << ")No thanks\n";									//option to do nothing
-	cout << out.str();
+    out << "(" << i << ")No thanks\n";                                    //option to do nothing
+    cout << out.str();
 }
+
+void Menu::updateMenu(Model& m) {
+    setInfectionRate(m.getInfRate());
+    setMenuMap(m.worldMap);
+    setMenuPlayers(m.players);
+    setMappedCubes("black", m.getCubeCount(black));
+    setMappedCubes("blue", m.getCubeCount(blue));
+    setMappedCubes("red", m.getCubeCount(red));
+    setMappedCubes("yellow", m.getCubeCount(yellow));
+}
+

@@ -7,14 +7,14 @@ class EpidemicCard : public Card {
     string description;
 
   public:
-    EpidemicCard(int id, string name, string desc = "tbd") :
-        Card(id, name),	description(desc) {}
+    EpidemicCard(int id, string name, string desc = "EPIDEMIC") :
+        Card(id, name),    description(desc) {}
 
-    string getDescription() {	return description; }
+    string getDescription() {    return description; }
 
     string ToString() {
         ostringstream out;
-        out << "!!-Epidemic-!!";
+        out << description;
         return out.str();
     }
 };

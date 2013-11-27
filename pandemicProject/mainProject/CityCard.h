@@ -3,7 +3,7 @@
 #include "Card.h"
 
 class CityCard : public Card {
-  private:		
+  private:        
     string color;
     string country;
 

@@ -4,6 +4,7 @@
 #include "Card.h"
 #include "Deck.h"
 #include "Map.h"
+#include "Model.h"
 #include "Player.h"
 
 using std::map;
@@ -18,14 +19,16 @@ class Menu {
             setMappedCommands(commands);
     }
     // getters
-    Map&            getMenuMap()         { return menuMap;    }
-    vector<Player*> getMenuPlayers()     { return players;    }
-    vector<string>  getMenuCommands()    { return commands;   }
-    map<int,string> getMappedCommands()  { return mappedCmds; }
-		// setters
-    void setMenuMap(Map& m)                { menuMap  = m; }
-    void setMenuPlayers(vector<Player*> p) { players  = p; }
-    void setMenuCommands(vector<string> s) { commands = s; }
+    int             getInfectionRate()   { return infectionRate; }
+    Map&            getMenuMap()         { return menuMap;       }
+    vector<Player*> getMenuPlayers()     { return players;       }
+    vector<string>  getMenuCommands()    { return commands;      }
+    map<int,string> getMappedCommands()  { return mappedCmds;    }
+    // setters
+    void setInfectionRate(int r)           { infectionRate  = r; }
+    void setMenuMap(Map& m)                { menuMap        = m; }
+    void setMenuPlayers(vector<Player*> p) { players        = p; }
+    void setMenuCommands(vector<string> s) { commands       = s; }
     void setMappedCubes(string c, int n)   { mappedCubes[c] = n; }
     void setMappedCommands(vector<string> c) {
         size_t idx = 0;
@@ -40,8 +43,9 @@ class Menu {
     string menuHands(vector<Player*>);
     string menuCommands(vector<string>);
     void showMenu(Player*);
-	void discardMenu(vector<Card*>);
-	void doubleEpEventMenu(vector<Card*>, vector<int>);
+    void discardMenu(vector<Card*>);
+    void doubleEpEventMenu(vector<Card*>, vector<int>);
+    void updateMenu(Model&);
 
   private:
     Map menuMap;
@@ -49,6 +53,7 @@ class Menu {
     map<int,string> mappedCmds;
     vector<string> commands;
     vector<Player*> players;
+    int infectionRate;
 };
 
 string menuAdjCities(City*);

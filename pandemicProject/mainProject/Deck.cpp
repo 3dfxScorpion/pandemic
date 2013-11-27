@@ -66,21 +66,28 @@ void Deck::buildDeck(vector<Card*>& tmpDeck) {
 }
 void Deck::shuffleDeck(vector<Card*>&) {
 }
-void Deck::dealCards() {
+void Deck::dealCards(int p) {
+    vector<Card*> deal;
+    vector<Card*>::iterator cItr = deck.begin();
+    for ( int i = 0; i < p; i++ ) {
+        Card* tmp = *cItr;
+        while ( tmp->getCardName() == "EPIDEMIC" )
+            ++cItr;
+		}
 }
 Card* Deck::takeCard() {
     if ( deck.empty() ) {
         throw PandemicException("Your team ran out of time!");
     }
     Card* tmp;
-		tmp = deck.front();
+        tmp = deck.front();
     deck.erase(deck.begin());
     size--;
     return tmp;
 }
 void Deck::ToString() {
     size_t n = 0;
-    std::vector<Card*>::iterator cItr;
+    vector<Card*>::iterator cItr;
     for (cItr = deck.begin(); cItr != deck.end(); cItr++) {
         n++;
         Card* p = *cItr;
@@ -92,10 +99,10 @@ void Deck::ToString() {
 }
 
 void Deck::saveGame(ofstream &fp) {
-	fp << deck.size() << endl;
-	for(int i = 0; i < int(deck.size()); i++) {
-		fp << deck[i]->getCardName() << "," << deck[i]->getID() << endl;
-	}
+    fp << deck.size() << endl;
+    for(int i = 0; i < int(deck.size()); i++) {
+        fp << deck[i]->getCardName() << "," << deck[i]->getID() << endl;
+    }
 }
 
 void Deck::loadGame(ifstream &fp) {
@@ -104,33 +111,33 @@ void Deck::loadGame(ifstream &fp) {
 
 bool Deck::isEventCard(Card* card)
 {
-	string name = card->getCardName();
+    string name = card->getCardName();
 
-	if( name == "One Quiet Night" || name == "Airlift" || name == "Forecast"		//Id rather we added a property to each card to determine this
-		|| name == "Government Grant" || name == "Resilient Population")
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if( name == "One Quiet Night" || name == "Airlift" || name == "Forecast"        //Id rather we added a property to each card to determine this
+        || name == "Government Grant" || name == "Resilient Population")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 //
 // findEvents - gets a player hand (vector of cardPTR) and reference to vector of ints. populates vector with indexes of the event cards
 void Deck::findEvents(vector<Card*>hand, vector<int>&eventIndexes)
 {
-	int num;
-	num = hand.size();				//store size
+    int num;
+    num = hand.size();                //store size
 
-	for(int i=0; i<num; i++)
-	{
-		if(isEventCard(hand[i]))	//if current card is an event card
-		{
-			eventIndexes.push_back(i);//push the index onto the vector
-		}
-	}
-	
-	return;			//return
+    for(int i=0; i<num; i++)
+    {
+        if(isEventCard(hand[i]))    //if current card is an event card
+        {
+            eventIndexes.push_back(i);//push the index onto the vector
+        }
+    }
+    
+    return;            //return
 }

@@ -1,9 +1,9 @@
 #include "View.h"
 
 void View::printTitle() {
-	cout << "******************************" << endl;
-	cout << "*    Welcome to Pandemic     *" << endl;
-	cout << "******************************" << endl << endl << endl;
+    cout << "******************************" << endl;
+    cout << "*    Welcome to Pandemic     *" << endl;
+    cout << "******************************" << endl << endl << endl;
 }
 
 void View::printInvalidInputMsg() {
@@ -39,35 +39,35 @@ void View::askNumOfPlayers() {
 }
 
 void View::displayPlayerInfo(string name, string role, string city) {
-	cout <<  "\n**Player: " << name <<  " Role: " << role << " Current Location: "  << city << "**" << endl;
+    cout <<  "\n**Player: " << name <<  " Role: " << role << " Current Location: "  << city << "**" << endl;
 }
 
 void View::printCubeCount(int red, int yellow, int blue, int black) {
-	cout << "Cubes remaining:\n";
-	cout << "Black: " << black << " Blue: " << blue << " Red: " << red<< " Yellow: " << yellow <<  endl;
+    cout << "Cubes remaining:\n";
+    cout << "Black: " << black << " Blue: " << blue << " Red: " << red<< " Yellow: " << yellow <<  endl;
 }
 
 void View::printAdj(vector<string>cities)
 {
-	cout << "\nAdjacent cities:\n";
-	while(!cities.empty())
-	{
-		cout << cities.front() << endl;
-		cities.erase(cities.begin());
-	}
-	cout << "Type a city's name to move: \n";
+    cout << "\nAdjacent cities:\n";
+    while(!cities.empty())
+    {
+        cout << cities.front() << endl;
+        cities.erase(cities.begin());
+    }
+    cout << "Type a city's name to move: \n";
 }
 
 void View::askLoadGame() {
-	cout << "Would you like to load a game? (Y/N) ";
+    cout << "Would you like to load a game? (Y/N) ";
 }
 
 void View::askLoadScenario() {
-	cout << "Would you like to load a scenario? (Y/N) ";
+    cout << "Would you like to load a scenario? (Y/N) ";
 }
 
 void View::askFileName() {
-	cout << "Please enter a file name (Leave blank for autosave): ";
+    cout << "Please enter a file name (Leave blank for autosave): ";
 }
 
 void View::askWhereTo() {
@@ -108,23 +108,23 @@ void View::askForcedDiscard(vector<Card*> c){
 }
 void View::printOutbreaks(vector<string> cities)
 {
-	int num = cities.size();
+    int num = cities.size();
 
-	cout<< "\n***** Outbreak";
-	if(num>1)
-		cout<<"s";
-	cout << " occured in the following: ";
+    cout<< "\n***** Outbreak";
+    if(num>1)
+        cout<<"s";
+    cout << " occured in the following: ";
 
-	for(int i =0; i<num; i++)
-	{
-		if(i>0)
-			cout << ", ";
-		if(num>0 && i==(num-1))
-			cout << "and ";
-			cout << cities[i];
-	}
-	cout <<"*****\n";
-	
-	return;
+    for(int i =0; i<num; i++)
+    {
+        if(i>0)
+            cout << ", ";
+        if(num>0 && i==(num-1))
+            cout << "and ";
+            cout << cities[i];
+    }
+    cout <<"*****\n";
+    
+    return;
 
 }

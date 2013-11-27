@@ -29,13 +29,13 @@ class Deck {
     void setDeck(vector<Card*> d) { deck = d; }
     void buildDeck(vector<Card*>&);
     void shuffleDeck(vector<Card*>&);
-    void dealCards();
+    void dealCards(int);
     Card* takeCard();
     void ToString();
-	void loadGame(ifstream &);
-	void saveGame(ofstream &);
-	bool isEventCard(Card*);
-	void findEvents(vector<Card*>, vector<int>&eventIndexes);
+    void loadGame(ifstream &);
+    void saveGame(ofstream &);
+    bool isEventCard(Card*);
+    void findEvents(vector<Card*>, vector<int>&eventIndexes);
 
   private:
     vector<Card*> deck;

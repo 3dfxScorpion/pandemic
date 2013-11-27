@@ -36,7 +36,7 @@ public:
     string getPlayerRole() { return playerRole; }
     string getPlayerName() { return playerName; }
     City * getPlayerLocation() { return location; }
-	string getPlayerLocStr(){ return location->getCityName();}
+    string getPlayerLocStr(){ return location->getCityName();}
     vector<Card*> getHand() { return hand; }
     int    getHandSize() { return (int)hand.size(); }
 };

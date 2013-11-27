@@ -8,9 +8,9 @@ class EventCard : public Card {
 
   public:
     EventCard(int id, string name, string desc = "tbd") :
-        Card(id, name),	description(desc) {}
+        Card(id, name),    description(desc) {}
 
-    string getDescription() {	return description; }
+    string getDescription() {    return description; }
 
     string ToString() {
         ostringstream out;

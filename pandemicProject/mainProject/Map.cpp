@@ -15,20 +15,20 @@ using std::ifstream;
 using std::ofstream;
 using std::ostringstream;
 
-													
+                                                    
 Map::Map() {}  // default constructor does nothing
 
 // parse file
 int Map::populateMap(string cityFile) {
     ifstream cityInfoFile;
     string fileInput;
-	cityInfoFile.open(cityFile,ifstream::in);
+    cityInfoFile.open(cityFile,ifstream::in);
 
-	
-	if ( cityInfoFile.fail() ) {
-		throw PandemicException("Error Loading Map");
-	}
-		
+    
+    if ( cityInfoFile.fail() ) {
+        throw PandemicException("Error Loading Map");
+    }
+        
 
     if ( cityInfoFile.eof() )
         return 1;
@@ -95,7 +95,7 @@ int Map::populateMap(string cityFile) {
         }
     }
     return 0;
-	
+    
 }
 City* Map::locateCity(string cityName) {
     for ( size_t i = 0; i < worldMap.size(); i++ ) {
@@ -135,53 +135,53 @@ string Map::researchList() {
 }
 
 void Map::loadGame(ifstream &fp) {
-	City* current;
-	
-	while(fp.good()) {
-		string temp;
-		bool researchStatus = false;
-		
-		getline(fp,temp,',');
-		if(!fp.good())
-			break;
-		current = locateCity(temp);
-		
-		getline(fp,temp,',');
-		current->setInfectedBlack(stoi(temp));
-		
-		getline(fp,temp,',');
-		current->setInfectedBlue(stoi(temp));
-		
-		getline(fp,temp,',');
-		current->setInfectedRed(stoi(temp));
-		
-		getline(fp,temp,',');
-		current->setInfectedYellow(stoi(temp));
-		
-		current->setInfected();
-		
-		getline(fp,temp);
-		if(temp == "TRUE")
-			researchStatus = true;
-		else if(temp == "FALSE")
-			researchStatus = false;
-		else
-			cout << "Error parsing file\n";
-		current->setResearchStation(researchStatus);
-	}
+    City* current;
+    
+    while(fp.good()) {
+        string temp;
+        bool researchStatus = false;
+        
+        getline(fp,temp,',');
+        if(!fp.good())
+            break;
+        current = locateCity(temp);
+        
+        getline(fp,temp,',');
+        current->setInfectedBlack(stoi(temp));
+        
+        getline(fp,temp,',');
+        current->setInfectedBlue(stoi(temp));
+        
+        getline(fp,temp,',');
+        current->setInfectedRed(stoi(temp));
+        
+        getline(fp,temp,',');
+        current->setInfectedYellow(stoi(temp));
+        
+        current->setInfected();
+        
+        getline(fp,temp);
+        if(temp == "TRUE")
+            researchStatus = true;
+        else if(temp == "FALSE")
+            researchStatus = false;
+        else
+            cout << "Error parsing file\n";
+        current->setResearchStation(researchStatus);
+    }
 }
 
 void Map::saveGame(ofstream &fp) {
-	for(size_t i = 0; i < worldMap.size(); i++) {
-		if( worldMap[i]->getInfectedBlack()  != 0 || worldMap[i]->getInfectedBlue()   != 0 ||
-			worldMap[i]->getInfectedRed()    != 0 || worldMap[i]->getInfectedYellow() != 0 ||
-			worldMap[i]->getResearchStationBool() ) {
-				fp	<< worldMap[i]->getCityName()		<< ","
-					<< worldMap[i]->getInfectedBlack()	<< ","
-					<< worldMap[i]->getInfectedBlue()	<< ","
-					<< worldMap[i]->getInfectedRed()	<< ","
-					<< worldMap[i]->getInfectedYellow()	<< ","
-					<< worldMap[i]->getResearchStation()<< endl;
-		}
-	}
+    for(size_t i = 0; i < worldMap.size(); i++) {
+        if( worldMap[i]->getInfectedBlack()  != 0 || worldMap[i]->getInfectedBlue()   != 0 ||
+            worldMap[i]->getInfectedRed()    != 0 || worldMap[i]->getInfectedYellow() != 0 ||
+            worldMap[i]->getResearchStationBool() ) {
+                fp    << worldMap[i]->getCityName()        << ","
+                    << worldMap[i]->getInfectedBlack()    << ","
+                    << worldMap[i]->getInfectedBlue()    << ","
+                    << worldMap[i]->getInfectedRed()    << ","
+                    << worldMap[i]->getInfectedYellow()    << ","
+                    << worldMap[i]->getResearchStation()<< endl;
+        }
+    }
 }
