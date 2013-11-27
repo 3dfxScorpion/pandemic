@@ -327,26 +327,27 @@ void Controller::doEpidemic()
 int Controller::run() {
 #ifdef _WIN32
 	HANDLE wHnd;    // Handle to write to the console.
-	HANDLE rHnd;    // Handle to read from the console.
 	
 	// Set up the handles for reading/writing:
 	wHnd = GetStdHandle(STD_OUTPUT_HANDLE);
-	rHnd = GetStdHandle(STD_INPUT_HANDLE);
     
 	// Change the window title:
 	SetConsoleTitle(TEXT("Pandemic"));
     
 	// Set up the required window size:
-	SMALL_RECT windowSize = {0, 0, 119, 69};
+	SMALL_RECT windowSize = {0, 0, 119, 49};
     
 	// Change the console window size:
 	SetConsoleWindowInfo(wHnd, TRUE, &windowSize);
     
 	// Create a COORD to hold the buffer size:
-	COORD bufferSize = {120, 100};
+	COORD bufferSize = {120, 50};
     
 	// Change the internal buffer size:
 	SetConsoleScreenBufferSize(wHnd, bufferSize);
+
+	// Resize the console window
+	MoveWindow(GetConsoleWindow(), 0, 0, 1000, 700, TRUE);
 #endif
     
 	bool test = false;
