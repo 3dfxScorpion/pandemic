@@ -78,8 +78,8 @@ public:
         return(cubes[disease]);
     }                                    //gets the count of a single color of cube
     int getInfRate() {
-        //return( infRate[currentRate] );
-        return currentRate;
+        return( infRate[currentRate] );
+        
     }                                    //gets the current infection rate (2,2,2,3,3,4,4)
     int getResSta() {
         return resSta;

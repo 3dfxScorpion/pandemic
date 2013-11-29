@@ -113,33 +113,56 @@ void Controller::doDrawRound(int current)
     Card* card1;
     Card* card2;
     vector<Card*> playerHand;
-    string ep = "EPIDEMIC";                                    //to avoid retyping
-    card1 = model.playerDeck.takeCard();                    //draw two cards
+    string ep = "EPIDEMIC";										//to avoid retyping
+    card1 = model.playerDeck.takeCard();						//draw two cards
     card2 = model.playerDeck.takeCard();
     
     //card 1 behavior
     if(card1->getCardName() == ep)
     {
-        doEpidemic();                                        //if epidemic card drawn, do eet
+		if(card2->getCardName() == ep)							//double epidemic check
+		{
+			model.infectedDeck.removeFirstDrawn();				//first drawn card this round is removed from play
+			doEpidemic();										//do the epidemic
+			doubleEpidemic(current);							//perform special circumstances
+		}
+		else
+		{
+			doEpidemic();										//otherwise just do it
+		}
     }
     else
     {
         view.printDrawConfirmation(card1->getCardName());    //print add confirm
-        model.players[current]->addCard(card1);                //otherwise regular card, add it to players hand
-        if(model.players[current]->getHandSize() > 7)        //enforce hand limit
-        {
-            doDiscard(model.players[current]->getHand(), current);    //do discard or play event card phase
-        }
+        model.players[current]->addCard(card1);              //otherwise regular card, add it to players hand
+        
     }//end card1 block
     
     
-    
-    //Special circumstances if both cards are epidemics
-    if(card1->getCardName() == card2->getCardName() && card1->getCardName() == ep)//if both epidemics
+    //card two behavior
+    if(card2->getCardName() == ep)
     {
-        vector<int> eventID;
-        model.infectedDeck.removeLastAdded();                                    //only second infection card gets added to the discard pile
-        model.playerDeck.findEvents(model.players[current]->getHand(), eventID);//get vector of indexes containing the players  event cards
+        doEpidemic();                                    //if epidemic card drawn, do eet
+    }
+    else
+    {
+        view.printDrawConfirmation(card2->getCardName());    //print add confirm
+        model.players[current]->addCard(card2);                //otherwise regular card, add it to players hand
+    }//end card2 block
+    
+
+	while(model.players[current]->getHandSize() > 7)			//enforce hand limit after draw phase
+	{
+		doDiscard(model.players[current]->getHand(), current);
+	}
+    
+}
+
+//special behavior if two epidemics drawn at the same time
+void Controller::doubleEpidemic(int current)
+{
+		vector<int> eventID;
+        model.playerDeck.findEvents(model.players[current]->getHand(), eventID); //get vector of indexes containing the players  event cards
         
         if(!eventID.empty())//if player had some event cards
         {
@@ -158,25 +181,6 @@ void Controller::doDrawRound(int current)
             //the desired card's index into the player hand is in eventID[temp]
             
         }
-        
-    }// end double epidemic specials
-    
-    //card two behavior
-    if(card2->getCardName() == ep)
-    {
-        doEpidemic();                                    //if epidemic card drawn, do eet
-    }
-    else
-    {
-        view.printDrawConfirmation(card2->getCardName());    //print add confirm
-        model.players[current]->addCard(card2);                //otherwise regular card, add it to players hand
-        if(model.players[current]->getHandSize() > 7)        //enforce hand limit
-        {
-            doDiscard(model.players[current]->getHand(), current);    //do discard or play event card phase
-        }
-    }//end card2 block
-    
-    
 }
 
 void Controller::doDiscard(vector<Card*>playerHand, int current)
@@ -207,6 +211,7 @@ void Controller::doDiscard(vector<Card*>playerHand, int current)
         {
             //code to play the event card goes here
             //DO ME BITCHES
+			model.players[current]->removeCard(x);            //temporary until event cards are played and removed
         }
         else
         {
@@ -259,18 +264,18 @@ void Controller::doInfectRound() {
             int color = iCardP->getColor();                                    //store color
             int tmp;
             
-            if(color == black)                                                //store the current count of cubes for specified color in tmp
-                tmp = ptr->getInfectedBlack();                                //similar if else block used in model
-            else if(color==blue)                                            //prime candidate for refactoring if time permits
-                tmp = ptr->getInfectedBlue();                                //better way would be to remove this completely
-            else if(color ==red)                                            //and have the city method take the desired color as a parameter
-                tmp = ptr->getInfectedRed();                                //---may do that later - D GOOSE
+            if(color == black)													//store the current count of cubes for specified color in tmp
+                tmp = ptr->getInfectedBlack();									//similar if else block used in model
+            else if(color==blue)												//prime candidate for refactoring if time permits
+                tmp = ptr->getInfectedBlue();									//better way would be to remove this completely
+            else if(color ==red)												//and have the city method take the desired color as a parameter
+                tmp = ptr->getInfectedRed();									//---may do that later - D GOOSE
             else
                 tmp = ptr->getInfectedYellow();
             
-            if(tmp < 3)                                                        //if this wont cause an outbreak
+            if(tmp < 3)															//if this wont cause an outbreak
             {
-                model.infectCity(ptr,color, 1);                                //infect the city
+                model.infectCity(ptr,color, 1);									//infect the city
             }
             else
             {
@@ -281,6 +286,7 @@ void Controller::doInfectRound() {
         }
         
     }
+	//system("pause");
 }
 
 //performs necessary model/view calls to do an epidemic
@@ -316,7 +322,7 @@ void Controller::doEpidemic()
         view.printOutbreaks(outbreakCities);            //display the information
     }
     
-    model.infectedDeck.shuffleDiscard();                //shuffle the discard to the top of iDeck
+	model.infectedDeck.shuffleDiscard();                //shuffle the discard to the top of iDeck
     
     return;
 }
@@ -358,7 +364,7 @@ int Controller::run() {
         }
         
         if(!test) {    // skips game setup if loading game or scenario
-            model.buildMap();
+            model.buildMap();		
             setPlayerCount();
             setPlayerNames();
             setDifficulty();

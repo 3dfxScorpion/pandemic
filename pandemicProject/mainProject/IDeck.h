@@ -18,7 +18,7 @@ public:
     void buildDeck(vector<ICard*>&);
     ICard* takeCard();
     ICard* takeBottomCard();
-    void removeLastAdded(){discard.pop_back();}
+    void removeFirstDrawn(){discard.erase(discard.end()-1);}
     void shuffleDiscard();
     void loadGame(ifstream &);
     void saveGame(ofstream &);

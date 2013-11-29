@@ -72,6 +72,7 @@ public:
   void forceDiscard(Player*);
   int run();
   bool isInVector(int, vector<int>&);
+  void doubleEpidemic(int);
 
 private:
   View view;                //the view we're using
