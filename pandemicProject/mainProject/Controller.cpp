@@ -22,6 +22,7 @@ vector<string> mainCommands ( cmds01, cmds01 + sizeof(cmds01) / sizeof(cmds01[0]
 Controller::Controller() {
     cityP = 0;
     iCardP = 0;
+	movesUsed = 0;
     setMappedFunctions();
 }
 
@@ -92,7 +93,8 @@ void Controller::doPlayerTurns() {
         Player * currentPlayer = model.players[i];
         model.mover.setCurrentPlayer(currentPlayer);
         
-        for(int j = 0; j<4; j++) {
+
+        for(this->resetMovesUsed(); this->getMovesUsed()<4; incMovesUsed()) {
             
             doProcessMenu(currentPlayer);
             
@@ -114,8 +116,16 @@ void Controller::doDrawRound(int current)
     Card* card2;
     vector<Card*> playerHand;
     string ep = "EPIDEMIC";										//to avoid retyping
-    card1 = model.playerDeck.takeCard();						//draw two cards
-    card2 = model.playerDeck.takeCard();
+
+	if(model.playerDeck.getSize() < 2)							// if there arent enough cards
+	{
+		throw PandemicException("You ran out of time! Player deck empty!");//quit
+	}
+	else
+	{
+		card1 = model.playerDeck.takeCard();						//draw two cards
+		card2 = model.playerDeck.takeCard();
+	}
     
     //card 1 behavior
     if(card1->getCardName() == ep)
@@ -599,8 +609,37 @@ void Controller::do_share_knowledge() {
 void Controller::do_build_station() {
     if (!model.canBuildResearchStation()) {     //Check if possible
         view.printCantBuildRS();
-    } else {
-        model.buildResearchStation();
+    } 
+	else {
+		int resCount = model.getResSta();
+		if(resCount < 6){                                                       //if fewer than six stations are in play
+		
+
+			model.buildResearchStation();
+		}
+		else {                                                                  //otherwise one must be removed
+			vector<string> locations =	model.getReasearchStationCities();		//get list of cities holding ressta
+			menu.removeResStaMenu(locations);									//display the prompt	
+
+			int temp = -1;
+            while (temp < 0  || temp > resCount)								//read until 0<=temp<=count of res sta
+            {
+                cin >> temp;													//read which index value to play from the hand
+                cin.clear();
+                cin.ignore();
+            }
+
+			if(temp < resCount)															//if city was selected
+			{
+				model.removeResearchStation(model.worldMap.locateCity(locations[temp]));//find pointer to it, and remove the research station
+				model.buildResearchStation();											//build station at players location
+			}
+			else{
+				//otherwise user chose "No thanks" 
+				decMovesUsed();		//so don't consume a move
+			}
+
+		}
     }
 }
 

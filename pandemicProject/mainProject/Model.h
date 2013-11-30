@@ -54,10 +54,9 @@ public:
     void incResSta() {
         resSta++;
     }
-    //increments number of research stations in play
-    void decResSta() {
-        resSta--;
-    }
+	void decResSta() {
+		resSta--;
+	}
     void cureDisease(int);                                                            //sets the status of a disease to cured
     bool allCured();
     void eradicateDisease(int);                                                        //sets the status of a disease to eradicated
@@ -102,6 +101,7 @@ public:
     void doCureDisease(int);
     bool canBuildResearchStation();
     void buildResearchStation();
+	void removeResearchStation(City*);
     bool canGetKnowledge();
     bool canGiveKnowledge();
     void giveCard(Player* p,string s);//Current player gives parameter p the card name that matches parameter s
@@ -110,7 +110,7 @@ public:
     string drawRole();                    //returns a random role card, removes it from the role deck
     void savegame(string filename);
     void loadgame(string filename);
-    void buildMap(){worldMap.populateMap("Cities.txt");}                //populate the map}}
+    void buildMap(){worldMap.populateMap("Cities2.txt");}                //populate the map}}
     
     void doOutbreak(City*, int, vector<string>&);                        //does outbreak
     bool alreadyOutbreak(string, vector<string>);                        //checks a vector for presence of a string

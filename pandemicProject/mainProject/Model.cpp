@@ -379,12 +379,19 @@ void Model::buildResearchStation(){
         {
             
             curr->getPlayerLocation()->setResearchStation(true);//builds the RS
+			incResSta();										//increments the count of resSta
             curr->removeCard(index);//remove card
             
         }
         index++;
     }
 
+}
+
+void Model::removeResearchStation(City* city)
+{
+	city->setResearchStation(false);//remove the research station
+	decResSta();					//decrease the count of stations built
 }
 
 bool Model::canCureDisease(int col){//This will be updated later when we have a bit more user input.
