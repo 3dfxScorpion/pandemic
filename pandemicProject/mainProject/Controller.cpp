@@ -539,7 +539,22 @@ void Controller::do_shuttle_flight() {
 }
 
 void Controller::do_treat_disease() {
-    view.printTreatDiseaseMsg();
+    char choice = 'x';
+    
+    for (int i = red; i <=black;i++) {    //loops and checks which disease player wants to treat
+        if (model.canTreatDisease(i)) {
+            view.askCanTreat(model.colorToString(i));
+            
+            while (choice != 'Y' && choice !='y' && choice !='n' && choice != 'N') {
+                cin >> choice;    //loop for input
+            }
+            
+            if (choice == 'Y' || choice == 'y') {
+                model.treatDisease(i);
+				view.printTreatDiseaseMsg();
+            }
+        }
+    }
 }
 
 void Controller::do_cure_disease() {    //TODO needs a role check. Needs more testing!!!
@@ -549,7 +564,7 @@ void Controller::do_cure_disease() {    //TODO needs a role check. Needs more te
         if (model.canCureDisease(i)) {    //self checking since player can never have more than one cure available
             view.askCanCure(model.colorToString(i));
             
-            while (input != 'Y'|| input !='y' || input !='n' || input != 'N') {
+            while (input != 'Y'&& input !='y' && input !='n' && input != 'N') {
                 cin >> input;    //loop for input
                 cin.clear();
                 cin.ignore();

@@ -31,7 +31,8 @@ public:
     void checkMedicSpecial();
     string colorToString(int);
     bool QSautoContain(ICard*);
-    void treatDisease(int col, int status);
+    void treatDisease(int col);
+	bool canTreatDisease(int col);
     void setNumPlayers(int num) {
         numPlayers = num;
     }

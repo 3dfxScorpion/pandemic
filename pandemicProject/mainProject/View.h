@@ -23,6 +23,7 @@ public:
     void printGetOrGiveKnowlege(vector<string>);
     void printInfected();
     void askCanCure(string);
+	void askCanTreat(string);
     void printPlayersVector(vector<Player*>);
     void askGiveKnowledge(vector<Player*>);
     void askGetKnowledge(vector<Player*>);

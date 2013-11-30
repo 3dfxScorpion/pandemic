@@ -187,12 +187,12 @@ void Model::checkMedicSpecial(){
     }
 }
 
-void Model::treatDisease(int col, int status){
+void Model::treatDisease(int col){
     City* toTreat = mover.getCurrentPlayer()->getPlayerLocation();
     switch(col){
         case blue:
             if (mover.getCurrentPlayer()->getPlayerRole() == "Medic" ||
-                status == cured ) //if medic or disease is cured, remove all cubes.
+                cureStatus[blue] == cured ) //if medic or disease is cured, remove all cubes.
             {
                 addCubes(blue, toTreat->getInfectedBlue());//adds the amount of cubes being removed
                 toTreat->setInfectedBlue(0);            //clears the city of infection
@@ -205,7 +205,7 @@ void Model::treatDisease(int col, int status){
             break;
         case black:                                                     //same as blue except black
             if (mover.getCurrentPlayer()->getPlayerRole() == "Medic" ||
-                status == cured )
+                cureStatus[black] == cured )
             {
                 addCubes(black, toTreat->getInfectedBlack());
                 toTreat->setInfectedBlack(0);
@@ -218,7 +218,7 @@ void Model::treatDisease(int col, int status){
             break;
         case yellow:                                                    //same as blue except yellow
             if (mover.getCurrentPlayer()->getPlayerRole() == "Medic" ||
-                status == cured )
+                cureStatus[yellow] == cured )
             {
                 addCubes(yellow,toTreat->getInfectedYellow());
                 toTreat->setInfectedYellow(0);
@@ -231,7 +231,7 @@ void Model::treatDisease(int col, int status){
             break;
         case red:                                                       //same as blue except red
             if (mover.getCurrentPlayer()->getPlayerRole() == "Medic" ||
-                status == cured )
+                cureStatus[red] == cured )
             {
                 addCubes(red, toTreat->getInfectedRed());
                 toTreat->setInfectedRed(0);
@@ -244,6 +244,25 @@ void Model::treatDisease(int col, int status){
     }
     if (cubes[col]==24)     //if there are no more cubes on the board then cure disease
         eradicateDisease(col);
+}
+
+bool Model::canTreatDisease(int col) {
+    City* toTreat = mover.getCurrentPlayer()->getPlayerLocation();
+    if (col == red && toTreat->getInfectedRed() > 0) { // There are red cubes at this location
+        return true;	
+    }
+    else if (col == yellow && toTreat->getInfectedYellow() > 0) { // There are yellow cubes at this location
+        return true;
+    }
+    else if (col == blue && toTreat->getInfectedBlue() > 0) { // There are blue cubes
+        return true;
+    }
+    else if (col == black && toTreat->getInfectedBlack() > 0) { // There are black cubes
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 void Model::savegame(string filename) {

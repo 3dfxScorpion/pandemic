@@ -27,7 +27,7 @@ void View::printShareKnowledgeMsg() {
 }
 
 void View::printTreatDiseaseMsg() {
-    cout << "Treat disease...\n";
+    cout << "Treating disease...\n";
 }
 
 void View::printSaveGameMsg() {
@@ -89,6 +89,11 @@ void View::askCanCure(string color){
          << color
          << " disease? (y/n)\n";
     
+}
+void View::askCanTreat(string color){
+	cout << "Do you want to treat the "
+		 << color
+		 << " disease? (y/n)\n";
 }
 void View::printGetOrGiveKnowlege(vector<string> s){
     cout<< menuStringVector(s,"Get or Give Knowledge?");
