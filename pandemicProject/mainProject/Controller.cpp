@@ -78,7 +78,7 @@ void Controller::setDifficulty() {
         if (cin.fail()) {
             view.printNonNumeric();
             cin.clear();
-			cin.ignore(256,'\n');
+            cin.ignore(256,'\n');
         } else if (difficulty < 1 || difficulty > 3) {
             view.printBadDiff();
         }
