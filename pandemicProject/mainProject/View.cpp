@@ -117,11 +117,12 @@ void View::printOutbreaks(vector<string> cities)
 
     for(int i =0; i<num; i++)
     {
-        if(i>0)
+        if(i>0){
             cout << ", ";
         if(num>0 && i==(num-1))
             cout << "and ";
             cout << cities[i];
+		}
     }
     cout <<"*****\n";
     
