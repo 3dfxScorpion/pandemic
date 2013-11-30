@@ -77,13 +77,11 @@ void Controller::setDifficulty() {
         
         if (cin.fail()) {
             view.printNonNumeric();
-            return;
+            cin.clear();
+			cin.ignore(256,'\n');
         } else if (difficulty < 1 || difficulty > 3) {
             view.printBadDiff();
         }
-        
-        cin.clear();
-        cin.sync();
     }
     model.setDifficulty(temp);
 }
