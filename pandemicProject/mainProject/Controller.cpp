@@ -45,7 +45,7 @@ void Controller::setPlayerCount() {
     }
     
     model.setNumPlayers(temp);
-    for ( size_t i = 0; i < temp; i++ ) {
+    for ( int i = 0; i < temp; i++ ) {
         model.players.push_back(new Player());
     }
     return;
@@ -89,10 +89,9 @@ void Controller::setDifficulty() {
 void Controller::doPlayerTurns() {
     for (int i=0; i<model.getNumPlayers(); i++) { //each players turn
         Player * currentPlayer = model.players[i];
-        model.mover.setCurrentPlayer(currentPlayer);
-        
-
-        for(this->resetMovesUsed(); this->getMovesUsed()<4; incMovesUsed()) {
+		model.mover.setCurrentPlayer(currentPlayer);
+		
+		for(this->resetMovesUsed(); this->getMovesUsed()<4; incMovesUsed()) {
             
             doProcessMenu(currentPlayer);
             
@@ -143,11 +142,9 @@ void Controller::doDrawRound(int current)
     {
         view.printDrawConfirmation(card1->getCardName());    //print add confirm
         model.players[current]->addCard(card1);              //otherwise regular card, add it to players hand
-        
     }//end card1 block
-    
-    
-    //card two behavior
+	
+	//card two behavior
     if(card2->getCardName() == ep)
     {
         doEpidemic();                                    //if epidemic card drawn, do eet
@@ -177,7 +174,7 @@ void Controller::doubleEpidemic(int current)
             menu.doubleEpEventMenu(model.players[current]->getHand(), eventID);//display user choices
             
             int temp = -1;
-            while (temp < 0  || temp >eventID.size())
+            while (temp < 0  || temp > int(eventID.size()))
             {
                 cin >> temp;                                //read which index value to play from the hand
                 cin.clear();
@@ -201,7 +198,7 @@ void Controller::doDiscard(vector<Card*>playerHand, int current)
         cin >> x;                                    //read x - the card to be removed
         cin.clear();
         cin.sync();
-    }while(0>x || x>= playerHand.size());            //while its not inside the range
+    }while(0>x || x>= int(playerHand.size()));            //while its not inside the range
     
     if(model.playerDeck.isEventCard(playerHand[x]))    //if event card is chosen
     {
@@ -362,17 +359,54 @@ int Controller::run() {
 #endif
 
     bool test = false;
-    
+
+    model.buildMap();
+
     try {
         view.printTitle();
-        test = getLoadGame();
-        
-        if(!test) {    // skips load scenario if game loaded
-            test = getLoadScenario();   // ask to load scenario
+		string filename = "autosave";
+		string name;
+
+        if(getLoadGame()) {
+			do {
+				filename = "autosave";
+				view.askFileName();
+				getline(cin, name);            // get savegame name from user
+    
+				#ifdef __APPLE__ && __MACH__
+					cin.ignore();
+					cin.clear();
+				#endif
+
+				if (!name.empty()) {
+					filename = name;
+				}
+				if(!fileExists(filename.c_str())) {
+					view.fileNotFound(filename);
+				}
+			} while(!fileExists(filename.c_str()));
+			model.loadgame(filename);
+		}
+		else if(getLoadScenario()) {
+			do {
+				view.askFileName2();
+				getline(cin, name);            // get savegame name from user
+    
+				#ifdef __APPLE__ && __MACH__
+					cin.ignore();
+					cin.clear();
+				#endif
+    
+				if (!name.empty()) {
+					filename = name;
+				}
+				if(!fileExists(filename.c_str())) {
+					view.fileNotFound(filename);
+				}
+			} while(!fileExists(filename.c_str()));
+            model.loadgame(filename);
         }
-        
-        if(!test) {    // skips game setup if loading game or scenario
-            model.buildMap();		
+		else {    // skips game setup if loading game or scenario
             setPlayerCount();
             setPlayerNames();
             setDifficulty();
@@ -410,15 +444,13 @@ bool Controller::getLoadGame() {
         cin.ignore();
         
         if (input == 'Y' || input == 'y') {
-            //return true;
-            return false;// just until working
+            return true;
         }
         
         if (input == 'N' || input == 'n') {
             return false;
         }
     }
-    return false;
 }
 
 bool Controller::getLoadScenario() {
@@ -429,15 +461,13 @@ bool Controller::getLoadScenario() {
         cin.ignore();
         
         if (input == 'Y' || input == 'y') {
-            //return true;
-            return false;// just until working
+            return true;
         }
         
         if (input == 'N' || input == 'n') {
             return false;
         }
     }
-    return false;
 }
 
 // these functions are accessible since function pointer passed into Menu Class
@@ -540,19 +570,19 @@ void Controller::do_shuttle_flight() {
 
 void Controller::do_treat_disease() {
     char choice = 'x';
-    
+	
     for (int i = red; i <=black;i++) {    //loops and checks which disease player wants to treat
         if (model.canTreatDisease(i)) {
             view.askCanTreat(model.colorToString(i));
-            
-            while (choice != 'Y' && choice !='y' && choice !='n' && choice != 'N') {
+			
+			while (choice != 'Y' && choice !='y' && choice !='n' && choice != 'N') {
                 cin >> choice;    //loop for input
-            }
+			}
             
             if (choice == 'Y' || choice == 'y') {
                 model.treatDisease(i);
 				view.printTreatDiseaseMsg();
-            }
+			}
         }
     }
 }
@@ -564,7 +594,7 @@ void Controller::do_cure_disease() {    //TODO needs a role check. Needs more te
         if (model.canCureDisease(i)) {    //self checking since player can never have more than one cure available
             view.askCanCure(model.colorToString(i));
             
-            while (input != 'Y'&& input !='y' && input !='n' && input != 'N') {
+            while(input != 'Y' && input != 'y' && input != 'n' && input != 'N') {
                 cin >> input;    //loop for input
                 cin.clear();
                 cin.ignore();
@@ -587,7 +617,7 @@ void Controller::do_share_knowledge() {
     {
         vector<Player*> toGive = model.getSharablePlayers("give");
         view.askGiveKnowledge(toGive);
-        while (pInput < 1 || pInput > toGive.size())
+        while (pInput < 1 || pInput > int(toGive.size()))
         {
             cin >> pInput;
             cin.ignore();
@@ -604,7 +634,7 @@ void Controller::do_share_knowledge() {
     {
         vector<Player*> toGet = model.getSharablePlayers("get");
         view.askGetKnowledge(toGet);
-        while (pInput < 1 || pInput > toGet.size())
+        while (pInput < 1 || pInput > int(toGet.size()))
         {
             cin >> pInput;
             cin.ignore();
@@ -656,7 +686,6 @@ void Controller::do_build_station() {
     }
 }
 
-
 void Controller::do_save_game() {
     string filename = "autosave";
     string name;
@@ -668,7 +697,7 @@ void Controller::do_save_game() {
     cin.ignore();
     cin.clear();
 #endif
-    
+
     if (!name.empty()) {
         filename = name;
     }
@@ -700,14 +729,14 @@ void Controller::forceDiscard(Player* p){
     vector<Card*> pHand = p->getHand();
     view.askForcedDiscard(pHand);   //get the players hand
     int input = -1;
-    while (input < 1 || input > pHand.size())
+    while (input < 1 || input > int(pHand.size()))
     {
         cin >> input;
         cin.ignore();
         cin.clear();
     }
     //Instead of simply setting p->remove card directly I'm going through this loop to use the model.
-    for (int i = 0; i<=model.players.size()-1;i++)
+    for (int i = 0; i<=int(model.players.size()-1);i++)
     {
         if (model.players[i]->getPlayerName() == p->getPlayerName())
             model.players[i]->removeCard(input-1);//remove selected card.
