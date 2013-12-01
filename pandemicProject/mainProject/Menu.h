@@ -46,8 +46,6 @@ class Menu {
     void discardMenu(vector<Card*>);
     void doubleEpEventMenu(vector<Card*>, vector<int>);
     void updateMenu(Model&);
-	void removeResStaMenu(vector<string>);
-	
 
   private:
     Map menuMap;
