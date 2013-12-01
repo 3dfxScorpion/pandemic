@@ -100,6 +100,7 @@ void IDeck::shuffleDiscard()
 }
 
 void IDeck::saveGame(ofstream &fp) {
+	//fp << "***** Infection Deck *****" << endl;
     fp << deck.size() << endl;
     for(int i = 0; i < int(deck.size()); i++) {
         fp << deck[i]->getName() << "," << deck[i]->getColor() << endl;
@@ -109,5 +110,30 @@ void IDeck::saveGame(ofstream &fp) {
     fp << discard.size() << endl;
     for(int i = 0; i < int(discard.size()); i++) {
         fp << discard[i]->getName() << "," << discard[i]->getColor() << endl;
+    }
+}
+
+void IDeck::loadGame(ifstream &fp) {
+	string name,input,color;
+	int deckSize;
+
+	// Infection Deck
+	std::getline(fp,input);
+	deckSize = strToInt(input);
+	for(int i = 0; i < deckSize; i++) {
+		std::getline(fp,name,',');
+		std::getline(fp,color);
+	    ICard* newCard = new ICard(name,strToInt(color));
+	    deck.push_back(newCard);
+    }
+
+	// Infection Discard Pile
+	std::getline(fp,input);
+	deckSize = strToInt(input);
+	for(int i = 0; i < deckSize; i++) {
+		std::getline(fp,name,',');
+		std::getline(fp,color);
+	    ICard* newCard = new ICard(name,strToInt(color));
+	    discard.push_back(newCard);
     }
 }

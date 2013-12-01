@@ -22,7 +22,7 @@ void PlayerMove::moveAdjacent(City* toMove) {
     string destination = toMove->getCityName();
     vector<string> adjCities = currentPlayer->getPlayerLocation()->getAdjCity();
     //check if the requested city is adjacent
-    for ( int i = 0; i <= adjCities.size(); i++ ) {
+    for ( int i = 0; i <= int(adjCities.size()); i++ ) {
         if ( destination == adjCities[i] ) {
             isAdj = true;  // if adj city is found set true
             break;         // found the city, no need to loop further.

@@ -1,6 +1,6 @@
 #ifndef DECK_H
 #define DECK_H
-#include<vector>
+#include <vector>
 #include <fstream>
 #include "CityCard.h"
 #include "EventCard.h"

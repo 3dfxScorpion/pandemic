@@ -1,11 +1,12 @@
-#include<iostream>
-#include<iomanip>
-#include<cstdlib>
-#include<vector>
-#include<unordered_set>
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+#include <vector>
+#include <unordered_set>
 #include <fstream>
-#include"Deck.h"
+#include "Deck.h"
 #include "PandemicException.h"
+#include "dataManip.h"
 
 using std::cout;
 using std::endl;
@@ -64,8 +65,10 @@ void Deck::buildDeck(vector<Card*>& tmpDeck) {
         ++iItr;
     }
 }
+
 void Deck::shuffleDeck(vector<Card*>&) {
 }
+
 void Deck::dealCards(int p) {
     vector<Card*> deal;
     vector<Card*>::iterator cItr = deck.begin();
@@ -75,6 +78,7 @@ void Deck::dealCards(int p) {
             ++cItr;
 		}
 }
+
 Card* Deck::takeCard() {
     if ( deck.empty() ) {
         throw PandemicException("Your team ran out of time!");
@@ -85,6 +89,7 @@ Card* Deck::takeCard() {
     size--;
     return tmp;
 }
+
 void Deck::ToString() {
     size_t n = 0;
     vector<Card*>::iterator cItr;
@@ -106,7 +111,20 @@ void Deck::saveGame(ofstream &fp) {
 }
 
 void Deck::loadGame(ifstream &fp) {
+	vector<Card*> newDeck;
+	string input;
 
+	std::getline(fp,input);
+	int deckSize = strToInt(input);
+	for(int i = 0; i < deckSize; i++) {
+		string name,id;
+		std::getline(fp,name,',');
+		std::getline(fp,id);
+		Card* newCard = new Card(strToInt(id),name);
+		newDeck.push_back(newCard);
+	}
+
+	setDeck(newDeck);
 }
 
 bool Deck::isEventCard(Card* card)
@@ -124,7 +142,6 @@ bool Deck::isEventCard(Card* card)
     }
 }
 
-//
 // findEvents - gets a player hand (vector of cardPTR) and reference to vector of ints. populates vector with indexes of the event cards
 void Deck::findEvents(vector<Card*>hand, vector<int>&eventIndexes)
 {

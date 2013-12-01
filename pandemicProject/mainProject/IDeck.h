@@ -4,10 +4,14 @@
 #include <string>
 #include <vector>
 #include "ICard.h"
-using namespace std;
+#include "dataManip.h"
+
+using std::string;
+using std::vector;
+using std::ifstream;
+using std::ofstream;
 
 static const size_t ICARDS = 48;
-
 
 class IDeck
 {
@@ -19,11 +23,11 @@ public:
     ICard* takeCard();
     ICard* takeBottomCard();
     void removeFirstDrawn(){discard.erase(discard.end()-1);}
+
     void shuffleDiscard();
     void loadGame(ifstream &);
     void saveGame(ofstream &);
-    
-
+	
 private:
         vector<ICard*> deck;
         vector<ICard*> discard;

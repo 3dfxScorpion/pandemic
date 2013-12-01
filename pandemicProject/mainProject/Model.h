@@ -16,13 +16,13 @@
 #include "PlayerMove.h"
 #include "IDeck.h"
 #include "PandemicException.h"
+#include "dataManip.h"
 
 using std::getline;
 
 enum {badCities};                                                        //odd
 enum {red, yellow, blue, black};                                        //cube colors
-enum {uncured, cured, eradicated};                                        //disease status
-
+enum {uncured, cured, eradicated};
 
 class Model
 {
@@ -79,7 +79,6 @@ public:
     }                                    //gets the count of a single color of cube
     int getInfRate() {
         return( infRate[currentRate] );
-        
     }                                    //gets the current infection rate (2,2,2,3,3,4,4)
     int getResSta() {
         return resSta;
@@ -87,6 +86,9 @@ public:
     int getCureStatus(int i){
         return cureStatus[i];
     }
+	void setCureStatus(int i, int status) {
+		cureStatus[i] = status;
+	}
     void setOutbreak(int outBreak) {
         outbreak = outBreak;
     }
@@ -112,7 +114,7 @@ public:
     void savegame(string filename);
     void loadgame(string filename);
     void buildMap(){worldMap.populateMap("Cities.txt");}                //populate the map}}
-    
+	void setResSta(int num) {resSta = num;}
     void doOutbreak(City*, int, vector<string>&);                        //does outbreak
     bool alreadyOutbreak(string, vector<string>);                        //checks a vector for presence of a string
 
