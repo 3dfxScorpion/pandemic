@@ -22,6 +22,7 @@ vector<string> mainCommands ( cmds01, cmds01 + sizeof(cmds01) / sizeof(cmds01[0]
 Controller::Controller() {
     cityP = 0;
     iCardP = 0;
+	movesUsed = 0;
     setMappedFunctions();
 }
 
@@ -44,7 +45,7 @@ void Controller::setPlayerCount() {
     }
     
     model.setNumPlayers(temp);
-    for ( int i = 0; i < temp; i++ ) {
+    for ( size_t i = 0; i < temp; i++ ) {
         model.players.push_back(new Player());
     }
     return;
@@ -76,13 +77,11 @@ void Controller::setDifficulty() {
         
         if (cin.fail()) {
             view.printNonNumeric();
-            return;
+            cin.clear();
+            cin.ignore(256,'\n');
         } else if (difficulty < 1 || difficulty > 3) {
             view.printBadDiff();
         }
-        
-        cin.clear();
-        cin.sync();
     }
     model.setDifficulty(temp);
 }
@@ -92,7 +91,8 @@ void Controller::doPlayerTurns() {
         Player * currentPlayer = model.players[i];
         model.mover.setCurrentPlayer(currentPlayer);
         
-        for(int j = 0; j<4; j++) {
+
+        for(this->resetMovesUsed(); this->getMovesUsed()<4; incMovesUsed()) {
             
             doProcessMenu(currentPlayer);
             
@@ -113,40 +113,71 @@ void Controller::doDrawRound(int current)
     Card* card1;
     Card* card2;
     vector<Card*> playerHand;
-    string ep = "EPIDEMIC";                                    //to avoid retyping
-    card1 = model.playerDeck.takeCard();                    //draw two cards
-    card2 = model.playerDeck.takeCard();
+    string ep = "EPIDEMIC";										//to avoid retyping
+
+	if(model.playerDeck.getSize() < 2)							// if there arent enough cards
+	{
+		throw PandemicException("You ran out of time! Player deck empty!");//quit
+	}
+	else
+	{
+		card1 = model.playerDeck.takeCard();						//draw two cards
+		card2 = model.playerDeck.takeCard();
+	}
     
     //card 1 behavior
     if(card1->getCardName() == ep)
     {
-        doEpidemic();                                        //if epidemic card drawn, do eet
+		if(card2->getCardName() == ep)							//double epidemic check
+		{
+			model.infectedDeck.removeFirstDrawn();				//first drawn card this round is removed from play
+			doEpidemic();										//do the epidemic
+			doubleEpidemic(current);							//perform special circumstances
+		}
+		else
+		{
+			doEpidemic();										//otherwise just do it
+		}
     }
     else
     {
         view.printDrawConfirmation(card1->getCardName());    //print add confirm
-        model.players[current]->addCard(card1);                //otherwise regular card, add it to players hand
-        if(model.players[current]->getHandSize() > 7)        //enforce hand limit
-        {
-            doDiscard(model.players[current]->getHand(), current);    //do discard or play event card phase
-        }
+        model.players[current]->addCard(card1);              //otherwise regular card, add it to players hand
+        
     }//end card1 block
     
     
-    
-    //Special circumstances if both cards are epidemics
-    if(card1->getCardName() == card2->getCardName() && card1->getCardName() == ep)//if both epidemics
+    //card two behavior
+    if(card2->getCardName() == ep)
     {
-        vector<int> eventID;
-        model.infectedDeck.removeLastAdded();                                    //only second infection card gets added to the discard pile
-        model.playerDeck.findEvents(model.players[current]->getHand(), eventID);//get vector of indexes containing the players  event cards
+        doEpidemic();                                    //if epidemic card drawn, do eet
+    }
+    else
+    {
+        view.printDrawConfirmation(card2->getCardName());    //print add confirm
+        model.players[current]->addCard(card2);                //otherwise regular card, add it to players hand
+    }//end card2 block
+    
+
+	while(model.players[current]->getHandSize() > 7)			//enforce hand limit after draw phase
+	{
+		doDiscard(model.players[current]->getHand(), current);
+	}
+    
+}
+
+//special behavior if two epidemics drawn at the same time
+void Controller::doubleEpidemic(int current)
+{
+		vector<int> eventID;
+        model.playerDeck.findEvents(model.players[current]->getHand(), eventID); //get vector of indexes containing the players  event cards
         
         if(!eventID.empty())//if player had some event cards
         {
             menu.doubleEpEventMenu(model.players[current]->getHand(), eventID);//display user choices
             
             int temp = -1;
-            while (temp < 0  || temp > int(eventID.size()))
+            while (temp < 0  || temp >eventID.size())
             {
                 cin >> temp;                                //read which index value to play from the hand
                 cin.clear();
@@ -158,25 +189,6 @@ void Controller::doDrawRound(int current)
             //the desired card's index into the player hand is in eventID[temp]
             
         }
-        
-    }// end double epidemic specials
-    
-    //card two behavior
-    if(card2->getCardName() == ep)
-    {
-        doEpidemic();                                    //if epidemic card drawn, do eet
-    }
-    else
-    {
-        view.printDrawConfirmation(card2->getCardName());    //print add confirm
-        model.players[current]->addCard(card2);                //otherwise regular card, add it to players hand
-        if(model.players[current]->getHandSize() > 7)        //enforce hand limit
-        {
-            doDiscard(model.players[current]->getHand(), current);    //do discard or play event card phase
-        }
-    }//end card2 block
-    
-    
 }
 
 void Controller::doDiscard(vector<Card*>playerHand, int current)
@@ -189,7 +201,7 @@ void Controller::doDiscard(vector<Card*>playerHand, int current)
         cin >> x;                                    //read x - the card to be removed
         cin.clear();
         cin.sync();
-    }while(0>x || x>= int(playerHand.size()));            //while its not inside the range
+    }while(0>x || x>= playerHand.size());            //while its not inside the range
     
     if(model.playerDeck.isEventCard(playerHand[x]))    //if event card is chosen
     {
@@ -207,6 +219,7 @@ void Controller::doDiscard(vector<Card*>playerHand, int current)
         {
             //code to play the event card goes here
             //DO ME BITCHES
+			model.players[current]->removeCard(x);            //temporary until event cards are played and removed
         }
         else
         {
@@ -259,18 +272,18 @@ void Controller::doInfectRound() {
             int color = iCardP->getColor();                                    //store color
             int tmp;
             
-            if(color == black)                                                //store the current count of cubes for specified color in tmp
-                tmp = ptr->getInfectedBlack();                                //similar if else block used in model
-            else if(color==blue)                                            //prime candidate for refactoring if time permits
-                tmp = ptr->getInfectedBlue();                                //better way would be to remove this completely
-            else if(color ==red)                                            //and have the city method take the desired color as a parameter
-                tmp = ptr->getInfectedRed();                                //---may do that later - D GOOSE
+            if(color == black)													//store the current count of cubes for specified color in tmp
+                tmp = ptr->getInfectedBlack();									//similar if else block used in model
+            else if(color==blue)												//prime candidate for refactoring if time permits
+                tmp = ptr->getInfectedBlue();									//better way would be to remove this completely
+            else if(color ==red)												//and have the city method take the desired color as a parameter
+                tmp = ptr->getInfectedRed();									//---may do that later - D GOOSE
             else
                 tmp = ptr->getInfectedYellow();
             
-            if(tmp < 3)                                                        //if this wont cause an outbreak
+            if(tmp < 3)															//if this wont cause an outbreak
             {
-                model.infectCity(ptr,color, 1);                                //infect the city
+                model.infectCity(ptr,color, 1);									//infect the city
             }
             else
             {
@@ -281,6 +294,7 @@ void Controller::doInfectRound() {
         }
         
     }
+	//system("pause");
 }
 
 //performs necessary model/view calls to do an epidemic
@@ -316,7 +330,7 @@ void Controller::doEpidemic()
         view.printOutbreaks(outbreakCities);            //display the information
     }
     
-    model.infectedDeck.shuffleDiscard();                //shuffle the discard to the top of iDeck
+	model.infectedDeck.shuffleDiscard();                //shuffle the discard to the top of iDeck
     
     return;
 }
@@ -348,54 +362,17 @@ int Controller::run() {
 #endif
 
     bool test = false;
-
-    model.buildMap();
-
+    
     try {
         view.printTitle();
-		string filename = "autosave";
-		string name;
-
-        if(getLoadGame()) {
-			do {
-				filename = "autosave";
-				view.askFileName();
-				getline(cin, name);            // get savegame name from user
-    
-				#ifdef __APPLE__ && __MACH__
-					cin.ignore();
-					cin.clear();
-				#endif
-
-				if (!name.empty()) {
-					filename = name;
-				}
-				if(!fileExists(filename.c_str())) {
-					view.fileNotFound(filename);
-				}
-			} while(!fileExists(filename.c_str()));
-			model.loadgame(filename);
-		}        
-		else if(getLoadScenario()) {
-			do {
-				view.askFileName2();
-				getline(cin, name);            // get savegame name from user
-    
-				#ifdef __APPLE__ && __MACH__
-					cin.ignore();
-					cin.clear();
-				#endif
-    
-				if (!name.empty()) {
-					filename = name;
-				}
-				if(!fileExists(filename.c_str())) {
-					view.fileNotFound(filename);
-				}
-			} while(!fileExists(filename.c_str()));
-            model.loadgame(filename);
+        test = getLoadGame();
+        
+        if(!test) {    // skips load scenario if game loaded
+            test = getLoadScenario();   // ask to load scenario
         }
-		else {    // skips game setup if loading game or scenario
+        
+        if(!test) {    // skips game setup if loading game or scenario
+            model.buildMap();		
             setPlayerCount();
             setPlayerNames();
             setDifficulty();
@@ -433,13 +410,15 @@ bool Controller::getLoadGame() {
         cin.ignore();
         
         if (input == 'Y' || input == 'y') {
-            return true;
+            //return true;
+            return false;// just until working
         }
         
         if (input == 'N' || input == 'n') {
             return false;
         }
     }
+    return false;
 }
 
 bool Controller::getLoadScenario() {
@@ -450,13 +429,15 @@ bool Controller::getLoadScenario() {
         cin.ignore();
         
         if (input == 'Y' || input == 'y') {
-            return true;
+            //return true;
+            return false;// just until working
         }
         
         if (input == 'N' || input == 'n') {
             return false;
         }
     }
+    return false;
 }
 
 // these functions are accessible since function pointer passed into Menu Class
@@ -559,20 +540,21 @@ void Controller::do_shuttle_flight() {
 
 void Controller::do_treat_disease() {
     char choice = 'x';
+    
     for (int i = red; i <=black;i++) {    //loops and checks which disease player wants to treat
         if (model.canTreatDisease(i)) {
-			view.askCanTreat(model.colorToString(i));
-
-			while (choice != 'Y' && choice !='y' && choice !='n' && choice != 'N') {
-				cin >> choice;    //loop for input
-			}
-			
-			if (choice == 'Y' || choice == 'y') {
-				model.treatDisease(i);
+            view.askCanTreat(model.colorToString(i));
+            
+            while (choice != 'Y' && choice !='y' && choice !='n' && choice != 'N') {
+                cin >> choice;    //loop for input
+            }
+            
+            if (choice == 'Y' || choice == 'y') {
+                model.treatDisease(i);
 				view.printTreatDiseaseMsg();
-			}
-		}
-	}
+            }
+        }
+    }
 }
 
 void Controller::do_cure_disease() {    //TODO needs a role check. Needs more testing!!!
@@ -582,7 +564,7 @@ void Controller::do_cure_disease() {    //TODO needs a role check. Needs more te
         if (model.canCureDisease(i)) {    //self checking since player can never have more than one cure available
             view.askCanCure(model.colorToString(i));
             
-            while(input != 'Y' && input != 'y' && input != 'n' && input != 'N') {
+            while (input != 'Y'&& input !='y' && input !='n' && input != 'N') {
                 cin >> input;    //loop for input
                 cin.clear();
                 cin.ignore();
@@ -605,7 +587,7 @@ void Controller::do_share_knowledge() {
     {
         vector<Player*> toGive = model.getSharablePlayers("give");
         view.askGiveKnowledge(toGive);
-        while (pInput < 1 || pInput > int(toGive.size()))
+        while (pInput < 1 || pInput > toGive.size())
         {
             cin >> pInput;
             cin.ignore();
@@ -622,7 +604,7 @@ void Controller::do_share_knowledge() {
     {
         vector<Player*> toGet = model.getSharablePlayers("get");
         view.askGetKnowledge(toGet);
-        while (pInput < 1 || pInput > int(toGet.size()))
+        while (pInput < 1 || pInput > toGet.size())
         {
             cin >> pInput;
             cin.ignore();
@@ -640,10 +622,40 @@ void Controller::do_share_knowledge() {
 void Controller::do_build_station() {
     if (!model.canBuildResearchStation()) {     //Check if possible
         view.printCantBuildRS();
-    } else {
-        model.buildResearchStation();
+    } 
+	else {
+		int resCount = model.getResSta();
+		if(resCount < 6){                                                       //if fewer than six stations are in play
+		
+
+			model.buildResearchStation();
+		}
+		else {                                                                  //otherwise one must be removed
+			vector<string> locations =	model.getReasearchStationCities();		//get list of cities holding ressta
+			menu.removeResStaMenu(locations);									//display the prompt	
+
+			int temp = -1;
+            while (temp < 0  || temp > resCount)								//read until 0<=temp<=count of res sta
+            {
+                cin >> temp;													//read which index value to play from the hand
+                cin.clear();
+                cin.ignore();
+            }
+
+			if(temp < resCount)															//if city was selected
+			{
+				model.removeResearchStation(model.worldMap.locateCity(locations[temp]));//find pointer to it, and remove the research station
+				model.buildResearchStation();											//build station at players location
+			}
+			else{
+				//otherwise user chose "No thanks" 
+				decMovesUsed();		//so don't consume a move
+			}
+
+		}
     }
 }
+
 
 void Controller::do_save_game() {
     string filename = "autosave";
@@ -653,10 +665,10 @@ void Controller::do_save_game() {
     getline(cin, name);            // get savegame name from user (reads whole line and discards end of line) cin will be empty after this call...
     
 #ifdef __APPLE__ && __MACH__    // fix for 'certain' OSes...
-	cin.ignore();
-	cin.clear();
+    cin.ignore();
+    cin.clear();
 #endif
-
+    
     if (!name.empty()) {
         filename = name;
     }
@@ -688,14 +700,14 @@ void Controller::forceDiscard(Player* p){
     vector<Card*> pHand = p->getHand();
     view.askForcedDiscard(pHand);   //get the players hand
     int input = -1;
-    while (input < 1 || input > int(pHand.size()))
+    while (input < 1 || input > pHand.size())
     {
         cin >> input;
         cin.ignore();
         cin.clear();
     }
     //Instead of simply setting p->remove card directly I'm going through this loop to use the model.
-    for (int i = 0; i<=int(model.players.size()-1);i++)
+    for (int i = 0; i<=model.players.size()-1;i++)
     {
         if (model.players[i]->getPlayerName() == p->getPlayerName())
             model.players[i]->removeCard(input-1);//remove selected card.

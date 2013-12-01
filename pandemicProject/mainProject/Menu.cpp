@@ -312,6 +312,25 @@ void Menu::doubleEpEventMenu(vector<Card*>hand, vector<int>index)
     cout << out.str();
 }
 
+void Menu::removeResStaMenu(vector<string> vec)
+{
+	int num;
+    int i=0;
+    ostringstream out;
+    out << "====================================================================================================\n";
+    out << "Six Research Stations already built. Select one to remove:\n";
+    out << "----------------------------------------------------------------------------------------------------\n";
+
+	num = vec.size();
+	for(i; i<num; i++)    //for each index representing an event card
+    {
+        out << "(" << i << ")" << vec[i] << "\n";
+    }
+
+	out << "(" << i << ")No thanks\n";                                    //option to do nothing
+    cout << out.str();
+}
+
 void Menu::updateMenu(Model& m) {
     setInfectionRate(m.getInfRate());
     setMenuMap(m.worldMap);

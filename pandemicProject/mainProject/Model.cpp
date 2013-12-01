@@ -247,49 +247,28 @@ void Model::treatDisease(int col){
 }
 
 bool Model::canTreatDisease(int col) {
-	City* toTreat = mover.getCurrentPlayer()->getPlayerLocation();
-	if (col == red && toTreat->getInfectedRed() > 0) { // There are red cubes at this location
-		return true;  
-	}
-
-	else if (col == yellow && toTreat->getInfectedYellow() > 0) { // There are yellow cubes at this location
-		return true;
-	}
-
-	else if (col == blue && toTreat->getInfectedBlue() > 0) { // There are blue cubes
-		return true;
-	}
-
-	else if (col == black && toTreat->getInfectedBlack() > 0) { // There are black cubes
-		return true;
-	}
-
-	else {
-		return false;
-	}
+    City* toTreat = mover.getCurrentPlayer()->getPlayerLocation();
+    if (col == red && toTreat->getInfectedRed() > 0) { // There are red cubes at this location
+        return true;	
+    }
+    else if (col == yellow && toTreat->getInfectedYellow() > 0) { // There are yellow cubes at this location
+        return true;
+    }
+    else if (col == blue && toTreat->getInfectedBlue() > 0) { // There are blue cubes
+        return true;
+    }
+    else if (col == black && toTreat->getInfectedBlack() > 0) { // There are black cubes
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 void Model::savegame(string filename) {
     ofstream fp_out(filename, ios::out);                // open/create savegame file with name(filename)
     
     if(fp_out.is_open()) {                                // test if file is open
-
-        //fp_out << "***** Players *****" << endl;
-        fp_out << getNumPlayers() << endl;
-        for(int i = 0; i < getNumPlayers(); i++) {        // save players
-            fp_out  << players[i]->getPlayerName()   << ","
-                    << players[i]->getPlayerRole()   << ","
-                    << players[i]->getPlayerLocStr() << endl;
-
-            vector<Card*> playerHand = players[i]->getHand();
-            fp_out << playerHand.size() << endl;
-            for(int j = 0; j < int(playerHand.size()); j++) {
-                fp_out  << playerHand[j]->getID() << "," 
-                        << playerHand[j]->getCardName()
-                        << endl;
-            }
-        }
-
         //fp_out << "***** Game Difficulty *****" << endl;
         fp_out << getDifficulty() << endl;                // save game difficulty
 
@@ -303,14 +282,20 @@ void Model::savegame(string filename) {
         fp_out << getOutbreak() << ","                    // save outbreak and infection levels
             << getInfRate() << endl;
 
-		//fp_out << "***** Research Stations *****" << endl;
-		fp_out << getResSta() << endl;
-
-		//fp_out << "***** Cure Status *****" << endl;
-		for(int i = 0; i < 4; i++) {
-			fp_out << getCureStatus(i) << ",";
-		}
-        fp_out << endl;
+        //fp_out << "***** Players *****" << endl;
+        fp_out << getNumPlayers() << endl;
+        for(int i = 0; i < getNumPlayers(); i++) {        // save players
+            fp_out    << players[i]->getPlayerName()    << ","
+                    << players[i]->getPlayerRole()    << ","
+                    << players[i]->getPlayerLocStr() << endl;
+            vector<Card*> playerHand = players[i]->getHand();
+            fp_out << playerHand.size() << endl;
+            for(int j = 0; j < int(playerHand.size()); j++) {
+                fp_out    << playerHand[j]->getCardName()
+                        << "," << playerHand[j]->getID()
+                        << endl;
+            }
+        }
 
         //fp_out << "***** Current Player *****" << endl;
         fp_out << mover.getCurrentPlayer()->getPlayerName() << endl;
@@ -331,81 +316,46 @@ void Model::savegame(string filename) {
 
 void Model::loadgame(string filename) {
     std::string input;
+    std::string::size_type sz;
     ifstream fp_in(filename, ios::in);
 
     if(fp_in.is_open()) {
-
-        // set number of players
         std::getline(fp_in,input);
-        setNumPlayers(strToInt(input));
-
-		// restore players
-		for ( int i = 0; i < getNumPlayers(); i++ ) {
-			string playerName;
-			std::getline(fp_in,playerName,',');
-			string playerRole;
-			std::getline(fp_in,playerRole,',');
-			std::getline(fp_in,input);
-			City* playerLocation = worldMap.locateCity(input);
-			players.push_back(new Player(playerName,playerRole,playerLocation));
-			std::getline(fp_in,input);
-			int handSize = strToInt(input);
-			for(int j = 0; j < handSize; j++) {
-				std::getline(fp_in,input,',');
-				int cardID = strToInt(input);
-				string cardName;
-				std::getline(fp_in,cardName);
-				Card* newCard = new Card(cardID,cardName);
-				players[i]->addCard(newCard);
-			}
-		}
-
-        std::getline(fp_in,input);
-        setDifficulty(strToInt(input));             // game difficulty
+        setDifficulty(std::stoi(input,&sz));        // game difficulty
 
         for(int i = 0; i < 4; i++) {                // cube counts
             std::getline(fp_in,input, ',');
-            setCubeCount(i,strToInt(input));
+            setCubeCount(i,std::stoi(input,&sz));
         }
-		std::getline(fp_in,input);                  // consume newline
 
-		// Outbreak level
         std::getline(fp_in,input,',');
-        setOutbreak(strToInt(input));
+        setOutbreak(std::stoi(input,&sz));            // outbreak
 
-		// Infection level
         std::getline(fp_in,input);
-        setInfection(strToInt(input));
+        setInfection(std::stoi(input,&sz));            // infection
 
-		// Number of research stations
-		std::getline(fp_in,input);
-		setResSta(strToInt(input));
-		
-		// cure status
-		for(int i = 0; i < 4; i++) {
-			std::getline(fp_in,input, ',');
-			setCureStatus(i,strToInt(input));
-		}
         std::getline(fp_in,input);
+        setNumPlayers(std::stoi(input,&sz));        // number of players
 
-        // player turn
-		std::getline(fp_in,input);
-		Player * currentPlayer;
-		for(int i = 0; i < getNumPlayers(); i++) {
-			if(input == players[i]->getPlayerName()) {
-				currentPlayer = players[i];
-				break;
-			}
-		}
-		mover.setCurrentPlayer(currentPlayer);
+        for(int i = 0; i < getNumPlayers(); i++) {
+            string playerName, playerRole, playerLocation;
+            std::getline(fp_in,playerName,',');
+            std::getline(fp_in,playerRole,',');
+            std::getline(fp_in,playerLocation);
+            players.push_back(new Player(playerName, playerRole, worldMap.locateCity(playerLocation)));
+            std::getline(fp_in,input);
+            for(int j = 0; j < std::stoi(input,&sz); j++) {
+                // restore player hand
+            }
+        }
 
-        infectedDeck.loadGame(fp_in);               // infected deck
+//        playerDeck.loadGame(fp_in);                    // player deck
 
-        playerDeck.loadGame(fp_in);                 // player deck
+//        infectedDeck.loadGame(fp_in);                // infected deck
 
-        worldMap.loadGame(fp_in);                   // world map
+//        worldMap.loadGame(fp_in);                    // world map
 
-        fp_in.close();                              // close file
+        fp_in.close();                                // close file
    }
 
    else
@@ -448,12 +398,19 @@ void Model::buildResearchStation(){
         {
             
             curr->getPlayerLocation()->setResearchStation(true);//builds the RS
+			incResSta();										//increments the count of resSta
             curr->removeCard(index);//remove card
             
         }
         index++;
     }
 
+}
+
+void Model::removeResearchStation(City* city)
+{
+	city->setResearchStation(false);//remove the research station
+	decResSta();					//decrease the count of stations built
 }
 
 bool Model::canCureDisease(int col){//This will be updated later when we have a bit more user input.
@@ -594,20 +551,20 @@ vector<Player*> Model::getSharablePlayers(string giveOrTake)
     string card = "";
     vector<Card*> pHand = mover.getCurrentPlayer()->getHand();
     if (giveOrTake == "give" || giveOrTake == "Give"){// If we want to get the players we can give
-    for (int k = 0 ; k<= int(pHand.size()-1); k++)
+    for (int k = 0 ; k<= pHand.size()-1; k++)
         if (pHand[k]->getCardName() == mover.getCurrentPlayer()->getPlayerLocStr())
             card = pHand[k]->getCardName();//finds the card that the player has
     
-    for (int i = 0 ; i <= int(players.size()-1); i++)
+    for (int i = 0 ; i <= players.size()-1; i++)
      if (players[i]->getPlayerLocStr() == card &&               //if Player is in the same spot as the card
          players[i]->getPlayerName() != mover.getCurrentPlayer()->getPlayerName())//And player isnt the current player
          ret.push_back(players[i]);
     }
     else    //else we are finding the players we can get information from.
     {
-        for (int i = 0 ; i <= int(players.size()-1); i++){
+        for (int i = 0 ; i <= players.size()-1; i++){
             pHand = players[i]->getHand();
-            for (int k = 0 ; k<= int(pHand.size()-1); k++)
+            for (int k = 0 ; k<= pHand.size()-1; k++)
                 {
                     if (pHand[k]->getCardName() == mover.getCurrentPlayer()->getPlayerLocStr() &&
                         players[i]->getPlayerName() != mover.getCurrentPlayer()->getPlayerName())
@@ -622,10 +579,10 @@ bool Model::canGiveKnowledge()
 {
     string pLocation = mover.getCurrentPlayer()->getPlayerLocStr();
     vector<Card*> pHand = mover.getCurrentPlayer()->getHand();
-    for (int i = 0 ; i <= int(players.size()-1); i++)
+    for (int i = 0 ; i <= players.size()-1; i++)
         if (pLocation == players[i]->getPlayerLocStr() &&
             players[i]->getPlayerName() != mover.getCurrentPlayer()->getPlayerName())//if there is a different player on the same location as current
-            for (int k = 0 ; k<= int(pHand.size()-1); k++)
+            for (int k = 0 ; k<= pHand.size()-1; k++)
                 if (pHand[k]->getCardName() == pLocation)//Curr player has the city card he is in
                     return true;
     return false;
@@ -635,11 +592,11 @@ bool Model::canGetKnowledge()
 {
     string pLocation = mover.getCurrentPlayer()->getPlayerLocStr();
     vector<Card*> pHand = mover.getCurrentPlayer()->getHand();
-    for (int i = 0 ; i <= int(players.size()-1); i++)
+    for (int i = 0 ; i <= players.size()-1; i++)
         if (pLocation == players[i]->getPlayerLocStr() && players[i]->getPlayerName() != mover.getCurrentPlayer()->getPlayerName())//if there is a different player on the same location as current
         {
             pHand = players[i]->getHand();
-            for (int k = 0 ; k<= int(pHand.size()-1); k++)
+            for (int k = 0 ; k<= pHand.size()-1; k++)
                 if (pHand[k]->getCardName() == pLocation)//A player in the same location has
                     return true;                         //the card
         }
@@ -659,7 +616,6 @@ int Model::getCardIndex(string cardName, Player * p){
     return -1;// returns -1 if card doesn't exist
     
 }
-
 //checks vector of city names to see if its there
 bool Model::alreadyOutbreak(string current, vector<string> previous)
 {

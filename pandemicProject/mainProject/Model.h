@@ -16,13 +16,13 @@
 #include "PlayerMove.h"
 #include "IDeck.h"
 #include "PandemicException.h"
-#include "dataManip.h"
 
 using std::getline;
 
 enum {badCities};                                                        //odd
 enum {red, yellow, blue, black};                                        //cube colors
 enum {uncured, cured, eradicated};                                        //disease status
+
 
 class Model
 {
@@ -32,7 +32,7 @@ public:
     string colorToString(int);
     bool QSautoContain(ICard*);
     void treatDisease(int col);
-    bool canTreatDisease(int col);
+	bool canTreatDisease(int col);
     void setNumPlayers(int num) {
         numPlayers = num;
     }
@@ -55,10 +55,9 @@ public:
     void incResSta() {
         resSta++;
     }
-    //increments number of research stations in play
-    void decResSta() {
-        resSta--;
-    }
+	void decResSta() {
+		resSta--;
+	}
     void cureDisease(int);                                                            //sets the status of a disease to cured
     bool allCured();
     void eradicateDisease(int);                                                        //sets the status of a disease to eradicated
@@ -79,8 +78,8 @@ public:
         return(cubes[disease]);
     }                                    //gets the count of a single color of cube
     int getInfRate() {
-        //return( infRate[currentRate] );
-        return currentRate;
+        return( infRate[currentRate] );
+        
     }                                    //gets the current infection rate (2,2,2,3,3,4,4)
     int getResSta() {
         return resSta;
@@ -88,9 +87,6 @@ public:
     int getCureStatus(int i){
         return cureStatus[i];
     }
-	void setCureStatus(int i, int status) {
-		cureStatus[i] = status;
-	}
     void setOutbreak(int outBreak) {
         outbreak = outBreak;
     }
@@ -106,6 +102,7 @@ public:
     void doCureDisease(int);
     bool canBuildResearchStation();
     void buildResearchStation();
+	void removeResearchStation(City*);
     bool canGetKnowledge();
     bool canGiveKnowledge();
     void giveCard(Player* p,string s);//Current player gives parameter p the card name that matches parameter s
@@ -115,7 +112,7 @@ public:
     void savegame(string filename);
     void loadgame(string filename);
     void buildMap(){worldMap.populateMap("Cities.txt");}                //populate the map}}
-	void setResSta(int num) {resSta = num;}
+    
     void doOutbreak(City*, int, vector<string>&);                        //does outbreak
     bool alreadyOutbreak(string, vector<string>);                        //checks a vector for presence of a string
 

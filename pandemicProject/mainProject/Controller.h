@@ -72,6 +72,12 @@ public:
   void forceDiscard(Player*);
   int run();
   bool isInVector(int, vector<int>&);
+  void doubleEpidemic(int);
+
+  int getMovesUsed(){return movesUsed;}
+  void resetMovesUsed(){movesUsed = 0;}
+  void decMovesUsed(){movesUsed--;}
+  void incMovesUsed(){movesUsed++;}
 
 private:
   View view;                //the view we're using
@@ -83,6 +89,7 @@ private:
   ICard* iCardP;            //pointer to an iCard
   map<int, menuFunctions> mappedFuncs;
   vector<string> commands;
+  int movesUsed;
 };
 
 

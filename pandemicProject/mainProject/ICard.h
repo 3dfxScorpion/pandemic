@@ -2,8 +2,9 @@
 #define ICARD
 
 #include <string>
+using namespace std;
 
-using std::string;
+
 
 class ICard
 {
@@ -15,5 +16,8 @@ private:
         string name;
         int color;                            //same enumeration as model.h
 };
+
+
+
 
 #endif

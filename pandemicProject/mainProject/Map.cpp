@@ -5,7 +5,6 @@
 #include <sstream>
 #include "Map.h"
 #include "PandemicException.h"
-#include "dataManip.h"
 
 using std::cout;
 using std::endl;
@@ -55,15 +54,15 @@ int Map::populateMap(string cityFile) {
                 else if ( first == "Color: " )
                     cityColor = second;
                 else if ( first == "Pop:   " )
-                    population = strToInt(second);
+                    population = stoi(second);
                 else if ( first == "Black: " )
-                    black = strToInt(second);
+                    black = stoi(second);
                 else if ( first == "Blue:  " )
-                    blue = strToInt(second);
+                    blue = stoi(second);
                 else if ( first == "Red:   " )
-                    red = strToInt(second);
+                    red = stoi(second);
                 else if ( first == "Yellow:" )
-                    yellow = strToInt(second);
+                    yellow = stoi(second);
                 // 
                 else if ( first == "HasSta:" ) {
                     if ( second == "TRUE" )
@@ -76,8 +75,8 @@ int Map::populateMap(string cityFile) {
                 else if ( first == "Adj:   " ) {
                 // populate map vector with cities
                     City* currentCity =
-                        new City(cityName,cityColor,population,black, blue, red, yellow, station);
-
+                        new City(cityName, cityColor, population,
+                                 black, blue, red, yellow, station);
                     currentCity->setAdjCity(second);
                     while ( !cityInfoFile.eof() ) {
                         second.clear();
@@ -96,8 +95,8 @@ int Map::populateMap(string cityFile) {
         }
     }
     return 0;
+    
 }
-
 City* Map::locateCity(string cityName) {
     for ( size_t i = 0; i < worldMap.size(); i++ ) {
         if ( worldMap[i]->getCityName() == cityName ) {
@@ -148,16 +147,18 @@ void Map::loadGame(ifstream &fp) {
         current = locateCity(temp);
         
         getline(fp,temp,',');
-        current->setInfectedBlack(strToInt(temp));
+        current->setInfectedBlack(stoi(temp));
         
         getline(fp,temp,',');
-        current->setInfectedBlue(strToInt(temp));
+        current->setInfectedBlue(stoi(temp));
         
         getline(fp,temp,',');
-        current->setInfectedRed(strToInt(temp));
+        current->setInfectedRed(stoi(temp));
         
         getline(fp,temp,',');
-        current->setInfectedYellow(strToInt(temp));
+        current->setInfectedYellow(stoi(temp));
+        
+        current->setInfected();
         
         getline(fp,temp);
         if(temp == "TRUE")
@@ -175,12 +176,12 @@ void Map::saveGame(ofstream &fp) {
         if( worldMap[i]->getInfectedBlack()  != 0 || worldMap[i]->getInfectedBlue()   != 0 ||
             worldMap[i]->getInfectedRed()    != 0 || worldMap[i]->getInfectedYellow() != 0 ||
             worldMap[i]->getResearchStationBool() ) {
-                fp  << worldMap[i]->getCityName()        << ","
-                    << worldMap[i]->getInfectedBlack()   << ","
+                fp    << worldMap[i]->getCityName()        << ","
+                    << worldMap[i]->getInfectedBlack()    << ","
                     << worldMap[i]->getInfectedBlue()    << ","
-                    << worldMap[i]->getInfectedRed()     << ","
-                    << worldMap[i]->getInfectedYellow()  << ","
-                    << worldMap[i]->getResearchStation() << endl;
+                    << worldMap[i]->getInfectedRed()    << ","
+                    << worldMap[i]->getInfectedYellow()    << ","
+                    << worldMap[i]->getResearchStation()<< endl;
         }
     }
 }
