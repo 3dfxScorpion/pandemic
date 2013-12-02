@@ -336,7 +336,7 @@ void Model::loadgame(string filename) {
         // set number of players
         std::getline(fp_in,input);
 		
-        setNumPlayers(stoi(input));
+        setNumPlayers(strToInt(input));
 
 		// restore players
 		for ( int i = 0; i < getNumPlayers(); i++ ) {
@@ -348,10 +348,10 @@ void Model::loadgame(string filename) {
 			City* playerLocation = worldMap.locateCity(input);
 			players.push_back(new Player(playerName,playerRole,playerLocation));
 			std::getline(fp_in,input);
-			int handSize = stoi(input);
+			int handSize = strToInt(input);
 			for(int j = 0; j < handSize; j++) {
 				std::getline(fp_in,input,',');
-				int cardID = stoi(input);
+				int cardID = strToInt(input);
 				string cardName;
 				std::getline(fp_in,cardName);
 				Card* newCard = new Card(cardID,cardName);
@@ -360,32 +360,32 @@ void Model::loadgame(string filename) {
 		}
 
         std::getline(fp_in,input);
-        setDifficulty(stoi(input));             // game difficulty
+        setDifficulty(strToInt(input));             // game difficulty
 
         for(int i = 0; i < 4; i++) {                // cube counts
             std::getline(fp_in,input, ',');
-            setCubeCount(i,stoi(input));
+            setCubeCount(i,strToInt(input));
         }
 		std::getline(fp_in,input);                  // consume newline
 
 		// Outbreak level
         std::getline(fp_in,input,',');
 		
-        setOutbreak(stoi(input));
+        setOutbreak(strToInt(input));
 
 		// Infection level
         std::getline(fp_in,input);
 		
-        setInfection(stoi(input));
+        setInfection(strToInt(input));
 
 		// Number of research stations
 		std::getline(fp_in,input);
-		setResSta(stoi(input));
+		setResSta(strToInt(input));
 		
 		// cure status
 		for(int i = 0; i < 4; i++) {
 			std::getline(fp_in,input, ',');
-			setCureStatus(i,stoi(input));
+			setCureStatus(i,strToInt(input));
 		}
         std::getline(fp_in,input);
 		

@@ -115,12 +115,12 @@ void Deck::loadGame(ifstream &fp) {
 	string input;
 
 	std::getline(fp,input);
-	int deckSize = stoi(input);
+	int deckSize = strToInt(input);
 	for(int i = 0; i < deckSize; i++) {
 		string name,id;
 		std::getline(fp,name,',');
 		std::getline(fp,id);
-		Card* newCard = new Card(stoi(id),name);
+		Card* newCard = new Card(strToInt(id),name);
 		newDeck.push_back(newCard);
 	}
 

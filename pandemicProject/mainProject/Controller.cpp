@@ -185,7 +185,7 @@ void Controller::do_event_card()
                 cin.ignore();
             }
             
-            if(temp < eventID.size())						//if event card chosen
+            if(temp < int(eventID.size()))						//if event card chosen
 			{
 				Card* theCard = model.players[currentPlayerIndex]->getCard(temp);
 				string cardName = theCard->getCardName();
@@ -422,7 +422,7 @@ int Controller::run() {
     bool test = false;
 
     model.buildMap();
-	menu.menuCitiesNumbered(model.worldMap);
+	//menu.menuCitiesNumbered(model.worldMap);		// why is this here?
 
     try {
         view.printTitle();
@@ -430,7 +430,7 @@ int Controller::run() {
 		string name;
 
         if(getLoadGame()) {
-			/*do {
+			do {
 				filename = "autosave";
 				view.askFileName();
 				getline(cin, name);            // get savegame name from user
@@ -466,7 +466,7 @@ int Controller::run() {
 					view.fileNotFound(filename);
 				}
 			} while(!fileExists(filename.c_str()));
-            model.loadgame(filename);*/
+            model.loadgame(filename);
         }
 		else {    // skips game setup if loading game or scenario
             setPlayerCount();
