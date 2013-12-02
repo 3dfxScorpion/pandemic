@@ -11,6 +11,7 @@ string cmds01[] = {
     "Discover Cure",
     "Share Knowledge",
     "Build Research Station",
+	"Play Event Card",
     "Save game"
 };
 
@@ -23,6 +24,7 @@ Controller::Controller() {
     cityP = 0;
     iCardP = 0;
 	movesUsed = 0;
+	currentPlayerIndex = 0;
     setMappedFunctions();
 }
 
@@ -87,10 +89,10 @@ void Controller::setDifficulty() {
 }
 
 void Controller::doPlayerTurns() {
-    for (int i=0; i<model.getNumPlayers(); i++) { //each players turn
-        Player * currentPlayer = model.players[i];
+    for (currentPlayerIndex=0; currentPlayerIndex<model.getNumPlayers(); currentPlayerIndex++) { //each players turn
+        Player * currentPlayer = model.players[currentPlayerIndex];
 		model.mover.setCurrentPlayer(currentPlayer);
-		
+		model.setDoInfect();								//set flag to do the infection round, playing one quiet night will unset this
 		for(this->resetMovesUsed(); this->getMovesUsed()<4; incMovesUsed()) {
             
             doProcessMenu(currentPlayer);
@@ -98,9 +100,10 @@ void Controller::doPlayerTurns() {
         } // four moves consumed
         
         view.newLine();
-        doDrawRound(i);//perform the draw round
+        doDrawRound(currentPlayerIndex);//perform the draw round
         view.newLine();
-        doInfectRound();//perform the infection round
+		if(model.getDoInfect())			//if user didn't choose to play one quiet night this round
+			doInfectRound();			//perform the infection round
         system("Pause");
         
         menu.updateMenu(model);
@@ -131,7 +134,7 @@ void Controller::doDrawRound(int current)
 		{
 			model.infectedDeck.removeFirstDrawn();				//first drawn card this round is removed from play
 			doEpidemic();										//do the epidemic
-			doubleEpidemic(current);							//perform special circumstances
+			do_event_card();							//perform special circumstances
 		}
 		else
 		{
@@ -164,14 +167,15 @@ void Controller::doDrawRound(int current)
 }
 
 //special behavior if two epidemics drawn at the same time
-void Controller::doubleEpidemic(int current)
+void Controller::do_event_card()
 {
 		vector<int> eventID;
-        model.playerDeck.findEvents(model.players[current]->getHand(), eventID); //get vector of indexes containing the players  event cards
+        model.playerDeck.findEvents(model.players[currentPlayerIndex]->getHand(), eventID); //get vector of indexes containing the players  event cards
         
         if(!eventID.empty())//if player had some event cards
         {
-            menu.doubleEpEventMenu(model.players[current]->getHand(), eventID);//display user choices
+			
+            menu.eventMenu(model.players[currentPlayerIndex]->getHand(), eventID);//display user choices
             
             int temp = -1;
             while (temp < 0  || temp > int(eventID.size()))
@@ -181,11 +185,69 @@ void Controller::doubleEpidemic(int current)
                 cin.ignore();
             }
             
-            //play the users event card
-            //needs code to handle event cards. DO ME.
-            //the desired card's index into the player hand is in eventID[temp]
+            if(temp < eventID.size())						//if event card chosen
+			{
+				Card* theCard = model.players[currentPlayerIndex]->getCard(temp);
+				string cardName = theCard->getCardName();
+
+				if(cardName =="One Quiet Night")
+				{
+					view.printOneQuiet();					//print confirmation
+					model.doEventCard(currentPlayerIndex, cardName,  eventID[temp]);
+				}
+				else if(cardName == "Airlift")
+				{
+					int choice;
+					int player;
+
+					do
+					{
+						view.printPlayerChoice(model.getNumPlayers());
+						cin >> player;
+						cin.clear();
+						cin.ignore();
+					}while(0<player || player > model.getNumPlayers());
+					player--;												//convert play number to player array offset
+
+					menu.menuCitiesNumbered(model.worldMap);				//print numbered list of cities
+					
+					do
+					{
+						cin >> choice;
+						cin.clear();
+						cin.ignore();
+					}while(choice < 0 || choice > 48);
+					
+					if(choice < 48) //if a city was chosen
+					{
+						model.players[player]->setPlayerLocation(model.worldMap.locateCityPtr(choice));			//move selected player to selected city
+					}
+					else			//otherwise user chose no thanks
+					{
+						decMovesUsed();
+					}	
+				}
+				else if(cardName == "Forecast")
+				{
+				}
+				else if(cardName == "Government Grant")
+				{
+				}
+				else       //resilient population
+				{
+				}
+				
+			}
+			else
+			{
+				decMovesUsed();								//otherwise dont consume move
+			}
             
         }
+		else
+		{
+			decMovesUsed();									//otherwise user had no event cards, don't consume a move
+		}
 }
 
 void Controller::doDiscard(vector<Card*>playerHand, int current)
@@ -214,9 +276,8 @@ void Controller::doDiscard(vector<Card*>playerHand, int current)
         
         if(temp == 0)
         {
-            //code to play the event card goes here
-            //DO ME BITCHES
-			model.players[current]->removeCard(x);            //temporary until event cards are played and removed
+            do_event_card();									
+			
         }
         else
         {
@@ -361,7 +422,8 @@ int Controller::run() {
     bool test = false;
 
     model.buildMap();
-	
+	menu.menuCitiesNumbered(model.worldMap);
+
     try {
         view.printTitle();
 		string filename = "autosave";
@@ -499,7 +561,7 @@ void Controller::do_direct_flight() {   //If it aint broke
     
     for ( size_t i = 0; i < hand.size(); i++ ) {
         if(!model.playerDeck.isEventCard(hand[i]))
-            cout << hand[i]->ToString() << "\n";        //don't display event cards in direct flight options - does nothing to prevent their use
+            cout << hand[i]->ToString() << "\n";        
     }
     
     vector<int> eventID;                                //indexes of event cards in hand

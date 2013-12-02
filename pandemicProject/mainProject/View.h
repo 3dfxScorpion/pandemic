@@ -68,6 +68,7 @@ public:
         cout << "11. Quit Game\n\n";
         cout << "Your choice: ";
     }
+	void printPlayerChoice(int playerCount){cout << "Enter a player number to move [1-" << playerCount << "]\n";}
     void printInfConfirmation(string city) {
         cout<<"*** " << city << " infected ***\n";
     }
@@ -76,6 +77,7 @@ public:
     }
     
     void printPlayOrDiscard(){cout << "\n You've chosen an event card.  Would you like to play it, or discard?\n(0)Play\n(1)Discard\n";}
+	void printOneQuiet(){cout << "Skipping the next infection phase/n";}
     void printOutbreaks(vector<string>);
     void askLoadGame();
     void askLoadScenario();

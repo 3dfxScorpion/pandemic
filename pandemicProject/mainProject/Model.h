@@ -33,6 +33,9 @@ public:
     bool QSautoContain(ICard*);
     void treatDisease(int col);
 	bool canTreatDisease(int col);
+	void setDoInfect(){doInfect = 1;}
+	void unsetDoInfect(){doInfect = 0;}
+	int getDoInfect(){return doInfect;}
     void setNumPlayers(int num) {
         numPlayers = num;
     }
@@ -117,11 +120,11 @@ public:
 	void setResSta(int num) {resSta = num;}
     void doOutbreak(City*, int, vector<string>&);                        //does outbreak
     bool alreadyOutbreak(string, vector<string>);                        //checks a vector for presence of a string
-
-    vector<Player*> players;                                                        //
-    Map worldMap;                                                                    //The map, bitch!
-    Deck playerDeck;                                                                //Player deck
-    IDeck infectedDeck;                                                                //Infected Deck
+	void doEventCard(int, string, int);									//player index, card name, card index
+    vector<Player*> players;											
+    Map worldMap;														//The map, bitch!
+    Deck playerDeck;													//Player deck
+    IDeck infectedDeck;													//Infected Deck
     PlayerMove mover;
 private:
     vector<string> rolesDeck;
@@ -129,5 +132,6 @@ private:
     int cubes[4];
     int infRate[7];
     int cureStatus[4];
+	int doInfect;
 };
 #endif

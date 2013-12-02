@@ -314,13 +314,13 @@ void Menu::discardMenu(vector<Card*>hand)
 }
 
 //Gives user options to play an event card between two consecutive epidemics
-void Menu::doubleEpEventMenu(vector<Card*>hand, vector<int>index)
+void Menu::eventMenu(vector<Card*>hand, vector<int>index)
 {
     int num;
     int i=0;
     ostringstream out;
     out << "====================================================================================================\n";
-    out << "You've drawn two Epidemics! Choose an event card to play from below:\n";
+    out << "Choose an event card to play from below:\n";
     out << "----------------------------------------------------------------------------------------------------\n";
 
     num = index.size();

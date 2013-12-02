@@ -40,6 +40,7 @@ public:
   void do_build_station();
   void do_save_game();
   void do_quit_game();
+  void do_event_card();
   // map menu functions
   void setMappedFunctions() {
       menuFunctions fns[] = {
@@ -52,6 +53,7 @@ public:
           &Controller::do_share_knowledge,
           &Controller::do_build_station,
           &Controller::do_save_game,
+		  &Controller::do_event_card,
           &Controller::do_quit_game
       };
       for ( size_t idx = 0; idx < 9; idx++ ) {
@@ -72,13 +74,13 @@ public:
   void forceDiscard(Player*);
   int run();
   bool isInVector(int, vector<int>&);
-  void doubleEpidemic(int);
+  
 
   int getMovesUsed(){return movesUsed;}
   void resetMovesUsed(){movesUsed = 0;}
   void decMovesUsed(){movesUsed--;}
   void incMovesUsed(){movesUsed++;}
-
+  int currentPlayerIndex;
 private:
   View view;                //the view we're using
   Model model;                //the model

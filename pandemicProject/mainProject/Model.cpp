@@ -10,7 +10,8 @@ Model::Model()
     infRate[0] = infRate[1] = infRate[2] = 2;
     infRate[3] = infRate[4] = 3;
     infRate[5] = infRate[6] = 4; 
-    
+    doInfect = 1;
+
     //initialize cube count to 24, and all diseases to uncured
     for(int i = 0; i <4; i++)
     {
@@ -681,4 +682,25 @@ bool Model::alreadyOutbreak(string current, vector<string> previous)
     }
     
     return tmp;
+}
+
+void Model::doEventCard(int player, string cardName, int index)
+{
+	if(cardName =="One Quiet Night")
+	{
+		unsetDoInfect();								    //set do infect bit to zero
+		players[player]->removeCard(index);					//remove card from hand
+	}
+	else if(cardName == "Airlift")
+	{
+	}
+	else if(cardName == "Forecast")
+	{
+	}
+	else if(cardName == "Government Grant")
+	{
+	}
+	else       //resilient population
+	{
+	}
 }

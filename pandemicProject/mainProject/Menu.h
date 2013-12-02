@@ -44,7 +44,7 @@ class Menu {
     string menuCommands(vector<string>);
     void showMenu(Player*);
     void discardMenu(vector<Card*>);
-    void doubleEpEventMenu(vector<Card*>, vector<int>);
+    void eventMenu(vector<Card*>, vector<int>);
     void updateMenu(Model&);
 	void removeResStaMenu(vector<string>);
 	void menuCitiesNumbered(Map&);
