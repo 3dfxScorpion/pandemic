@@ -119,21 +119,21 @@ void IDeck::loadGame(ifstream &fp) {
 
 	// Infection Deck
 	std::getline(fp,input);
-	deckSize = strToInt(input);
+	deckSize = stoi(input);
 	for(int i = 0; i < deckSize; i++) {
 		std::getline(fp,name,',');
 		std::getline(fp,color);
-	    ICard* newCard = new ICard(name,strToInt(color));
+	    ICard* newCard = new ICard(name,stoi(color));
 	    deck.push_back(newCard);
     }
 
 	// Infection Discard Pile
 	std::getline(fp,input);
-	deckSize = strToInt(input);
+	deckSize = stoi(input);
 	for(int i = 0; i < deckSize; i++) {
 		std::getline(fp,name,',');
 		std::getline(fp,color);
-	    ICard* newCard = new ICard(name,strToInt(color));
+	    ICard* newCard = new ICard(name,stoi(color));
 	    discard.push_back(newCard);
     }
 }

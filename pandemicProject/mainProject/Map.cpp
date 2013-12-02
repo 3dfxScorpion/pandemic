@@ -55,15 +55,15 @@ int Map::populateMap(string cityFile) {
                 else if ( first == "Color: " )
                     cityColor = second;
                 else if ( first == "Pop:   " )
-                    population = strToInt(second);
+                    population = stoi(second);
                 else if ( first == "Black: " )
-                    black = strToInt(second);
+                    black = stoi(second);
                 else if ( first == "Blue:  " )
-                    blue = strToInt(second);
+                    blue = stoi(second);
                 else if ( first == "Red:   " )
-					red = strToInt(second);
+					red = stoi(second);
                 else if ( first == "Yellow:" )
-                    yellow = strToInt(second);
+                    yellow = stoi(second);
                 // 
                 else if ( first == "HasSta:" ) {
                     if ( second == "TRUE" )
@@ -148,16 +148,16 @@ void Map::loadGame(ifstream &fp) {
         current = locateCity(temp);
         
         getline(fp,temp,',');
-        current->setInfectedBlack(strToInt(temp));
+        current->setInfectedBlack(stoi(temp));
         
         getline(fp,temp,',');
-        current->setInfectedBlue(strToInt(temp));
+        current->setInfectedBlue(stoi(temp));
         
         getline(fp,temp,',');
-        current->setInfectedRed(strToInt(temp));
+        current->setInfectedRed(stoi(temp));
         
         getline(fp,temp,',');
-        current->setInfectedYellow(strToInt(temp));
+        current->setInfectedYellow(stoi(temp));
 		
 		getline(fp,temp);
         if(temp == "TRUE")

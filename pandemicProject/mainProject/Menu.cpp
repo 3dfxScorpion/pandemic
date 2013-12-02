@@ -50,6 +50,27 @@ string Menu::menuCities(Map& m) {
     return out.str();
 }
 
+void Menu::menuCitiesNumbered(Map& m) {
+    ostringstream out;
+    vector<City*> menuMap = m.getWorldMap();
+    int i = 0;
+	int num = menuMap.size();
+	string tempStr;
+	cout << "====================================================================================================\n";
+    cout << "Select a city to continue:\n";
+    cout << "----------------------------------------------------------------------------------------------------\n";
+	for (i; i < num; i++)
+	{
+
+		cout << "(" << i << ")" << setw(25) << left << menuMap[i]->getCityName();
+		i++;
+		cout <<"(" << i << ")" << setw(25) <<left << menuMap[i]->getCityName();
+		i++;
+		cout <<"(" << i << ")" << setw(25) <<left << menuMap[i]->getCityName() << endl;
+	}
+
+	cout << "(" << i << ")No thanks." << endl;   
+}
 string menuAdjCities(City* c) {         // static method for external purposes
     size_t cityID = 1;
     const size_t totalCount = 8;        // number of slots for cards

@@ -335,7 +335,7 @@ void Model::loadgame(string filename) {
         // set number of players
         std::getline(fp_in,input);
 		
-        setNumPlayers(strToInt(input));
+        setNumPlayers(stoi(input));
 
 		// restore players
 		for ( int i = 0; i < getNumPlayers(); i++ ) {
@@ -347,10 +347,10 @@ void Model::loadgame(string filename) {
 			City* playerLocation = worldMap.locateCity(input);
 			players.push_back(new Player(playerName,playerRole,playerLocation));
 			std::getline(fp_in,input);
-			int handSize = strToInt(input);
+			int handSize = stoi(input);
 			for(int j = 0; j < handSize; j++) {
 				std::getline(fp_in,input,',');
-				int cardID = strToInt(input);
+				int cardID = stoi(input);
 				string cardName;
 				std::getline(fp_in,cardName);
 				Card* newCard = new Card(cardID,cardName);
@@ -359,32 +359,32 @@ void Model::loadgame(string filename) {
 		}
 
         std::getline(fp_in,input);
-        setDifficulty(strToInt(input));             // game difficulty
+        setDifficulty(stoi(input));             // game difficulty
 
         for(int i = 0; i < 4; i++) {                // cube counts
             std::getline(fp_in,input, ',');
-            setCubeCount(i,strToInt(input));
+            setCubeCount(i,stoi(input));
         }
 		std::getline(fp_in,input);                  // consume newline
 
 		// Outbreak level
         std::getline(fp_in,input,',');
 		
-        setOutbreak(strToInt(input));
+        setOutbreak(stoi(input));
 
 		// Infection level
         std::getline(fp_in,input);
 		
-        setInfection(strToInt(input));
+        setInfection(stoi(input));
 
 		// Number of research stations
 		std::getline(fp_in,input);
-		setResSta(strToInt(input));
+		setResSta(stoi(input));
 		
 		// cure status
 		for(int i = 0; i < 4; i++) {
 			std::getline(fp_in,input, ',');
-			setCureStatus(i,strToInt(input));
+			setCureStatus(i,stoi(input));
 		}
         std::getline(fp_in,input);
 		
@@ -629,7 +629,8 @@ bool Model::canGiveKnowledge()
     vector<Card*> pHand = mover.getCurrentPlayer()->getHand();
     for (int i = 0 ; i <= int(players.size()-1); i++)
         if (pLocation == players[i]->getPlayerLocStr() &&
-            players[i]->getPlayerName() != mover.getCurrentPlayer()->getPlayerName())//if there is a different player on the same location as current            for (int k = 0 ; k<= int(pHand.size()-1); k++)
+            players[i]->getPlayerName() != mover.getCurrentPlayer()->getPlayerName())//if there is a different player on the same location as current
+            for (int k = 0 ; k<= int(pHand.size()-1); k++)
                 if (pHand[k]->getCardName() == pLocation)//Curr player has the city card he is in
                     return true;
     return false;

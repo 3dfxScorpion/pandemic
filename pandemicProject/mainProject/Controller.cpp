@@ -361,14 +361,14 @@ int Controller::run() {
     bool test = false;
 
     model.buildMap();
-
+	
     try {
         view.printTitle();
 		string filename = "autosave";
 		string name;
 
         if(getLoadGame()) {
-			do {
+			/*do {
 				filename = "autosave";
 				view.askFileName();
 				getline(cin, name);            // get savegame name from user
@@ -404,7 +404,7 @@ int Controller::run() {
 					view.fileNotFound(filename);
 				}
 			} while(!fileExists(filename.c_str()));
-            model.loadgame(filename);
+            model.loadgame(filename);*/
         }
 		else {    // skips game setup if loading game or scenario
             setPlayerCount();

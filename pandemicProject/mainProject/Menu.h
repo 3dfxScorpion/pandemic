@@ -47,6 +47,7 @@ class Menu {
     void doubleEpEventMenu(vector<Card*>, vector<int>);
     void updateMenu(Model&);
 	void removeResStaMenu(vector<string>);
+	void menuCitiesNumbered(Map&);
 	
 
   private:
