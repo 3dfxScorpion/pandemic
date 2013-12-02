@@ -118,9 +118,17 @@ public:
     void loadgame(string filename);
     void buildMap(){worldMap.populateMap("Cities.txt");}                //populate the map}}
 	void setResSta(int num) {resSta = num;}
-    void doOutbreak(City*, int, vector<string>&);                        //does outbreak
-    bool alreadyOutbreak(string, vector<string>);                        //checks a vector for presence of a string
+    void doOutbreak(City*, int, vector<string>&);                       //does outbreak
+    bool alreadyOutbreak(string, vector<string>);                       //checks a vector for presence of a string
 	void doEventCard(int, string, int);									//player index, card name, card index
+	int getCurrentPlayerIndex() { return currentPlayerIndex; }
+	int getMovesUsed() { return movesUsed; }
+	void setCurrentPlayerIndex(int index) { currentPlayerIndex = index; }
+	void setMovesUsed(int moves) { movesUsed = moves; }
+    void decMovesUsed(){movesUsed--;}
+    void incMovesUsed(){movesUsed++;}
+	void incCurrentPlayerIndex(){currentPlayerIndex++;}
+
     vector<Player*> players;											
     Map worldMap;														//The map, bitch!
     Deck playerDeck;													//Player deck
@@ -133,5 +141,7 @@ private:
     int infRate[7];
     int cureStatus[4];
 	int doInfect;
+	int currentPlayerIndex;
+	int movesUsed;
 };
 #endif

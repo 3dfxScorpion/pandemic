@@ -166,7 +166,8 @@ bool Model::QSautoContain(ICard* icardP){
     return false;//otherwise return false so the city will be infected.
 }
 
-void Model::checkMedicSpecial(){
+void Model::checkMedicSpecial()
+{
     Player* toCheck = mover.getCurrentPlayer();
     if (mover.getCurrentPlayer()->getPlayerRole() == "Medic")
     {
@@ -188,7 +189,8 @@ void Model::checkMedicSpecial(){
     }
 }
 
-void Model::treatDisease(int col){
+void Model::treatDisease(int col)
+{
     City* toTreat = mover.getCurrentPlayer()->getPlayerLocation();
     switch(col){
         case blue:
@@ -247,7 +249,8 @@ void Model::treatDisease(int col){
         eradicateDisease(col);
 }
 
-bool Model::canTreatDisease(int col) {
+bool Model::canTreatDisease(int col)
+{
     City* toTreat = mover.getCurrentPlayer()->getPlayerLocation();
     if (col == red && toTreat->getInfectedRed() > 0) { // There are red cubes at this location
         return true;	
@@ -266,7 +269,8 @@ bool Model::canTreatDisease(int col) {
     }
 }
 
-void Model::savegame(string filename) {
+void Model::savegame(string filename)
+{
     ofstream fp_out(filename, ios::out);                // open/create savegame file with name(filename)
     
     if(fp_out.is_open()) {                                // test if file is open
@@ -310,7 +314,8 @@ void Model::savegame(string filename) {
         fp_out << endl;
 
         //fp_out << "***** Current Player *****" << endl;
-        fp_out << mover.getCurrentPlayer()->getPlayerName() << endl;
+        fp_out << getCurrentPlayerIndex() << "," 
+			   << getMovesUsed() << endl;
 
         //fp_out << "***** Infection Decks *****" << endl;
         infectedDeck.saveGame(fp_out);                    // save infection deck & discard deck
@@ -326,16 +331,15 @@ void Model::savegame(string filename) {
         ; // throw error
 }
 
-void Model::loadgame(string filename) {
+void Model::loadgame(string filename)
+{
     std::string input;
-	
     ifstream fp_in(filename, ios::in);
 
     if(fp_in.is_open()) {
 
         // set number of players
         std::getline(fp_in,input);
-		
         setNumPlayers(strToInt(input));
 
 		// restore players
@@ -370,12 +374,10 @@ void Model::loadgame(string filename) {
 
 		// Outbreak level
         std::getline(fp_in,input,',');
-		
         setOutbreak(strToInt(input));
 
 		// Infection level
         std::getline(fp_in,input);
-		
         setInfection(strToInt(input));
 
 		// Number of research stations
@@ -390,16 +392,10 @@ void Model::loadgame(string filename) {
         std::getline(fp_in,input);
 		
         // player turn
+		std::getline(fp_in,input,',');
+		setCurrentPlayerIndex(strToInt(input));
 		std::getline(fp_in,input);
-		
-		Player * currentPlayer;
-		for(int i = 0; i < getNumPlayers(); i++) {
-			if(input == players[i]->getPlayerName()) {
-				currentPlayer = players[i];
-				break;
-			}
-		}
-		mover.setCurrentPlayer(currentPlayer);
+		setMovesUsed(strToInt(input));
 		
         infectedDeck.loadGame(fp_in);               // infected deck
 		
@@ -414,7 +410,8 @@ void Model::loadgame(string filename) {
         ; // throw error
 }
 
-vector<string> Model::getReasearchStationCities(){
+vector<string> Model::getReasearchStationCities()
+{
     vector<string> ret;
     vector<City*> cities = worldMap.getWorldMap();
     vector<City*>::iterator cItr;
@@ -426,7 +423,8 @@ vector<string> Model::getReasearchStationCities(){
     return ret;
 }
 
-bool Model::canBuildResearchStation(){
+bool Model::canBuildResearchStation()
+{
     Player * curr = mover.getCurrentPlayer();
     vector<Card*> hand = curr->getHand();
     vector<Card*>::iterator hItr;
@@ -439,7 +437,8 @@ bool Model::canBuildResearchStation(){
     
 }
 
-void Model::buildResearchStation(){
+void Model::buildResearchStation()
+{
     Player * curr = mover.getCurrentPlayer();
     int index = 0;
     vector<Card*> hand = curr->getHand();
@@ -462,7 +461,8 @@ void Model::removeResearchStation(City* city)
 	decResSta();					//decrease the count of stations built
 }
 
-bool Model::canCureDisease(int col){//This will be updated later when we have a bit more user input.
+bool Model::canCureDisease(int col)
+{//This will be updated later when we have a bit more user input.
    
    string color = colorToString(col);
     int colorNum=0;
@@ -483,7 +483,8 @@ bool Model::canCureDisease(int col){//This will be updated later when we have a 
     return false;
 }
 
-void Model::doCureDisease(int col){
+void Model::doCureDisease(int col)
+{
     
     string color = colorToString(col);
     int colorNum=0;                        //We will need to ask which 5 cards a player wants to discard
@@ -652,18 +653,19 @@ bool Model::canGetKnowledge()
     return false;
 }
 
-int Model::getCardIndex(string cardName, Player * p){
+int Model::getCardIndex(string cardName, Player * p)
+{
     vector<Card*>::iterator cItr;
     vector<Card*> pHand = p->getHand();
     int i = 0;
-    for (cItr = pHand.begin();cItr != pHand.end();cItr++){
+    for (cItr = pHand.begin();cItr != pHand.end();cItr++)
+	{
         Card* tmp = * cItr;
         if (tmp->getCardName() == cardName)
             return i;
         i++;
     }
     return -1;// returns -1 if card doesn't exist
-    
 }
 
 //checks vector of city names to see if its there

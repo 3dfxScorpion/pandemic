@@ -23,8 +23,8 @@ vector<string> mainCommands ( cmds01, cmds01 + sizeof(cmds01) / sizeof(cmds01[0]
 Controller::Controller() {
     cityP = 0;
     iCardP = 0;
-	movesUsed = 0;
-	currentPlayerIndex = 0;
+	model.setMovesUsed(0);
+	model.setCurrentPlayerIndex(0);
     setMappedFunctions();
 }
 
@@ -89,18 +89,18 @@ void Controller::setDifficulty() {
 }
 
 void Controller::doPlayerTurns() {
-    for (currentPlayerIndex=0; currentPlayerIndex<model.getNumPlayers(); currentPlayerIndex++) { //each players turn
-        Player * currentPlayer = model.players[currentPlayerIndex];
+    for ( ; model.getCurrentPlayerIndex() < model.getNumPlayers(); model.incCurrentPlayerIndex()) { //each players turn
+        Player * currentPlayer = model.players[model.getCurrentPlayerIndex()];
 		model.mover.setCurrentPlayer(currentPlayer);
 		model.setDoInfect();								//set flag to do the infection round, playing one quiet night will unset this
-		for(this->resetMovesUsed(); this->getMovesUsed()<4; incMovesUsed()) {
-            
+
+		for( ; model.getMovesUsed() < 4; model.incMovesUsed()) {
             doProcessMenu(currentPlayer);
-            
         } // four moves consumed
+		model.setMovesUsed(0);
         
         view.newLine();
-        doDrawRound(currentPlayerIndex);//perform the draw round
+        doDrawRound(model.getCurrentPlayerIndex());//perform the draw round
         view.newLine();
 		if(model.getDoInfect())			//if user didn't choose to play one quiet night this round
 			doInfectRound();			//perform the infection round
@@ -108,6 +108,7 @@ void Controller::doPlayerTurns() {
         
         menu.updateMenu(model);
     }
+	model.setCurrentPlayerIndex(0);
 }
 
 void Controller::doDrawRound(int current)
@@ -170,12 +171,12 @@ void Controller::doDrawRound(int current)
 void Controller::do_event_card()
 {
 		vector<int> eventID;
-        model.playerDeck.findEvents(model.players[currentPlayerIndex]->getHand(), eventID); //get vector of indexes containing the players  event cards
+        model.playerDeck.findEvents(model.players[model.getCurrentPlayerIndex()]->getHand(), eventID); //get vector of indexes containing the players event cards
         
         if(!eventID.empty())//if player had some event cards
         {
 			
-            menu.eventMenu(model.players[currentPlayerIndex]->getHand(), eventID);//display user choices
+            menu.eventMenu(model.players[model.getCurrentPlayerIndex()]->getHand(), eventID); //display user choices
             
             int temp = -1;
             while (temp < 0  || temp > int(eventID.size()))
@@ -187,13 +188,13 @@ void Controller::do_event_card()
             
             if(temp < int(eventID.size()))						//if event card chosen
 			{
-				Card* theCard = model.players[currentPlayerIndex]->getCard(temp);
+				Card* theCard = model.players[model.getCurrentPlayerIndex()]->getCard(temp);
 				string cardName = theCard->getCardName();
 
 				if(cardName =="One Quiet Night")
 				{
 					view.printOneQuiet();					//print confirmation
-					model.doEventCard(currentPlayerIndex, cardName,  eventID[temp]);
+					model.doEventCard(model.getCurrentPlayerIndex(), cardName,  eventID[temp]);
 				}
 				else if(cardName == "Airlift")
 				{
@@ -224,7 +225,7 @@ void Controller::do_event_card()
 					}
 					else			//otherwise user chose no thanks
 					{
-						decMovesUsed();
+						model.decMovesUsed();
 					}	
 				}
 				else if(cardName == "Forecast")
@@ -240,13 +241,13 @@ void Controller::do_event_card()
 			}
 			else
 			{
-				decMovesUsed();								//otherwise dont consume move
+				model.decMovesUsed();								//otherwise dont consume move
 			}
             
         }
 		else
 		{
-			decMovesUsed();									//otherwise user had no event cards, don't consume a move
+			model.decMovesUsed();									//otherwise user had no event cards, don't consume a move
 		}
 }
 
@@ -472,8 +473,10 @@ int Controller::run() {
             setPlayerCount();
             setPlayerNames();
             setDifficulty();
-            model.prepareGame();    //assigns roles, draws initial player hands based on player count, sets resSta and player location to atlanta
-            model.initialInfect();    //perform initial infection
+            model.prepareGame();            // assigns roles, draws initial player hands based on player count, sets resSta and player location to atlanta
+            model.initialInfect();          // perform initial infection
+			model.setCurrentPlayerIndex(0); // set currentPlayerIndex to 0
+			model.setMovesUsed(0);          // set movesUsed to 0
         }
         
         menu.setMenuCommands(mainCommands);
@@ -706,9 +709,6 @@ void Controller::do_share_knowledge() {
             cout << "This is the get card " << getCard->getCardName()<<endl;
         model.mover.shareKnowledge(toGet[pInput-1],model.mover.getCurrentPlayer(), getCard);
     }
-    
-        
-    
 }
 
 void Controller::do_build_station() {
@@ -741,21 +741,22 @@ void Controller::do_build_station() {
 			}
 			else{
 				//otherwise user chose "No thanks" 
-				decMovesUsed();		//so don't consume a move
+				model.decMovesUsed();		//so don't consume a move
 			}
 
 		}
     }
 }
 
-void Controller::do_save_game() {
+void Controller::do_save_game()
+{
     string filename = "autosave";
     string name;
     
     view.askFileName();
-    getline(cin, name);            // get savegame name from user (reads whole line and discards end of line) cin will be empty after this call...
+    getline(cin, name);             // get savegame name from user (reads whole line and discards end of line) cin will be empty after this call...
     
-#ifdef __APPLE__ && __MACH__    // fix for 'certain' OSes...
+#ifdef __APPLE__ && __MACH__        // fix for Apple
     cin.ignore();
     cin.clear();
 #endif
@@ -765,6 +766,7 @@ void Controller::do_save_game() {
     }
     
     model.savegame(filename);
+	model.decMovesUsed();			// saving shoul not increment number of moves...
     view.printProgressSavedMsg();
 }
 
@@ -783,26 +785,26 @@ bool Controller::isInVector(int x, vector<int>& vec)
                 return true;
         }
     }
-    
     return false;
 }
 
-void Controller::forceDiscard(Player* p){
+void Controller::forceDiscard(Player* p)
+{
     vector<Card*> pHand = p->getHand();
     view.askForcedDiscard(pHand);   //get the players hand
     int input = -1;
+
     while (input < 1 || input > int(pHand.size()))
     {
         cin >> input;
         cin.ignore();
         cin.clear();
     }
+
     //Instead of simply setting p->remove card directly I'm going through this loop to use the model.
     for (int i = 0; i<=int(model.players.size()-1);i++)
     {
         if (model.players[i]->getPlayerName() == p->getPlayerName())
             model.players[i]->removeCard(input-1);//remove selected card.
     }
-    
-    
 }
