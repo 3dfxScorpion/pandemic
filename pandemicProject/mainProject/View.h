@@ -20,6 +20,7 @@ public:
     void printTreatDiseaseMsg();
     void printShareKnowledgeMsg();
     void printSaveGameMsg();
+    
     void printGetOrGiveKnowlege(vector<string>);
     void printInfected();
     void askCanCure(string);
@@ -28,6 +29,7 @@ public:
     void askGiveKnowledge(vector<Player*>);
     void askGetKnowledge(vector<Player*>);
     void askForcedDiscard(vector<Card*>);
+    void printCantCharterFlight(){cout << "You do not have the required card to charter a flight...\n";}
     void askWhoToGiveCard(){cout << "Which player would you like to give a card to?\n";}
     void askWhoToGetCard(){cout << "Which player would you like to get a card from?\n";}
     void printCantBuildRS(){cout << "You do not have the required card to build an RS here\n";}

@@ -18,9 +18,11 @@ void View::printProgressSavedMsg() {
     cout << "Your progress has been saved.\n";
 }
 
+
 void View::printCharterFlightMsg() {
-     cout << "Charter flight to city...\n";
+    cout << "Please type the name of a valid city you would like to travel to.\n";
 }
+
 
 void View::printShareKnowledgeMsg() {
     cout << "share knowledge, are you crazy???\n";

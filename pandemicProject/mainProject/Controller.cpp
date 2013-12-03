@@ -680,9 +680,27 @@ void Controller::do_direct_flight() {   //If it aint broke
 
 void Controller::do_charter_flight() {    //Need a menu to list all cities or let character enter input :S
     Player * p = model.mover.getCurrentPlayer();
-    view.printCharterFlightMsg();
-    cout << menuAdjCities(p->getPlayerLocation()) << "\n";
+    if (model.canCharterFlight())
+    {
+        
+        string input = "";
+        cin.ignore();
+        cin.clear();
+        while (!model.worldMap.locateCity(input)){
+            view.printCharterFlightMsg();
+            getline(cin, input);//read player name
+            if (input == "10")
+                return;
+            
+            
+        }
+        model.charterFlight(input);
+        
+    }
+    else
+        view.printCantCharterFlight();
 }
+
 
 void Controller::do_shuttle_flight() {
     view.askLocationShuttleFlight();

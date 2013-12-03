@@ -5,7 +5,8 @@
 
 #include "Controller.h"
 #include<iostream>
-
+#include "dataManip.h"
+#include "dataManip.cpp"
 
 using std::cin;
 using std::cout;

@@ -712,3 +712,32 @@ void Model::buildResearchStation(City* ptr)
 	ptr->setResearchStation(true);
 	incResSta();
 }
+
+
+bool Model::canCharterFlight(){
+    vector<Card*> pHand = mover.getCurrentPlayer()->getHand();
+    vector<Card*>::iterator cItr;
+    for (cItr = pHand.begin() ; cItr != pHand.end() ; cItr++){
+        Card* tmp = *cItr;
+        if (mover.getCurrentPlayer()->getPlayerLocStr() == tmp->getCardName())
+            return true;
+    }
+    return false;
+}
+
+
+void Model::charterFlight(string toMove){
+    vector<Card*> pHand = mover.getCurrentPlayer()->getHand();
+    vector<Card*>::iterator cItr;
+    int i = 0;
+    for (cItr = pHand.begin() ; cItr != pHand.end() ; cItr++){
+        Card* tmp = *cItr;
+        if (mover.getCurrentPlayer()->getPlayerLocStr() == tmp->getCardName())
+        {
+            mover.getCurrentPlayer()->removeCard(i);
+            mover.getCurrentPlayer()->setPlayerLocation(worldMap.locateCity(toMove));
+        }
+        i++;
+    }
+    
+}

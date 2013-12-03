@@ -12,6 +12,7 @@
 #include <vector>
 #include <stdlib.h>
 
+
 using std::cin;
 using std::cout;
 using std::setw;

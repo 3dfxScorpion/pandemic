@@ -109,6 +109,8 @@ public:
     void buildResearchStation();
 	void buildResearchStation(City*);
 	void removeResearchStation(City*);
+    bool canCharterFlight();
+    void charterFlight(string);
     bool canGetKnowledge();
     bool canGiveKnowledge();
     void giveCard(Player* p,string s);//Current player gives parameter p the card name that matches parameter s
