@@ -275,7 +275,12 @@ string Menu::menuCommands(vector<string> commands) {
     }
 
     /*  adding current infection rate... */
-    str[1] << setw(14) << right << getInfectionRate(); 
+    str[0] << setw(14) << right << getInfectionRate();
+
+	str[2] << "      " << "Outbreak Level:";
+
+	/* adding current outbreak count... */
+	str[3] << setw(14) << right << getOutbreakRate();
 
     for ( size_t i = 0; i < slotCount; i++ ) {
         out << str[i].str() << "\n";
@@ -375,6 +380,7 @@ void Menu::removeResStaMenu(vector<string> vec)
 
 void Menu::updateMenu(Model& m) {
     setInfectionRate(m.getInfRate());
+	setOutbreakRate(m.getOutbreak());
     setMenuMap(m.worldMap);
     setMenuPlayers(m.players);
     setMappedCubes("black", m.getCubeCount(black));

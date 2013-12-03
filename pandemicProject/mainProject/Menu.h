@@ -20,12 +20,14 @@ class Menu {
     }
     // getters
     int             getInfectionRate()   { return infectionRate; }
+	int             getOutbreakRate()    { return outbreakRate;  }
     Map&            getMenuMap()         { return menuMap;       }
     vector<Player*> getMenuPlayers()     { return players;       }
     vector<string>  getMenuCommands()    { return commands;      }
     map<int,string> getMappedCommands()  { return mappedCmds;    }
     // setters
     void setInfectionRate(int r)           { infectionRate  = r; }
+	void setOutbreakRate(int z)            { outbreakRate   = z; }
     void setMenuMap(Map& m)                { menuMap        = m; }
     void setMenuPlayers(vector<Player*> p) { players        = p; }
     void setMenuCommands(vector<string> s) { commands       = s; }
@@ -58,6 +60,7 @@ class Menu {
     vector<string> commands;
     vector<Player*> players;
     int infectionRate;
+	int outbreakRate;
 };
 
 string menuAdjCities(City*);
