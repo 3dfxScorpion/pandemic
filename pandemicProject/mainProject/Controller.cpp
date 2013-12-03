@@ -225,24 +225,94 @@ void Controller::do_event_card()
 					}
 					else			//otherwise user chose no thanks
 					{
-						model.decMovesUsed();
+						
 					}	
 				}
 				else if(cardName == "Forecast")
 				{
+					int  x;
+					vector<ICard*> infCards = model.infectedDeck.getTopSix();		//draw the top six cards from the ideck to temporary deck
+					
+					while(!infCards.empty())										//while its not empty - will prob change to static count 
+					{
+						view.forecastMenu(infCards);								// print menu
+
+						do
+						{
+							cin >> x;
+							cin.clear();
+							cin.ignore();
+						}while(x < 0 || x >= infCards.size());						//until proper input
+
+						model.infectedDeck.addTop(infCards[x]);						//add choice to top of deck
+						infCards.erase(infCards.begin()+x);							//erase from the temporary deck
+					}
 				}
 				else if(cardName == "Government Grant")
 				{
+					int resCount = model.getResSta();
+					City* cityP;
+					if (resCount >= 6) {                                                    //if one must be removed
+						vector<string> locations =	model.getReasearchStationCities();		//get list of cities holding ressta
+						menu.removeResStaMenu(locations);									//display the prompt	
+
+						int temp = -1;
+						while (temp < 0  || temp > resCount)								//read until 0<=temp<=count of res sta
+						{
+							cin >> temp;													
+							cin.clear();
+							cin.ignore();
+						}
+
+						if(temp < resCount)//if user didn't choose no thanks
+						{
+							model.removeResearchStation(model.worldMap.locateCity(locations[temp]));//find pointer to it, and remove the research station
+							menu.menuCitiesNumbered(model.worldMap);								//print the menu
+
+							temp = -1;
+							while(temp < 0 || temp > 48)
+							{
+								cin >> temp;													
+								cin.clear();
+								cin.ignore();
+
+								cityP = model.worldMap.locateCityPtr(temp);							//get pointer to the city
+								if (cityP->getResearchStationBool())									//if it already has a station
+								{
+									view.stationAlreadyBuilt();										//print confirmation of this
+									temp = -1;														//continue looping
+								}
+							}
+							
+							if(temp < 48)															//if city chosen
+							{
+								model.buildResearchStation(cityP);									//build station at players location
+							}
+						}
+										
+
+					}
 				}
 				else       //resilient population
 				{
+					vector<string> discardPile = model.infectedDeck.getDiscardStr();
+					menu.resPopMenu(discardPile);							//display user choices
+
+					int x;
+					do
+					{
+						cin >> x;
+						cin.clear();
+						cin.ignore();
+					}while(x<0 || x >= discardPile.size());		//read until proper input
+
+					model.infectedDeck.removeFromDiscard(x);	//remove it from the infected deck discard
 				}
 				
 			}
-			else
-			{
-				model.decMovesUsed();								//otherwise dont consume move
-			}
+			
+			model.decMovesUsed();								//otherwise dont consume move
+			
             
         }
 		else
@@ -389,6 +459,7 @@ void Controller::doEpidemic()
         view.printOutbreaks(outbreakCities);            //display the information
     }
     
+	this->do_event_card();								//give player option to play event card
 	model.infectedDeck.shuffleDiscard();                //shuffle the discard to the top of iDeck
     
     return;

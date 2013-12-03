@@ -48,6 +48,7 @@ class Menu {
     void updateMenu(Model&);
 	void removeResStaMenu(vector<string>);
 	void menuCitiesNumbered(Map&);
+	void resPopMenu(vector<string>);
 	
 
   private:

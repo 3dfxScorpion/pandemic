@@ -90,6 +90,7 @@ public:
     void printDrawConfirmation(string card){cout  << card << " added to your hand.\n";}
     void newLine(){cout << "\n";}
 	void fileNotFound(string filename) { cout << "File not found: " << filename << "\n\n"; }
-    
+    void forecastMenu(vector<ICard*>);
+	void stationAlreadyBuilt(){cout << "That city already has a research station.  Select another: ";}
 };
 

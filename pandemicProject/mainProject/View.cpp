@@ -141,3 +141,14 @@ void View::printOutbreaks(vector<string> cities)
     return;
 
 }
+
+void View::forecastMenu(vector<ICard*> icards)
+{
+	cout << "Select a card to add to the top of the infection deck (last card added is new top of deck)\n";
+	
+	int x = icards.size();
+	for(int i = 0; i<x; i++)
+	{
+		cout << "(" << i << ")" << icards[i]->getName() << endl;
+	}
+}

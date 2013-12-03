@@ -20,15 +20,9 @@ int main()
 {
     Controller controller;
     while(controller.run())
-    {
-                                                            
-    }
-
-
-    
-    return 0;
-
-    
+    {                                                            
+    }    
+    return 0;    
 }
 
 

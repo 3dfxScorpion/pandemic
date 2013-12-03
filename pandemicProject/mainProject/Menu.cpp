@@ -71,6 +71,8 @@ void Menu::menuCitiesNumbered(Map& m) {
 
 	cout << "(" << i << ")No thanks." << endl;   
 }
+
+
 string menuAdjCities(City* c) {         // static method for external purposes
     size_t cityID = 1;
     const size_t totalCount = 8;        // number of slots for cards
@@ -332,6 +334,25 @@ void Menu::eventMenu(vector<Card*>hand, vector<int>index)
     out << "(" << i << ")No thanks\n";                                    //option to do nothing
     cout << out.str();
 }
+
+void Menu::resPopMenu(vector<string> cards)
+{
+	int num;
+    int i=0;
+    ostringstream out;
+    out << "====================================================================================================\n";
+    out << "Choose an event card to play from below:\n";
+    out << "----------------------------------------------------------------------------------------------------\n";
+
+    num = cards.size();
+    for(i; i<num; i++)    //for each index representing an event card
+    {
+        out << "(" << i << ")" << cards[i] << "\n";
+    }
+    out << "(" << i << ")No thanks\n";                                    //option to do nothing
+    cout << out.str();
+}
+
 
 void Menu::removeResStaMenu(vector<string> vec)
 {

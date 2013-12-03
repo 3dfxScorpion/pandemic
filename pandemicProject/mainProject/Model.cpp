@@ -706,3 +706,9 @@ void Model::doEventCard(int player, string cardName, int index)
 	{
 	}
 }
+
+void Model::buildResearchStation(City* ptr)
+{
+	ptr->setResearchStation(true);
+	incResSta();
+}

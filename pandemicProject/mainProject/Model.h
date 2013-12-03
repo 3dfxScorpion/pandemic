@@ -107,6 +107,7 @@ public:
     void doCureDisease(int);
     bool canBuildResearchStation();
     void buildResearchStation();
+	void buildResearchStation(City*);
 	void removeResearchStation(City*);
     bool canGetKnowledge();
     bool canGiveKnowledge();

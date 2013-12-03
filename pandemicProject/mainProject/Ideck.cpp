@@ -137,3 +137,38 @@ void IDeck::loadGame(ifstream &fp) {
 	    discard.push_back(newCard);
     }
 }
+
+vector<ICard*> IDeck::getTopSix()
+{
+	vector<ICard*> cards;
+
+	for(int i = 0; i<6; i++)
+	{
+		cards.push_back(takeCard());		//add top to temp vector
+		discard.pop_back();					//remove from discard
+	}
+
+	return cards;
+}
+
+void IDeck::addTop(ICard* card)
+{
+	deck.insert(deck.begin(), card);
+}
+
+void IDeck::removeFromDiscard(int offset)
+{
+	discard.erase(discard.begin()+offset);
+}
+
+vector<string> IDeck::getDiscardStr()
+{
+	vector<string> temp;
+	int size = discard.size();
+	for(int i = 0; i<size; i++)
+	{
+		temp.push_back(discard[i]->getName());		//build string representation of the deck
+	}
+
+	return temp;
+}

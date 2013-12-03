@@ -19,11 +19,14 @@ public:
     IDeck(){
         buildDeck(deck);
         size = deck.size();};
+	vector<ICard*> getTopSix();
+	vector<string> getDiscardStr();
+	ICard* takeCard();
+	ICard* takeBottomCard();
     void buildDeck(vector<ICard*>&);
-    ICard* takeCard();
-    ICard* takeBottomCard();
-    void removeFirstDrawn(){discard.erase(discard.end()-1);}
-
+    void addTop(ICard*);
+    void removeFirstDrawn(){discard.erase(discard.end()-1);}	
+	void removeFromDiscard(int);
     void shuffleDiscard();
     void loadGame(ifstream &);
     void saveGame(ofstream &);
