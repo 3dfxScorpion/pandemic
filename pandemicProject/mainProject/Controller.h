@@ -53,11 +53,11 @@ public:
           &Controller::do_cure_disease,
           &Controller::do_share_knowledge,
           &Controller::do_build_station,
-          &Controller::do_save_game,
 		  &Controller::do_event_card,
-          &Controller::do_quit_game
+          &Controller::do_save_game/*,
+          &Controller::do_quit_game*/     // not needed
       };
-      for ( size_t idx = 0; idx < 9; idx++ ) {
+      for ( size_t idx = 0; idx < 10; idx++ ) {
           mappedFuncs[idx] = fns[idx];
       }
   }
