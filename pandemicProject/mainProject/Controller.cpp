@@ -219,6 +219,11 @@ void Controller::do_event_card()
                     if ( choice < 48 ) // if a city was chosen
                     {                  // move selected player to selected city
                         model.players[player]->setPlayerLocation( model.worldMap.locateCityPtr(choice) );
+
+						int temp = model.getCurrentPlayerIndex();
+						model.setCurrentPlayerIndex(player);
+						model.checkMedicSpecial();
+						model.setCurrentPlayerIndex(temp);
                     }
                     else               // otherwise user chose no thanks
                     {                        
@@ -658,6 +663,7 @@ void Controller::do_direct_flight() {   // If it aint broke
             cout << "Flying to " << s << "\n";
             cityP = model.worldMap.locateCity(s);
             p->setPlayerLocation(cityP);
+			model.checkMedicSpecial();
             p->removeCard(num);
         }
         ++num;
@@ -704,8 +710,11 @@ void Controller::do_shuttle_flight() {
     }
     cin.ignore();
     City* toMove = model.worldMap.locateCity( RScities[input - 1] );
-    model.mover.shuttleFlight(toMove);
-    model.incMovesUsed();
+	if (model.mover.canShuttleFlight(toMove)){
+		model.mover.shuttleFlight(toMove);
+		model.checkMedicSpecial();
+		model.incMovesUsed();
+	}
 }
 
 void Controller::do_treat_disease() {
@@ -786,6 +795,7 @@ void Controller::do_share_knowledge() {
         Card * getCard = toGet[pInput-1]->getHand()[model.getCardIndex( model.mover.getCurrentPlayer()->getPlayerLocStr(),toGet[pInput-1] )];
             cout << "This is the get card " << getCard->getCardName() << endl;
         model.mover.shareKnowledge( toGet[pInput-1],model.mover.getCurrentPlayer(), getCard );
+		model.incMovesUsed();
     }
 }
 

@@ -29,7 +29,7 @@ public:
     void   addCard(Card* _toAdd);
     void   removeCard(int _toRemove);
     void   setPlayerName(string _name) { playerName=_name; }
-    void   setPlayerLocation(City * _location) { location = _location; }
+    void   setPlayerLocation(City * _location) {location = _location; }
     void   setPlayerRole(string _role) { playerRole = _role; }
     void   setHand(vector<Card*> _hand) { hand = _hand; }
     Card*  getCard(int _toGet) { return hand[_toGet]; }

@@ -110,7 +110,7 @@ bool PlayerMove::canCharterFlight(City* toMove){
 //Move from city with research station to any other city that has research station.
 void PlayerMove::shuttleFlight(City* toMove) {
     //check if player is on a city with an RS
-    if (canShuttleFlight(toMove))
+
     currentPlayer->setPlayerLocation(toMove);
     
 }

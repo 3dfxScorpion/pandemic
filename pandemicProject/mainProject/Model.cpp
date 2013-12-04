@@ -175,15 +175,15 @@ void Model::checkMedicSpecial()
             toCheck->getPlayerLocation()->getInfectedRed() > 0)//If red is cured
             toCheck->getPlayerLocation()->setInfectedRed(0);//Auto treat red on move
         
-        if (getCureStatus(red) == cured &&
+        if (getCureStatus(yellow) == cured &&
             toCheck->getPlayerLocation()->getInfectedYellow() > 0)//if yellow...
             toCheck->getPlayerLocation()->setInfectedYellow(0);// the same...
         
-        if (getCureStatus(red) == cured &&
+        if (getCureStatus(blue) == cured &&
             toCheck->getPlayerLocation()->getInfectedBlue() > 0)
             toCheck->getPlayerLocation()->setInfectedBlue(0);
         
-        if (getCureStatus(red) == cured &&
+        if (getCureStatus(black) == cured &&
             toCheck->getPlayerLocation()->getInfectedBlack() > 0)
             toCheck->getPlayerLocation()->setInfectedBlack(0);
     }
@@ -716,7 +716,9 @@ void Model::charterFlight(string toMove){
         if (mover.getCurrentPlayer()->getPlayerLocStr() == tmp->getCardName())
         {
             mover.getCurrentPlayer()->removeCard(i);
-            mover.getCurrentPlayer()->setPlayerLocation(worldMap.locateCity(toMove));
+			City* cityP = worldMap.locateCity(toMove);
+            mover.getCurrentPlayer()->setPlayerLocation(cityP);
+			checkMedicSpecial();				
         }
         i++;
     }
