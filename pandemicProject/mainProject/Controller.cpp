@@ -748,6 +748,7 @@ void Controller::do_cure_disease() {    //TODO needs a role check. Needs more te
             
             if (input == 'Y' || input == 'y') {
                 model.doCureDisease(i);
+				model.incMovesUsed();
             } else {
                 return;
             }
@@ -775,6 +776,7 @@ void Controller::do_share_knowledge() {
         // has the same name as the location he is in. The only way to get to this point is
         // to have already confirmed this card exists.
         model.mover.shareKnowledge(model.mover.getCurrentPlayer(), toGive[pInput-1], giveCard);
+		model.incMovesUsed();
     }
     else if (model.canGetKnowledge())
     {
