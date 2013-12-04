@@ -123,7 +123,6 @@ public:
 	void setResSta(int num) {resSta = num;}
     void doOutbreak(City*, int, vector<string>&);                       //does outbreak
     bool alreadyOutbreak(string, vector<string>);                       //checks a vector for presence of a string
-	void doEventCard(int, string, int);									//player index, card name, card index
 	int getCurrentPlayerIndex() { return currentPlayerIndex; }
 	int getMovesUsed() { return movesUsed; }
 	void setCurrentPlayerIndex(int index) { currentPlayerIndex = index; }

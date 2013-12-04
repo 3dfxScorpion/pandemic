@@ -346,7 +346,7 @@ void Menu::resPopMenu(vector<string> cards)
     int i=0;
     ostringstream out;
     out << "====================================================================================================\n";
-    out << "Choose an event card to play from below:\n";
+    out << "Choose an infection card to remove from the game:\n";
     out << "----------------------------------------------------------------------------------------------------\n";
 
     num = cards.size();

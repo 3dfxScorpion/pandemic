@@ -686,26 +686,7 @@ bool Model::alreadyOutbreak(string current, vector<string> previous)
     return tmp;
 }
 
-void Model::doEventCard(int player, string cardName, int index)
-{
-	if(cardName =="One Quiet Night")
-	{
-		unsetDoInfect();								    //set do infect bit to zero
-		players[player]->removeCard(index);					//remove card from hand
-	}
-	else if(cardName == "Airlift")
-	{
-	}
-	else if(cardName == "Forecast")
-	{
-	}
-	else if(cardName == "Government Grant")
-	{
-	}
-	else       //resilient population
-	{
-	}
-}
+
 
 void Model::buildResearchStation(City* ptr)
 {

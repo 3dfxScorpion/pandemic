@@ -194,7 +194,7 @@ void Controller::do_event_card()
 				if(cardName =="One Quiet Night")
 				{
 					view.printOneQuiet();					//print confirmation
-					model.doEventCard(model.getCurrentPlayerIndex(), cardName,  eventID[temp]);
+					model.unsetDoInfect();
 				}
 				else if(cardName == "Airlift")
 				{
@@ -435,7 +435,7 @@ void Controller::doEpidemic()
     iCardP = model.infectedDeck.takeBottomCard();        //draw bottom card
     clr = iCardP->getColor();                            //store its color
     cityP = model.worldMap.locateCity(iCardP->getName());//get pointer to the city
-    
+    view.printEpiConfirmation(iCardP->getName());
     
     if(clr == black)                                    //store the current count of cubes for specified color
         tmp = cityP->getInfectedBlack();
@@ -494,7 +494,6 @@ int Controller::run() {
     bool test = false;
 
     model.buildMap();
-	//menu.menuCitiesNumbered(model.worldMap);		// why is this here?
 
     try {
         view.printTitle();
