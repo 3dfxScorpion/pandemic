@@ -166,6 +166,19 @@ bool Model::QSautoContain(ICard* icardP){
     return false;//otherwise return false so the city will be infected.
 }
 
+bool Model::QSautoContain(City* cityP){
+    vector<string> toCheck = cityP->getAdjCity();
+    for (int i = 0; i < int(toCheck.size()); i++)
+        for (int k = 0; k < getNumPlayers(); k++)
+            if (players[k]->getPlayerRole() == "Quarantine Specialist" &&  //If the player is QS
+                (players[k]->getPlayerLocation()->getCityName() == toCheck[i] || //and player is in an adj city
+                 players[k]->getPlayerLocation()->getCityName() == cityP->getCityName()))// or player is on the city
+                return true;                            //return true so that city wont be infected.
+    // end of both looops.
+    
+    return false;//otherwise return false so the city will be infected.
+}
+
 void Model::checkMedicSpecial()
 {
     Player* toCheck = mover.getCurrentPlayer();
@@ -560,7 +573,7 @@ void Model::doOutbreak(City* Cptr, int color, vector<string>&prevOB)
     string cities;
     vector<string> adjCities;                                            //stores vector of adjacent cities
 
-    if(!alreadyOutbreak(Cptr->getCityName(), prevOB))                    //do if city hasnt already had outbreak this round
+    if(!alreadyOutbreak(Cptr->getCityName(), prevOB) && !QSautoContain(Cptr))//do if city hasnt already had outbreak this round and QS not nearby
     {
         incrementOutbreak();                                            //increment count of outbreaks
         prevOB.push_back(Cptr->getCityName());                            //add current city to list of cities that had an outbreak this round

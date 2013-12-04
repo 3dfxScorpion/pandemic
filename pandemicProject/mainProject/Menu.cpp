@@ -54,22 +54,22 @@ void Menu::menuCitiesNumbered(Map& m) {
     ostringstream out;
     vector<City*> menuMap = m.getWorldMap();
     int i = 0;
-    int num = menuMap.size();
-    string tempStr;
-    cout << "====================================================================================================\n";
+	int num = menuMap.size();
+	string tempStr;
+	cout << "====================================================================================================\n";
     cout << "Select a city to continue:\n";
     cout << "----------------------------------------------------------------------------------------------------\n";
-    for (i; i < num; i++)
-    {
+	for (i; i < num; i++)
+	{
 
-        cout << "(" << i << ")" << setw(25) << left << menuMap[i]->getCityName();
-        i++;
-        cout <<"(" << i << ")" << setw(25) <<left << menuMap[i]->getCityName();
-        i++;
-        cout <<"(" << i << ")" << setw(25) <<left << menuMap[i]->getCityName() << endl;
-    }
+		cout << "(" << i << ")" << setw(25) << left << menuMap[i]->getCityName();
+		i++;
+		cout <<"(" << i << ")" << setw(25) <<left << menuMap[i]->getCityName();
+		i++;
+		cout <<"(" << i << ")" << setw(25) <<left << menuMap[i]->getCityName() << endl;
+	}
 
-    cout << "(" << i << ")No thanks." << endl;   
+	cout << "(" << i << ")No thanks." << endl;   
 }
 
 
@@ -201,7 +201,7 @@ string menuCardsVector(vector<Card*> cards, string label) {         // static me
 
 string Menu::menuHands(vector<Player*> plyrs) {
     size_t playerCount = 1;
-    const size_t totalCount = 12;        // number of slots for cards
+    const size_t totalCount = 14;        // number of slots for cards
     ostringstream out;
     ostringstream str[totalCount];
     vector<Player*>::iterator pItr;      // players iterator
@@ -277,10 +277,10 @@ string Menu::menuCommands(vector<string> commands) {
     /*  adding current infection rate... */
     str[0] << setw(14) << right << getInfectionRate();
 
-    str[2] << "      " << "Outbreak Level:";
+	str[2] << "      " << "Outbreak Level:";
 
-    /* adding current outbreak count... */
-    str[3] << setw(14) << right << getOutbreakRate();
+	/* adding current outbreak count... */
+	str[3] << setw(14) << right << getOutbreakRate();
 
     for ( size_t i = 0; i < slotCount; i++ ) {
         out << str[i].str() << "\n";
@@ -342,7 +342,7 @@ void Menu::eventMenu(vector<Card*>hand, vector<int>index)
 
 void Menu::resPopMenu(vector<string> cards)
 {
-    int num;
+	int num;
     int i=0;
     ostringstream out;
     out << "====================================================================================================\n";
@@ -361,26 +361,26 @@ void Menu::resPopMenu(vector<string> cards)
 
 void Menu::removeResStaMenu(vector<string> vec)
 {
-    int num;
+	int num;
     int i=0;
     ostringstream out;
     out << "====================================================================================================\n";
     out << "Six Research Stations already built. Select one to remove:\n";
     out << "----------------------------------------------------------------------------------------------------\n";
 
-    num = vec.size();
-    for(i; i<num; i++)    //for each index representing an event card
+	num = vec.size();
+	for(i; i<num; i++)    //for each index representing an event card
     {
         out << "(" << i << ")" << vec[i] << "\n";
     }
 
-    out << "(" << i << ")No thanks\n";                                    //option to do nothing
+	out << "(" << i << ")No thanks\n";                                    //option to do nothing
     cout << out.str();
 }
 
 void Menu::updateMenu(Model& m) {
     setInfectionRate(m.getInfRate());
-    setOutbreakRate(m.getOutbreak());
+	setOutbreakRate(m.getOutbreak());
     setMenuMap(m.worldMap);
     setMenuPlayers(m.players);
     setMappedCubes("black", m.getCubeCount(black));
