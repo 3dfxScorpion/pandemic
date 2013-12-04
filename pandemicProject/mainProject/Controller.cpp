@@ -188,7 +188,7 @@ void Controller::do_event_card()
             
             if(temp < int(eventID.size()))						//if event card chosen
 			{
-				Card* theCard = model.players[model.getCurrentPlayerIndex()]->getCard(temp);
+				Card* theCard = model.players[model.getCurrentPlayerIndex()]->getCard(eventID[temp]);
 				string cardName = theCard->getCardName();
 
 				if(cardName =="One Quiet Night")
@@ -267,32 +267,31 @@ void Controller::do_event_card()
 						if(temp < resCount)//if user didn't choose no thanks
 						{
 							model.removeResearchStation(model.worldMap.locateCity(locations[temp]));//find pointer to it, and remove the research station
-							menu.menuCitiesNumbered(model.worldMap);								//print the menu
-
-							temp = -1;
-							while(temp < 0 || temp > 48)
-							{
-								cin >> temp;													
-								cin.clear();
-								cin.ignore();
-
-								cityP = model.worldMap.locateCityPtr(temp);							//get pointer to the city
-								if (cityP->getResearchStationBool())									//if it already has a station
-								{
-									view.stationAlreadyBuilt();										//print confirmation of this
-									temp = -1;														//continue looping
-								}
-							}
-							
-							if(temp < 48)															//if city chosen
-							{
-								model.buildResearchStation(cityP);									//build station at players location
-							}
 						}
-										
+					}//end removal		
+					
+					menu.menuCitiesNumbered(model.worldMap);								//print the menu
 
+					temp = -1;
+					while(temp < 0 || temp > 48)
+					{
+						cin >> temp;													
+						cin.clear();
+						cin.ignore();
+						
+						cityP = model.worldMap.locateCityPtr(temp);							//get pointer to the city
+						if (cityP->getResearchStationBool())									//if it already has a station
+						{
+							view.stationAlreadyBuilt();										//print confirmation of this
+							temp = -1;														//continue looping
+						}
 					}
-				}
+							
+					if(temp < 48)															//if city chosen
+					{
+						model.buildResearchStation(cityP);									//build station at players location
+					}
+				}						
 				else       //resilient population
 				{
 					vector<string> discardPile = model.infectedDeck.getDiscardStr();

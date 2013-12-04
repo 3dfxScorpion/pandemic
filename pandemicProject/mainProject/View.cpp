@@ -133,8 +133,6 @@ void View::printOutbreaks(vector<string> cities)
     {
         if(i>0){
             cout << ", ";
-        if(num>0 && i==(num-1))
-            cout << "and ";
             cout << cities[i];
 		}
     }
