@@ -14,6 +14,7 @@ using std::ofstream;
 static const size_t CITIES = 48;  // city card total
 static const size_t EVENTS = 5;   // event card total
 static const size_t EPICS  = 6;   // epidemic card total
+static const size_t DEALT  = 9;  // cards to be dealt
 
 class Deck {
   public:
@@ -28,8 +29,7 @@ class Deck {
     vector<Card*> getDeck() { return deck; }
     void setDeck(vector<Card*> d) { deck = d; }
     void buildDeck(vector<Card*>&);
-    void shuffleDeck(vector<Card*>&);
-    void dealCards(int);
+    void shuffleDeck();
     Card* takeCard();
     void ToString();
     void loadGame(ifstream &);

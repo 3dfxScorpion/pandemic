@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
-#include <cstdlib>
+//#include <cstdlib>
+#include <algorithm>
 #include <vector>
 #include <unordered_set>
 #include <fstream>
@@ -41,8 +42,8 @@ void Deck::buildDeck(vector<Card*>& tmpDeck) {
 /*  create indices for EPIDEMIC cards */
     int epics[EPICS] = {};
     for ( size_t i = 0; i < EPICS; i++ ) {
-        size_t r = EPICS + ( ceCards / EPICS * i ) +
-                 rand() % ( ceCards / EPICS );
+        size_t r = DEALT + ( ( ceCards - DEALT ) / EPICS * i ) +
+                 rand() % ( ( ceCards - DEALT ) / EPICS );
         epics[i] = r;
     }
 /* create Deck */
@@ -66,17 +67,8 @@ void Deck::buildDeck(vector<Card*>& tmpDeck) {
     }
 }
 
-void Deck::shuffleDeck(vector<Card*>&) {
-}
-
-void Deck::dealCards(int p) {
-    vector<Card*> deal;
-    vector<Card*>::iterator cItr = deck.begin();
-    for ( int i = 0; i < p; i++ ) {
-        Card* tmp = *cItr;
-        while ( tmp->getCardName() == "EPIDEMIC" )
-            ++cItr;
-		}
+void Deck::shuffleDeck() {
+    random_shuffle(deck.begin(), deck.end());
 }
 
 Card* Deck::takeCard() {
