@@ -57,7 +57,8 @@ public:
           &Controller::do_save_game/*,
           &Controller::do_quit_game*/     // not needed
       };
-      for ( size_t idx = 0; idx < 10; idx++ ) {
+      int fnsSize = sizeof(fns) / sizeof(fns[0]);
+      for ( size_t idx = 0; idx < fnsSize; idx++ ) {
           mappedFuncs[idx] = fns[idx];
       }
   }
