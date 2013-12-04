@@ -224,8 +224,7 @@ void Controller::do_event_card()
 						model.players[player]->setPlayerLocation(model.worldMap.locateCityPtr(choice));			//move selected player to selected city
 					}
 					else			//otherwise user chose no thanks
-					{
-						
+					{						
 					}	
 				}
 				else if(cardName == "Forecast")
@@ -308,16 +307,9 @@ void Controller::do_event_card()
 					model.infectedDeck.removeFromDiscard(x);	//remove it from the infected deck discard
 				}
 				
-			}
-			
-			model.decMovesUsed();								//otherwise dont consume move
-			
-            
+				model.players[model.getCurrentPlayerIndex()]->removeCard(eventID[temp]);  //remove from player hand
+			}            
         }
-		else
-		{
-			model.decMovesUsed();									//otherwise user had no event cards, don't consume a move
-		}
 }
 
 void Controller::doDiscard(vector<Card*>playerHand, int current)
@@ -346,8 +338,7 @@ void Controller::doDiscard(vector<Card*>playerHand, int current)
         
         if(temp == 0)
         {
-            do_event_card();									
-			
+            do_event_card();			
         }
         else
         {
@@ -622,6 +613,7 @@ void Controller::do_drive_ferry() {
         }
     }
     model.mover.moveAdjacent(model.worldMap.locateCity(adjs[input-1]));    // minus one to get synced with menu.
+	model.incMovesUsed();
     
 }
 
@@ -673,7 +665,7 @@ void Controller::do_direct_flight() {   //If it aint broke
         }
         ++num;
     }
-    
+    model.incMovesUsed();
 }
 
 void Controller::do_charter_flight() {    //Need a menu to list all cities or let character enter input :S
@@ -693,7 +685,7 @@ void Controller::do_charter_flight() {    //Need a menu to list all cities or le
             
         }
         model.charterFlight(input);
-        
+        model.incMovesUsed();
     }
     else
         view.printCantCharterFlight();
@@ -718,6 +710,7 @@ void Controller::do_shuttle_flight() {
     cin.ignore();
     City* toMove = model.worldMap.locateCity(RScities[input-1]);
     model.mover.shuttleFlight(toMove);
+	model.incMovesUsed();
 }
 
 void Controller::do_treat_disease() {
@@ -734,6 +727,7 @@ void Controller::do_treat_disease() {
             if (choice == 'Y' || choice == 'y') {
                 model.treatDisease(i);
 				view.printTreatDiseaseMsg();
+				model.incMovesUsed();
 			}
         }
     }
@@ -826,11 +820,7 @@ void Controller::do_build_station() {
 				model.removeResearchStation(model.worldMap.locateCity(locations[temp]));//find pointer to it, and remove the research station
 				model.buildResearchStation();											//build station at players location
 			}
-			else{
-				//otherwise user chose "No thanks" 
-				model.decMovesUsed();		//so don't consume a move
-			}
-
+			
 		}
     }
 }
@@ -853,7 +843,6 @@ void Controller::do_save_game()
     }
     
     model.savegame(filename);
-	model.decMovesUsed();			// saving shoul not increment number of moves...
     view.printProgressSavedMsg();
 }
 
