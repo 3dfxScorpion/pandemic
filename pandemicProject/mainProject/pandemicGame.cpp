@@ -19,9 +19,12 @@ using std::ostringstream;
 
 int main()
 {
-    Controller controller;
-    while(controller.run())
-    {                                                            
+    
+	int x = 1;
+    while(x)
+    {      
+		Controller controller;
+		x = controller.run();
     }    
     return 0;    
 }
