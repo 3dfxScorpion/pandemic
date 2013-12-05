@@ -475,21 +475,25 @@ void Model::removeResearchStation(City* city)
 }
 
 bool Model::canCureDisease(int col)
-{//This will be updated later when we have a bit more user input.
+{
    
    string color = colorToString(col);
     int colorNum=0;
     CityCard * cityCaster;
     if (!mover.getCurrentPlayer()->getPlayerLocation()->getResearchStationBool()) //if player isnt on research station
         return false;
+
     for (int i = 0; i <= mover.getCurrentPlayer()->getHandSize()-1;i++){
         cityCaster=(CityCard*)mover.getCurrentPlayer()->getHand()[i];   
         if (color == cityCaster->getColor())                 //wtb instanceof
         {
             colorNum++;
         }
-        if (colorNum>=5){
-            cureDisease(col);
+		if(players[currentPlayerIndex]->getPlayerRole() == "Scientist" && colorNum>=4)
+		{
+			return true;
+		}
+        else if (colorNum>=5){
             return true;
         }
     }
